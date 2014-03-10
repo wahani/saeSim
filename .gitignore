@@ -1,0 +1,10 @@
+.Rproj.user
+.Rhistory
+.RData
+R_Code/*.RData
+/Rcheck/*
+*.so
+*.o
+*.dll
+core
+*.html
