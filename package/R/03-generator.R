@@ -1,12 +1,17 @@
 generator_fe_norm <- function(mean = 0, sd = 1) {
   function(nDomains, nUnits, const, slope) {
-    idD <- if (length(nUnits) == 1) rep(1:nDomains, each = nUnits) else 
-      unlist(lapply(1:nDomains, function(i) rep(i, nUnits[i])))    
-    x <- rnorm(length(idD), mean = mean, sd = sd)
-    out <- data.frame(idD, x) %.% group_by(idD) %.% 
-      mutate(idU = 1:n(), XB = const + slope * x) %.% arrange(idD, idU, x, XB)
+    idD <- make_id(nDomains, if (length(nUnits) == 1) nUnits else as.list(nUnits))
+    x <- rnorm(nrow(idD), mean = mean, sd = sd)
+    out <- data.frame(idD, x) %.% mutate(XB = const + slope * x) %.% arrange(idD, idU) %.% select(idD, idU, x)
     return(as.data.frame(out))
-    
-    
+  }
+}
+
+generator_e_norm <- function(mean = 0, sd = 1) {
+  function(nDomains, nUnits) {
+    idD <- make_id(nDomains, if (length(nUnits) == 1) nUnits else as.list(nUnits))
+    e <- rnorm(nrow(idD), mean = mean, sd = sd)
+    out <- data.frame(idD, e) %.% arrange(idD, idU) %.% select(idD, idU, e)
+    return(as.data.frame(out))
   }
 }
