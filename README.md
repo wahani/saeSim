@@ -18,7 +18,7 @@ Class-System:
 Class | Parent | Methods
 ------------- | ------------- | -------------
 smstp | VIRTUAL | -
-smstp_ | smstp | -
+smstp_ | smstp | sim_generate
 smstp_fe | smstp_ | sim_generate
 sim_rs | data.frame | add
  |  | as.data.frame
@@ -34,4 +34,4 @@ Prefix | Meaning
 00 | setClass
 01 | setGeneric, setMethod
 02 | -
-03 | Front-End Functions - no generics/methods
+03 | functions - no generics/methods

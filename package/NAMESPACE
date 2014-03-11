@@ -1,3 +1,4 @@
 exportPattern("^[[:alpha:]]+")
 exportClasses("smstp_fe")
 exportClasses("smstp_")
+importFrom(MASS, mvrnorm)

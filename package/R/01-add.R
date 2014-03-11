@@ -15,7 +15,7 @@ setMethod("add", c(dat1 = "sim_rs", dat2 = "sim_rs"),
             dat1[vars_cum] <- dat1[vars_cum] + dat2[vars_cum]
             # add new variables
             dat1[vars_add] <- dat2[vars_add]
-            dat1
+            new("sim_rs", dat1)
           })
 
 setMethod("add", c(dat1 = "sim_rs_fe", dat2 = "sim_rs_fe"), 
@@ -26,5 +26,5 @@ setMethod("add", c(dat1 = "sim_rs_fe", dat2 = "sim_rs_fe"),
 
 setMethod("add", c(dat1 = "sim_rs", dat2 = "missing"), 
           function(dat1, dat2) {
-            dat1
+            new("sim_rs", dat1)
           })
