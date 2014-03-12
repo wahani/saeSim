@@ -14,7 +14,11 @@ sim_re <- function(generator = generator_e_norm()) {
 
 sim_rec <- function(generator = generator_e_norm(), nCont = 1, level = "unit", fixed = TRUE) {
   function(sim_base) {
-    new("smstp_c", nDomains = sim_base$nDomains, nUnits = sim_base$nUnits, 
-        generator = generator)
+    new("smstp_c", nDomains = sim_base$nDomains, nUnits = sim_base$nUnits, generator = generator,
+        nCont = nCont, level = level, fixed = fixed)
   }
+}
+
+sim_base_standard <- function(nDomains = 100, nUnits = 100) {
+  new("sim_base", list(nDomains = nDomains, nUnits = nUnits))
 }
