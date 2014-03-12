@@ -1,4 +1,4 @@
-generator_fe_norm <- function(mean = 0, sd = 1) {
+gen_fe_norm <- function(mean = 0, sd = 1) {
   function(nDomains, nUnits, const, slope) {
     idD <- make_id(nDomains, if (length(nUnits) == 1) nUnits else as.list(nUnits))
     x <- rnorm(nrow(idD), mean = mean, sd = sd)
@@ -7,7 +7,7 @@ generator_fe_norm <- function(mean = 0, sd = 1) {
   }
 }
 
-generator_e_norm <- function(mean = 0, sd = 1) {
+gen_e_norm <- function(mean = 0, sd = 1) {
   function(nDomains, nUnits) {
     idD <- make_id(nDomains, if (length(nUnits) == 1) nUnits else as.list(nUnits))
     e <- rnorm(nrow(idD), mean = mean, sd = sd)
@@ -16,7 +16,7 @@ generator_e_norm <- function(mean = 0, sd = 1) {
   }
 }
 
-generator_v_norm <- function(mean = 0, sd = 1) {
+gen_v_norm <- function(mean = 0, sd = 1) {
   function(nDomains, nUnits) {    
     idD <- make_id(nDomains, if (length(nUnits) == 1) nUnits else as.list(nUnits))
     v <- rnorm(nDomains, mean = mean, sd = sd)
@@ -25,7 +25,7 @@ generator_v_norm <- function(mean = 0, sd = 1) {
   }
 }
 
-generator_v_sar <- function(mean = 0, sp_sd = 1, rho = 0.5, type = "rook") {
+gen_v_sar <- function(mean = 0, sp_sd = 1, rho = 0.5, type = "rook") {
   function(nDomains, nUnits) {    
     idD <- make_id(nDomains, if (length(nUnits) == 1) nUnits else as.list(nUnits))
     

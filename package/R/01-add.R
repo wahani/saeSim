@@ -28,3 +28,20 @@ setMethod("add", c(dat1 = "sim_rs", dat2 = "missing"),
           function(dat1, dat2) {
             new("sim_rs", dat1)
           })
+
+setMethod("add", c(dat1 = "sim_rs_c", dat2 = "sim_rs_c"), 
+          function(dat1, dat2) {
+            dat <- add(new("sim_rs", S3Part(dat1)), new("sim_rs", S3Part(dat2)))
+            suppressWarnings({
+              dat[paste("idC", sum(grepl("idC", names(dat))), sep = "")] <- dat2$idC
+            })
+            new("sim_rs", dat)
+          })
+
+setMethod("add", c(dat1 = "sim_rs", dat2 = "sim_rs_c"), 
+          function(dat1, dat2) {
+            if (any(grepl("idC", names(dat1)))) return(add(new("sim_rs_c", S3Part(dat1)), dat2))
+            # else
+            add(dat1, new("sim_rs", S3Part(dat2)))
+          })
+

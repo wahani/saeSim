@@ -4,7 +4,7 @@ Title: saeSim
 Version: 0.1
 Author: Sebastian Warnholz
 Maintainer: <Sebastian.Warnholz@fu-berlin.de>
-Depends: R(>= 3.0), methods, dplyr
+Depends: R(>= 3.0), methods, dplyr, spdep
 Suggests: testthat
 Description: Tools for the simulation of data in the context of small area estimation.
 License: GPL-2
