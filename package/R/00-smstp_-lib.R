@@ -1,6 +1,6 @@
 # generator: function which given the slots of smstp will generate random number according to the specs
 setClass("smstp_", 
-         slots = c(generator = "function"),
+         slots = c(generator = "function", name = "character"),
          contains = "smstp")
 
 setClass("smstp_fe", 

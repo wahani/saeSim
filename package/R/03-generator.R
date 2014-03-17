@@ -18,58 +18,39 @@
 #'  
 #'  @return All these functions are not meant to be used interactively. They will all return a function, which will be called internally with specific arguments. These arguments do not have to be supplied by the user. The following overview is made for the sake of completeness:
 #'  \itemize{
-#'    \item \code{gen_e_norm()}, \code{gen_v_norm()} and \code{gen_v_sar()} expect:
+#'    \item \code{gen_norm()}, \code{gen_v_norm()} and \code{gen_v_sar()} expect:
 #'    \itemize {
 #'      \item nDomains the number of domains
 #'      \item nUnits the number of units in each domain
-#'    }
-#'    \item \code{gen_fe_norm()}:
-#'    \itemize{
-#'      \item nDomains, the number of domains
-#'      \item nUnits, the number of units in each domain
-#'      \item const, the intercept or constant in a linear model
-#'      \item slope, the slope parameter in a linear model 
 #'    }
 #'  
 #'  }
 #'  @rdname generators
 #'  @export
 #'  @seealso For examples: \code{\link{sim_fe}}, \code{\link{sim_re}}, \code{\link{sim_rec}}
-gen_e_norm <- function(mean = 0, sd = 1) {
-  function(nDomains, nUnits) {
+gen_norm <- function(mean = 0, sd = 1) {
+  function(nDomains, nUnits, name) {
     idD <- make_id(nDomains, if (length(nUnits) == 1) nUnits else as.list(nUnits))
-    e <- rnorm(nrow(idD), mean = mean, sd = sd)
-    out <- data.frame(idD, e) %.% arrange(idD, idU) %.% select(idD, idU, e)
-    return(as.data.frame(out))
-  }
-}
-
-#'@rdname generators
-#'@export
-gen_fe_norm <- function(mean = 0, sd = 1) {
-  function(nDomains, nUnits, const, slope) {
-    idD <- make_id(nDomains, if (length(nUnits) == 1) nUnits else as.list(nUnits))
-    x <- rnorm(nrow(idD), mean = mean, sd = sd)
-    out <- data.frame(idD, x) %.% mutate(XB = const + slope * x) %.% arrange(idD, idU) %.% select(idD, idU, x, XB)
-    return(as.data.frame(out))
+    idD[name] <- rnorm(nrow(idD), mean = mean, sd = sd)
+    idD
   }
 }
 
 #'@rdname generators
 #'@export
 gen_v_norm <- function(mean = 0, sd = 1) {
-  function(nDomains, nUnits) {    
+  function(nDomains, nUnits, name) {    
     idD <- make_id(nDomains, if (length(nUnits) == 1) nUnits else as.list(nUnits))
-    v <- rnorm(nDomains, mean = mean, sd = sd)
-    out <- data.frame(idD, v = v[idD$idD]) %.% arrange(idD, idU) %.% select(idD, idU, v)
-    return(as.data.frame(out))
+    tmp <- rnorm(nDomains, mean = mean, sd = sd)
+    idD[name] <- tmp[idD$idD]
+    idD
   }
 }
 
 #'@rdname generators
 #'@export
 gen_v_sar <- function(mean = 0, sd = 1, rho = 0.5, type = "rook") {
-  function(nDomains, nUnits) {    
+  function(nDomains, nUnits, name) {    
     idD <- make_id(nDomains, if (length(nUnits) == 1) nUnits else as.list(nUnits))
     
     # Spatial Structure:
@@ -81,8 +62,8 @@ gen_v_sar <- function(mean = 0, sd = 1, rho = 0.5, type = "rook") {
     # Drawing the numbers:
     v <- mvrnorm(1, mu = rep(mean, length.out = nDomains), Sigma = sp_var)
         
-    out <- data.frame(idD, v_sp = v[idD$idD]) %.% arrange(idD, idU) %.% select(idD, idU, v_sp)
-    return(as.data.frame(out))
+    idD[name] <- v[idD$idD]
+    idD
   }
 }
 
