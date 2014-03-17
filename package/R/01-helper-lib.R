@@ -13,3 +13,5 @@ setMethod("make_id", signature=c(nDomains = "numeric", nUnits = "list"),
               mutate(idU = 1:n()) %.% arrange(idD, idD)
             as.data.frame(out)
           })
+
+is.smstp <- function(x) sapply(x, inherits, what = "smstp_")

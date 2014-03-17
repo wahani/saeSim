@@ -32,8 +32,17 @@ setMethod("add", c(dat1 = "sim_rs", dat2 = "missing"),
 setMethod("add", c(dat1 = "sim_rs_c", dat2 = "sim_rs_c"), 
           function(dat1, dat2) {
             dat <- add(new("sim_rs", S3Part(dat1)), new("sim_rs", S3Part(dat2)))
+            # two cases: 1. both idC have the same variable name
+            # add idC variable with +
             suppressWarnings({
-              dat[paste("idC", sum(grepl("idC", names(dat))), sep = "")] <- dat2$idC
+              idCVarName <- names(dat2)[grepl("idC", names(dat2))]
+              if(idCVarName %in% names(S3Part(dat1))) {
+                dat[idCVarName] <- as.logical(dat1[[idCVarName]] + dat2[[idCVarName]])
+              } else {
+                # 2. they have different names
+                # just append the idC variable
+                dat[idCVarName] <- dat2[idCVarName]
+              }
             })
             new("sim_rs", dat)
           })
