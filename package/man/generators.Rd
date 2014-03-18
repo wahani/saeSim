@@ -1,13 +1,10 @@
-\name{gen_e_norm}
-\alias{gen_e_norm}
-\alias{gen_fe_norm}
+\name{gen_norm}
+\alias{gen_norm}
 \alias{gen_v_norm}
 \alias{gen_v_sar}
 \title{Generates random numbers}
 \usage{
-gen_e_norm(mean = 0, sd = 1)
-
-gen_fe_norm(mean = 0, sd = 1)
+gen_norm(mean = 0, sd = 1)
 
 gen_v_norm(mean = 0, sd = 1)
 
@@ -32,16 +29,10 @@ They will all return a function, which will be called
 internally with specific arguments. These arguments do not
 have to be supplied by the user. The following overview is
 made for the sake of completeness: \itemize{ \item
-\code{gen_e_norm()}, \code{gen_v_norm()} and
-\code{gen_v_sar()} expect: \itemize { \item nDomains the
+\code{gen_norm()}, \code{gen_v_norm()} and
+\code{gen_v_sar()} expect: \itemize{ \item nDomains the
 number of domains \item nUnits the number of units in each
-domain } \item \code{gen_fe_norm()}: \itemize{ \item
-nDomains, the number of domains \item nUnits, the number of
-units in each domain \item const, the intercept or constant
-in a linear model \item slope, the slope parameter in a
-linear model }
-
-}
+domain } }
 }
 \description{
 This function family is designed to draw random numbers

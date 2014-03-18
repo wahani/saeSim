@@ -27,3 +27,14 @@ test_that("Method for base", {
   expect_that(all(c("idU", "idD") %in% names(dat)), is_true())
   
 })
+
+test_that("Method for sim_setup", {
+  setup <- sim_setup(sim_base_standard(nDomains = 4, nUnits = 3), 
+                     sim_gen_fe(), sim_gen_e(), R = 500, simName = "test")
+  datList <- sim(setup)
+  
+  expect_that(length(datList), equals(500))
+  expect_that(max(rbind_all(datList)$idR), equals(500))
+  expect_that(all(rbind_all(datList)$simName == "test"), is_true())
+  
+})

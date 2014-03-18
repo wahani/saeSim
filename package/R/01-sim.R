@@ -2,18 +2,28 @@ setGeneric("sim", function(x, ...) standardGeneric("sim"))
 
 setMethod("sim", c(x = "sim_base"),
           function(x, ..., idC = TRUE) {
-            #browser()
             setup <- sim_setup(x, ..., R = 1, simName = "", idC = idC)
             results <- lapply(setup[is.smstp(setup)], sim)
             out <- as.data.frame(Reduce(add, results))
-            out$y <- rowSums(out[!grepl("id", names(out), ignore.case=FALSE) | grepl("B$", names(out), ignore.case=FALSE)])
-            out <- out[!grepl("B$", names(out), ignore.case=FALSE)]
+            out$y <- rowSums(out[!grepl("id", names(out), ignore.case=FALSE) | grepl(".B$", names(out), ignore.case=FALSE)])
+            out <- out[!grepl(".B$", names(out), ignore.case=FALSE)]
             # Features:
             if(idC) {
               out$idC <- Reduce("|", out[grepl("idC", names(out))])
               out <- out[!grepl("idC.", names(out))]
             }
             out
+          })
+
+setMethod("sim", c(x = "sim_setup"),
+          function(x, ...) {
+            lapply(as.list(1:x@R), 
+                   function(i) {
+                     df <- sim(x@base, S3Part(x, TRUE), idC = x@idC)
+                     df$idR <- i
+                     df$simName <- x@simName
+                     df
+                   })
           })
 
 setMethod("sim", signature=c(x = "smstp_fe"),

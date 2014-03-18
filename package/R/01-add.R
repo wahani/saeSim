@@ -37,7 +37,7 @@ setMethod("add", c(dat1 = "sim_rs_c", dat2 = "sim_rs_c"),
             suppressWarnings({
               idCVarName <- names(dat2)[grepl("idC", names(dat2))]
               if(idCVarName %in% names(S3Part(dat1))) {
-                dat[idCVarName] <- as.logical(dat1[[idCVarName]] + dat2[[idCVarName]])
+                dat[idCVarName] <- dat1[[idCVarName]] | dat2[[idCVarName]]
               } else {
                 # 2. they have different names
                 # just append the idC variable

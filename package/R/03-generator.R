@@ -19,12 +19,9 @@
 #'  @return All these functions are not meant to be used interactively. They will all return a function, which will be called internally with specific arguments. These arguments do not have to be supplied by the user. The following overview is made for the sake of completeness:
 #'  \itemize{
 #'    \item \code{gen_norm()}, \code{gen_v_norm()} and \code{gen_v_sar()} expect:
-#'    \itemize {
+#'    \itemize{
 #'      \item nDomains the number of domains
-#'      \item nUnits the number of units in each domain
-#'    }
-#'  
-#'  }
+#'      \item nUnits the number of units in each domain } }
 #'  @rdname generators
 #'  @export
 #'  @seealso For examples: \code{\link{sim_fe}}, \code{\link{sim_re}}, \code{\link{sim_rec}}
@@ -36,8 +33,8 @@ gen_norm <- function(mean = 0, sd = 1) {
   }
 }
 
-#'@rdname generators
-#'@export
+#' @rdname generators
+#' @export
 gen_v_norm <- function(mean = 0, sd = 1) {
   function(nDomains, nUnits, name) {    
     idD <- make_id(nDomains, if (length(nUnits) == 1) nUnits else as.list(nUnits))
@@ -47,8 +44,8 @@ gen_v_norm <- function(mean = 0, sd = 1) {
   }
 }
 
-#'@rdname generators
-#'@export
+#' @rdname generators
+#' @export
 gen_v_sar <- function(mean = 0, sd = 1, rho = 0.5, type = "rook") {
   function(nDomains, nUnits, name) {    
     idD <- make_id(nDomains, if (length(nUnits) == 1) nUnits else as.list(nUnits))
