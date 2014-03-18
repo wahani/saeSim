@@ -13,6 +13,7 @@
 setClass("smstp", 
          slots = c(nDomains = "numeric", nUnits = "numeric"),
          contains = "VIRTUAL", 
+         prototype = prototype(nDomains = 1, nUnits = 1),
          validity = function(object) {
            nDomains <- slot(object, "nDomains")
            nUnits <- slot(object, "nUnits")
