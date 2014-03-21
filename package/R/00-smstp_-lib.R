@@ -16,3 +16,7 @@ setClass("smstp_c",
            if(length(object@nCont) > 1 & (object@level %in% c("area", "none"))) stop("A vector of nCont on level area or none can not be interpreted!")
            TRUE
          })
+
+setClass("smstp_sample", 
+         slots = c(smplFun = "function"),
+         contains = "smstp")

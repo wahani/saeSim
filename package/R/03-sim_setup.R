@@ -1,5 +1,5 @@
 sim_setup <- function(base, ..., R = 500, simName = "test", idC = TRUE) {
-  # Taking care of the sim_gen-family:
+  # Taking care of the smstp-family:
   dots <- list(...)
   if (class(dots[[1]]) == "list") dots <- dots[[1]]
   
@@ -10,5 +10,5 @@ sim_setup <- function(base, ..., R = 500, simName = "test", idC = TRUE) {
   })
   
   # Putting everything in a list:
-  new("sim_setup", base = base, R = R, simName = simName, idC = idC, c(smstp_objects))
+  new("sim_setup", base = base, R = R, simName = simName, idC = idC, smstp_objects)
 }

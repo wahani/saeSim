@@ -2,8 +2,11 @@ setGeneric("sim", function(x, ...) standardGeneric("sim"))
 
 setMethod("sim", c(x = "sim_base"),
           function(x, ..., idC = TRUE) {
+            # Preparing:
             setup <- sim_setup(x, ..., R = 1, simName = "", idC = idC)
-            results <- lapply(setup[is.smstp(setup)], sim)
+            results <- lapply(setup[is.smstp_(setup)], sim)
+            
+            # Generating pop
             out <- as.data.frame(Reduce(add, results))
             out$y <- rowSums(out[!grepl("id", names(out), ignore.case=FALSE) | grepl(".B$", names(out), ignore.case=FALSE)])
             out <- out[!grepl(".B$", names(out), ignore.case=FALSE)]
@@ -12,7 +15,17 @@ setMethod("sim", c(x = "sim_base"),
               out$idC <- Reduce("|", out[grepl("idC", names(out))])
               out <- out[!grepl("idC.", names(out))]
             }
+            
+            # Drawing sample:
+            for (smstp_sample in setup[is.smstp_sample(setup)])
+              out <- sim(smstp_sample, out)
+            
             out
+          })
+
+setMethod("sim", c(x = "smstp_sample"),
+          function(x, dat, ...) {
+            dat[x@smplFun(x@nDomains, x@nUnits), ]
           })
 
 setMethod("sim", c(x = "sim_setup"),
