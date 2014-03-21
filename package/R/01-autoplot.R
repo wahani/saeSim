@@ -1,3 +1,5 @@
+setGeneric("autoplot")
+
 setMethod("autoplot", "sim_setup",
           function(object, x = "x", y = "y", ...) {
             require(ggplot2)

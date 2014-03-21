@@ -1,4 +1,4 @@
-setGeneric("%+%", function(e1, e2) standardGeneric("%+%"))
+setGeneric("%+%") #, function(e1, e2) standardGeneric("%+%"))
 
 setMethod("%+%", signature(e1 = "sim_setup", e2 = "sim_setup"), 
           function(e1, e2) {
@@ -6,7 +6,7 @@ setMethod("%+%", signature(e1 = "sim_setup", e2 = "sim_setup"),
             e2
           })
 
-setMethod("%+%", signature(e1 = "sim_setup", e2 = "smstp_"), 
+setMethod("%+%", signature(e1 = "sim_setup", e2 = "smstp"), 
           function(e1, e2) {
             S3Part(e1) <- c(S3Part(e1, TRUE), list(e2))
             e1
