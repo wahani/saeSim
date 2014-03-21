@@ -16,11 +16,25 @@ setMethod("sim", c(x = "sim_base"),
               out <- out[!grepl("idC.", names(out))]
             }
             
+            # Calculating stuff:
+            for (smstp_calc in setup[is.smstp_cpopulation(setup)])
+              out <- sim(smstp_calc, out)
+            
             # Drawing sample:
             for (smstp_sample in setup[is.smstp_sample(setup)])
               out <- sim(smstp_sample, out)
             
+            # Calculating stuff:
+            for (smstp_calc in setup[is.smstp_csample(setup)])
+              out <- sim(smstp_calc, out)
+            
+            # Return:
             out
+          })
+
+setMethod("sim", c(x = "smstp_calc"),
+          function(x, dat, ...) {
+            x@calcFun(dat)
           })
 
 setMethod("sim", c(x = "smstp_sample"),

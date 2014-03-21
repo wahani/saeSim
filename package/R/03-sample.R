@@ -14,7 +14,6 @@ sample_srs <- function(size = 0.05, ...) {
 sample_csrs <- function(size = 0.05, ...) {
   function(nDomains, nUnits) {
     id <- make_id(nDomains, if (length(nUnits) == 1) nUnits else as.list(nUnits))
-    
     dataList <- split(id, list(id$idD))
     unlist(lapply(as.list(1:nDomains), 
            function(i) {
@@ -24,7 +23,8 @@ sample_csrs <- function(size = 0.05, ...) {
                                    if(length(size) == 1) 
                                      size else 
                                        size[i] else 
-                                         ceiling(size * nrow(df))), ]
+                                         if(size >= 1) size else
+                                           ceiling(size * nrow(df))), ]
              as.numeric(rownames(df))
            }))
   }

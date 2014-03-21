@@ -16,3 +16,6 @@ setMethod("make_id", signature=c(nDomains = "numeric", nUnits = "list"),
 
 is.smstp_ <- function(x) sapply(x, inherits, what = "smstp_")
 is.smstp_sample <- function(x) sapply(x, inherits, what = "smstp_sample")
+is.smstp_cpopulation <- function(x) sapply(x, inherits, what = "smstp_cpopulation")
+is.smstp_csample <- function(x) sapply(x, inherits, what = "smstp_csample")
+is.smstp_cresult <- function(x) sapply(x, inherits, what = "smstp_cresult")

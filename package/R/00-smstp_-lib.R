@@ -1,4 +1,4 @@
-# generator: function which given the slots of smstp will generate random number according to the specs
+# smstp_
 setClass("smstp_", 
          slots = c(generator = "function", name = "character"),
          contains = "smstp")
@@ -17,6 +17,21 @@ setClass("smstp_c",
            TRUE
          })
 
+# smstp_sample
 setClass("smstp_sample", 
          slots = c(smplFun = "function"),
          contains = "smstp")
+
+# smstp_calc
+setClass("smstp_calc", 
+         slots = c(calcFun = "function", name = "character"),
+         contains = "smstp")
+
+setClass("smstp_cpopulation",
+         contains = "smstp_calc")
+
+setClass("smstp_csample",
+         contains = "smstp_calc")
+
+setClass("smstp_cresult",
+         contains = "smstp_calc")

@@ -1,0 +1,18 @@
+context("sim_calc")
+test_that("sim_calc and calc_var", {
+  setup <- sim_setup(sim_base_standard(nDomains=5, nUnits = 10), 
+                     sim_gen_fe(generator = gen_norm(mean=50, sd=20), const=0, slope = 10), 
+                     sim_gen_e(generator=gen_norm(0, 1)), 
+                     sim_gen_ec(),
+                     sim_sample(sample_csrs(size=5)), R = 1)
+  
+  dat <- sim(setup %+% sim_calc(calc_var(varName = c(popY = "y"), funNames = c("mean", "var"), exclude = "idC")) %+%
+               sim_calc(calc_var(varName = c(N = "y"), funNames = "length")) %+% 
+               sim_calc(calc_var(varName = c(n = "y"), funNames = "length"), level = "sample") %+% 
+               sim_calc(calc_var(varName = "y", funNames = "length"), level = "sample"))[[1]]
+  
+  expect_that(nrow(dat), equals(25))
+  expect_that(all(c("popYmean", "popYvar", "N", "n", "ylength") %in% names(dat)), is_true())
+  expect_that(unique(dat$n), equals(5))
+  expect_that(unique(dat$N), equals(10))
+})

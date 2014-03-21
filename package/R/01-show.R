@@ -1,6 +1,6 @@
 setMethod("show", "sim_setup",
           function(object) {
             dat <- sim(object@base, S3Part(object, TRUE), object@idC)
-            print(head(arrange(dat, idU)))
+            print(head(dat))
             invisible(dat)
           })
