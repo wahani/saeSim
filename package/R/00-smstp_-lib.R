@@ -24,7 +24,7 @@ setClass("smstp_sample",
 
 # smstp_calc
 setClass("smstp_calc", 
-         slots = c(calcFun = "function", name = "character"),
+         slots = c(calcFun = "function"),
          contains = "smstp")
 
 setClass("smstp_cpopulation",
@@ -35,3 +35,8 @@ setClass("smstp_csample",
 
 setClass("smstp_cresult",
          contains = "smstp_calc")
+
+# smstp_agg
+setClass("smstp_agg", 
+         slots = c(aggFun = "function"),
+         contains = "smstp")

@@ -28,8 +28,17 @@ setMethod("sim", c(x = "sim_base"),
             for (smstp_calc in setup[is.smstp_csample(setup)])
               out <- sim(smstp_calc, out)
             
+            # Aggregating:
+            for (smstp_agg in setup[is.smstp_agg(setup)])
+              out <- sim(smstp_agg, out)
+            
             # Return:
             out
+          })
+
+setMethod("sim", c(x = "smstp_agg"),
+          function(x, dat, ...) {
+            x@aggFun(dat)
           })
 
 setMethod("sim", c(x = "smstp_calc"),

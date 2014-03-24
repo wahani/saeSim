@@ -1,3 +1,5 @@
+setGeneric("plot")
+
 setMethod("plot", c(x = "sim_setup", y = "character"),
           function(x, y, xlab = y, ylab = "y", ...) {
             dat <- sim(x@base, S3Part(x, TRUE), x@idC)
