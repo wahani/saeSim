@@ -15,7 +15,7 @@ agg_standard <- function(splitVars = "idD") {
                                                        function(char) names(sort(table(char), decreasing=TRUE)[1]))
              # factors
              dfOut[sapply(df, is.factor)] <- lapply(df[sapply(df, is.factor)], 
-                                                    function(fac) names(sort(table(fac), decreasing=TRUE)[1]))
+                                                    function(fac) factor(names(sort(table(fac), decreasing=TRUE)[1])))
              # numeric
              dfOut[sapply(df, is.numeric)] <- lapply(df[sapply(df, is.numeric)], mean)
              
