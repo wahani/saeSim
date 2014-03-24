@@ -1,8 +1,20 @@
 \name{sim_calc}
+\alias{sim_N}
 \alias{sim_calc}
+\alias{sim_n}
+\alias{sim_trueMean}
+\alias{sim_trueVar}
 \title{Add new variables}
 \usage{
 sim_calc(calcFun = calc_var(), level = "population")
+
+sim_n()
+
+sim_N()
+
+sim_trueMean(exclude = "idC")
+
+sim_trueVar(exclude = "idC")
 }
 \arguments{
   \item{calcFun}{a function used for calculation, see
