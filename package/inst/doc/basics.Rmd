@@ -20,6 +20,7 @@ The procedure is as follows:
 Basic setup:
 
 ```{r }
+#.libPaths("../../../libWin")
 library(saeSim)
 setup <- sim_setup(sim_base_standard(nDomains = 100, nUnits = 100), R=100, simName="demo", idC=TRUE)
 ```
