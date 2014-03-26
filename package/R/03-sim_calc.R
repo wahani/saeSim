@@ -28,12 +28,12 @@ sim_N <- function() {
 
 #' @export
 #' @rdname sim_calc
-sim_trueMean <- function(exclude = "idC") {
+sim_popMean <- function(exclude = "idC") {
   sim_calc(calc_var(c(popMean = "y"), "mean", exclude), level="population")
 }
 
 #' @export
 #' @rdname sim_calc
-sim_trueVar <- function(exclude = "idC") {
+sim_popVar <- function(exclude = "idC") {
   sim_calc(calc_var(c(popVar = "y"), "var", exclude), level="population")
 }
