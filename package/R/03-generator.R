@@ -16,6 +16,7 @@
 #'  @export
 #'  @seealso For examples: \code{\link{sim_gen_fe}}, \code{\link{sim_gen_e}}, \code{\link{sim_gen_ec}}, \code{\link{sim_gen_re}} and \code{\link{sim_gen_rec}}
 gen_norm <- function(mean = 0, sd = 1) {
+  desc <- paste("~ N(", mean, ", ", sd^2, ")", sep = "")
   function(nDomains, nUnits, name) {
     idD <- make_id(nDomains, if (length(nUnits) == 1) nUnits else as.list(nUnits))
     idD[name] <- rnorm(nrow(idD), mean = mean, sd = sd)
@@ -26,6 +27,7 @@ gen_norm <- function(mean = 0, sd = 1) {
 #' @rdname generators
 #' @export
 gen_v_norm <- function(mean = 0, sd = 1) {
+  desc <- paste("~ N(", mean, ", ", sd^2, ")", sep = "")
   function(nDomains, nUnits, name) {    
     idD <- make_id(nDomains, if (length(nUnits) == 1) nUnits else as.list(nUnits))
     tmp <- rnorm(nDomains, mean = mean, sd = sd)
@@ -37,6 +39,7 @@ gen_v_norm <- function(mean = 0, sd = 1) {
 #' @rdname generators
 #' @export
 gen_v_sar <- function(mean = 0, sd = 1, rho = 0.5, type = "rook") {
+  desc <- paste("~ N(", mean, ", SAR1(", rho, ", ", sd^2, ")", sep = "")
   function(nDomains, nUnits, name) {    
     idD <- make_id(nDomains, if (length(nUnits) == 1) nUnits else as.list(nUnits))
     
