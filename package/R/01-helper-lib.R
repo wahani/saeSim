@@ -20,3 +20,7 @@ is.smstp_cpopulation <- function(x) sapply(x, inherits, what = "smstp_cpopulatio
 is.smstp_csample <- function(x) sapply(x, inherits, what = "smstp_csample")
 is.smstp_cresult <- function(x) sapply(x, inherits, what = "smstp_cresult")
 is.smstp_agg <- function(x) sapply(x, inherits, what = "smstp_agg")
+
+.onAttach <- function(libname, pkgname) {
+  packageStartupMessage("Documentation is available at wahani.github.io/saeSim", domain = NULL, appendLF = TRUE)
+}
