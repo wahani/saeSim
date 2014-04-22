@@ -36,17 +36,17 @@ setMethod("sim", c(x = "sim_base"),
             out
           })
 
-setMethod("sim", c(x = "smstp_agg"),
+setMethod("sim", c(x = "sim_agg"),
           function(x, dat, ...) {
             x@aggFun(dat)
           })
 
-setMethod("sim", c(x = "smstp_calc"),
+setMethod("sim", c(x = "sim_calc_virtual"),
           function(x, dat, ...) {
             x@calcFun(dat)
           })
 
-setMethod("sim", c(x = "smstp_sample"),
+setMethod("sim", c(x = "sim_sample"),
           function(x, dat, ...) {
             dat[x@smplFun(x@nDomains, x@nUnits), ]
           })
@@ -62,19 +62,14 @@ setMethod("sim", c(x = "sim_setup"),
                    })
           })
 
-setMethod("sim", signature=c(x = "smstp_fe"),
+setMethod("sim", signature=c(x = "sim_gen_virtual"),
           function(x, ...) {
             dat <- x@generator(x@nDomains, x@nUnits, x@name)
             dat[paste(x@name, "B", sep = "")] <- x@const + x@slope * dat[[x@name]]
             new("sim_rs_fe", dat)
           })
 
-setMethod("sim", signature=c(x = "smstp_"),
-          function(x, ...) {
-            new("sim_rs", x@generator(x@nDomains, x@nUnits, x@name))
-          })
-
-setMethod("sim", signature=c(x = "smstp_c"),
+setMethod("sim", signature=c(x = "sim_genCont_virtual"),
           function(x, ...) {
             out <- x@generator(x@nDomains, x@nUnits, x@name)
             nCont <- if(length(x@nCont) > 1) as.list(as.integer(x@nCont)) else if(x@nCont >= 1) as.integer(x@nCont) else x@nCont 

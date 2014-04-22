@@ -1,0 +1,49 @@
+\docType{class}
+\name{sim_virtual-class}
+\alias{sim_agg-class}
+\alias{sim_cagg-class}
+\alias{sim_calc_virtual-class}
+\alias{sim_cpopulation-class}
+\alias{sim_csample-class}
+\alias{sim_gen-class}
+\alias{sim_genCont-class}
+\alias{sim_genCont_virtual-class}
+\alias{sim_gen_virtual-class}
+\alias{sim_id_virtual-class}
+\alias{sim_sample-class}
+\alias{sim_virtual-class}
+\title{class-sim_virtual}
+\description{
+class-sim_virtual
+
+class-sim_id_virtual
+
+class-sim_sample
+
+class-sim_gen_virtual
+
+class-sim_gen
+
+class-sim_genCont_virtual
+
+class-sim_genCont
+
+class-sim_agg
+
+class-sim_calc_virtual
+
+class-sim_cpopulation
+
+class-sim_csample
+
+class-sim_cagg
+}
+\section{Slots}{
+  \describe{ \item{\code{nDomains}:}{\code{"numeric"} of
+  length 1, the number of domains}
+  \item{\code{nUnits}:}{Object of class \code{"character"},
+  containing data that needs to go in slot2.}
+  \item{\code{nUnits}:}{Object of class \code{"character"},
+  containing data that needs to go in slot2.} }
+}
+

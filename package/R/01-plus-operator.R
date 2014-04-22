@@ -6,13 +6,13 @@ setMethod("%+%", signature(e1 = "sim_setup", e2 = "sim_setup"),
             e2
           })
 
-setMethod("%+%", signature(e1 = "sim_setup", e2 = "smstp"), 
+setMethod("%+%", signature(e1 = "sim_setup", e2 = "sim_virtual"), 
           function(e1, e2) {
             S3Part(e1) <- c(S3Part(e1, TRUE), list(e2))
             e1
           })
 
-setMethod("%+%", signature(e1 = "sim_base", e2 = "smstp"), 
+setMethod("%+%", signature(e1 = "sim_base", e2 = "sim_virtual"), 
           function(e1, e2) {
             sim_setup(e1, e2)
           })
