@@ -24,3 +24,12 @@ test_that("sim_gen", code={
   
   expect_that(result2, equals(result1))
 })
+
+test_that("adding variables works correctly", {
+  result1 <- sim(sim_base_standard(), sim_gen_fe())
+  result2 <- sim(sim_base_standard(), sim_gen_fe(const = 10, slope = 0))
+  result3 <- sim(sim_base_standard(), sim_gen_fe(const = 0, slope = 0))
+  expect_that(as.numeric(coefficients(lm(y ~ x, data = result1))), equals(c(100, 1)))
+  expect_that(as.numeric(coefficients(lm(y ~ x, data = result2))), equals(c(10, 0)))
+  expect_that(as.numeric(coefficients(lm(y ~ x, data = result3))), equals(c(0, 0)))
+})
