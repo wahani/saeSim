@@ -10,8 +10,9 @@
 #' @examples
 #' sim_base_standard() %+% sim_gen_fe() %+% sim_calc()
 sim_calc <- function(calcFun = calc_var(), level = "population") {
-  if(!(level %in% c("population", "sample", "result"))) stop("This level is not supported, check spelling.")
-  new(paste("smstp_c", level, sep = ""), calcFun = calcFun)
+  if(!(level %in% c("population", "sample", "result"))) 
+    stop("This level is not supported, check spelling.")
+  new(paste("sim_c", level, sep = ""), fun = calcFun)
 }
 
 #' @export

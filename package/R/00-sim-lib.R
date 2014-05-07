@@ -11,6 +11,7 @@
 #'
 #' @rdname sim_virtual
 #' @aliases sim_virtual-class
+#' @export
 setClass("sim_virtual",
          slots = c(fun = "function"),
          contains = "VIRTUAL")
@@ -21,6 +22,7 @@ setClass("sim_virtual",
 #' 
 #' @rdname sim_virtual
 #' @aliases sim_id_virtual-class
+#' @export
 setClass("sim_id_virtual", 
          slots = c(nDomains = "numeric", nUnits = "numeric"),
          contains = c("sim_virtual", "VIRTUAL"), 
@@ -40,6 +42,7 @@ setClass("sim_id_virtual",
 #' 
 #' @rdname sim_virtual 
 #' @aliases sim_sample-class
+#' @export
 setClass("sim_sample", contains = "sim_id_virtual")
 
 
@@ -47,6 +50,7 @@ setClass("sim_sample", contains = "sim_id_virtual")
 #' 
 #' @rdname sim_virtual
 #' @aliases sim_gen_virtual-class
+#' @export
 setClass("sim_gen_virtual",
          slots = c(const = "numeric", slope = "numeric", name = "character"),
          contains = c("sim_id_virtual", "VIRTUAL"),
@@ -64,12 +68,14 @@ setClass("sim_gen_virtual",
 #' 
 #' @rdname sim_virtual
 #' @aliases sim_gen-class
+#' @export
 setClass("sim_gen", contains = "sim_gen_virtual")
 
 #' class-sim_genCont_virtual
 #' 
 #' @rdname sim_virtual
 #' @aliases sim_genCont_virtual-class
+#' @export
 setClass("sim_genCont_virtual",
          slots = c(nCont = "numeric", level = "character", fixed = "logical"),
          contains = c("sim_gen_virtual", "VIRTUAL"),
@@ -89,6 +95,7 @@ setClass("sim_genCont_virtual",
 #' 
 #' @rdname sim_virtual
 #' @aliases sim_genCont-class
+#' @export
 setClass("sim_genCont", contains = "sim_genCont_virtual")
 
 ################################################################################
@@ -97,6 +104,7 @@ setClass("sim_genCont", contains = "sim_genCont_virtual")
 #' 
 #' @rdname sim_virtual 
 #' @aliases sim_agg-class
+#' @export
 setClass("sim_agg", contains = "sim_virtual")
 
 ################################################################################
@@ -105,22 +113,26 @@ setClass("sim_agg", contains = "sim_virtual")
 #' 
 #' @rdname sim_virtual 
 #' @aliases sim_calc_virtual-class
+#' @export
 setClass("sim_calc_virtual", contains = c("sim_virtual", "VIRTUAL"))
 
 #' class-sim_cpopulation
 #' 
 #' @rdname sim_virtual 
 #' @aliases sim_cpopulation-class
+#' @export
 setClass("sim_cpopulation", contains = c("sim_calc_virtual"))
 
 #' class-sim_csample
 #' 
 #' @rdname sim_virtual 
 #' @aliases sim_csample-class
+#' @export
 setClass("sim_csample", contains = c("sim_calc_virtual"))
 
 #' class-sim_cagg
 #' 
 #' @rdname sim_virtual 
 #' @aliases sim_cagg-class
+#' @export
 setClass("sim_cagg", contains = c("sim_calc_virtual"))

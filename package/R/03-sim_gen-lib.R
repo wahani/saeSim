@@ -19,19 +19,19 @@
 #' # Adding contamination in the model error
 #' sim_base_standard() %+% sim_gen_fe() %+% sim_gen_re %+% sim_gen_e() %+% sim_gen_ec()
 sim_gen_fe <- function(generator = gen_norm(0, 4), const = 100, slope = 1, name = "x") {
-  new("sim_gen", generator = generator, slope = slope, const = const, name = name)  
+  new("sim_gen", fun = generator, slope = slope, const = const, name = name)  
 }
 
 #' @rdname sim_gen
 #' @export
 sim_gen_e <- function(generator = gen_norm(0, 4), name = "e") {
-  new("smstp_", generator = generator, name = name)
+  new("sim_gen", fun = generator, name = name, slope = 1, const = 0)
 }
 
 #' @rdname sim_gen
 #' @export
 sim_gen_ec <- function(generator = gen_norm(mean=0, sd=150), nCont = 0.05, level = "unit", fixed = TRUE, name = "e") {
-  out <- new("smstp_c", generator = generator, nCont = nCont, level = level, fixed = fixed, name = name)
+  out <- new("sim_genCont", fun = generator, slope = 1, const = 0, nCont = nCont, level = level, fixed = fixed, name = name)
 }
 
 #' @rdname sim_gen

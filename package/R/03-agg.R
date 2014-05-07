@@ -1,3 +1,4 @@
+#' @export
 agg_standard <- function(splitVars = "idD") {
   function(dat) {
     # Delete vars:

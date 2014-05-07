@@ -18,12 +18,6 @@ setMethod("add", c(dat1 = "sim_rs", dat2 = "sim_rs"),
             new("sim_rs", dat1)
           })
 
-setMethod("add", c(dat1 = "sim_rs_fe", dat2 = "sim_rs_fe"), 
-          function(dat1, dat2) {
-            dat1 <- left_join(dat1, dat2, by = names(dat1)[grepl("id", names(dat1))])
-            new("sim_rs_fe", as.data.frame(dat1))
-          })
-
 setMethod("add", c(dat1 = "sim_rs", dat2 = "missing"), 
           function(dat1, dat2) {
             new("sim_rs", dat1)
@@ -32,24 +26,15 @@ setMethod("add", c(dat1 = "sim_rs", dat2 = "missing"),
 setMethod("add", c(dat1 = "sim_rs_c", dat2 = "sim_rs_c"), 
           function(dat1, dat2) {
             dat <- add(new("sim_rs", S3Part(dat1)), new("sim_rs", S3Part(dat2)))
-            # two cases: 1. both idC have the same variable name
-            # add idC variable with +
-            suppressWarnings({
-              idCVarName <- names(dat2)[grepl("idC", names(dat2))]
-              if(idCVarName %in% names(S3Part(dat1))) {
-                dat[idCVarName] <- dat1[[idCVarName]] | dat2[[idCVarName]]
-              } else {
-                # 2. they have different names
-                # just append the idC variable
-                dat[idCVarName] <- dat2[idCVarName]
-              }
-            })
+            # variable idC will be ignored by add.sim_rs:
+            dat$idC <- dat[["idC"]] | dat[["idC"]]
             new("sim_rs", dat)
           })
 
 setMethod("add", c(dat1 = "sim_rs", dat2 = "sim_rs_c"), 
           function(dat1, dat2) {
-            if (any(grepl("idC", names(dat1)))) return(add(new("sim_rs_c", S3Part(dat1)), dat2))
+            if (any(grepl("idC", names(dat1)))) 
+              return(add(new("sim_rs_c", S3Part(dat1)), dat2))
             # else
             add(dat1, new("sim_rs", S3Part(dat2)))
           })

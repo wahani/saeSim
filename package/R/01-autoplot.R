@@ -1,7 +1,9 @@
+#' @importFrom ggplot2 autoplot
+#' @export
 setGeneric("autoplot")
 
-setMethod("autoplot", "sim_setup",
-          function(object, x = "x", y = "y", ...) {
+#' @export
+setMethod("autoplot", "sim_setup", function(object, x = "x", y = "y", ...) {
             require(ggplot2)
             dat <- sim(object@base, S3Part(object, TRUE), object@idC)
             ggplot(dat, aes_string(x = x, y = y)) + 

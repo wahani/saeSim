@@ -1,10 +1,12 @@
+#' @export
 setGeneric("sim", function(x, ...) standardGeneric("sim"))
 
+#' @export
 setMethod("sim", c(x = "sim_base"),
           function(x, ..., idC = TRUE) {
             # Preparing:
             setup <- sim_setup(x, ..., R = 1, simName = "", idC = idC)
-            results <- lapply(setup[is.smstp_(setup)], sim)
+            results <- lapply(setup[is.sim_gen_virtual(setup)], sim)
             
             # Generating pop
             out <- as.data.frame(Reduce(add, results))
@@ -17,40 +19,44 @@ setMethod("sim", c(x = "sim_base"),
             }
             
             # Calculating stuff:
-            for (smstp_calc in setup[is.smstp_cpopulation(setup)])
+            for (smstp_calc in setup[is.sim_cpopulation(setup)])
               out <- sim(smstp_calc, out)
             
             # Drawing sample:
-            for (smstp_sample in setup[is.smstp_sample(setup)])
+            for (smstp_sample in setup[is.sim_sample(setup)])
               out <- sim(smstp_sample, out)
             
             # Calculating stuff:
-            for (smstp_calc in setup[is.smstp_csample(setup)])
+            for (smstp_calc in setup[is.sim_csample(setup)])
               out <- sim(smstp_calc, out)
             
             # Aggregating:
-            for (smstp_agg in setup[is.smstp_agg(setup)])
+            for (smstp_agg in setup[is.sim_agg(setup)])
               out <- sim(smstp_agg, out)
             
             # Return:
             out
           })
 
+#' @export
 setMethod("sim", c(x = "sim_agg"),
           function(x, dat, ...) {
-            x@aggFun(dat)
+            x@fun(dat)
           })
 
+#' @export
 setMethod("sim", c(x = "sim_calc_virtual"),
           function(x, dat, ...) {
-            x@calcFun(dat)
+            x@fun(dat)
           })
 
+#' @export
 setMethod("sim", c(x = "sim_sample"),
           function(x, dat, ...) {
-            dat[x@smplFun(x@nDomains, x@nUnits), ]
+            dat[x@fun(x@nDomains, x@nUnits), ]
           })
 
+#' @export
 setMethod("sim", c(x = "sim_setup"),
           function(x, ...) {
             lapply(as.list(1:x@R), 
@@ -62,18 +68,20 @@ setMethod("sim", c(x = "sim_setup"),
                    })
           })
 
+#' @export
 setMethod("sim", signature=c(x = "sim_gen_virtual"),
           function(x, ...) {
-            dat <- x@generator(x@nDomains, x@nUnits, x@name)
-            dat[paste(x@name, "B", sep = "")] <- x@const + x@slope * dat[[x@name]]
-            new("sim_rs_fe", dat)
+            dat <- x@fun(x@nDomains, x@nUnits, x@name)
+            dat$y <- x@const + x@slope * dat[[x@name]]
+            new("sim_rs", dat)
           })
 
+#' @export
 setMethod("sim", signature=c(x = "sim_genCont_virtual"),
           function(x, ...) {
-            out <- x@generator(x@nDomains, x@nUnits, x@name)
+            out <- x@fun(x@nDomains, x@nUnits, x@name)
             nCont <- if(length(x@nCont) > 1) as.list(as.integer(x@nCont)) else if(x@nCont >= 1) as.integer(x@nCont) else x@nCont 
             out <- select_cont(out, nCont, x@level, x@fixed)
-            names(out)[grepl("idC", names(out))] <- paste("idC", x@name, sep = "")
+            #names(out)[grepl("idC", names(out))] <- paste("idC", x@name, sep = "")
             new("sim_rs_c", out)
           })

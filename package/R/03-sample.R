@@ -1,9 +1,11 @@
+#' @export
 sample_sampleWrapper <- function(...) {
   function(nDomains, nUnits) {
     sample(...)
   }
 }
 
+#' @export
 sample_srs <- function(size = 0.05, ...) {
   function(nDomains, nUnits) {
     id <- make_id(nDomains, if (length(nUnits) == 1) nUnits else as.list(nUnits))
@@ -11,6 +13,7 @@ sample_srs <- function(size = 0.05, ...) {
   }
 }
 
+#' @export
 sample_csrs <- function(size = 0.05, ...) {
   function(nDomains, nUnits) {
     id <- make_id(nDomains, if (length(nUnits) == 1) nUnits else as.list(nUnits))
