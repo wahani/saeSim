@@ -9,7 +9,8 @@ sample_sampleWrapper <- function(...) {
 sample_srs <- function(size = 0.05, ...) {
   function(nDomains, nUnits) {
     id <- make_id(nDomains, if (length(nUnits) == 1) nUnits else as.list(nUnits))
-    sample.int(nrow(id), if(is.integer(size)) size else ceiling(size * nrow(id)), ...)
+    sample.int(nrow(id), if(is.integer(size) | size >= 1) as.integer(size) else 
+      ceiling(size * nrow(id)), ...)
   }
 }
 
