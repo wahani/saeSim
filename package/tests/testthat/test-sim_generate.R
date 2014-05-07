@@ -10,3 +10,17 @@ test_that("sim_generate for smstp_fe", code={
   expect_that(max(test_out$idD), equals(2))
 })
 
+test_that("sim_gen", code={
+  setup1 <- sim_base_standard() %+% 
+    sim_gen(gen_norm(0, 4), const = 100, name = "x") %+% 
+    sim_gen(gen_norm(0, 4), name = "e") %+% 
+    sim_gen(gen_norm(0, 150), name = "e", nCont = 0.05, level = "unit", fixed = TRUE)
+  setup2 <- sim_base_standard() %+% sim_gen_fe() %+% sim_gen_e() %+% sim_gen_ec()
+  
+  set.seed(1)
+  result1 <- sim(setup1, R = 1)
+  set.seed(1)
+  result2 <- sim(setup2, R = 1)
+  
+  expect_that(result2, equals(result1))
+})

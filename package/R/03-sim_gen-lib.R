@@ -18,20 +18,38 @@
 #' sim_base_standard() %+% sim_gen_fe() %+% sim_gen_re %+% sim_gen_e()
 #' # Adding contamination in the model error
 #' sim_base_standard() %+% sim_gen_fe() %+% sim_gen_re %+% sim_gen_e() %+% sim_gen_ec()
+sim_gen <- function(generator, const = 0, slope = 1, name = "variableName", 
+                    nCont = NULL, level = NULL, fixed = NULL) {
+  # if all contamination parameter are NULL construct a 'sim_gen' object, sim_genCont
+  # otherwise
+  if(any(c(is.null(nCont), is.null(level), is.null(fixed)))) {
+    new("sim_gen", fun = generator, const = const, slope = slope, name = name)
+  } else {
+    new("sim_genCont", fun = generator, const = const, slope = slope, name = name,
+        nCont = nCont, level = level, fixed = fixed)
+  }
+  
+}
+
+
+#' @rdname sim_gen
+#' @export
 sim_gen_fe <- function(generator = gen_norm(0, 4), const = 100, slope = 1, name = "x") {
-  new("sim_gen", fun = generator, slope = slope, const = const, name = name)  
+  sim_gen(generator = generator, slope = slope, const = const, name = name)  
 }
 
 #' @rdname sim_gen
 #' @export
 sim_gen_e <- function(generator = gen_norm(0, 4), name = "e") {
-  new("sim_gen", fun = generator, name = name, slope = 1, const = 0)
+  sim_gen(generator = generator, name = name, slope = 1, const = 0)
 }
 
 #' @rdname sim_gen
 #' @export
-sim_gen_ec <- function(generator = gen_norm(mean=0, sd=150), nCont = 0.05, level = "unit", fixed = TRUE, name = "e") {
-  out <- new("sim_genCont", fun = generator, slope = 1, const = 0, nCont = nCont, level = level, fixed = fixed, name = name)
+sim_gen_ec <- function(generator = gen_norm(mean=0, sd=150), nCont = 0.05, 
+                       level = "unit", fixed = TRUE, name = "e") {
+  sim_gen(generator = generator, slope = 1, const = 0, nCont = nCont, 
+          level = level, fixed = fixed, name = name)
 }
 
 #' @rdname sim_gen

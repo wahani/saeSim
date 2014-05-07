@@ -6,13 +6,11 @@ setMethod("sim", c(x = "sim_base"),
           function(x, ...) {
             # Preparing:
             setup <- sim_setup(x, ..., R = 1, simName = "")
-            results <- lapply(setup[is.sim_gen_virtual(setup)], sim)
             
             # Generating pop
+            results <- lapply(setup[is.sim_gen_virtual(setup)], sim)
             out <- as.data.frame(Reduce(add, results))
-            out$y <- rowSums(out[!grepl("id", names(out), ignore.case=FALSE) | grepl(".B$", names(out), ignore.case=FALSE)])
-            out <- out[!grepl(".B$", names(out), ignore.case=FALSE)]
-            
+                        
             # Calculating stuff:
             for (smstp_calc in setup[is.sim_cpopulation(setup)])
               out <- sim(smstp_calc, out)
@@ -53,8 +51,8 @@ setMethod("sim", c(x = "sim_sample"),
 
 #' @export
 setMethod("sim", c(x = "sim_setup"),
-          function(x, ...) {
-            lapply(as.list(1:x@R), 
+          function(x, ..., R = NULL) {
+            lapply(as.list(1:if(is.null(R)) x@R else R), 
                    function(i) {
                      df <- sim(x@base, S3Part(x, TRUE))
                      df$idR <- i
