@@ -8,7 +8,7 @@ setClass("sim_rs_c", contains = "sim_rs")
 #
 #' @export
 setClass("sim_base", contains = "list")
+
 #' @export
 setClass("sim_setup", 
-         slots = c(base = "sim_base", R = "numeric", simName = "character", 
-                   idC = "logical"), contains = "list")
+         slots = c(base = "sim_base", R = "numeric", simName = "character"), contains = "list")

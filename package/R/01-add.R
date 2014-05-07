@@ -33,9 +33,10 @@ setMethod("add", c(dat1 = "sim_rs_c", dat2 = "sim_rs_c"),
 
 setMethod("add", c(dat1 = "sim_rs", dat2 = "sim_rs_c"), 
           function(dat1, dat2) {
-            if (any(grepl("idC", names(dat1)))) 
+            if (any(grepl("idC", names(dat1)))) {
               return(add(new("sim_rs_c", S3Part(dat1)), dat2))
-            # else
-            add(dat1, new("sim_rs", S3Part(dat2)))
+              } else {
+                return(add(dat1, new("sim_rs", S3Part(dat2))))
+              }
           })
 

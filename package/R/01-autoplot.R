@@ -5,7 +5,7 @@ setGeneric("autoplot")
 #' @export
 setMethod("autoplot", "sim_setup", function(object, x = "x", y = "y", ...) {
             require(ggplot2)
-            dat <- sim(object@base, S3Part(object, TRUE), object@idC)
+            dat <- sim(object@base, S3Part(object, TRUE))
             ggplot(dat, aes_string(x = x, y = y)) + 
               stat_density2d(geom="tile", aes(fill=..density..^0.25, alpha=1), contour=FALSE) + 
               geom_point(alpha = 0.1, size = 0.5) +

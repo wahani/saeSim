@@ -13,7 +13,7 @@ sim_n()
 
 sim_N()
 
-sim_popMean(exclude = "idC")
+sim_popMean(exclude = NULL)
 
 sim_popVar(exclude = "idC")
 }

@@ -3,20 +3,15 @@ setGeneric("sim", function(x, ...) standardGeneric("sim"))
 
 #' @export
 setMethod("sim", c(x = "sim_base"),
-          function(x, ..., idC = TRUE) {
+          function(x, ...) {
             # Preparing:
-            setup <- sim_setup(x, ..., R = 1, simName = "", idC = idC)
+            setup <- sim_setup(x, ..., R = 1, simName = "")
             results <- lapply(setup[is.sim_gen_virtual(setup)], sim)
             
             # Generating pop
             out <- as.data.frame(Reduce(add, results))
             out$y <- rowSums(out[!grepl("id", names(out), ignore.case=FALSE) | grepl(".B$", names(out), ignore.case=FALSE)])
             out <- out[!grepl(".B$", names(out), ignore.case=FALSE)]
-            # Features:
-            if(idC) {
-              out$idC <- Reduce("|", out[grepl("idC", names(out))])
-              out <- out[!grepl("idC.", names(out))]
-            }
             
             # Calculating stuff:
             for (smstp_calc in setup[is.sim_cpopulation(setup)])
@@ -61,7 +56,7 @@ setMethod("sim", c(x = "sim_setup"),
           function(x, ...) {
             lapply(as.list(1:x@R), 
                    function(i) {
-                     df <- sim(x@base, S3Part(x, TRUE), idC = x@idC)
+                     df <- sim(x@base, S3Part(x, TRUE))
                      df$idR <- i
                      df$simName <- x@simName
                      df
@@ -82,6 +77,5 @@ setMethod("sim", signature=c(x = "sim_genCont_virtual"),
             out <- x@fun(x@nDomains, x@nUnits, x@name)
             nCont <- if(length(x@nCont) > 1) as.list(as.integer(x@nCont)) else if(x@nCont >= 1) as.integer(x@nCont) else x@nCont 
             out <- select_cont(out, nCont, x@level, x@fixed)
-            #names(out)[grepl("idC", names(out))] <- paste("idC", x@name, sep = "")
             new("sim_rs_c", out)
           })
