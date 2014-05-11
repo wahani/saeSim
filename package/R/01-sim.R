@@ -1,6 +1,10 @@
+#' sim Functions
+#' 
+#' @rdname sim
 #' @export
 setGeneric("sim", function(x, ...) standardGeneric("sim"))
 
+#' @rdname sim
 #' @export
 setMethod("sim", c(x = "sim_base"),
           function(x, ...) {
@@ -31,24 +35,28 @@ setMethod("sim", c(x = "sim_base"),
             out
           })
 
+#' @rdname sim
 #' @export
 setMethod("sim", c(x = "sim_agg"),
           function(x, dat, ...) {
             x@fun(dat)
           })
 
+#' @rdname sim
 #' @export
 setMethod("sim", c(x = "sim_calc_virtual"),
           function(x, dat, ...) {
             x@fun(dat)
           })
 
+#' @rdname sim
 #' @export
 setMethod("sim", c(x = "sim_sample"),
           function(x, dat, ...) {
             dat[x@fun(x@nDomains, x@nUnits), ]
           })
 
+#' @rdname sim
 #' @export
 setMethod("sim", c(x = "sim_setup"),
           function(x, ..., R = NULL) {
@@ -61,6 +69,7 @@ setMethod("sim", c(x = "sim_setup"),
                    })
           })
 
+#' @rdname sim
 #' @export
 setMethod("sim", signature=c(x = "sim_gen_virtual"),
           function(x, ...) {
@@ -69,6 +78,7 @@ setMethod("sim", signature=c(x = "sim_gen_virtual"),
             new("sim_rs", dat)
           })
 
+#' @rdname sim
 #' @export
 setMethod("sim", signature=c(x = "sim_genCont_virtual"),
           function(x, ...) {

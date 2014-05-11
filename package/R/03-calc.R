@@ -1,4 +1,4 @@
-#' Calculater Function
+#' Calculator Function
 #' 
 #' These functions are used to add new variables to the data.
 #' 
@@ -11,18 +11,31 @@
 #' 
 #' @seealso \code{\link{sim_calc}}
 #' @export
-calc_var <- function(varName = c(y = "y"), funNames = c("mean", "var"), exclude = NULL) {
+calc_var <- function(varName = "y", funNames = c("mean", "var"), exclude = NULL, 
+                     by = "idD", newName = varName) {
   function(dat) {
     # split
-    dataList <- split(dat, dat$idD)
+    dataList <- split(dat, dat[[by]])
     # apply
     dataList <- lapply(dataList, 
                        function(df) {
                          for (fname in funNames) {
                            fun <- match.fun(fname)
-                           nn <- if(is.null(names(varName))) paste(varName, fname, sep = "") else if(length(funNames) == 1) names(varName) else paste(names(varName), fname, sep = "")
+                           nn <- if(length(funNames) == 1) {
+                             if(newName[1] %in% names(df)) {
+                               paste(newName[1], capwords(fname), sep = "")
+                             } else {
+                               newName[1]
+                             }
+                           } else if(length(funNames) == length(newName)) {
+                             newName[which(funNames == fname)]
+                           } else {
+                             paste(newName, capwords(fname), sep = "") 
+                           } 
+                           
                            df[nn] <- 
-                             fun(df[if(is.null(exclude)) TRUE else !Reduce("|", df[exclude]), varName])  
+                             fun(df[if(is.null(exclude)) TRUE else 
+                               !Reduce("|", df[exclude]), varName])  
                          }
                          df
                        })
