@@ -2,32 +2,29 @@
 \docType{methods}
 \name{sim}
 \alias{sim}
-\alias{sim,sim_agg-method}
 \alias{sim,sim_base-method}
-\alias{sim,sim_calc_virtual-method}
-\alias{sim,sim_genCont_virtual-method}
-\alias{sim,sim_gen_virtual-method}
-\alias{sim,sim_sample-method}
 \alias{sim,sim_setup-method}
-\title{sim Functions}
+\title{Start simulation}
 \usage{
 sim(x, ...)
 
 \S4method{sim}{sim_base}(x, ...)
 
-\S4method{sim}{sim_agg}(x, dat, ...)
-
-\S4method{sim}{sim_calc_virtual}(x, dat, ...)
-
-\S4method{sim}{sim_sample}(x, dat, ...)
-
 \S4method{sim}{sim_setup}(x, ..., R = NULL)
+}
+\arguments{
+\item{x}{a \code{sim_setup} or \code{sim_base} constructed with \code{sim_setup()} or \code{sim_base_standard()}}
 
-\S4method{sim}{sim_gen_virtual}(x, ...)
-
-\S4method{sim}{sim_genCont_virtual}(x, ...)
+\item{...}{simulation components added with \code{sim_*}}
 }
 \description{
-sim Functions
+This function can be applied to a \code{sim_setup} object or \code{sim_base}. It will start the simulation. Use the printing method as long as you are testing the scenario.
+}
+\examples{
+setup <- sim_lm()
+resultList <- sim(setup, R = 1)
+
+# Will return a data frame
+dat <- sim(sim_base_standard(), sim_gen_fe(), sim_gen_e())
 }
 

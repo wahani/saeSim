@@ -1,7 +1,5 @@
-#' @export
 setGeneric("select_cont", function(dat, nCont, level, fixed, ...) standardGeneric("select_cont"))
 
-#' @export
 setMethod("select_cont", c(dat = "data.frame", nCont = "integer"), 
           function(dat, nCont, level, fixed, ...) {
             # Def Variables:
@@ -49,7 +47,6 @@ setMethod("select_cont", c(dat = "data.frame", nCont = "integer"),
             return(dat)
           })
 
-#' @export
 setMethod("select_cont", c(nCont = "list"), 
           function(dat, nCont, level, fixed, ...) {
             # area | none
@@ -61,7 +58,6 @@ setMethod("select_cont", c(nCont = "list"),
                              SIMPLIFY = FALSE))
           })
 
-#' @export
 setMethod("select_cont", c(nCont = "numeric"), 
           function(dat, nCont, level, fixed, ...) {
             # area

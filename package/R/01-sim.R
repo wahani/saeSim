@@ -1,7 +1,17 @@
-#' sim Functions
+#' Start simulation
 #' 
+#' This function can be applied to a \code{sim_setup} object or \code{sim_base}. It will start the simulation. Use the printing method as long as you are testing the scenario.
+#' 
+#' @param x a \code{sim_setup} or \code{sim_base} constructed with \code{sim_setup()} or \code{sim_base_standard()}
+#' @param ... simulation components added with \code{sim_*}
 #' @rdname sim
 #' @export
+#' @examples
+#' setup <- sim_lm()
+#' resultList <- sim(setup, R = 1)
+#' 
+#' # Will return a data frame
+#' dat <- sim(sim_base_standard(), sim_gen_fe(), sim_gen_e())
 setGeneric("sim", function(x, ...) standardGeneric("sim"))
 
 #' @rdname sim
@@ -39,22 +49,16 @@ setMethod("sim", c(x = "sim_base"),
             out
           })
 
-#' @rdname sim
-#' @export
 setMethod("sim", c(x = "sim_agg"),
           function(x, dat, ...) {
             x@fun(dat)
           })
 
-#' @rdname sim
-#' @export
 setMethod("sim", c(x = "sim_calc_virtual"),
           function(x, dat, ...) {
             x@fun(dat)
           })
 
-#' @rdname sim
-#' @export
 setMethod("sim", c(x = "sim_sample"),
           function(x, dat, ...) {
             dat[x@fun(x@nDomains, x@nUnits), ]
@@ -73,8 +77,6 @@ setMethod("sim", c(x = "sim_setup"),
                    })
           })
 
-#' @rdname sim
-#' @export
 setMethod("sim", signature=c(x = "sim_gen_virtual"),
           function(x, ...) {
             dat <- x@fun(x@nDomains, x@nUnits, x@name)
@@ -82,8 +84,6 @@ setMethod("sim", signature=c(x = "sim_gen_virtual"),
             new("sim_rs", dat)
           })
 
-#' @rdname sim
-#' @export
 setMethod("sim", signature=c(x = "sim_genCont_virtual"),
           function(x, ...) {
             out <- x@fun(x@nDomains, x@nUnits, x@name)
