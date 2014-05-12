@@ -31,6 +31,10 @@ setMethod("sim", c(x = "sim_base"),
             for (smstp_agg in setup[is.sim_agg(setup)])
               out <- sim(smstp_agg, out)
             
+            # Calculating stuff:
+            for (smstp_calc in setup[is.sim_cagg(setup)])
+              out <- sim(smstp_calc, out)
+            
             # Return:
             out
           })

@@ -29,7 +29,7 @@ is.sim_cpopulation <- function(x) sapply(x, inherits, what = "sim_cpopulation")
 #' @export
 is.sim_csample <- function(x) sapply(x, inherits, what = "sim_csample")
 #' @export
-is.sim_cresult <- function(x) sapply(x, inherits, what = "sim_cresult")
+is.sim_cagg <- function(x) sapply(x, inherits, what = "sim_cagg")
 #' @export
 is.sim_agg <- function(x) sapply(x, inherits, what = "sim_agg")
 #' @export

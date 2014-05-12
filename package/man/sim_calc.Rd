@@ -15,17 +15,32 @@ sim_N()
 
 sim_popMean(exclude = NULL)
 
-sim_popVar(exclude = "idC")
+sim_popVar(exclude = NULL)
 }
 \arguments{
-\item{calcFun}{a function used for calculation, see \code{\link{calc_var}}}
+\item{calcFun}{a function used for calculation}
 
-\item{level}{character given the level on which the variable is to be calculated. One in \code{c("population", "sample")}}
+\item{level}{character given the level on which the variable is to be calculated. One in \code{c("population", "sample", "agg")}}
 }
 \description{
 These functions can be used for adding new variables to the data.
 }
 \examples{
+# Standard behavior
 sim_base_standard() \%+\% sim_gen_fe() \%+\% sim_calc()
+
+# Custom data modifications
+## Add predicted values of a linear model
+library(saeSim)
+
+calc_lm <- function(dat) {
+  dat$linearPredictor <- predict(lm(y ~ x, data = dat))
+  dat
+}
+
+sim_base_standard() \%+\% sim_gen_fe() \%+\% sim_gen_e() \%+\% sim_calc(calc_lm)
+}
+\seealso{
+\code{\link{calc_var}}
 }
 
