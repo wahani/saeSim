@@ -18,7 +18,7 @@
 gen_norm <- function(mean = 0, sd = 1) {
   desc <- paste("~ N(", mean, ", ", sd^2, ")", sep = "")
   function(nDomains, nUnits, name) {
-    idD <- make_id(nDomains, if (length(nUnits) == 1) nUnits else as.list(nUnits))
+    idD <- make_id(nDomains, nUnits)
     idD[name] <- rnorm(nrow(idD), mean = mean, sd = sd)
     idD
   }
@@ -29,7 +29,7 @@ gen_norm <- function(mean = 0, sd = 1) {
 gen_v_norm <- function(mean = 0, sd = 1) {
   desc <- paste("~ N(", mean, ", ", sd^2, ")", sep = "")
   function(nDomains, nUnits, name) {    
-    idD <- make_id(nDomains, if (length(nUnits) == 1) nUnits else as.list(nUnits))
+    idD <- make_id(nDomains, nUnits)
     tmp <- rnorm(nDomains, mean = mean, sd = sd)
     idD[name] <- tmp[idD$idD]
     idD
@@ -41,7 +41,7 @@ gen_v_norm <- function(mean = 0, sd = 1) {
 gen_v_sar <- function(mean = 0, sd = 1, rho = 0.5, type = "rook") {
   desc <- paste("~ N(", mean, ", SAR1(", rho, ", ", sd^2, ")", sep = "")
   function(nDomains, nUnits, name) {    
-    idD <- make_id(nDomains, if (length(nUnits) == 1) nUnits else as.list(nUnits))
+    idD <- make_id(nDomains, nUnits)
     
     # Spatial Structure:
     W <- nb2mat(cell2nb(nDomains, 1, type), style = "W")
