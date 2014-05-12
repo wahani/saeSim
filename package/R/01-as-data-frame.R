@@ -1,2 +1,1 @@
-#' @export
-as.data.frame.sim_rs <- function(x) S3Part(x)
+as.data.frame.sim_rs <- function(x, row.names = NULL, optional = FALSE, ...) S3Part(x)
