@@ -31,23 +31,23 @@ sim_calc <- function(calcFun = calc_var(), level = "population") {
 #' @export
 #' @rdname sim_calc
 sim_n <- function() {
-  sim_calc(calc_var("y", funNames="length", newName="n"), level="sample")
+  sim_calc(calc_var("y", funList=list(length), newName="n"), level="sample")
 }
 
 #' @export
 #' @rdname sim_calc
 sim_N <- function() {
-  sim_calc(calc_var("y", funNames="length", newName="N"), level="population")
+  sim_calc(calc_var("y", funList=list(length), newName="N"), level="population")
 }
 
 #' @export
 #' @rdname sim_calc
 sim_popMean <- function(exclude = NULL) {
-  sim_calc(calc_var("y", "mean", exclude, newName="popMean"), level="population")
+  sim_calc(calc_var("y", funList=list(mean), exclude, newName="popMean"), level="population")
 }
 
 #' @export
 #' @rdname sim_calc
 sim_popVar <- function(exclude = NULL) {
-  sim_calc(calc_var("y", "var", exclude, newName = "popVar"), level="population")
+  sim_calc(calc_var("y", funList=list(var), exclude, newName = "popVar"), level="population")
 }

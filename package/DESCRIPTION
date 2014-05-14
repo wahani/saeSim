@@ -11,8 +11,7 @@ Depends:
     dplyr,
     spdep,
     ggplot2,
-    MASS
-Imports:
+    MASS,
     methods
 Suggests:
     testthat

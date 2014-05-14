@@ -20,7 +20,7 @@ setMethod("make_id", signature=c(nDomains = "numeric", nUnits = "numeric"),
           function(nDomains, nUnits, ...) {
             if(length(nUnits) == 1) {
               out <- data.frame(idD = rep(1:nDomains, each = nUnits)) %.% 
-                group_by(idD) %.% mutate(idU = 1:n()) %.% arrange(idD, idD)
+                group_by("idD") %.% mutate(idU = 1:n())
               return(as.data.frame(out))
             } else {
               make_id(nDomains, as.list(nUnits))
@@ -33,7 +33,6 @@ setMethod("make_id", signature=c(nDomains = "numeric", nUnits = "list"),
             out <- 
               data.frame(idD = unlist(lapply(1:nDomains, 
                                              function(i) rep(i, nUnits[[i]])))) %.% 
-              group_by(idD) %.%
-              mutate(idU = 1:n()) %.% arrange(idD, idD)
+              group_by("idD") %.% mutate(idU = 1:n())
             as.data.frame(out)
           })

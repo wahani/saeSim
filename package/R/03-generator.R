@@ -35,6 +35,8 @@ gen_v_norm <- function(mean = 0, sd = 1) {
   }
 }
 
+#' @importFrom MASS mvrnorm
+#' @importFrom spdep cell2nb nb2mat
 #' @rdname generators
 #' @export
 gen_v_sar <- function(mean = 0, sd = 1, rho = 0.5, type = "rook") {

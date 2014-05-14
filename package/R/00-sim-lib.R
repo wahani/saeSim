@@ -1,3 +1,7 @@
+# Imports of packages:
+#' @import dplyr
+#' @import methods
+
 ################################################################################
 
 setClass("sim_virtual",

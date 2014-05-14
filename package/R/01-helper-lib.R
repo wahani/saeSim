@@ -1,16 +1,9 @@
-#' @export
 is.sim_gen_virtual <- function(x) sapply(x, inherits, what = "sim_gen_virtual")
-#' @export
 is.sim_sample <- function(x) sapply(x, inherits, what = "sim_sample")
-#' @export
 is.sim_cpopulation <- function(x) sapply(x, inherits, what = "sim_cpopulation")
-#' @export
 is.sim_csample <- function(x) sapply(x, inherits, what = "sim_csample")
-#' @export
 is.sim_cagg <- function(x) sapply(x, inherits, what = "sim_cagg")
-#' @export
 is.sim_agg <- function(x) sapply(x, inherits, what = "sim_agg")
-#' @export
 is.sim_id_virtual <- function(x) sapply(x, inherits, what = "sim_id_virtual")
 
 .onAttach <- function(libname, pkgname) {
