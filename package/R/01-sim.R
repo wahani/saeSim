@@ -23,7 +23,7 @@ setMethod("sim", c(x = "sim_base"),
             
             # Generating pop
             results <- lapply(setup[is.sim_gen_virtual(setup)], sim)
-            out <- as.data.frame(Reduce(add, results))
+            out <- S3Part(Reduce(add, results), TRUE)
                         
             # Calculating stuff:
             for (smstp_calc in setup[is.sim_cpopulation(setup)])

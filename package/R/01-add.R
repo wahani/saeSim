@@ -8,8 +8,8 @@ setMethod("add", c(dat1 = "sim_rs", dat2 = "sim_rs"),
             vars_add <- names(dat2)[!(names(dat2) %in% names(dat1))]
             
             # sort the variables
-            dat1 <- arrange(dat1, idD, idU)
-            dat2 <- arrange(dat2, idD, idU)
+            dat1 <- arrange(S3Part(dat1, TRUE), idD, idU)
+            dat2 <- arrange(S3Part(dat2, TRUE), idD, idU)
             
             # cumulate results
             dat1[vars_cum] <- dat1[vars_cum] + dat2[vars_cum]
