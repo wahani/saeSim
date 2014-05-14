@@ -1,10 +1,9 @@
 context("sim_agg")
 test_that("Basic functionality", {
-  assign("make_factor", function(x) factor("a"), envir=.GlobalEnv)
-  assign("make_character", function(x) "b", envir=.GlobalEnv)
   setup <- sim_setup(sim_base_standard(), R=1) %+% sim_gen_e() %+% sim_gen_fe() %+% 
-    sim_calc(calc_var("y", funNames="length", newName="N")) %+% sim_agg() %+%
-    sim_calc(calc_var("y", funNames = c("make_factor", "make_character")))
+    sim_calc(calc_var("y", funList=list("length" = length), newName="N")) %+% sim_agg() %+%
+    sim_calc(calc_var("y", funList = list("make_factor" = function(x) factor("a"), 
+                                          "make_character" = function(x) "b")))
   
   dat <- sim(setup)[[1]]
   expect_that(nrow(dat), equals(100))
@@ -18,5 +17,5 @@ test_that("Basic functionality", {
   expect_that(dat$yMake_character, is_a("character"))
   expect_that(dat$idR, is_a("integer"))
   expect_that(dat$simName, is_a("character"))
-  rm(list=c("make_factor", "make_character"), envir=.GlobalEnv)
+  
 })
