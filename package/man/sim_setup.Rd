@@ -13,9 +13,9 @@ sim_setup(base, ...)
 \S4method{sim_setup}{sim_setup}(base, ...)
 }
 \arguments{
-\item{base}{a object constructed by the \code{sim_base_*} family}
+\item{base}{a object constructed by the \code{sim_base_*} family or a \code{sim_setup} object, constructed with \code{\link{sim_setup}}}
 
-\item{...}{arguments passed to methods}
+\item{...}{simulation components, like \code{sim_gen}, etc.}
 
 \item{R}{the number of desired repetitions in the simulation}
 
@@ -26,5 +26,8 @@ An objects of class \code{sim_setup}. Should be used in conjunction with methods
 }
 \description{
 This function is used to construct a new simulation set-up. There are several ways to work with it. Please see the examples and documentation.
+}
+\seealso{
+\code{\link{sim}}, \code{\link{sim_base_standard}}
 }
 
