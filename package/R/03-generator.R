@@ -1,6 +1,6 @@
-#' Generates random numbers
+#' Generator functions
 #' 
-#'  This function family is designed to draw random numbers according to the setting for domains and units in a domain. fe stands for fixed effects, e for the model error and v for an additional error component defined on area level (random effect). These functions are used in combination with the \code{\link{sim_gen}} function family.
+#'  This function family is designed to draw random numbers according to the setting for domains and units. fe stands for fixed effects, e for the model error and v for an additional error component defined on area level (random effect). These functions are used in combination with the \code{\link{sim_gen}} function family. These functions are not called directly but via \code{\link{sim_gen}}
 #'  
 #'  @param mean the mean passed to the random number generator, for example \code{\link{rnorm}}
 #'  @param sd the standard deviation passed to the random number generator, for example \link{rnorm}
@@ -9,12 +9,11 @@
 #'  
 #'  @details \code{gen_norm} is used to draw random numbers from a homoscedastic normal distribution. This generator is used for the fixed effects part and model error.
 #'  
-#'  \code{gen_v_norm} and \code{gen_v_sar} will create an area-level random component. In the case of v_norm, the error component will be from a normal distribution and i.i.d. from an area-level perspective (all units in an area will get the same value, all areas are independent). v_sar will also come from a normal distribution, but the errors are correlated. The variance covariance matrix is constructed for a SAR(1) - spatial/simultanous autoregressive process. \link[MASS]{mvrnorm} is used for the random number generation. 
+#'  \code{gen_v_norm} and \code{gen_v_sar} will create an area-level random component. In the case of \code{v_norm}, the error component will be from a normal distribution and i.i.d. from an area-level perspective (all units in an area will have same value, all areas are independent). v_sar will also be from a normal distribution, but the errors are correlated. The variance covariance matrix is constructed for a SAR(1) - spatial/simultanous autoregressive process. \link[MASS]{mvrnorm} is used for the random number generation. 
 #'  
-#'  @return These functions are not called directly but via \code{\link{sim_gen}} 
 #'  @rdname generators
 #'  @export
-#'  @seealso For examples: \code{\link{sim_gen_fe}}, \code{\link{sim_gen_e}}, \code{\link{sim_gen_ec}}, \code{\link{sim_gen_re}} and \code{\link{sim_gen_rec}}
+#'  @seealso For examples: \code{\link{sim_gen}}, \code{\link{sim_gen_fe}}, \code{\link{sim_gen_e}}, \code{\link{sim_gen_ec}}, \code{\link{sim_gen_re}} and \code{\link{sim_gen_rec}}
 gen_norm <- function(mean = 0, sd = 1) {
   desc <- paste("~ N(", mean, ", ", sd^2, ")", sep = "")
   function(nDomains, nUnits, name) {

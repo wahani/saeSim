@@ -37,9 +37,6 @@ sim_gen_rec(generator = gen_v_norm(mean = 0, sd = 40), nCont = 0.05,
 
 \item{nCont}{gives the number of contaminated observations. Values between 0 and 1 will be trated as proportion. If length is larger 1, the expected length is the number of domains, you can specify something else in each domain. Integers are expected in that cas - numeric will be converted to integer}
 }
-\value{
-These functions are not designed to be used interactively but added to a setup. See examples
-}
 \description{
 These functions can be used to add data to a setup. The terminology comes from mixed models.
 }

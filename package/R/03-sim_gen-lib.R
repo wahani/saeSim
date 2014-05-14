@@ -9,7 +9,6 @@
 #' @param level "unit", "area" or "none" - is the whole area contaminated, units inside an area or random observations in the data
 #' @param nCont gives the number of contaminated observations. Values between 0 and 1 will be trated as proportion. If length is larger 1, the expected length is the number of domains, you can specify something else in each domain. Integers are expected in that cas - numeric will be converted to integer
 #' 
-#' @return These functions are not designed to be used interactively but added to a setup. See examples
 #' @export
 #' @rdname sim_gen
 #' @seealso \code{\link{gen_norm}}, \code{\link{gen_v_norm}}, \code{\link{gen_v_sar}}
