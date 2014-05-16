@@ -13,6 +13,8 @@ make_id(nDomains, nUnits, ...)
 \item{nDomains}{The number of domains. Can be considered as cluster variable.}
 
 \item{nUnits}{The number of units in each domain. If \code{length(nUnits) > 1} each elemnt is the number of units in each domain respectively.}
+
+\item{...}{arguments passed to methods}
 }
 \description{
 This function can be used to construct a data frame with \code{id*} variables. This is helpful for user written generator functions.

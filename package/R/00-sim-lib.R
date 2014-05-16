@@ -1,6 +1,7 @@
 # Imports of packages:
 #' @import dplyr
 #' @import methods
+#' @import ggplot2
 
 ################################################################################
 

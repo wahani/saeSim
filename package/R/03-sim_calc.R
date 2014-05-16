@@ -4,6 +4,7 @@
 #' 
 #' @param calcFun a function used for calculation
 #' @param level character given the level on which the variable is to be calculated. One in \code{c("population", "sample", "agg")}
+#' @inheritParams calc_var
 #' 
 #' @seealso \code{\link{calc_var}}
 #' @export

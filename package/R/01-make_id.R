@@ -2,6 +2,7 @@
 #' @description This function can be used to construct a data frame with \code{id*} variables. This is helpful for user written generator functions.
 #' @param nDomains The number of domains. Can be considered as cluster variable.
 #' @param nUnits The number of units in each domain. If \code{length(nUnits) > 1} each elemnt is the number of units in each domain respectively.
+#' @param ... arguments passed to methods
 #' 
 #' @rdname make_id
 #' @export

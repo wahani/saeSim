@@ -16,6 +16,8 @@ sim(x, ...)
 \item{x}{a \code{sim_setup} or \code{sim_base} constructed with \code{sim_setup()} or \code{sim_base_standard()}}
 
 \item{...}{simulation components added with \code{sim_*}}
+
+\item{R}{the number of desired repetitions in the simulation}
 }
 \description{
 This function can be applied to a \code{sim_setup} object or \code{sim_base}. It will start the simulation. Use the printing method as long as you are testing the scenario.

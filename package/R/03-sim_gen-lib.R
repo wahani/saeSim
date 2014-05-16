@@ -8,6 +8,7 @@
 #' @param name variable name used in the resulting \code{data.frame}
 #' @param level "unit", "area" or "none" - is the whole area contaminated, units inside an area or random observations in the data
 #' @param nCont gives the number of contaminated observations. Values between 0 and 1 will be trated as proportion. If length is larger 1, the expected length is the number of domains, you can specify something else in each domain. Integers are expected in that cas - numeric will be converted to integer
+#' @param fixed TRUE fixes the observations which will be contaminated. FALSE will result in a random selection of contaminated observations. Default is NULL for non-contaminated scenarios.
 #' 
 #' @export
 #' @rdname sim_gen

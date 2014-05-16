@@ -1,4 +1,3 @@
-#' @importFrom ggplot2 "%+%"
 #' @export
 setGeneric("%+%") #, function(e1, e2) standardGeneric("%+%"))
 

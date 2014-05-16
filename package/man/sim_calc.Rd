@@ -21,6 +21,8 @@ sim_popVar(exclude = NULL)
 \item{calcFun}{a function used for calculation}
 
 \item{level}{character given the level on which the variable is to be calculated. One in \code{c("population", "sample", "agg")}}
+
+\item{exclude}{charcter vector of variable names in the data used to exclude observations from the calculation or \code{NULL}. The variables must be \code{logical}, \code{TRUE}s will be excluded.}
 }
 \description{
 These functions can be used for adding new variables to the data.

@@ -4,6 +4,8 @@
 #' 
 #' @param x a \code{sim_setup} or \code{sim_base} constructed with \code{sim_setup()} or \code{sim_base_standard()}
 #' @param ... simulation components added with \code{sim_*}
+#' @inheritParams sim_setup
+#' 
 #' @rdname sim
 #' @export
 #' @examples

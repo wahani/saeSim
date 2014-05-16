@@ -1,4 +1,3 @@
-#' @importFrom ggplot2 autoplot
 #' @export
 setGeneric("autoplot")
 
