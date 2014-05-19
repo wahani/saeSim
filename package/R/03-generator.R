@@ -9,14 +9,14 @@
 #'  
 #'  @details \code{gen_norm} is used to draw random numbers from a normal distribution where all generated numbers are independent.
 #'  
-#'  \code{gen_v_norm} and \code{gen_v_sar} will create an area-level random component. In the case of \code{v_norm}, the error component will be from a normal distribution and i.i.d. from an area-level perspective (all units in an area will have same value, all areas are independent). v_sar will also be from a normal distribution, but the errors are correlated. The variance covariance matrix is constructed for a SAR(1) - spatial/simultanous autoregressive process. \link[MASS]{mvrnorm} is used for the random number generation. 
+#'  \code{gen_v_norm} and \code{gen_v_sar} will create an area-level random component. In the case of \code{v_norm}, the error component will be from a normal distribution and i.i.d. from an area-level perspective (all units in an area will have the same value, all areas are independent). v_sar will also be from a normal distribution, but the errors are correlated. The variance covariance matrix is constructed for a SAR(1) - spatial/simultanous autoregressive process. \link[MASS]{mvrnorm} is used for the random number generation. 
 #'  
 #'  @rdname generators
 #'  @export
 #'  @seealso For examples: \code{\link{sim_gen}}, \code{\link{sim_gen_fe}}, \code{\link{sim_gen_e}}, \code{\link{sim_gen_ec}}, \code{\link{sim_gen_re}}, \code{\link{sim_gen_rec}}, \code{\link[spdep]{cell2nb}}
 #'  
 #'  @examples
-#'  sim_base_standard %+% sim_gen_fe %+% sim_gen_e() %+% sim_gen_re %+% sim_gen_re(gen_v_sar())
+#'  sim_base_standard() %+% sim_gen_fe() %+% sim_gen_e() %+% sim_gen_re() %+% sim_gen_re(gen_v_sar())
 gen_norm <- function(mean = 0, sd = 1) {
   desc <- paste("~ N(", mean, ", ", sd^2, ")", sep = "")
   function(nDomains, nUnits, name) {

@@ -27,6 +27,6 @@ plot(x, y, ...)
 Use this function to produce plots for an object of class \code{sim_setup}. At this time they are wrapper functions around \code{\link{smoothScatter}}.
 }
 \seealso{
-\code{\link[saeSim]{autoplot}}, \code{\link{autoplot}}
+\code{\link[saeSim]{autoplot}}
 }
 

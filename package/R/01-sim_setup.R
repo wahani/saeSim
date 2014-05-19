@@ -3,13 +3,13 @@
 #' @description This function is used to construct a new simulation set-up. There are several ways to work with it. Please see the examples and documentation.
 #' 
 #' @param base a object constructed by the \code{sim_base_*} family or a \code{sim_setup} object, constructed with \code{\link{sim_setup}}.
-#' @param ... simulation components, like \code{sim_gen}, etc.
+#' @param ... simulation components, like \code{\link{sim_gen}}, \code{\link{sim_calc}}, \code{\link{sim_sample}}, \code{\link{sim_agg}}
 #' @param R the number of desired repetitions in the simulation.
-#' @param simName the name of the simulation. It is simply added as character to the data.
+#' @param simName the name of the simulation. It is simply added as character variable to the data.
 #' 
 #' @return An objects of class \code{sim_setup}. There is really no need to access an object of class \code{sim_setup}. You can interact with it using the \code{show}, \code{plot}, \code{autoplot} and of course \code{sim} method.
 #' 
-#' @seealso \code{\link{sim}}, \code{\link{sim_base_standard}}
+#' @seealso \code{\link{sim}}, \code{\link{sim_base_standard}}, \code{\link{show}}, \code{\link{plot}}, \code{\link{autoplot}}
 #' @export
 #' @rdname sim_setup
 #' 

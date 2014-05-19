@@ -10,7 +10,7 @@
 #' 
 #' @export
 #' @rdname plot
-#' @seealso \code{\link[saeSim]{autoplot}}, \code{\link{autoplot}}
+#' @seealso \code{\link[saeSim]{autoplot}}
 #' @importFrom graphics plot
 setGeneric("plot")
 

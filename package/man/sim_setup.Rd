@@ -15,11 +15,11 @@ sim_setup(base, ...)
 \arguments{
 \item{base}{a object constructed by the \code{sim_base_*} family or a \code{sim_setup} object, constructed with \code{\link{sim_setup}}.}
 
-\item{...}{simulation components, like \code{sim_gen}, etc.}
+\item{...}{simulation components, like \code{\link{sim_gen}}, \code{\link{sim_calc}}, \code{\link{sim_sample}}, \code{\link{sim_agg}}}
 
 \item{R}{the number of desired repetitions in the simulation.}
 
-\item{simName}{the name of the simulation. It is simply added as character to the data.}
+\item{simName}{the name of the simulation. It is simply added as character variable to the data.}
 }
 \value{
 An objects of class \code{sim_setup}. There is really no need to access an object of class \code{sim_setup}. You can interact with it using the \code{show}, \code{plot}, \code{autoplot} and of course \code{sim} method.
@@ -46,6 +46,6 @@ resultList <- sim(setup)
 }
 }
 \seealso{
-\code{\link{sim}}, \code{\link{sim_base_standard}}
+\code{\link{sim}}, \code{\link{sim_base_standard}}, \code{\link{show}}, \code{\link{plot}}, \code{\link{autoplot}}
 }
 

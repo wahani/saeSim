@@ -13,7 +13,7 @@ calc_var(varName = "y", funList = list(mean = mean, var = var),
 
 \item{exclude}{charcter vector of variable names in the data used to exclude observations from the calculation or \code{NULL}. The variables must be \code{logical}, \code{TRUE}s will be excluded.}
 
-\item{by}{variable names as character to split the data. Computed values will be constant within each subset.}
+\item{by}{variable names as character to split the data. Computed values will be constant within each group.}
 
 \item{newName}{name of the new variable(s). If \code{length(funList) > 1} it can be a vector. If equal to \code{varName} the name will be pasted with the function name (if the list is named) or appended by an increasing sequence of integer}
 }
