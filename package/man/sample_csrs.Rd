@@ -9,9 +9,12 @@ sample_csrs(size = 0.05)
 \item{size}{can either be >= 1 giving the sample size (in each cluster) or < 1 where it is treated as proportion (in each cluster). Additionally size can have \code{length(size) > 1} which will be interpreted as different sample sizes in each cluster/domain.}
 }
 \description{
-This function controls the sampling mechanism. They are designed to be used with \code{\link{sim_sample}}. \code{sample_csrs} will draw with simple random sampling in each cluster. The cluster is hard coded as \code{idD}.
+This function is intended to be used with \code{\link{sim_sample}} and not interactively. \code{sample_csrs} will draw with simple random sampling in each cluster. Clusters are identified using the \code{nDomains} and \code{nUnits} specified in the sim_base. \code{\link{sample.int}} is used under the hood.
+}
+\examples{
+sim_lm() \%+\% sim_sample(sample_csrs())
 }
 \seealso{
-\code{\link{sample_srs}}, \code{\link{sample_sampleWrapper}}, \code{\link{sim_sample}}
+\code{\link{sample_srs}}, \code{\link{sample_sampleWrapper}}, \code{\link{sim_sample}}, \code{\link{sample.int}}
 }
 

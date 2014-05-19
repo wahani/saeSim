@@ -5,7 +5,7 @@
 \alias{sim_n}
 \alias{sim_popMean}
 \alias{sim_popVar}
-\title{Add new variables}
+\title{Calculation component}
 \usage{
 sim_calc(calcFun = calc_var(), level = "population")
 
@@ -18,14 +18,19 @@ sim_popMean(exclude = NULL)
 sim_popVar(exclude = NULL)
 }
 \arguments{
-\item{calcFun}{a function used for calculation}
+\item{calcFun}{a function used for calculation.}
 
-\item{level}{character given the level on which the variable is to be calculated. One in \code{c("population", "sample", "agg")}}
+\item{level}{character given the level on which the variable is to be calculated. One in \code{c("population", "sample", "agg")}.}
 
 \item{exclude}{charcter vector of variable names in the data used to exclude observations from the calculation or \code{NULL}. The variables must be \code{logical}, \code{TRUE}s will be excluded.}
 }
 \description{
-These functions can be used for adding new variables to the data.
+One of the components which can be added to a simulation set-up. These functions can be used for adding new variables to the data. \code{sim_calc} is the generic interface to add a calculation component. Everything else are preconfigured components.
+}
+\details{
+Potentially you can define a \code{calcFun} yourself. Take care that it only has one argument, named \code{dat}, and returns the aggregated data as \code{data.frame}.
+
+\code{sim_n} and \code{sim_N} will add the sample and population size in each domain respectively. \code{sim_popMean} and \code{sim_popVar} the population mean and variance of the variable \code{y}.
 }
 \examples{
 # Standard behavior
@@ -43,6 +48,6 @@ calc_lm <- function(dat) {
 sim_base_standard() \%+\% sim_gen_fe() \%+\% sim_gen_e() \%+\% sim_calc(calc_lm)
 }
 \seealso{
-\code{\link{calc_var}}
+\code{\link{calc_var}}, \code{\link{sim_gen}}, \code{\link{sim_agg}}, \code{\link{sim_sample}}
 }
 

@@ -6,14 +6,17 @@
 sample_srs(size = 0.05, ...)
 }
 \arguments{
-\item{size}{can either be >= 1 giving the sample size or < 1 where it is treated as proportion}
+\item{size}{can either be >= 1 giving the sample size or < 1 where it is treated as proportion.}
 
-\item{...}{Arguments passed to \code{\link{sample.int}}}
+\item{...}{Arguments passed to \code{\link{sample.int}}.}
 }
 \description{
-This function controls the sampling mechanism. They are designed to be used with \code{\link{sim_sample}}. \code{sample_srs} will draw with simple random sampling.
+This function is intended to be used with \code{\link{sim_sample}} and not interactively. \code{sample_srs} will draw with simple random sampling. \code{\link{sample.int}} is used under the hood.
+}
+\examples{
+sim_lm() \%+\% sim_sample(sample_srs())
 }
 \seealso{
-\code{\link{sample_sampleWrapper}}, \code{\link{sample_csrs}}, \code{\link{sim_sample}}
+\code{\link{sample_sampleWrapper}}, \code{\link{sample_csrs}}, \code{\link{sim_sample}}, \code{\link{sample.int}}
 }
 

@@ -1,15 +1,18 @@
 #' Calculator function
 #' 
-#' This function can be used to calculate some new variables on the data. This function is supposed to be used with \code{\link{sim_calc}}. See the examples there.
+#' This function is intended to be used with \code{\link{sim_calc}} and not interactively. It can be used to calculate statistics for gouping variables in the data.
 #' 
-#' @param varName a chracter giving the name of the variable in the data, on which a function is applied. 
-#' @param funList list of functions to be applied on \code{varName}. Can be named, see \code{newName}
+#' @param varName character giving the name of the variable in the data, on which a function is applied. 
+#' @param funList list of functions to be applied on \code{varName}. Can be named, see \code{newName}.
 #' @param exclude charcter vector of variable names in the data used to exclude observations from the calculation or \code{NULL}. The variables must be \code{logical}, \code{TRUE}s will be excluded.
-#' @param by variable names as character for which the data is split. Computed values will be constant within each subset
-#' @param newName name of the new variable. If \code{length(funList) > 1} it can be vector. If equal to \code{varName} the name will be pasted with the function name (if the list is named) or appended by a increasing sequence of integer
+#' @param by variable names as character to split the data. Computed values will be constant within each subset.
+#' @param newName name of the new variable(s). If \code{length(funList) > 1} it can be a vector. If equal to \code{varName} the name will be pasted with the function name (if the list is named) or appended by an increasing sequence of integer
 #' 
 #' @seealso \code{\link{sim_calc}}
 #' @export
+#' 
+#' @examples
+#' sim_base_standard() %+% sim_gen_fe() %+% sim_gen_e() %+% sim_calc(calc_var())
 calc_var <- function(varName = "y", funList = list("mean" = mean, "var" = var), exclude = NULL, 
                      by = "idD", newName = varName) {
   function(dat) {

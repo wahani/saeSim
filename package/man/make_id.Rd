@@ -2,22 +2,25 @@
 \docType{methods}
 \name{make_id}
 \alias{make_id}
+\alias{make_id,numeric,list-method}
 \alias{make_id,numeric,numeric-method}
 \title{Construct ID-Variables}
 \usage{
 make_id(nDomains, nUnits, ...)
 
 \S4method{make_id}{numeric,numeric}(nDomains, nUnits, ...)
+
+\S4method{make_id}{numeric,list}(nDomains, nUnits, ...)
 }
 \arguments{
 \item{nDomains}{The number of domains. Can be considered as cluster variable.}
 
 \item{nUnits}{The number of units in each domain. If \code{length(nUnits) > 1} each elemnt is the number of units in each domain respectively.}
 
-\item{...}{arguments passed to methods}
+\item{...}{arguments passed to methods.}
 }
 \description{
-This function can be used to construct a data frame with \code{id*} variables. This is helpful for user written generator functions.
+This function can be used to construct a data frame with grouping/\code{ID} variables. This is helpful for user written generator functions.
 }
 \examples{
 make_id(2, 2)

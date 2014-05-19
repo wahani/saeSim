@@ -4,7 +4,7 @@
 \alias{sim_setup}
 \alias{sim_setup,sim_base-method}
 \alias{sim_setup,sim_setup-method}
-\title{Construct a simulation set-up}
+\title{Constructor for sim_setup}
 \usage{
 sim_setup(base, ...)
 
@@ -13,19 +13,37 @@ sim_setup(base, ...)
 \S4method{sim_setup}{sim_setup}(base, ...)
 }
 \arguments{
-\item{base}{a object constructed by the \code{sim_base_*} family or a \code{sim_setup} object, constructed with \code{\link{sim_setup}}}
+\item{base}{a object constructed by the \code{sim_base_*} family or a \code{sim_setup} object, constructed with \code{\link{sim_setup}}.}
 
 \item{...}{simulation components, like \code{sim_gen}, etc.}
 
-\item{R}{the number of desired repetitions in the simulation}
+\item{R}{the number of desired repetitions in the simulation.}
 
-\item{simName}{the name of the simulation. It is simply added as character to the data}
+\item{simName}{the name of the simulation. It is simply added as character to the data.}
 }
 \value{
-An objects of class \code{sim_setup}. Should be used in conjunction with methods for this class.
+An objects of class \code{sim_setup}. There is really no need to access an object of class \code{sim_setup}. You can interact with it using the \code{show}, \code{plot}, \code{autoplot} and of course \code{sim} method.
 }
 \description{
 This function is used to construct a new simulation set-up. There are several ways to work with it. Please see the examples and documentation.
+}
+\examples{
+# Define a set-up
+setup <- sim_setup(sim_base_standard(), sim_gen_fe(), sim_gen_e())
+# Show:
+setup
+
+\dontrun{
+# plot:
+plot(setup)
+plot(setup \%+\% sim_gen_ec() \%+\% sim_agg())
+# autoplot for the ggplot2 user:
+autoplot(setup)
+autoplot(setup \%+\% sim_gen_ec())
+
+# Start a simulation:
+resultList <- sim(setup)
+}
 }
 \seealso{
 \code{\link{sim}}, \code{\link{sim_base_standard}}

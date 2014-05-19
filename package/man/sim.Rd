@@ -15,9 +15,12 @@ sim(x, ...)
 \arguments{
 \item{x}{a \code{sim_setup} or \code{sim_base} constructed with \code{sim_setup()} or \code{sim_base_standard()}}
 
-\item{...}{simulation components added with \code{sim_*}}
+\item{...}{simulation components; any composition of \code{\link{sim_gen}}, \code{\link{sim_calc}}, \code{\link{sim_sample}}, \code{\link{sim_agg}}.}
 
-\item{R}{the number of desired repetitions in the simulation}
+\item{R}{the number of desired repetitions in the simulation.}
+}
+\value{
+If \code{x} is a \code{sim_base} object constructed for example with \code{\link{sim_base_standard}} the return value is a the result of one simulation run and of class \code{data.frame}. If \code{x} has class \code{sim_setup} the return value is always a list. The elements are the resulting \code{data.frame}s of each simulation run.
 }
 \description{
 This function can be applied to a \code{sim_setup} object or \code{sim_base}. It will start the simulation. Use the printing method as long as you are testing the scenario.

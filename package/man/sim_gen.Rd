@@ -6,7 +6,7 @@
 \alias{sim_gen_fe}
 \alias{sim_gen_re}
 \alias{sim_gen_rec}
-\title{Add generated data}
+\title{Generation component}
 \usage{
 sim_gen(generator, const = 0, slope = 1, name = "variableName",
   nCont = NULL, level = NULL, fixed = NULL)
@@ -25,30 +25,44 @@ sim_gen_rec(generator = gen_v_norm(mean = 0, sd = 40), nCont = 0.05,
   level = "area", fixed = TRUE, name = "v")
 }
 \arguments{
-\item{generator}{generator function used to generate random numbers}
+\item{generator}{generator function used to generate random numbers.}
 
-\item{const}{constant/intercept in a fixed effects part}
+\item{const}{constant/intercept in a fixed effects part.}
 
-\item{slope}{slope in a fixed effects part}
+\item{slope}{slope in a fixed effects part.}
 
-\item{name}{variable name used in the resulting \code{data.frame}}
+\item{name}{variable name used in the resulting \code{data.frame}.}
 
-\item{level}{"unit", "area" or "none" - is the whole area contaminated, units inside an area or random observations in the data}
+\item{level}{"unit", "area" or "none" - is the whole area contaminated, units inside an area or random observations in the data.}
 
-\item{nCont}{gives the number of contaminated observations. Values between 0 and 1 will be trated as proportion. If length is larger 1, the expected length is the number of domains, you can specify something else in each domain. Integers are expected in that cas - numeric will be converted to integer}
+\item{nCont}{gives the number of contaminated observations. Values between 0 and 1 will be trated as proportion. If length is larger 1, the expected length is the number of domains, you can specify something else in each domain. Integers are expected in that cas - numeric will be converted to integer.}
 
 \item{fixed}{TRUE fixes the observations which will be contaminated. FALSE will result in a random selection of contaminated observations. Default is NULL for non-contaminated scenarios.}
 }
 \description{
-These functions can be used to add data to a setup. The terminology comes from mixed models.
+One of the components which can be added to a simulation set-up. \code{sim_gen} is the generic interface to add components for data from some generator. Everything else are preconfigured wrapper functions of \code{sim_gen}.
+}
+\details{
+\code{fe}: fixed-effect component; \code{e}: model-error; \code{ec}: contaminated model error; \code{re}: random-effect (error constant for each domain); \code{rec} contaminated random-effect. Note that for contamination you are expected to add both, a non-contaminated component and a contaminated component. They are simply added up in the response \code{y}.
+
+Potentially you can define a \code{generator} yourself. Take care that it has three arguments, named \code{nDomains}, \code{nUnits} and \code{name}, and returns a \code{data.frame} with the variables \code{idD}, \code{idU} and one named with \code{name}. Use \code{make_id} to stay in the correct format.
 }
 \examples{
 # Data setup for a mixed model
 sim_base_standard() \%+\% sim_gen_fe() \%+\% sim_gen_re \%+\% sim_gen_e()
 # Adding contamination in the model error
 sim_base_standard() \%+\% sim_gen_fe() \%+\% sim_gen_re \%+\% sim_gen_e() \%+\% sim_gen_ec()
+
+# Simple user generated generator:
+gen_myVar <- function(nDomains, nUnits, name) {
+  dat <- make_id(nDomains, nUnits)
+  dat[name] <- rnorm(nrow(dat))
+  dat
+}
+
+sim_base_standard() \%+\% sim_gen_fe() \%+\% sim_gen_e(gen_myVar)
 }
 \seealso{
-\code{\link{gen_norm}}, \code{\link{gen_v_norm}}, \code{\link{gen_v_sar}}
+\code{\link{gen_norm}}, \code{\link{gen_v_norm}}, \code{\link{gen_v_sar}}, \code{\link{sim_agg}}, \code{\link{sim_calc}}, \code{\link{sim_sample}}
 }
 

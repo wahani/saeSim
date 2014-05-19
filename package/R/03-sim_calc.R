@@ -1,12 +1,16 @@
-#' Add new variables
+#' Calculation component
 #' 
-#' These functions can be used for adding new variables to the data.
+#' One of the components which can be added to a simulation set-up. These functions can be used for adding new variables to the data. \code{sim_calc} is the generic interface to add a calculation component. Everything else are preconfigured components.
 #' 
-#' @param calcFun a function used for calculation
-#' @param level character given the level on which the variable is to be calculated. One in \code{c("population", "sample", "agg")}
+#' @param calcFun a function used for calculation.
+#' @param level character given the level on which the variable is to be calculated. One in \code{c("population", "sample", "agg")}.
 #' @inheritParams calc_var
 #' 
-#' @seealso \code{\link{calc_var}}
+#' @details Potentially you can define a \code{calcFun} yourself. Take care that it only has one argument, named \code{dat}, and returns the aggregated data as \code{data.frame}.
+#' 
+#' \code{sim_n} and \code{sim_N} will add the sample and population size in each domain respectively. \code{sim_popMean} and \code{sim_popVar} the population mean and variance of the variable \code{y}.
+#' 
+#' @seealso \code{\link{calc_var}}, \code{\link{sim_gen}}, \code{\link{sim_agg}}, \code{\link{sim_sample}}
 #' @export
 #' @rdname sim_calc
 #' @examples

@@ -5,7 +5,7 @@
 \alias{sim_lmc}
 \alias{sim_lmm}
 \alias{sim_lmmc}
-\title{Basics for a simulation setup}
+\title{Constructor for sim_base}
 \usage{
 sim_base_standard(nDomains = 100, nUnits = 100)
 
@@ -18,11 +18,24 @@ sim_lmc()
 sim_lmmc()
 }
 \arguments{
-\item{nDomains}{the number of domains}
+\item{nDomains}{the number of domains.}
 
-\item{nUnits}{the number of units}
+\item{nUnits}{the number of units. Can have \code{length(nUnits) == nDomains} where it is interpreted as number of units in each domain. Else the number of units in each domain is constant.}
 }
 \description{
 Use the `sim_base_*` functions to start a new simulation setup. Everything else are just preconfigured setups.
+}
+\details{
+\code{sim_lm()} will start a linear model: One regressor, one error component. \code{sim_lmm()} will start a linear mixed model: One regressor, one error component and one random effect for the domain. \code{sim_lmc()} and \code{sim_lmmc()} add outlier contamination to the scenarios. Use these as a quick start, then you probably want to configure your own scenario.
+}
+\examples{
+# The preconfigured set-ups:
+sim_lm()
+sim_lmm()
+sim_lmc()
+sim_lmmc()
+
+# Example for a linear model:
+sim_base_standard() \%+\% sim_gen_fe() \%+\% sim_gen_e()
 }
 

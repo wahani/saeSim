@@ -2,20 +2,23 @@ Package: saeSim
 Type: Package
 Title: Simulation Tools for Small Area Estimation
 Date: 2014-05-12
-Version: 0.2
+Version: 0.3.1
 Author: Sebastian Warnholz <Sebastian.Warnholz@fu-berlin.de>
 Maintainer: Sebastian Warnholz <Sebastian.Warnholz@fu-berlin.de>
 URL: wahani.github.io/saeSim
 Depends:
     R(>= 3.0),
+    methods
+Imports:
     dplyr,
-    spdep,
     ggplot2,
     MASS,
-    methods
+    spdep
 Suggests:
     testthat
 Description: Tools for the simulation of data in the context of small area
-    estimation.
+    estimation. At the moment the tools are only intended to support
+    model-based simulations. However, I believe the tools can be of use in any
+    field of application.
 Roxygen: list(wrap = FALSE)
 License: GPL-3 | file LICENSE

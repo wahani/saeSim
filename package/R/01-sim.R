@@ -3,8 +3,10 @@
 #' This function can be applied to a \code{sim_setup} object or \code{sim_base}. It will start the simulation. Use the printing method as long as you are testing the scenario.
 #' 
 #' @param x a \code{sim_setup} or \code{sim_base} constructed with \code{sim_setup()} or \code{sim_base_standard()}
-#' @param ... simulation components added with \code{sim_*}
+#' @param ... simulation components; any composition of \code{\link{sim_gen}}, \code{\link{sim_calc}}, \code{\link{sim_sample}}, \code{\link{sim_agg}}.
 #' @inheritParams sim_setup
+#' 
+#' @return If \code{x} is a \code{sim_base} object constructed for example with \code{\link{sim_base_standard}} the return value is a the result of one simulation run and of class \code{data.frame}. If \code{x} has class \code{sim_setup} the return value is always a list. The elements are the resulting \code{data.frame}s of each simulation run.
 #' 
 #' @rdname sim
 #' @export
@@ -51,16 +53,24 @@ setMethod("sim", c(x = "sim_base"),
             out
           })
 
+#' Sim-methods
+#' 
+#' These methods are documented because I have to (and of course want to) fulfill the conventions documented in 'Writing R documentation files' in the 'Writing R Extensions' manual. You don't need them, they are only used internally.
+#' @param dat data.frame
+#' @inheritParams sim
+#' @rdname sim-methods
 setMethod("sim", c(x = "sim_agg"),
           function(x, dat, ...) {
             x@fun(dat)
           })
 
+#' @rdname sim-methods
 setMethod("sim", c(x = "sim_calc_virtual"),
           function(x, dat, ...) {
             x@fun(dat)
           })
 
+#' @rdname sim-methods
 setMethod("sim", c(x = "sim_sample"),
           function(x, dat, ...) {
             dat[x@fun(x@nDomains, x@nUnits), ]
@@ -79,6 +89,7 @@ setMethod("sim", c(x = "sim_setup"),
                    })
           })
 
+#' @rdname sim-methods
 setMethod("sim", signature=c(x = "sim_gen_virtual"),
           function(x, ...) {
             dat <- x@fun(x@nDomains, x@nUnits, x@name)
@@ -86,6 +97,7 @@ setMethod("sim", signature=c(x = "sim_gen_virtual"),
             new("sim_rs", dat)
           })
 
+#' @rdname sim-methods
 setMethod("sim", signature=c(x = "sim_genCont_virtual"),
           function(x, ...) {
             out <- x@fun(x@nDomains, x@nUnits, x@name)

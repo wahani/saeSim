@@ -1,11 +1,14 @@
 #' Sampling function
 #' 
-#' These function control the sampling mechanism. They are designed to be used with \code{\link{sim_sample}}. \code{sample_sampleWrapper} is a wrapper of the sample function already implemented in R. The arguments will simply be passed to \code{\link{sample}}
+#' This function is intended to be used with \code{\link{sim_sample}} and not interactively. \code{sample_sampleWrapper} is a wrapper of the sample function already implemented in R. The arguments will simply be passed to \code{\link{sample}}.
 #' 
-#' @param ... Arguments passed to \code{\link{sample}}
+#' @param ... Arguments passed to \code{\link{sample}}.
 #' 
-#' @seealso \code{\link{sample_srs}}, \code{\link{sample_csrs}}, \code{\link{sim_sample}}
+#' @seealso \code{\link{sample_srs}}, \code{\link{sample_csrs}}, \code{\link{sim_sample}}, \code{\link{sample}}
 #' @export
+#' 
+#' @examples 
+#' sim_lm() %+% sim_sample(sample_sampleWrapper(1:(100*100), 50))
 sample_sampleWrapper <- function(...) {
   function(nDomains, nUnits) {
     sample(...)
@@ -14,13 +17,16 @@ sample_sampleWrapper <- function(...) {
 
 #' Sampling function
 #' 
-#' This function controls the sampling mechanism. They are designed to be used with \code{\link{sim_sample}}. \code{sample_srs} will draw with simple random sampling.
+#' This function is intended to be used with \code{\link{sim_sample}} and not interactively. \code{sample_srs} will draw with simple random sampling. \code{\link{sample.int}} is used under the hood.
 #' 
-#' @param size can either be >= 1 giving the sample size or < 1 where it is treated as proportion
-#' @param ... Arguments passed to \code{\link{sample.int}}
+#' @param size can either be >= 1 giving the sample size or < 1 where it is treated as proportion.
+#' @param ... Arguments passed to \code{\link{sample.int}}.
 #' 
-#' @seealso \code{\link{sample_sampleWrapper}}, \code{\link{sample_csrs}}, \code{\link{sim_sample}}
+#' @seealso \code{\link{sample_sampleWrapper}}, \code{\link{sample_csrs}}, \code{\link{sim_sample}}, \code{\link{sample.int}}
 #' @export
+#' 
+#' @examples 
+#' sim_lm() %+% sim_sample(sample_srs())
 sample_srs <- function(size = 0.05, ...) {
   function(nDomains, nUnits) {
     id <- make_id(nDomains, nUnits)
@@ -31,12 +37,15 @@ sample_srs <- function(size = 0.05, ...) {
 
 #' Sampling function
 #' 
-#' This function controls the sampling mechanism. They are designed to be used with \code{\link{sim_sample}}. \code{sample_csrs} will draw with simple random sampling in each cluster. The cluster is hard coded as \code{idD}.
+#' This function is intended to be used with \code{\link{sim_sample}} and not interactively. \code{sample_csrs} will draw with simple random sampling in each cluster. Clusters are identified using the \code{nDomains} and \code{nUnits} specified in the sim_base. \code{\link{sample.int}} is used under the hood.
 #' 
 #' @param size can either be >= 1 giving the sample size (in each cluster) or < 1 where it is treated as proportion (in each cluster). Additionally size can have \code{length(size) > 1} which will be interpreted as different sample sizes in each cluster/domain.
 #' 
-#' @seealso \code{\link{sample_srs}}, \code{\link{sample_sampleWrapper}}, \code{\link{sim_sample}}
+#' @seealso \code{\link{sample_srs}}, \code{\link{sample_sampleWrapper}}, \code{\link{sim_sample}}, \code{\link{sample.int}}
 #' @export
+#' 
+#' @examples 
+#' sim_lm() %+% sim_sample(sample_csrs())
 sample_csrs <- function(size = 0.05) {
   function(nDomains, nUnits) {
     id <- make_id(nDomains, nUnits)

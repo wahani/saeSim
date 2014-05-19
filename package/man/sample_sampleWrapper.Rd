@@ -6,12 +6,15 @@
 sample_sampleWrapper(...)
 }
 \arguments{
-\item{...}{Arguments passed to \code{\link{sample}}}
+\item{...}{Arguments passed to \code{\link{sample}}.}
 }
 \description{
-These function control the sampling mechanism. They are designed to be used with \code{\link{sim_sample}}. \code{sample_sampleWrapper} is a wrapper of the sample function already implemented in R. The arguments will simply be passed to \code{\link{sample}}
+This function is intended to be used with \code{\link{sim_sample}} and not interactively. \code{sample_sampleWrapper} is a wrapper of the sample function already implemented in R. The arguments will simply be passed to \code{\link{sample}}.
+}
+\examples{
+sim_lm() \%+\% sim_sample(sample_sampleWrapper(1:(100*100), 50))
 }
 \seealso{
-\code{\link{sample_srs}}, \code{\link{sample_csrs}}, \code{\link{sim_sample}}
+\code{\link{sample_srs}}, \code{\link{sample_csrs}}, \code{\link{sim_sample}}, \code{\link{sample}}
 }
 
