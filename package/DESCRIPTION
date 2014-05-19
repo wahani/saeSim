@@ -18,4 +18,4 @@ Suggests:
 Description: Tools for the simulation of data in the context of small area
     estimation.
 Roxygen: list(wrap = FALSE)
-License: GPL-2 | file LICENSE
+License: GPL-3 | file LICENSE
