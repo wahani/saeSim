@@ -4,6 +4,7 @@
 \alias{sim,sim_agg-method}
 \alias{sim,sim_calc_virtual-method}
 \alias{sim,sim_genCont_virtual-method}
+\alias{sim,sim_genData-method}
 \alias{sim,sim_gen_virtual-method}
 \alias{sim,sim_sample-method}
 \title{Sim-methods}
@@ -17,6 +18,8 @@
 \S4method{sim}{sim_gen_virtual}(x, ...)
 
 \S4method{sim}{sim_genCont_virtual}(x, ...)
+
+\S4method{sim}{sim_genData}(x, ...)
 }
 \arguments{
 \item{dat}{data.frame}

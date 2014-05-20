@@ -77,3 +77,6 @@ sim_gen_rec <- function(generator = gen_v_norm(mean=0, sd=40), nCont = 0.05, lev
   sim_gen_ec(generator, nCont, level, fixed, name)
 }
 
+sim_gen_data <- function(loadData) {
+  new("sim_genData", fun = loadData)
+}

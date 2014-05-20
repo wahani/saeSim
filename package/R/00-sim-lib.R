@@ -41,6 +41,8 @@ setClass("sim_gen_virtual",
 
 ################################################################################
 
+setClass("sim_genData", contains = "sim_id_virtual")
+
 setClass("sim_gen", contains = "sim_gen_virtual")
 
 setClass("sim_genCont_virtual",

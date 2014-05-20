@@ -26,7 +26,7 @@ setMethod("sim", c(x = "sim_base"),
             setup <- sim_setup(x, ..., R = 1, simName = "")
             
             # Generating pop
-            results <- lapply(setup[is.sim_gen_virtual(setup)], sim)
+            results <- lapply(setup[is.sim_gen_virtual(setup) | is.sim_genData(setup)], sim)
             out <- S3Part(Reduce(add, results), TRUE)
                         
             # Calculating stuff:
@@ -104,4 +104,11 @@ setMethod("sim", signature=c(x = "sim_genCont_virtual"),
             nCont <- if(length(x@nCont) > 1) as.list(as.integer(x@nCont)) else if(x@nCont >= 1) as.integer(x@nCont) else x@nCont 
             out <- select_cont(out, nCont, x@level, x@fixed)
             new("sim_rs_c", out)
+          })
+
+#' @rdname sim-methods
+setMethod("sim", signature=c(x = "sim_genData"),
+          function(x, ...) {
+            dat <- make_id(x@nDomains, x@nUnits)
+            new("sim_rs", cbind(dat, x@fun()))
           })

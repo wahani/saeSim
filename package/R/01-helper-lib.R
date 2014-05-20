@@ -5,6 +5,7 @@ is.sim_csample <- function(x) sapply(x, inherits, what = "sim_csample")
 is.sim_cagg <- function(x) sapply(x, inherits, what = "sim_cagg")
 is.sim_agg <- function(x) sapply(x, inherits, what = "sim_agg")
 is.sim_id_virtual <- function(x) sapply(x, inherits, what = "sim_id_virtual")
+is.sim_genData <- function(x) sapply(x, inherits, what = "sim_genData")
 
 .onAttach <- function(libname, pkgname) {
   packageStartupMessage("Documentation is available at wahani.github.io/saeSim", domain = NULL, appendLF = TRUE)
