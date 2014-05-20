@@ -6,17 +6,31 @@
 #'  @param sd the standard deviation passed to the random number generator, for example \link{rnorm}.
 #'  @param rho the correlation used to create the variance covariance matrix for a SAR process - see \code{\link[spdep]{cell2nb}}.
 #'  @param type either "rook" or "queen". See \code{\link[spdep]{cell2nb}} for details.
+#'  @param level character in \code{c("unit", "domain")}. If equal to 'unit' random numbers for all observations are generated. If equal to 'domain' they are different between domains and constant within.
+#'  @param generator a function producing random numbers.
+#'  @param ... arguments passed to \code{generator}.
 #'  
 #'  @details \code{gen_norm} is used to draw random numbers from a normal distribution where all generated numbers are independent.
 #'  
 #'  \code{gen_v_norm} and \code{gen_v_sar} will create an area-level random component. In the case of \code{v_norm}, the error component will be from a normal distribution and i.i.d. from an area-level perspective (all units in an area will have the same value, all areas are independent). v_sar will also be from a normal distribution, but the errors are correlated. The variance covariance matrix is constructed for a SAR(1) - spatial/simultanous autoregressive process. \link[MASS]{mvrnorm} is used for the random number generation. 
 #'  
+#'  \code{gen_generic} can be used if your world is not normal. You can specify 'any' function as generator, like \code{\link{rnorm}}. Arguments in \code{...} are matched be name or position. The first argument of \code{generator} is expected to be the number of random numbers (not necessarily named \code{n}) and need not to be specified.
+#'  
 #'  @rdname generators
 #'  @export
-#'  @seealso For examples: \code{\link{sim_gen}}, \code{\link{sim_gen_fe}}, \code{\link{sim_gen_e}}, \code{\link{sim_gen_ec}}, \code{\link{sim_gen_re}}, \code{\link{sim_gen_rec}}, \code{\link[spdep]{cell2nb}}
+#'  @seealso \code{\link{sim_gen}}, \code{\link{sim_gen_fe}}, \code{\link{sim_gen_e}}, \code{\link{sim_gen_ec}}, \code{\link{sim_gen_re}}, \code{\link{sim_gen_rec}}, \code{\link[spdep]{cell2nb}}
 #'  
 #'  @examples
 #'  sim_base_standard() %+% sim_gen_fe() %+% sim_gen_e() %+% sim_gen_re() %+% sim_gen_re(gen_v_sar())
+#'  
+#'  # Generic interface
+#'  set.seed(1)
+#'  dat1 <- sim(sim_base_standard(), 
+#'              sim_gen(gen_generic(rnorm, mean = 0, sd = 4), name="e"))
+#'  set.seed(1)
+#'  dat2 <- sim(sim_base_standard(),
+#'              sim_gen_e())
+#'  all.equal(dat1, dat2)
 gen_norm <- function(mean = 0, sd = 1) {
   desc <- paste("~ N(", mean, ", ", sd^2, ")", sep = "")
   function(nDomains, nUnits, name) {
@@ -59,4 +73,27 @@ gen_v_sar <- function(mean = 0, sd = 1, rho = 0.5, type = "rook") {
     idD[name] <- v[idD$idD]
     idD
   }
+}
+
+#' @rdname generators
+#' @export
+gen_generic <- function(generator, ..., level = "unit") {
+  genArgs <- list(...)
+  force(generator)
+  stopifnot(level %in% c("unit", "domain"))
+  
+  gen_unit <- function(nDomains, nUnits, name) {
+    dat <- make_id(nDomains, nUnits)
+    dat[name] <- do.call(generator, c(nrow(dat), genArgs))
+    dat
+  }
+  
+  gen_domain <- function(nDomains, nUnits, name) {    
+    dat <- make_id(nDomains, nUnits)
+    tmp <- do.call(generator, c(nDomains, genArgs))
+    dat[name] <- tmp[dat$idD]
+    dat
+  }
+  
+  get(paste("gen_", level, sep = ""))
 }

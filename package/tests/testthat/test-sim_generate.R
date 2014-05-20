@@ -25,6 +25,28 @@ test_that("sim_gen", code={
   expect_that(result2, equals(result1))
 })
 
+test_that("gen_generic", {
+  # Generator itself
+  dat1 <- gen_generic(runif, level = "domain")(5, 2, "x")
+  dat2 <- gen_generic(runif, level = "unit")(5, 2, "x")
+  expect_is(dat1, "data.frame")
+  expect_equal(nrow(dat1), 10)
+  expect_equal(dat1[1, "x"], dat1[2, "x"])
+  expect_equal(unique(dat2["x"]), dat2["x"])
+  expect_error(gen_generic(runif, level = "")(5, 2, "x"))
+  
+  # In a set-up
+  set.seed(1)
+  dat1 <- sim(sim_base_standard(), 
+      sim_gen(gen_generic(rnorm, mean = 0, sd = 4), name="e"),
+      sim_gen(gen_generic(rnorm, mean = 0, sd = 1, level = "domain"), name="v"))
+  set.seed(1)
+  dat2 <- sim(sim_base_standard(), 
+              sim_gen_e(),
+              sim_gen_re())
+  expect_equal(dat1, dat2)
+})
+
 test_that("adding variables works correctly", {
   result1 <- sim(sim_base_standard(), sim_gen_fe())
   result2 <- sim(sim_base_standard(), sim_gen_fe(const = 10, slope = 0))

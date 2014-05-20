@@ -3,6 +3,7 @@
 export()
 export(agg_standard)
 export(calc_var)
+export(gen_generic)
 export(gen_norm)
 export(gen_v_norm)
 export(gen_v_sar)

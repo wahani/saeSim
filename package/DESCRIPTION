@@ -1,8 +1,8 @@
 Package: saeSim
 Type: Package
 Title: Simulation Tools for Small Area Estimation
-Date: 2014-05-19
-Version: 0.3.2
+Date: 2014-05-20
+Version: 0.3.3
 Author: Sebastian Warnholz <Sebastian.Warnholz@fu-berlin.de>
 Maintainer: Sebastian Warnholz <Sebastian.Warnholz@fu-berlin.de>
 URL: wahani.github.io/saeSim
@@ -17,8 +17,9 @@ Imports:
 Suggests:
     testthat
 Description: Tools for the simulation of data in the context of small area
-    estimation. At the moment the tools are only intended to support
-    model-based simulations. However, I believe the tools can be of use in any
-    field of application.
+    estimation. They will organize your simulation set-up into phases:
+    Generating data - computing - drawing samples - computing - aggregating -
+    computing. At the moment the tools are only intended to support model-based
+    simulations.
 Roxygen: list(wrap = FALSE)
 License: GPL-3 | file LICENSE
