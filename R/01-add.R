@@ -28,7 +28,7 @@ setMethod("add", c(dat1 = "sim_rs_c", dat2 = "sim_rs_c"),
           function(dat1, dat2) {
             dat <- add(new("sim_rs", S3Part(dat1)), new("sim_rs", S3Part(dat2)))
             # variable idC will be ignored by add.sim_rs:
-            dat$idC <- dat[["idC"]] | dat[["idC"]]
+            dat$idC <- dat1[["idC"]] | dat2[["idC"]]
             new("sim_rs", dat)
           })
 

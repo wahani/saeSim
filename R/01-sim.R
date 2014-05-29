@@ -100,10 +100,12 @@ setMethod("sim", signature=c(x = "sim_gen_virtual"),
 #' @rdname sim-methods
 setMethod("sim", signature=c(x = "sim_genCont_virtual"),
           function(x, ...) {
-            out <- x@fun(x@nDomains, x@nUnits, x@name)
-            nCont <- if(length(x@nCont) > 1) as.list(as.integer(x@nCont)) else if(x@nCont >= 1) as.integer(x@nCont) else x@nCont 
-            out <- select_cont(out, nCont, x@level, x@fixed)
-            new("sim_rs_c", out)
+            dat <- x@fun(x@nDomains, x@nUnits, x@name)
+            nCont <- if(length(x@nCont) > 1) as.list(as.integer(x@nCont)) else 
+              if(x@nCont >= 1) as.integer(x@nCont) else x@nCont 
+            dat <- select_cont(dat, nCont, x@level, x@fixed)
+            dat$y <- x@const + x@slope * dat[[x@name]]
+            new("sim_rs_c", dat)
           })
 
 #' @rdname sim-methods
