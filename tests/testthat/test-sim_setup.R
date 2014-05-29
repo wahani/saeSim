@@ -12,3 +12,12 @@ test_that("methods equal", {
   expect_that(show({set.seed(1);sim_setup(setup, sim_sample())}), equals(show({set.seed(1);setup %+% sim_sample()})))
   cat("\n")
 })
+
+context("sim_setup-methods")
+test_that("as.data.frame", {
+  setup <- sim_lm()
+  dat <- as.data.frame(setup)
+  expect_is(dat, class="data.frame")
+  expect_equal(nrow(dat), 10000)
+  expect_true(all(names(dat) %in% c("idD", "idU", "y", "x", "e")))
+})
