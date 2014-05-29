@@ -12,7 +12,7 @@ agg_standard(splitVars = "idD")
 This function is intended to be used with \code{\link{sim_agg}} and not interactively. This is one implementation for aggregating data in a simulation set-up.
 }
 \details{
-This function follows the split-apply-combine idiom. Each data set is split by the defined variables. Then the variables within each subset are aggregated (reduced to one row). Logical variables are reduced by \code{\link{any}}; for characters and factors the most frequent value is taken; and for numerics the mean (removing NAs).
+This function follows the split-apply-combine idiom. Each data set is split by the defined variables. Then the variables within each subset are aggregated (reduced to one row). Logical variables are reduced by \code{\link{any}}; for characters and factors dummy variables are created and the aggregate is the mean of each dummy; and for numerics the mean (removing NAs).
 }
 \examples{
 sim_base_standard() \%+\% sim_gen_fe() \%+\% sim_gen_e() \%+\% sim_agg(agg_standard())
