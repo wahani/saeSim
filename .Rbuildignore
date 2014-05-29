@@ -1,3 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-inst/devel
+inst/staticdocs
+inst/web
+devel
+.gitignore

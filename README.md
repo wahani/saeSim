@@ -12,5 +12,5 @@ At the moment the tools are only intended to support model-based simulations. Al
 ## Installation
 ```
 library(devtools)
-install_github("saeSim", "wahani", subdir="package")
+install_github("wahani/saeSim")
 ```
