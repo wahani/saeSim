@@ -15,6 +15,6 @@ Use the `sim_base_*` functions to start a new simulation setup.
 }
 \examples{
 # Example for a linear model:
-sim_base_standard() \%+\% sim_gen_fe() \%+\% sim_gen_e()
+sim_base_standard() \%&\% sim_gen_fe() \%&\% sim_gen_e()
 }
 

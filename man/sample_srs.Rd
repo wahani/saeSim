@@ -14,7 +14,7 @@ sample_srs(size = 0.05, ...)
 This function is intended to be used with \code{\link{sim_sample}} and not interactively. \code{sample_srs} will draw with simple random sampling. \code{\link{sample.int}} is used under the hood.
 }
 \examples{
-sim_lm() \%+\% sim_sample(sample_srs())
+sim_lm() \%&\% sim_sample(sample_srs())
 }
 \seealso{
 \code{\link{sample_sampleWrapper}}, \code{\link{sample_csrs}}, \code{\link{sim_sample}}, \code{\link{sample.int}}

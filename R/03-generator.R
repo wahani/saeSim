@@ -21,7 +21,7 @@
 #'  @seealso \code{\link{sim_gen}}, \code{\link{sim_gen_fe}}, \code{\link{sim_gen_e}}, \code{\link{sim_gen_ec}}, \code{\link{sim_gen_re}}, \code{\link{sim_gen_rec}}, \code{\link[spdep]{cell2nb}}
 #'  
 #'  @examples
-#'  sim_base_standard() %+% sim_gen_fe() %+% sim_gen_e() %+% sim_gen_re() %+% sim_gen_re(gen_v_sar())
+#'  sim_base_standard() %&% sim_gen_fe() %&% sim_gen_e() %&% sim_gen_re() %&% sim_gen_re(gen_v_sar())
 #'  
 #'  # Generic interface
 #'  set.seed(1)

@@ -9,23 +9,23 @@
 #' @export
 #' @rdname plus-operator
 #' @examples 
-#' setup <- sim_base_standard() %+% sim_gen_fe() %+% sim_gen_e() %+% sim_gen_re()
-#' setup <- setup %+% sim_gen_rec() %+% sim_gen_ec()
+#' setup <- sim_base_standard() %&% sim_gen_fe() %&% sim_gen_e() %&% sim_gen_re()
+#' setup <- setup %&% sim_gen_rec() %&% sim_gen_ec()
 #' anotherSetup <- sim_setup(sim_base_standard(), R = 5)
-#' yesAnotherOne <- setup %+% anotherSetup
-setGeneric("%+%") #, function(e1, e2) standardGeneric("%+%"))
+#' yesAnotherOne <- setup %&% anotherSetup
+setGeneric("%&%", function(e1, e2) standardGeneric("%&%"))
 
 #' @export
 #' @rdname plus-operator
-setMethod("%+%", signature(e1 = "sim_setup", e2 = "sim_setup"), 
+setMethod("%&%", signature(e1 = "sim_setup", e2 = "sim_setup"), 
           function(e1, e2) {
-            S3Part(e2) <- c(S3Part(e2, TRUE), S3Part(e1, TRUE))
-            e2
+            S3Part(e1) <- c(S3Part(e1, TRUE), S3Part(e2, TRUE))
+            e1
           })
 
 #' @export
 #' @rdname plus-operator
-setMethod("%+%", signature(e1 = "sim_setup", e2 = "sim_virtual"), 
+setMethod("%&%", signature(e1 = "sim_setup", e2 = "sim_virtual"), 
           function(e1, e2) {
             S3Part(e1) <- c(S3Part(e1, TRUE), list(e2))
             e1
@@ -33,7 +33,7 @@ setMethod("%+%", signature(e1 = "sim_setup", e2 = "sim_virtual"),
 
 #' @export
 #' @rdname plus-operator
-setMethod("%+%", signature(e1 = "sim_base", e2 = "sim_virtual"), 
+setMethod("%&%", signature(e1 = "sim_base", e2 = "sim_virtual"), 
           function(e1, e2) {
             sim_setup(e1, e2)
           })

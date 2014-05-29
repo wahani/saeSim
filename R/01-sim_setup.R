@@ -22,10 +22,10 @@
 #' \dontrun{
 #' # plot:
 #' plot(setup)
-#' plot(setup %+% sim_gen_ec() %+% sim_agg())
+#' plot(setup %&% sim_gen_ec() %&% sim_agg())
 #' # autoplot for the ggplot2 user:
 #' autoplot(setup)
-#' autoplot(setup %+% sim_gen_ec())
+#' autoplot(setup %&% sim_gen_ec())
 #' 
 #' # Start a simulation:
 #' resultList <- sim(setup)

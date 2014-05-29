@@ -8,7 +8,7 @@
 #' @export
 #' 
 #' @examples 
-#' sim_lm() %+% sim_sample(sample_sampleWrapper(1:(100*100), 50))
+#' sim_lm() %&% sim_sample(sample_sampleWrapper(1:(100*100), 50))
 sample_sampleWrapper <- function(...) {
   function(nDomains, nUnits) {
     sample(...)
@@ -26,7 +26,7 @@ sample_sampleWrapper <- function(...) {
 #' @export
 #' 
 #' @examples 
-#' sim_lm() %+% sim_sample(sample_srs())
+#' sim_lm() %&% sim_sample(sample_srs())
 sample_srs <- function(size = 0.05, ...) {
   function(nDomains, nUnits) {
     id <- make_id(nDomains, nUnits)
@@ -45,7 +45,7 @@ sample_srs <- function(size = 0.05, ...) {
 #' @export
 #' 
 #' @examples 
-#' sim_lm() %+% sim_sample(sample_csrs())
+#' sim_lm() %&% sim_sample(sample_csrs())
 sample_csrs <- function(size = 0.05) {
   function(nDomains, nUnits) {
     id <- make_id(nDomains, nUnits)

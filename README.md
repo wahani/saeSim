@@ -24,7 +24,7 @@ install_github("wahani/saeSim")
 - Data from linear mixed models with and without contamination
   - Other model classes should be possible
 - Separation between the set-up and the actual simulation - you can specify the simulation without generating the data - then if you need the data, you can run the function `sim()` on the set-up object
-  - It is possible to modify the simulation set-up. You can add components with `%+%`
+  - It is possible to modify the simulation set-up. You can add components with `%&%`
   - Use the `plot` and `autoplot` functions on the set-up object to get some scatter-plot like graphics
 - It is possible to generate populations, draw samples and aggregate for area level information (all in one step)
   - The sample_* allow you to control the sampling process

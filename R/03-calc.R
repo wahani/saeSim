@@ -12,7 +12,7 @@
 #' @export
 #' 
 #' @examples
-#' sim_base_standard() %+% sim_gen_fe() %+% sim_gen_e() %+% sim_calc(calc_var())
+#' sim_base_standard() %&% sim_gen_fe() %&% sim_gen_e() %&% sim_calc(calc_var())
 calc_var <- function(varName = "y", funList = list("mean" = mean, "var" = var), exclude = NULL, 
                      by = "idD", newName = varName) {
   function(dat) {

@@ -7,9 +7,9 @@ test_that("sim_setup", {
 })
 
 test_that("methods equal", {
-  setup <- sim_base_standard() %+% sim_gen_fe() %+% sim_gen_e() %+% sim_agg()
+  setup <- sim_base_standard() %&% sim_gen_fe() %&% sim_gen_e() %&% sim_agg()
   cat("\n Show methods, sorry for that:\n")
-  expect_that(show({set.seed(1);sim_setup(setup, sim_sample())}), equals(show({set.seed(1);setup %+% sim_sample()})))
+  expect_that(show({set.seed(1);sim_setup(setup, sim_sample())}), equals(show({set.seed(1);setup %&% sim_sample()})))
   cat("\n")
 })
 

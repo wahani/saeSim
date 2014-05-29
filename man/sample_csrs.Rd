@@ -12,7 +12,7 @@ sample_csrs(size = 0.05)
 This function is intended to be used with \code{\link{sim_sample}} and not interactively. \code{sample_csrs} will draw with simple random sampling in each cluster. Clusters are identified using the \code{nDomains} and \code{nUnits} specified in the sim_base. \code{\link{sample.int}} is used under the hood.
 }
 \examples{
-sim_lm() \%+\% sim_sample(sample_csrs())
+sim_lm() \%&\% sim_sample(sample_csrs())
 }
 \seealso{
 \code{\link{sample_srs}}, \code{\link{sample_sampleWrapper}}, \code{\link{sim_sample}}, \code{\link{sample.int}}

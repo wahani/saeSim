@@ -34,7 +34,7 @@ Potentially you can define a \code{calcFun} yourself. Take care that it only has
 }
 \examples{
 # Standard behavior
-sim_base_standard() \%+\% sim_gen_fe() \%+\% sim_calc()
+sim_base_standard() \%&\% sim_gen_fe() \%&\% sim_calc()
 
 # Custom data modifications
 ## Add predicted values of a linear model
@@ -45,7 +45,7 @@ calc_lm <- function(dat) {
   dat
 }
 
-sim_base_standard() \%+\% sim_gen_fe() \%+\% sim_gen_e() \%+\% sim_calc(calc_lm)
+sim_base_standard() \%&\% sim_gen_fe() \%&\% sim_gen_e() \%&\% sim_calc(calc_lm)
 }
 \seealso{
 \code{\link{calc_var}}, \code{\link{sim_gen}}, \code{\link{sim_agg}}, \code{\link{sim_sample}}

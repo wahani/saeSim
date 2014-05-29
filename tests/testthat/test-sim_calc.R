@@ -6,12 +6,12 @@ test_that("sim_calc and calc_var", {
                      sim_gen_ec(),
                      sim_sample(sample_csrs(size=5)), R = 1)
   
-  dat <- sim(setup %+% 
+  dat <- sim(setup %&% 
                sim_calc(calc_var("y", funList = list("mean" = mean, "var" = var), 
-                                 exclude = "idC", newName = "pop")) %+%
-               sim_calc(calc_var(varName = "y", funList = list("length" = length), newName = "N")) %+% 
-               sim_calc(calc_var(varName = "y", funList = list("length" = length), newName = "n"), level = "sample") %+% 
-               sim_calc(calc_var(varName = "y", funList = list("length" = length)), level = "sample") %+% 
+                                 exclude = "idC", newName = "pop")) %&%
+               sim_calc(calc_var(varName = "y", funList = list("length" = length), newName = "N")) %&% 
+               sim_calc(calc_var(varName = "y", funList = list("length" = length), newName = "n"), level = "sample") %&% 
+               sim_calc(calc_var(varName = "y", funList = list("length" = length)), level = "sample") %&% 
                sim_calc(calc_var(varName = "y", funList = list(max)), level = "sample"))[[1]]
   
   calc_lm <- function(dat) {
@@ -19,7 +19,7 @@ test_that("sim_calc and calc_var", {
     dat
   }
   
-  dat1 <- sim(setup %+% sim_agg() %+% sim_calc(calc_lm, level="agg"))[[1]]
+  dat1 <- sim(setup %&% sim_agg() %&% sim_calc(calc_lm, level="agg"))[[1]]
   
   expect_that(nrow(dat), equals(25))
   expect_that(all(c("popMean", "popVar", "N", "n", "yLength", "y1") %in% names(dat)), is_true())

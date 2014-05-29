@@ -15,7 +15,7 @@
 #' @rdname sim_calc
 #' @examples
 #' # Standard behavior
-#' sim_base_standard() %+% sim_gen_fe() %+% sim_calc()
+#' sim_base_standard() %&% sim_gen_fe() %&% sim_calc()
 #' 
 #' # Custom data modifications
 #' ## Add predicted values of a linear model
@@ -26,7 +26,7 @@
 #'   dat
 #' }
 #'
-#' sim_base_standard() %+% sim_gen_fe() %+% sim_gen_e() %+% sim_calc(calc_lm)
+#' sim_base_standard() %&% sim_gen_fe() %&% sim_gen_e() %&% sim_calc(calc_lm)
 sim_calc <- function(calcFun = calc_var(), level = "population") {
   if(!(level %in% c("population", "sample", "agg"))) 
     stop("This level is not supported, check spelling.")
