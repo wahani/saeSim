@@ -4,7 +4,7 @@
     # Fix for Git under RStudio to locate SSH-Keys
     Sys.setenv(USERPROFILE=Sys.getenv("HOME"))
   } else {
-      .libPaths(paste(getwd(), "libLinux", sep = "/"))
+      .libPaths("~/R/x86_64-pc-linux-gnu-library/3.1/")
     }
 
 }
