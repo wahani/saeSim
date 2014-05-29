@@ -1,32 +1,24 @@
 #' Plotting methods
 #' 
-#' Use this function to produce plots for an object of class \code{sim_setup}. At this time they are wrapper functions around \code{\link{smoothScatter}}.
+#' Use this function to produce plots for an object of class \code{sim_setup}.
 #' 
 #' @param x a \code{sim_setup}
-#' @param y can be a variable name as character or missing.
-#' @param xlab a title for the x axis
-#' @param ylab a title for the y axis
-#' @param ... Arguments to be passed to \code{\link{smoothScatter}}.
+#' @param y will be ignored
+#' @param ... Arguments to be passed to \code{\link[graphics]{plot}}.
 #' 
 #' @export
-#' @rdname plot
+#' @method plot sim_setup
+#' @rdname plot.sim_setup
 #' @seealso \code{\link[saeSim]{autoplot}}
 #' @importFrom graphics plot
-setGeneric("plot")
-
-#' @export
-#' @rdname plot
-setMethod("plot", c(x = "sim_setup", y = "character"),
-          function(x, y, xlab = y, ylab = "y", ...) {
-            dat <- sim(x@base, S3Part(x, TRUE))
-            smoothScatter(y=dat$y, x = dat[[y]], xlab = xlab, ylab = ylab, ...)
-          })
-
-#' @export
-#' @rdname plot
-setMethod("plot", c(x = "sim_setup", y = "missing"),
-          function(x, y, ...) {
-            dat <- sim(x@base, S3Part(x, TRUE))
-            y <- names(dat)[!grepl("id|y", names(dat))][1]
-            smoothScatter(y=dat$y, x = dat[[y]], xlab = y, ylab = "y", ...)
-          })
+plot.sim_setup <- function(x, y, ...) {
+  # Get some data
+  dat <- sim(x@base, S3Part(x, TRUE))
+  # get name for y-Axis; default to "y" 
+  yAxis <- if(all(names(dat) != "y")) 
+    names(dat)[!grepl("id", names(dat))][1] else "y"
+  # get name for x-axis
+  xAxis <- names(dat)[!grepl(paste("id", yAxis, sep = "|"), names(dat))][1]
+  
+  plot(y=dat[[yAxis]], x = dat[[xAxis]], xlab = xAxis, ylab = yAxis, ...)
+}

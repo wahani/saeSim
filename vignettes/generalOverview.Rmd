@@ -1,16 +1,14 @@
 <!--
 %\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{saeSim overview}
+%\VignetteIndexEntry{Introduction}
 -->
 ```{r include=FALSE}
 options(markdown.HTML.header = system.file('misc', 'vignette.css', package='knitr'))
 ```
 
-`saeSim` is a Package for the [R](http://cran.r-project.org/) language. It is developed to make the data simulation process more compact and yet flexible enough for customization. It is designed to suffice in the context of small area estimation. Furthermore, at this time simulation is possible under linear mixed models.
+# Introduction
 
-```{r}
-library(KernSmooth)
-```
+`saeSim` is a Package for the [R](http://cran.r-project.org/) language. It is developed to make the data simulation process more compact and yet flexible enough for customization. It is designed to suffice in the context of small area estimation. Furthermore, at this time simulation is possible under linear mixed models.
 
 # Data Set-up
 
@@ -19,7 +17,7 @@ A linear mixed model contains two components. A fixed effects part, and an error
 - To begin with, this is the desired approach: `sim_setup(base, ..., R = 500, simName = "")`. The example is the set-up for a linear model:
 ```{r eval=FALSE}
 setup <- sim_setup(sim_base_standard(), sim_gen_fe(), sim_gen_e(), R = 500, 
-                   simName = "Doku", idC = TRUE)
+                   simName = "Doku")
 ```
 - Also it is possible to compose a set-up by using `%+%`. Internally the function `sim_setup` is called and uses it's defaults for all arguments but `base` and `...`:
 ```{r eval=FALSE}

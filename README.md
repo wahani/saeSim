@@ -9,7 +9,7 @@ Tools for the simulation of data in the context of small area estimation. They w
 
 At the moment the tools are only intended to support model-based simulations. Although I am planing to integrate design based simulations. Go to the [homepage](http://wahani.github.io/saeSim/) of this project to find out more.
 
-# Installation
+## Installation
 
 The package is still under development. Please report bugs, troubles and discussion as [issue on GitHub](https://github.com/wahani/saeSim/issues). You can install the latest version from the [repository on GitHub](https://www.github.com/wahani/saeSim):
 
@@ -18,7 +18,7 @@ library(devtools)
 install_github("wahani/saeSim")
 ```
 
-# Key Features
+## Key Features
 
 - Functions to simulate data in the context of small area estimation
 - Data from linear mixed models with and without contamination

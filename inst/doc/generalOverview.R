@@ -2,11 +2,8 @@
 options(markdown.HTML.header = system.file('misc', 'vignette.css', package='knitr'))
 
 ## ----eval=FALSE----------------------------------------------------------
-#  library(devtools)
-#  install_github("saeSim", "wahani", subdir="package", ref = "v0.1")
-
-## ----eval=FALSE----------------------------------------------------------
-#  setup <- sim_setup(sim_base_standard(), sim_gen_fe(), sim_gen_e(), R = 500, simName = "Doku", idC = TRUE)
+#  setup <- sim_setup(sim_base_standard(), sim_gen_fe(), sim_gen_e(), R = 500,
+#                     simName = "Doku")
 
 ## ----eval=FALSE----------------------------------------------------------
 #  setup <- sim_base_standard() %+% sim_gen_fe() %+% sim_gen_e()
@@ -32,10 +29,14 @@ setup <- sim_lmm() %+% sim_gen_re(gen_v_sar(), "vSp")
 #  dataList <- sim(setup)
 
 ## ------------------------------------------------------------------------
-contSetup <- setup %+% sim_gen_rec(gen_v_sar(sd = 40), nCont = 0.05, level = "area", fixed = TRUE, name = "vSp")
+contSetup <- setup %+% 
+  sim_gen_rec(gen_v_sar(sd = 40), nCont = 0.05, level = "area", fixed = TRUE, 
+              name = "vSp")
 
 ## ------------------------------------------------------------------------
-sim(sim_base_standard(3, 4), sim_gen_fe(), sim_gen_e(), sim_gen_ec(nCont = c(1, 2, 3), level = "unit", name = "eCont"))
+sim(sim_base_standard(3, 4), 
+    sim_gen_fe(), sim_gen_e(), 
+    sim_gen_ec(nCont = c(1, 2, 3), level = "unit", name = "eCont"))
 
 ## ------------------------------------------------------------------------
 sim(sim_base_standard(3, 4), sim_gen_fe(), sim_sample(sample_srs(1L)))
@@ -54,12 +55,18 @@ sim(sim_base_standard(3, 4), sim_gen_fe(), sim_sample(sample_csrs(1L)))
 sim_setup(setup, sim_agg())
 
 ## ------------------------------------------------------------------------
-sim(sim_base_standard(3, 4), sim_gen_fe(), sim_gen_e(), sim_gen_ec(), sim_calc(calc_var(varName = "y", funList = list(mean = mean, var = var), exclude = "idC", by = "idD"), level = "population"))
-sim(sim_base_standard(3, 4), sim_gen_fe(), sim_gen_e(), sim_gen_ec(), sim_calc(calc_var(varName = "y", funList = list(mean = mean, var = var), exclude = NULL, by = "idD"), level = "population"))
-setup %+% sim_calc(calc_var(varName = "y", funList = list(length), newName = "N"), level = "population")
+sim(sim_base_standard(3, 4), sim_gen_fe(), sim_gen_e(), sim_gen_ec(), 
+    sim_calc(calc_var(varName = "y", funList = list(mean = mean, var = var), 
+                      exclude = "idC", by = "idD"), level = "population"))
+sim(sim_base_standard(3, 4), sim_gen_fe(), sim_gen_e(), sim_gen_ec(), 
+    sim_calc(calc_var(varName = "y", funList = list(mean = mean, var = var), 
+                      exclude = NULL, by = "idD"), level = "population"))
+setup %+% sim_calc(calc_var(varName = "y", funList = list(length), newName = "N"), 
+                   level = "population")
 setup %+% 
   sim_sample() %+%
-  sim_calc(calc_var(varName = "y", funList = list(length), newName = "n"), level = "sample")
+  sim_calc(calc_var(varName = "y", funList = list(length), newName = "n"), 
+           level = "sample")
 
 ## ------------------------------------------------------------------------
 sim(sim_base_standard(3, 4), sim_gen_fe(), sim_gen_e(), sim_gen_ec(), sim_popMean())

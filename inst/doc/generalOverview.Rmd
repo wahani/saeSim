@@ -1,21 +1,14 @@
 <!--
 %\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{saeSim overview}
+%\VignetteIndexEntry{Introduction}
 -->
 ```{r include=FALSE}
 options(markdown.HTML.header = system.file('misc', 'vignette.css', package='knitr'))
 ```
 
+# Introduction
+
 `saeSim` is a Package for the [R](http://cran.r-project.org/) language. It is developed to make the data simulation process more compact and yet flexible enough for customization. It is designed to suffice in the context of small area estimation. Furthermore, at this time simulation is possible under linear mixed models.
-
-# Installation
-
-The package is still under development. Please report bugs, troubles and discussion as [issue on GitHub](https://github.com/wahani/saeSim/issues). You can install the latest version from the [repository on GitHub](https://www.github.com/wahani/saeSim):
-
-```{r eval=FALSE}
-library(devtools)
-install_github("saeSim", "wahani", subdir="package", ref = "v0.1")
-```
 
 # Data Set-up
 
@@ -23,7 +16,8 @@ A linear mixed model contains two components. A fixed effects part, and an error
 
 - To begin with, this is the desired approach: `sim_setup(base, ..., R = 500, simName = "")`. The example is the set-up for a linear model:
 ```{r eval=FALSE}
-setup <- sim_setup(sim_base_standard(), sim_gen_fe(), sim_gen_e(), R = 500, simName = "Doku", idC = TRUE)
+setup <- sim_setup(sim_base_standard(), sim_gen_fe(), sim_gen_e(), R = 500, 
+                   simName = "Doku")
 ```
 - Also it is possible to compose a set-up by using `%+%`. Internally the function `sim_setup` is called and uses it's defaults for all arguments but `base` and `...`:
 ```{r eval=FALSE}
@@ -102,7 +96,9 @@ dataList <- sim(setup)
 When interested in contamination it is important to know, that the contamination adds additively to the values in the data. This means how data is added to the model changes, the data generators stay the same. If you want a contaminated spatially correlated error component you can add the following to the `setup` object from above:
 
 ```{r}
-contSetup <- setup %+% sim_gen_rec(gen_v_sar(sd = 40), nCont = 0.05, level = "area", fixed = TRUE, name = "vSp")
+contSetup <- setup %+% 
+  sim_gen_rec(gen_v_sar(sd = 40), nCont = 0.05, level = "area", fixed = TRUE, 
+              name = "vSp")
 ```
 
 Note that the generator is the same but with a higher standard deviation. There are two functions for adding contaminated components:
@@ -117,7 +113,9 @@ If you use relative numbers for `nCont` the actual number of contaminated observ
 Use the following example to see how these things play together:
 
 ```{r}
-sim(sim_base_standard(3, 4), sim_gen_fe(), sim_gen_e(), sim_gen_ec(nCont = c(1, 2, 3), level = "unit", name = "eCont"))
+sim(sim_base_standard(3, 4), 
+    sim_gen_fe(), sim_gen_e(), 
+    sim_gen_ec(nCont = c(1, 2, 3), level = "unit", name = "eCont"))
 ```
 
 ### Custom data
@@ -174,12 +172,18 @@ Of course the real workhorse is the `calcFun`. At this time you can only calcula
 Consider the following examples to see how this function can be used:  
   
 ```{r}
-sim(sim_base_standard(3, 4), sim_gen_fe(), sim_gen_e(), sim_gen_ec(), sim_calc(calc_var(varName = "y", funList = list(mean = mean, var = var), exclude = "idC", by = "idD"), level = "population"))
-sim(sim_base_standard(3, 4), sim_gen_fe(), sim_gen_e(), sim_gen_ec(), sim_calc(calc_var(varName = "y", funList = list(mean = mean, var = var), exclude = NULL, by = "idD"), level = "population"))
-setup %+% sim_calc(calc_var(varName = "y", funList = list(length), newName = "N"), level = "population")
+sim(sim_base_standard(3, 4), sim_gen_fe(), sim_gen_e(), sim_gen_ec(), 
+    sim_calc(calc_var(varName = "y", funList = list(mean = mean, var = var), 
+                      exclude = "idC", by = "idD"), level = "population"))
+sim(sim_base_standard(3, 4), sim_gen_fe(), sim_gen_e(), sim_gen_ec(), 
+    sim_calc(calc_var(varName = "y", funList = list(mean = mean, var = var), 
+                      exclude = NULL, by = "idD"), level = "population"))
+setup %+% sim_calc(calc_var(varName = "y", funList = list(length), newName = "N"), 
+                   level = "population")
 setup %+% 
   sim_sample() %+%
-  sim_calc(calc_var(varName = "y", funList = list(length), newName = "n"), level = "sample")
+  sim_calc(calc_var(varName = "y", funList = list(length), newName = "n"), 
+           level = "sample")
 ```
 
 
