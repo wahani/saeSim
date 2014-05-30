@@ -10,12 +10,16 @@ sim(x, ...)
 
 \S4method{sim}{sim_base}(x, ...)
 
-\S4method{sim}{sim_setup}(x, ..., R = NULL)
+\S4method{sim}{sim_setup}(x, ..., R = NULL, parallel = FALSE, path = NULL)
 }
 \arguments{
 \item{x}{a \code{sim_setup} or \code{sim_base} constructed with \code{sim_setup()} or \code{sim_base_standard()}}
 
-\item{...}{simulation components; any composition of \code{\link{sim_gen}}, \code{\link{sim_calc}}, \code{\link{sim_sample}}, \code{\link{sim_agg}}.}
+\item{...}{simulation components; any composition of \code{\link{sim_gen}}, \code{\link{sim_calc}}, \code{\link{sim_sample}}, \code{\link{sim_agg}}. If \code{parallel = TRUE} arguments passed to mclapply, see details}
+
+\item{parallel}{if \code{FALSE} \code{lapply} is used; if \code{TRUE} a 'plug-and-play' version of mclapply is used; see details.}
+
+\item{path}{optional path in which the simulation results can be saved. This may be a good idea for long running simulations and for those using large data.frames as return value.}
 
 \item{R}{the number of desired repetitions in the simulation.}
 }
@@ -24,6 +28,9 @@ If \code{x} is a \code{sim_base} object constructed for example with \code{\link
 }
 \description{
 This function can be applied to a \code{sim_setup} object or \code{sim_base}. It will start the simulation. Use the printing method as long as you are testing the scenario.
+}
+\details{
+The backend for parallel computation is very experimental. You can find the code and documentation on www.github.com/wahani/parallelTools. In Windows parallelization is build around \code{\link[parallel]{clusterApply}}. If you are not using Windows the function \code{\link[parallel]{mclapply}} is used. See the parameters of \code{mclapply} how to control the parallelization. Parallizing trivial tasks in Windows will result in wasted time. Also working with large data.frames will be inefficient in Windows.
 }
 \examples{
 setup <- sim_lm()

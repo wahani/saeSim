@@ -2,6 +2,7 @@
 #' @import dplyr
 #' @import methods
 #' @import ggplot2
+#' @import parallel
 
 ################################################################################
 
