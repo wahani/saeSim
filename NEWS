@@ -1,3 +1,7 @@
-Version 0.1
+Version 0.4.0
 
-- Startet a project
+- Implementation of all relevant steps in simulation studies
+- as.data.frame for sim_setup
+- summary for sim_setup
+- sim_setup method for data.frames as link to design-based studies
+- implemented a solution for doing the simulation in parallel

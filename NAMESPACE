@@ -3,6 +3,7 @@
 S3method(as.data.frame,sim_setup)
 S3method(autoplot,sim_setup)
 S3method(plot,sim_setup)
+S3method(summary,sim_setup)
 export("%&%")
 export(agg_standard)
 export(calc_var)
