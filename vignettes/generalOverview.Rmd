@@ -212,6 +212,7 @@ You will want to check your results regularly to see how things will work out. W
 ```{r}
 setup
 plot(setup)
+library(ggplot2)
 autoplot(setup)
 autoplot(setup, "e")
 ```

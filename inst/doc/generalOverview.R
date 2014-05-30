@@ -74,6 +74,7 @@ sim(sim_base_standard(3, 4), sim_gen_fe(), sim_gen_e(), sim_gen_ec(), sim_popMea
 ## ------------------------------------------------------------------------
 setup
 plot(setup)
+library(ggplot2)
 autoplot(setup)
 autoplot(setup, "e")
 

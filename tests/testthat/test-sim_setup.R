@@ -21,3 +21,8 @@ test_that("as.data.frame", {
   expect_equal(nrow(dat), 10000)
   expect_true(all(names(dat) %in% c("idD", "idU", "y", "x", "e")))
 })
+
+test_that("autoplot", {
+  expect_warning(autoplot(sim_lm(), x = "z"))
+  expect_warning(autoplot(sim_lm(), y = "k"))
+})
