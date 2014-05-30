@@ -17,7 +17,7 @@ sim_base_standard <- function(nDomains = 100, nUnits = 100) {
 
 #' Construct a design-based set-up
 #' 
-#' \code{sim_base_data} is still an experimentatl implementation to extend the whole approach for design-based simulation studies. 
+#' \code{sim_base_data} is still an experimental implementation to extend the whole approach for design-based simulation studies. 
 #' 
 #' @param data a data.frame containing a population.
 #' @param domainID variable names in \code{data} as character which will identify the domains/groups/cluster in the data.

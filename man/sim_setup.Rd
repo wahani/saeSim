@@ -2,6 +2,7 @@
 \docType{methods}
 \name{sim_setup}
 \alias{sim_setup}
+\alias{sim_setup,data.frame-method}
 \alias{sim_setup,sim_base-method}
 \alias{sim_setup,sim_setup-method}
 \title{Constructor for sim_setup}
@@ -10,7 +11,11 @@ sim_setup(base, ...)
 
 \S4method{sim_setup}{sim_base}(base, ..., R = 500, simName = "test")
 
-\S4method{sim_setup}{sim_setup}(base, ...)
+\S4method{sim_setup}{sim_setup}(base, ..., R = base@R,
+  simName = base@simName)
+
+\S4method{sim_setup}{data.frame}(base, ..., R = 500, simName = "test",
+  domainID)
 }
 \arguments{
 \item{base}{a object constructed by the \code{sim_base_*} family or a \code{sim_setup} object, constructed with \code{\link{sim_setup}}.}
@@ -20,6 +25,8 @@ sim_setup(base, ...)
 \item{R}{the number of desired repetitions in the simulation.}
 
 \item{simName}{the name of the simulation. It is simply added as character variable to the data.}
+
+\item{domainID}{variable names in \code{data} as character which will identify the domains/groups/cluster in the data.}
 }
 \value{
 An objects of class \code{sim_setup}. There is really no need to access an object of class \code{sim_setup}. You can interact with it using the \code{show}, \code{plot}, \code{autoplot} and of course \code{sim} method.

@@ -11,6 +11,6 @@ sim_base_data(data, domainID)
 \item{domainID}{variable names in \code{data} as character which will identify the domains/groups/cluster in the data.}
 }
 \description{
-\code{sim_base_data} is still an experimentatl implementation to extend the whole approach for design-based simulation studies.
+\code{sim_base_data} is still an experimental implementation to extend the whole approach for design-based simulation studies.
 }
 

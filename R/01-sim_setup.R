@@ -63,9 +63,16 @@ setMethod("sim_setup", c(base = "sim_base"),
 #' @rdname sim_setup
 #' @export
 setMethod("sim_setup", c(base = "sim_setup"),
-          function(base, ...) {
+          function(base, ..., R = base@R, simName = base@simName) {
             smstp_objects <- c(list(...), S3Part(base, strictS3=TRUE))
-            new("sim_setup", base = base@base, 
-                R = base@R, simName = base@simName, smstp_objects)
+            new("sim_setup", base = base@base, R = R, simName = simName, 
+                smstp_objects)
           })
 
+#' @inheritParams sim_base_data
+#' @rdname sim_setup
+#' @export
+setMethod("sim_setup", c(base = "data.frame"),
+          function(base, ..., R = 500, simName = "test", domainID) {
+            sim_setup(sim_base_data(base, domainID), ..., R = R, simName = simName)
+          })
