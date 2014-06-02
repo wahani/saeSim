@@ -1,8 +1,8 @@
 Package: saeSim
 Type: Package
 Title: Simulation Tools for Small Area Estimation
-Date: 2014-05-30
-Version: 0.4.0
+Date: 2014-06-02
+Version: 0.4.1
 Author: Sebastian Warnholz <Sebastian.Warnholz@fu-berlin.de>
 Maintainer: Sebastian Warnholz <Sebastian.Warnholz@fu-berlin.de>
 URL: wahani.github.io/saeSim
@@ -10,9 +10,8 @@ Depends:
     R(>= 3.1),
     methods
 Imports:
-    dplyr,
+    dplyr(>= 0.2),
     ggplot2,
-    magrittr,
     MASS,
     spdep,
     parallel

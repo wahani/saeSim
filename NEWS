@@ -1,3 +1,7 @@
+Version 0.4.1
+
+- Import dplyr(>= 0.2) - because of import of magrittr
+
 Version 0.4.0
 
 - Implementation of all relevant steps in simulation studies

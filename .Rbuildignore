@@ -4,3 +4,5 @@ inst/staticdocs
 inst/web
 devel
 .gitignore
+.Rprofile
+README.md
