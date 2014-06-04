@@ -34,7 +34,7 @@ summary.sim_setup <- function(object, ...) {
   cat(tmp["elapsed"], "seconds.", object@R, "*", tmp["elapsed"], "=", 
       object@R * tmp["elapsed"], "seconds.\n")
   
-  cat("\nHead of the data:\n")
-  print(head(dat))
+  cat("\nStructure of the data:\n")
+  print(str(dat))
   invisible(NULL)
 }

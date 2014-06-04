@@ -8,7 +8,7 @@ read_simData(path, ..., returnList = FALSE)
 \arguments{
 \item{path}{path to the files you want to read in.}
 
-\item{...}{arguments passed to \code{\link{dir}}}
+\item{...}{arguments passed to \code{\link{read.csv}}}
 
 \item{returnList}{if \code{TRUE} a list containing the data.frames. Very much like the output of sim. If \code{FALSE} a single data.frame is returned.}
 }

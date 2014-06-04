@@ -7,7 +7,7 @@ calc_var(varName = "y", funList = list(mean = mean, var = var),
   exclude = NULL, by = "idD", newName = varName)
 }
 \arguments{
-\item{varName}{character giving the name of the variable in the data, on which a function is applied.}
+\item{varName}{character giving the name of the variable in the data, on which a function is applied. \code{length(varName) > 1} the function(s) are applied on each variable in varName.}
 
 \item{funList}{list of functions to be applied on \code{varName}. Can be named, see \code{newName}.}
 
@@ -15,7 +15,7 @@ calc_var(varName = "y", funList = list(mean = mean, var = var),
 
 \item{by}{variable names as character to split the data. Computed values will be constant within each group.}
 
-\item{newName}{name of the new variable(s). If \code{length(funList) > 1} it can be a vector. If equal to \code{varName} the name will be pasted with the function name (if the list is named) or appended by an increasing sequence of integer}
+\item{newName}{name of the new variable(s). If \code{length(funList) > 1} it can be a vector. If equal to \code{varName} the name will be pasted with the function name (if the list is named) or appended by an increasing sequence of integers. If \code{length(varName) > 1} newName is expected to have the same length as varName.}
 }
 \description{
 This function is intended to be used with \code{\link{sim_calc}} and not interactively. It can be used to calculate statistics for gouping variables in the data.
