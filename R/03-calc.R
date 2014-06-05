@@ -59,6 +59,8 @@ calc_var <- function(varName = "y", funList = list("mean" = mean, "var" = var), 
       newName <<- newNameCp[i]
       dat <- calc_single(dat)
     }
+    varName <<- varNameCp
+    newName <<- newNameCp
     dat
   }
   

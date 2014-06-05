@@ -42,6 +42,8 @@ test_that("calc_var length(varName) > 1", {
         calc_var(varName=c("x", "y"), 
                  funList = list(mean), newName = c("newName1", "newName2"))))
   
+  datList <- sim(setup %&% sim_calc(calc_var(varName=c("x", "y"))), R = 2)
+  
   expect_true(all(c("xMean", "xVar", "yMean", "yVar") %in% names(dat1)))
   expect_false(all(dat1$xMean == dat1$yMean))
   expect_true(all(c("popMean", "popVar") %in% names(dat2)))
@@ -49,4 +51,5 @@ test_that("calc_var length(varName) > 1", {
   expect_true(all(c("newName1", "newName2") %in% names(dat3)))
   expect_true(all(dat1$xMean == dat3$newName1))
   expect_true(all(dat1$yMean == dat3$newName2))
+  expect_true(all(Reduce(f=`%in%`, lapply(datList, names))))
 })
