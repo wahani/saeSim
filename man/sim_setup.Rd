@@ -9,13 +9,12 @@
 \usage{
 sim_setup(base, ...)
 
-\S4method{sim_setup}{sim_base}(base, ..., R = 500, simName = "test")
+\S4method{sim_setup}{sim_base}(base, ..., R = 1, simName = "")
 
 \S4method{sim_setup}{sim_setup}(base, ..., R = base@R,
   simName = base@simName)
 
-\S4method{sim_setup}{data.frame}(base, ..., R = 500, simName = "test",
-  domainID)
+\S4method{sim_setup}{data.frame}(base, ..., R = 1, simName = "", domainID)
 }
 \arguments{
 \item{base}{a object constructed by the \code{sim_base_*} family or a \code{sim_setup} object, constructed with \code{\link{sim_setup}}.}

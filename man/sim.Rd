@@ -10,7 +10,8 @@ sim(x, ...)
 
 \S4method{sim}{sim_base}(x, ...)
 
-\S4method{sim}{sim_setup}(x, ..., R = NULL, parallel = FALSE, path = NULL)
+\S4method{sim}{sim_setup}(x, ..., R = NULL, simName = NULL,
+  parallel = FALSE, path = NULL)
 }
 \arguments{
 \item{x}{a \code{sim_setup} or \code{sim_base} constructed with \code{sim_setup()} or \code{sim_base_standard()}}
@@ -22,6 +23,8 @@ sim(x, ...)
 \item{path}{optional path in which the simulation results can be saved. This may be a good idea for long running simulations and for those using large data.frames as return value.}
 
 \item{R}{the number of desired repetitions in the simulation.}
+
+\item{simName}{the name of the simulation. It is simply added as character variable to the data.}
 }
 \value{
 If \code{x} is a \code{sim_base} object constructed for example with \code{\link{sim_base_standard}} the return value is a the result of one simulation run and of class \code{data.frame}. If \code{x} has class \code{sim_setup} the return value is always a list. The elements are the resulting \code{data.frame}s of each simulation run.

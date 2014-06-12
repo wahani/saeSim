@@ -35,7 +35,7 @@ setGeneric("sim_setup", function(base, ...) standardGeneric("sim_setup"))
 #' @rdname sim_setup
 #' @export
 setMethod("sim_setup", c(base = "sim_base"),
-          function(base, ..., R = 500, simName = "test") {
+          function(base, ..., R = 1, simName = "") {
             
             dots <- list(...)
             if (length(dots) == 0) {
@@ -73,6 +73,6 @@ setMethod("sim_setup", c(base = "sim_setup"),
 #' @rdname sim_setup
 #' @export
 setMethod("sim_setup", c(base = "data.frame"),
-          function(base, ..., R = 500, simName = "test", domainID) {
+          function(base, ..., R = 1, simName = "", domainID) {
             sim_setup(sim_base_data(base, domainID), ..., R = R, simName = simName)
           })

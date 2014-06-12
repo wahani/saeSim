@@ -83,16 +83,16 @@ setMethod("sim", c(x = "sim_sample"),
 #' @rdname sim
 #' @export
 setMethod("sim", c(x = "sim_setup"),
-          function(x, ..., R = NULL, parallel = FALSE, path = NULL) {
+          function(x, ..., R = NULL, simName = NULL, parallel = FALSE, path = NULL) {
             iterateOver <- as.list(1:if(is.null(R)) x@R else R)
             iterateFun <- if(parallel) {
               setPTOption(packageToLoad = "saeSim")
               mclapply
               } else lapply
-            iterateOver %>% iterateFun(function(i, object, path) {
+            iterateOver %>% iterateFun(function(i, object, path, simName) {
               df <- as.data.frame(object)
               df$idR <- i
-              df$simName <- object@simName
+              df$simName <- if(is.null(simName)) object@simName else simName
               # Save results to disk
               if(!is.null(path)) {
                 write.csv(df, file = paste(path, object@simName, i, ".csv", sep = ""),
@@ -101,7 +101,7 @@ setMethod("sim", c(x = "sim_setup"),
                 gc()
               }
               df
-            }, object = x, path = path, ...)
+            }, object = x, path = path, simName = simName, ...)
           })
 
 #' @rdname sim-methods
