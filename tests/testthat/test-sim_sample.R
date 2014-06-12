@@ -34,3 +34,10 @@ test_that("sample_srs() can handle integer and numeric", {
   expect_that(nrow(result3), equals(5))
   expect_that(nrow(result4), equals(1))
 })
+
+test_that("sample_csrs is working with numeric input and length > 1", {
+  expect_equal(sum(c(2,5,4,2,4,2,3,4,2,4)), 
+               length(sample_csrs(size=c(2,5,4,2,4,2,3,4,2,4))(10, 10)))
+  expect_error(sample_csrs(size=c(2,5,4,2,4,2,3,4,2))(10, 10))
+
+})

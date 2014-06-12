@@ -47,19 +47,28 @@ sample_srs <- function(size = 0.05, ...) {
 #' @examples 
 #' sim_lm() %&% sim_sample(sample_csrs())
 sample_csrs <- function(size = 0.05) {
+  # Size is either a integer vector length > 1 | length == 1 or a numeric with 
+  # length == 1
+  if(any(size >= 1)) size <- as.integer(size)
   function(nDomains, nUnits) {
+    # Check input:
+    if(length(size) > 1 && length(size) != nDomains) 
+      stop("The length(size) needs to be 1 or equal to nDomain")
+    
+    # Begin program:
     id <- make_id(nDomains, nUnits)
     dataList <- split(id, list(id$idD))
     unlist(lapply(as.list(1:nDomains), 
            function(i) {
              df <- dataList[[i]]
-             df <- df[sample.int(nrow(df), 
-                                 if(is.integer(size)) 
-                                   if(length(size) == 1) 
-                                     size else 
-                                       size[i] else 
-                                         if(size >= 1) size else
-                                           ceiling(size * nrow(df))), ]
+             df <- df[sample.int(nrow(df), if(is.integer(size)) {
+               if(length(size) == 1) 
+                 size else 
+                   size[i]
+             } else {
+               if(length(size) == 1) ceiling(size * nrow(df)) else
+                 ceiling(size[i] * nrow(df))
+             }), ]
              as.numeric(rownames(df))
            }))
   }

@@ -1,3 +1,7 @@
+Version 0.4.4
+
+- Bugfix in sample_csrs - Handling of numeric input with length > 1
+
 Version 0.4.3
 
 - Bugfix in calc_var
