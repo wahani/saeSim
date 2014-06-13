@@ -12,7 +12,7 @@ sim_sample(smplFun = sample_csrs(size = 5L))
 One of the components which can be added to a simulation set-up. This component can be used to add a sampling mechanism to the simulation set-up. A sample will be drawn after the population is generated (\code{\link{sim_gen}}) and variables on the population are computed (\code{\link{sim_calc}}).
 }
 \details{
-Potentially you can define a \code{smplFun} yourself. Take care that it has two arguments, named \code{nDomains} and \code{nUnits}, and returns a vector which can be used for sub-setting the rows of a data.frame.
+Potentially you can define a \code{smplFun} yourself. Take care that it has one argument, named \code{dat} being the data as data.frame, and returns the sample as data.frame.
 }
 \examples{
 # Simple random sample - 5\% sample:
@@ -22,9 +22,8 @@ sim_lm() \%&\% sim_sample(sample_srs())
 sim_lm() \%&\% sim_sample(sample_csrs())
 
 # User defined sampling function:
-sample_mySampleFun <- function(nDomains, nUnits) {
-  dat <- make_id(nDomains, nUnits)
-  sample.int(nrow(dat), 10)
+sample_mySampleFun <- function(dat) {
+  dat[sample.int(nrow(dat), 10), ]
 }
 
 sim_lm() \%&\% sim_sample(sample_mySampleFun)

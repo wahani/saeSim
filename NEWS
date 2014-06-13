@@ -1,13 +1,14 @@
 Version 0.4.4
 
-- Bugfix in sample_csrs - Handling of numeric input with length > 1
+- Bug fix in sample_csrs - Handling of numeric input with length > 1
 - Default in sim_setup is R = 1
 - Argument simName in sim.sim_setup
 - Default for simName in sim_setup is set to ""
+- Change in sim_setup, now matches the behaviour of all other components
 
 Version 0.4.3
 
-- Bugfix in calc_var
+- Bug-fix in calc_var
 
 Version 0.4.2
 

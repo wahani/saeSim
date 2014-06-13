@@ -77,7 +77,7 @@ setMethod("sim", c(x = "sim_calc_virtual"),
 #' @rdname sim-methods
 setMethod("sim", c(x = "sim_sample"),
           function(x, dat, ...) {
-            dat[x@fun(x@nDomains, x@nUnits), ]
+            x@fun(dat)
           })
 
 #' @rdname sim

@@ -1,15 +1,27 @@
 context("sim_sample")
 test_that("Basic sampling functionality", {
-  dat <- sim(sim_base_standard(nDomains=3, nUnits = 4), 
-             sim_gen_fe(generator = gen_norm(mean=50, sd=20), const=0, slope = 10), 
-             sim_gen_e(generator=gen_norm(0, 1)))
+  setup <- sim_base_standard(nDomains=3, nUnits = 4) %&%
+    sim_gen_fe(generator = gen_norm(mean=50, sd=20), const=0, slope = 10) %&%
+    sim_gen_e(generator=gen_norm(0, 1))
   
-  expect_that(nrow(dat[sample_sampleWrapper(12L, 5)(),]), equals(5))
-  expect_that(nrow(dat[sample_srs(size = 0.05)(3, 4),]), equals(1))
-  expect_that(nrow(dat[sample_srs(size = 5L)(3, 4),]), equals(5))
-  expect_that(nrow(dat[sample_csrs(size = 2L)(3, 4), ]), equals(6))
-  expect_that(nrow(dat[sample_csrs(size = c(1L, 2L, 4L))(3, 4), ]), equals(7))
-  expect_that(nrow(dat[sample_csrs(size = 0.05)(3, 4), ]), equals(3))
+  # 1
+  setup %&% sim_sample(sample_sampleWrapper(12L, 5)) %>% as.data.frame %>% 
+    nrow %>% expect_that(equals(5))
+  # 2
+  setup %&% sim_sample(sample_srs(size = 0.05)) %>% as.data.frame %>% 
+    nrow %>% expect_that(equals(1))
+  # 3
+  setup %&% sim_sample(sample_srs(size = 5L)) %>% as.data.frame %>% 
+    nrow %>% expect_that(equals(5))
+  # 4
+  setup %&% sim_sample(sample_csrs(size = 2L)) %>% as.data.frame %>% 
+    nrow %>% expect_that(equals(6))
+  # 5
+  setup %&% sim_sample(sample_csrs(size = c(1L, 2L, 4L))) %>% as.data.frame %>% 
+    nrow %>% expect_that(equals(7))
+  # 6
+  setup %&% sim_sample(sample_csrs(size = 0.05)) %>% as.data.frame %>% 
+    nrow %>% expect_that(equals(3))
 })
 
 test_that("sim method is applying the sampling functions correctly", {
@@ -36,8 +48,11 @@ test_that("sample_srs() can handle integer and numeric", {
 })
 
 test_that("sample_csrs is working with numeric input and length > 1", {
+  setup <- sim_base_standard(10, 10) %&% sim_gen_fe()
+  
   expect_equal(sum(c(2,5,4,2,4,2,3,4,2,4)), 
-               length(sample_csrs(size=c(2,5,4,2,4,2,3,4,2,4))(10, 10)))
-  expect_error(sample_csrs(size=c(2,5,4,2,4,2,3,4,2))(10, 10))
-
+               setup %&% sim_sample(sample_csrs(size=c(2,5,4,2,4,2,3,4,2,4))) %>%
+                 as.data.frame %>% nrow)
+  expect_error(setup %&% sim_sample(sample_csrs(size=c(2,5,4,2,4,2,3,4,2))) %>% 
+                 as.data.frame)
 })
