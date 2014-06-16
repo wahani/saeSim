@@ -89,10 +89,11 @@ setMethod("sim", c(x = "sim_setup"),
               setPTOption(packageToLoad = "saeSim")
               mclapply
               } else lapply
+            x@simName <- if(is.null(simName)) x@simName else simName
             iterateOver %>% iterateFun(function(i, object, path, simName) {
               df <- as.data.frame(object)
               df$idR <- i
-              df$simName <- if(is.null(simName)) object@simName else simName
+              df$simName <- object@simName
               # Save results to disk
               if(!is.null(path)) {
                 write.csv(df, file = paste(path, object@simName, i, ".csv", sep = ""),
