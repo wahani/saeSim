@@ -6,13 +6,14 @@ test_that("sim_calc and calc_var", {
                      sim_gen_ec(),
                      sim_sample(sample_csrs(size=5)), R = 1)
   
-  dat <- sim(setup %&% 
-               sim_calc(calc_var("y", funList = list("mean" = mean, "var" = var), 
-                                 exclude = "idC", newName = "pop")) %&%
-               sim_calc(calc_var(varName = "y", funList = list("length" = length), newName = "N")) %&% 
-               sim_calc(calc_var(varName = "y", funList = list("length" = length), newName = "n"), level = "sample") %&% 
-               sim_calc(calc_var(varName = "y", funList = list("length" = length)), level = "sample") %&% 
-               sim_calc(calc_var(varName = "y", funList = list(max)), level = "sample"))[[1]]
+  dat <- setup %&% 
+    sim_calc(calc_var("y", funList = list("mean" = mean, "var" = var), 
+                      exclude = "idC", newName = "pop")) %&%
+    sim_calc(calc_var(varName = "y", funList = list("length" = length), newName = "N")) %&% 
+    sim_calc(calc_var(varName = "y", funList = list("length" = length), newName = "n"), level = "sample") %&% 
+    sim_calc(calc_var(varName = "y", funList = list("length" = length)), level = "sample") %&% 
+    sim_calc(calc_var(varName = "y", funList = list(max)), level = "sample") %>% 
+    as.data.frame
   
   calc_lm <- function(dat) {
     dat$linearPredictor <- predict(lm(y ~ x, data = dat))

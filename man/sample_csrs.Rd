@@ -3,13 +3,17 @@
 \alias{sample_csrs}
 \title{Sampling function}
 \usage{
-sample_csrs(size = 0.05)
+sample_csrs(size = 0.05, clusterVar = "idD", ...)
 }
 \arguments{
 \item{size}{can either be >= 1 giving the sample size (in each cluster) or < 1 where it is treated as proportion (in each cluster). Additionally size can have \code{length(size) > 1} which will be interpreted as different sample sizes in each cluster/domain.}
+
+\item{clusterVar}{variable names used to identify clusters.}
+
+\item{...}{Arguments passed to \code{\link{sample.int}}.}
 }
 \description{
-This function is intended to be used with \code{\link{sim_sample}} and not interactively. \code{sample_csrs} will draw with simple random sampling in each cluster. Clusters are identified using the \code{nDomains} and \code{nUnits} specified in the sim_base. \code{\link{sample.int}} is used under the hood.
+This function is intended to be used with \code{\link{sim_sample}} and not interactively. \code{sample_csrs} will draw with simple random sampling in each cluster. Clusters are identified using the variable names given by \code{clusterVar}. \code{\link{sample.int}} is used under the hood.
 }
 \examples{
 sim_lm() \%&\% sim_sample(sample_csrs())

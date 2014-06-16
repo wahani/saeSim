@@ -1,3 +1,5 @@
+## saeSim
+
 Tools for the simulation of data in the context of small area estimation. They will organize your simulation set-up into phases:
   1. Generating data 
   2. Computing on the generated data
