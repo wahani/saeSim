@@ -99,7 +99,6 @@ setMethod("sim", c(x = "sim_setup"),
                 write.csv(df, file = paste(path, object@simName, i, ".csv", sep = ""),
                           row.names = FALSE)
                 df <- NULL
-                gc()
               }
               df
             }, object = x, path = path, simName = simName, ...)

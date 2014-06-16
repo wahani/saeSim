@@ -1,6 +1,7 @@
 Version 0.4.5
 
 - Bugfix in sim.sim_setup pass simName
+- No garbage collection for sim with path
 
 Version 0.4.4
 
