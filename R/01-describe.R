@@ -27,7 +27,7 @@ describe.sim_setup <- function(x, ...) {
   
   variableString <- paste(descData$name, descData$desc) %>% paste(collapse = "\n")
   
-  cat("Model for response:")
+  cat("Model for response:\n")
   cat(modelString, "\n\n")
   cat("with:\n")
   cat(variableString)
