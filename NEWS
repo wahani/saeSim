@@ -1,3 +1,7 @@
+Version 0.4.6
+
+- Describe function for sim_setup
+
 Version 0.4.5
 
 - Bugfix in sim.sim_setup pass simName

@@ -9,6 +9,7 @@
 #'  @param level character in \code{c("unit", "domain")}. If equal to 'unit' random numbers for all observations are generated. If equal to 'domain' they are different between domains and constant within.
 #'  @param generator a function producing random numbers.
 #'  @param ... arguments passed to \code{generator}.
+#'  @param desc character used for describing the distribution from which the data is generated.
 #'  
 #'  @details \code{gen_norm} is used to draw random numbers from a normal distribution where all generated numbers are independent.
 #'  
@@ -32,7 +33,7 @@
 #'              sim_gen_e())
 #'  all.equal(dat1, dat2)
 gen_norm <- function(mean = 0, sd = 1) {
-  desc <- paste("~ N(", mean, ", ", sd^2, ")", sep = "")
+  desc <- paste("~ N(", mean, ", ", sd^2, ") unit-level", sep = "")
   function(nDomains, nUnits, name) {
     idD <- make_id(nDomains, nUnits)
     idD[name] <- rnorm(nrow(idD), mean = mean, sd = sd)
@@ -43,7 +44,7 @@ gen_norm <- function(mean = 0, sd = 1) {
 #' @rdname generators
 #' @export
 gen_v_norm <- function(mean = 0, sd = 1) {
-  desc <- paste("~ N(", mean, ", ", sd^2, ")", sep = "")
+  desc <- paste("~ N(", mean, ", ", sd^2, ") domain-level", sep = "")
   function(nDomains, nUnits, name) {    
     idD <- make_id(nDomains, nUnits)
     tmp <- rnorm(nDomains, mean = mean, sd = sd)
@@ -57,7 +58,7 @@ gen_v_norm <- function(mean = 0, sd = 1) {
 #' @rdname generators
 #' @export
 gen_v_sar <- function(mean = 0, sd = 1, rho = 0.5, type = "rook") {
-  desc <- paste("~ N(", mean, ", SAR1(", rho, ", ", sd^2, ")", sep = "")
+  desc <- paste("~ N(", mean, ", SAR1(", type, ")(", rho, ", ", sd^2, ") domain-level", sep = "")
   function(nDomains, nUnits, name) {    
     idD <- make_id(nDomains, nUnits)
     
@@ -77,10 +78,11 @@ gen_v_sar <- function(mean = 0, sd = 1, rho = 0.5, type = "rook") {
 
 #' @rdname generators
 #' @export
-gen_generic <- function(generator, ..., level = "unit") {
+gen_generic <- function(generator, ..., level = "unit", desc = "F") {
   genArgs <- list(...)
   force(generator)
   stopifnot(level %in% c("unit", "domain"))
+  desc <- paste("~ ", desc, "(", paste(..., sep = ", "), ") ", level, "-level", sep = "")
   
   gen_unit <- function(nDomains, nUnits, name) {
     dat <- make_id(nDomains, nUnits)
