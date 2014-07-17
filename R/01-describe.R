@@ -21,8 +21,10 @@ describe.sim_setup <- function(x, ...) {
                desc = get(x = "desc", envir = environment(genC@fun)))) %>% 
     do.call(what = rbind)
   
-  modelString <- paste(descData$slope, descData$name, sep = " * ", collapse = " + ") %>% 
-    paste(sum(descData$const), ., sep = " + ") %>% paste("y =", .) %>%
+  tmp1 <- paste(descData$slope, descData$name, sep = " * ", collapse = " + ")
+  tmp2 <- paste(sum(descData$const), tmp1, sep = " + ")
+  
+  modelString <- paste("y =", tmp2) %>% 
     gsub(pattern = " 1 \\* ", replacement = " ")
   
   variableString <- paste(descData$name, descData$desc) %>% paste(collapse = "\n")

@@ -13,6 +13,11 @@
 #' sim_base_standard() %&% sim_gen_fe() %&% sim_gen_e() %&% sim_agg(agg_standard())
 agg_standard <- function(splitVars = "idD") {
   function(dat) {
+    
+    # Keep Attributes
+    preAttr <- attributes(dat)
+    preAttr[c("class", "row.names", "names")] <- NULL
+    
     # character > factor > dummies (numeric)
     dat[sapply(dat, is.character)] <- dat[sapply(dat, is.character)] %>% lapply(as.factor)
     dummies <- names(dat)[sapply(dat, is.factor)] %>% 
@@ -38,6 +43,8 @@ agg_standard <- function(splitVars = "idD") {
              dfOut
            })
     # combine:
-    rbind_all(datList)
+    out <- rbind_all(datList)
+    attributes(out) <- c(attributes(out), preAttr)
+    out
   }
 } 

@@ -38,11 +38,11 @@ sample_srs <- function(size = 0.05, ...) {
 
 #' Sampling function
 #' 
-#' This function is intended to be used with \code{\link{sim_sample}} and not interactively. \code{sample_csrs} will draw with simple random sampling in each cluster. Clusters are identified using the variable names given by \code{clusterVar}. \code{\link{sample.int}} is used under the hood.
+#' This function is intended to be used with \code{\link{sim_sample}} and not interactively. \code{sample_csrs} will draw with simple random sampling in each cluster. Clusters are identified using the variable names given by \code{clusterVar}.
 #' 
-#' @param size can either be >= 1 giving the sample size (in each cluster) or < 1 where it is treated as proportion (in each cluster). Additionally size can have \code{length(size) > 1} which will be interpreted as different sample sizes in each cluster/domain.
-#' @param clusterVar variable names used to identify clusters.
-#' @param ... Arguments passed to \code{\link{sample.int}}.
+#' @param size can be >= 1 giving the sample size (in each cluster) or < 1 where it is treated as proportion (in each cluster). Additionally size can have \code{length(size) > 1} which will be interpreted as different sample sizes in each cluster/domain.
+#' @param clusterVar variable names as character used to identify clusters.
+#' @param ... Arguments passed to \code{\link{sample}}.
 #' 
 #' @seealso \code{\link{sample_srs}}, \code{\link{sample_sampleWrapper}}, \code{\link{sim_sample}}, \code{\link{sample.int}}
 #' @export
@@ -54,28 +54,22 @@ sample_csrs <- function(size = 0.05, clusterVar = "idD", ...) {
   # length == 1
   if(any(size >= 1)) size <- as.integer(size)
   function(dat) {
-    # Begin program:
-    dataList <- split(dat, dat[clusterVar])
+    
+    # Splitting positions in dat:
+    posList <- split(1:nrow(dat), dat[clusterVar])
     
     # Check input:
-    if(length(size) > 1 && length(size) != length(dataList)) 
-      stop("length(size) needs to be 1 or equal to the number of clusters!")
+    if(length(size) > 1 && length(size) != length(posList)) 
+      stop("length(size) needs to be 1 or equal to the number of clusters!")    
+            
+    # Drawing sample of positions:
+    pos <- mapply(function(pos, size) {
+      if(size < 1) size <- ceiling(size * length(pos))
+      sample(pos, size, ...)
+    }, posList, size, SIMPLIFY = FALSE) %>% unlist
     
-    # Iterate over dataList:
-    dataList <- lapply(seq_along(dataList), 
-           function(i) {
-             df <- dataList[[i]]
-             df <- df[sample.int(nrow(df), if(is.integer(size)) {
-               if(length(size) == 1) 
-                 size else 
-                   size[i]
-             } else {
-               if(length(size) == 1) ceiling(size * nrow(df)) else
-                 ceiling(size[i] * nrow(df))
-             }, ...), ]
-             df
-           })
-    rbind_all(dataList)
+    # Return subset:
+    dat[pos, ]
   }
 }
 
