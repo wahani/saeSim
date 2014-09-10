@@ -30,49 +30,53 @@
 #' # Start a simulation:
 #' resultList <- sim(setup)
 #' }
-setGeneric("sim_setup", function(base, ...) standardGeneric("sim_setup"))
+sim_setup <- function(base, ...) UseMethod("sim_setup")
 
 #' @rdname sim_setup
 #' @export
-setMethod("sim_setup", c(base = "sim_base"),
-          function(base, ..., R = 1, simName = "") {
-            
-            dots <- list(...)
-            if (length(dots) == 0) {
-              return(new("sim_setup", base = base, R = R, 
-                         simName = simName, list()))
-            } else {
-              # Taking care of the smstp-family:
-              if (class(dots[[1]]) == "list") dots <- dots[[1]]
-              
-              smstp_objects <- dots
-              smstp_objects[is.sim_id_virtual(dots)] <- 
-                lapply(dots[is.sim_id_virtual(dots)], function(x) {
-                  x@nDomains <- base$nDomains
-                  x@nUnits <- base$nUnits
-                  x
-                })
-              
-              # Putting everything in a list:
-              return(new("sim_setup", base = base, R = R, 
-                         simName = simName, smstp_objects))
-            }
-            
-          })
+sim_setup.sim_base <- function(base, ..., R = 1, simName = "") {
+  
+  dots <- list(...)
+  if (length(dots) == 0) {
+    return(new("sim_setup", base = base, R = R, 
+               simName = simName, list()))
+  } else {
+    # Taking care of the smstp-family:
+    if (class(dots[[1]]) == "list") dots <- dots[[1]]
+    
+    smstp_objects <- dots
+    smstp_objects[is.sim_id_virtual(dots)] <- 
+      lapply(dots[is.sim_id_virtual(dots)], function(x) {
+        x@nDomains <- base$nDomains
+        x@nUnits <- base$nUnits
+        x
+      })
+        
+    smstp_objects <- smstp_objects[c(which(is.sim_gen_virtual(smstp_objects) | is.sim_genData(smstp_objects)),
+                                     which(is.sim_cpopulation(smstp_objects)),
+                                     which(is.sim_sample(smstp_objects)),
+                                     which(is.sim_csample(smstp_objects)),
+                                     which(is.sim_agg(smstp_objects)),
+                                     which(is.sim_cagg(smstp_objects)))]
+    
+    # Putting everything in a list:
+    return(new("sim_setup", base = base, R = R, 
+               simName = simName, smstp_objects))
+  }
+  
+}
 
 #' @rdname sim_setup
 #' @export
-setMethod("sim_setup", c(base = "sim_setup"),
-          function(base, ..., R = base@R, simName = base@simName) {
-            smstp_objects <- c(list(...), S3Part(base, strictS3=TRUE))
-            new("sim_setup", base = base@base, R = R, simName = simName, 
-                smstp_objects)
-          })
+sim_setup.sim_setup <- function(base, ..., R = base@R, simName = base@simName) {
+  smstp_objects <- c(list(...), S3Part(base, strictS3=TRUE))
+  new("sim_setup", base = base@base, R = R, simName = simName, 
+      smstp_objects)
+}
 
 #' @inheritParams sim_base_data
 #' @rdname sim_setup
 #' @export
-setMethod("sim_setup", c(base = "data.frame"),
-          function(base, ..., R = 1, simName = "", domainID) {
-            sim_setup(sim_base_data(base, domainID), ..., R = R, simName = simName)
-          })
+sim_setup.data.frame <- function(base, ..., R = 1, simName = "", domainID) {
+  sim_setup(sim_base_data(base, domainID), ..., R = R, simName = simName)
+}

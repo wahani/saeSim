@@ -37,3 +37,13 @@ test_that("Id construction for not simulated data.frames", {
   expect_equal(length(resultList), 10)
   expect_true(all(names(resultList[[2]]) %in% c("idD", "idU", "idR", "simName", "x", "id")))
 })
+
+test_that("sim_setup sorts its content", {
+  setup <- sim_setup(sim_base_standard(3, 3), sim_agg(), sim_sample(), sim_n(), sim_N(), sim_gen_re(), sim_gen_fe())
+  expect_true(inherits(setup[[1]], "sim_gen"))
+  expect_true(inherits(setup[[2]], "sim_gen"))
+  expect_true(inherits(setup[[3]], "sim_cpopulation"))
+  expect_true(inherits(setup[[4]], "sim_sample"))
+  expect_true(inherits(setup[[5]], "sim_csample"))
+  expect_true(inherits(setup[[6]], "sim_agg"))
+})
