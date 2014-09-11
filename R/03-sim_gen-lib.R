@@ -32,8 +32,6 @@
 #' sim_base_standard() %&% sim_gen_fe() %&% sim_gen_e(gen_myVar)
 sim_gen <- function(generator, const = 0, slope = 1, name = "variableName", 
                     nCont = NULL, level = NULL, fixed = NULL) {
-  # if all contamination parameter are NULL construct a 'sim_gen' object, sim_genCont
-  # otherwise
   if(any(c(is.null(nCont), is.null(level), is.null(fixed)))) {
     new("sim_gen", fun = generator, const = const, slope = slope, name = name)
   } else {

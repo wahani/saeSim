@@ -30,11 +30,12 @@ sim.sim_base <- function(x, ...) {
   setup <- sim_setup(x, ..., R = 1, simName = "")
   
   # Generating pop
-  results <- lapply(setup[is.sim_gen_virtual(setup) | is.sim_genData(setup)], sim)
-  out <- S3Part(Reduce(add, results), TRUE)
+  results <- lapply(setup[is.sim_gen(setup) | is.sim_genData(setup)], sim)
+  resultsCont <- lapply(setup[is.sim_genCont(setup)], sim)
+  out <- S3Part(Reduce(add, c(results, resultsCont)), TRUE)
   
   # Calculating stuff:
-  for (smstp in setup[!(is.sim_gen_virtual(setup) | is.sim_genData(setup))])
+  for (smstp in setup[!(is.sim_gen(setup) | is.sim_genData(setup) | is.sim_genCont(setup))])
     out <- sim(smstp, out)
     
   # Return:

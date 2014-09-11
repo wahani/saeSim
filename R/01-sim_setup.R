@@ -52,7 +52,8 @@ sim_setup.sim_base <- function(base, ..., R = 1, simName = "") {
         x
       })
         
-    smstp_objects <- smstp_objects[c(which(is.sim_gen_virtual(smstp_objects) | is.sim_genData(smstp_objects)),
+    smstp_objects <- smstp_objects[c(which(is.sim_gen(smstp_objects) | is.sim_genData(smstp_objects)),
+                                     which(is.sim_genCont(smstp_objects)),
                                      which(is.sim_cpopulation(smstp_objects)),
                                      which(is.sim_sample(smstp_objects)),
                                      which(is.sim_csample(smstp_objects)),
