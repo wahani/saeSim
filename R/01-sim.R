@@ -28,14 +28,11 @@ sim.sim_base <- function(x, ...) {
   
   # Preparing:
   setup <- sim_setup(x, ..., R = 1, simName = "")
-  
+    
   # Generating pop
-  results <- lapply(setup[is.sim_gen(setup) | is.sim_genData(setup)], sim)
-  resultsCont <- lapply(setup[is.sim_genCont(setup)], sim)
-  out <- S3Part(Reduce(add, c(results, resultsCont)), TRUE)
+  out <- make_id(setup[[1]]@nDomains, setup[[1]]@nUnits)
   
-  # Calculating stuff:
-  for (smstp in setup[!(is.sim_gen(setup) | is.sim_genData(setup) | is.sim_genCont(setup))])
+  for (smstp in setup)
     out <- sim(smstp, out)
     
   # Return:
@@ -89,26 +86,34 @@ sim.sim_setup <- function(x, ..., R = NULL, simName = NULL, parallel = FALSE, pa
 
 #' @rdname sim-methods
 #' @export
-sim.sim_gen <- function(x, ...) {
-  dat <- x@fun(x@nDomains, x@nUnits, x@name)
-  dat$y <- x@const + x@slope * dat[[x@name]]
-  new("sim_rs", dat)
+sim.sim_gen <- function(x, dat, ...) {
+  x@fun(dat)
 }
 
 #' @rdname sim-methods
 #' @export
-sim.sim_genCont <- function(x, ...) {
-  dat <- x@fun(x@nDomains, x@nUnits, x@name)
+sim.sim_genCont <- function(x, dat, ...) {
+  genDat <- x@fun(dat)
   nCont <- if(length(x@nCont) > 1) as.list(as.integer(x@nCont)) else 
     if(x@nCont >= 1) as.integer(x@nCont) else x@nCont 
-  dat <- select_cont(dat, nCont, x@level, x@fixed)
-  dat$y <- x@const + x@slope * dat[[x@name]]
-  new("sim_rs_c", dat)
+  
+  genDat <- select_cont(genDat, nCont, x@level, x@fixed)
+  
+  # gleiche namen
+  replace_cont <- function(var1, var2) ifelse(var1 == 0, var2, var1)
+  replace_contData <- function(contData, dat) {
+    vars <- names(contData)[names(contData) %in% names(dat)]
+    for(var in vars) contData[var] <- replace_cont(contData[[var]], dat[[var]])
+    contData
+  }
+  
+  replace_contData(genDat, dat)
+    
 }
 
 #' @rdname sim-methods
 #' @export
-sim.sim_genData <- function(x, ...) {
-  dat <- make_id(x@nDomains, x@nUnits)
-  new("sim_rs", cbind(dat, x@fun()))
+sim.sim_genData <- function(x, dat, ...) {
+  idDat <- make_id(x@nDomains, x@nUnits)
+  cbind(idDat, x@fun()) 
 }

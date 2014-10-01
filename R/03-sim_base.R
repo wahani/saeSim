@@ -53,27 +53,27 @@ sim_base_data <- function(data, domainID) {
 #' sim_lmmc()
 sim_lm <- function() {
   sim_base_standard(nDomains = 100, nUnits = 100) %&% 
-    sim_gen_fe(gen_norm(0, 4), const = 100, slope = 1, name = "x") %&% 
-    sim_gen_e(gen_norm(0, 4), name = "e")
+    sim_gen_fe(gen_norm(0, 4, name = "x"), const = 100, slope = 1) %&% 
+    sim_gen_e(gen_norm(0, 4, name = "e"))
 }
 
 #' @rdname sim_setup_preconfigured
 #' @export
 sim_lmm <- function() {
-  sim_lm() %&% sim_gen_re(gen_v_norm(0, 1), name = "v")
+  sim_lm() %&% sim_gen_re(gen_v_norm(0, 1, name = "v"))
 }
 
 #' @rdname sim_setup_preconfigured
 #' @export
 sim_lmc <- function() {
-  sim_lm() %&% sim_gen_ec(gen_norm(mean = 0, sd = 150), nCont = 0.05,
-                          level = "unit", fixed = TRUE, name = "e")
+  sim_lm() %&% sim_gen_ec(gen_norm(mean = 0, sd = 150, name = "e"), nCont = 0.05,
+                          level = "unit", fixed = TRUE)
 }
 
 #' @rdname sim_setup_preconfigured
 #' @export
 sim_lmmc <- function() {
-  sim_lmc() %&% sim_gen_re(gen_v_norm(0, 1), name = "v") %&% 
-    sim_gen_rec(gen_v_norm(mean = 0, sd = 40), nCont = 0.05,
-                level = "area", fixed = TRUE, name = "v")
+  sim_lmc() %&% sim_gen_re(gen_v_norm(0, 1, name = "v")) %&% 
+    sim_gen_rec(gen_v_norm(mean = 0, sd = 40, name = "v"), nCont = 0.05,
+                level = "area", fixed = TRUE)
 }

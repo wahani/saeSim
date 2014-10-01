@@ -30,12 +30,12 @@
 #' }
 #' 
 #' sim_base_standard() %&% sim_gen_fe() %&% sim_gen_e(gen_myVar)
-sim_gen <- function(generator, const = 0, slope = 1, name = "variableName", 
+sim_gen <- function(generator, const = 0, slope = 1, 
                     nCont = NULL, level = NULL, fixed = NULL) {
   if(any(c(is.null(nCont), is.null(level), is.null(fixed)))) {
-    new("sim_gen", fun = generator, const = const, slope = slope, name = name)
+    new("sim_gen", fun = generator, const = const, slope = slope)
   } else {
-    new("sim_genCont", fun = generator, const = const, slope = slope, name = name,
+    new("sim_genCont", fun = generator, const = const, slope = slope,
         nCont = nCont, level = level, fixed = fixed)
   }
   
@@ -44,35 +44,35 @@ sim_gen <- function(generator, const = 0, slope = 1, name = "variableName",
 
 #' @rdname sim_gen
 #' @export
-sim_gen_fe <- function(generator = gen_norm(0, 4), const = 100, slope = 1, name = "x") {
-  sim_gen(generator = generator, slope = slope, const = const, name = name)  
+sim_gen_fe <- function(generator = gen_norm(0, 4, name = "x"), const = 100, slope = 1) {
+  sim_gen(generator = generator, slope = slope, const = const)  
 }
 
 #' @rdname sim_gen
 #' @export
-sim_gen_e <- function(generator = gen_norm(0, 4), name = "e") {
-  sim_gen(generator = generator, name = name, slope = 1, const = 0)
+sim_gen_e <- function(generator = gen_norm(0, 4, name = "e")) {
+  sim_gen(generator = generator, slope = 1, const = 0)
 }
 
 #' @rdname sim_gen
 #' @export
-sim_gen_ec <- function(generator = gen_norm(mean=0, sd=150), nCont = 0.05, 
-                       level = "unit", fixed = TRUE, name = "e") {
+sim_gen_ec <- function(generator = gen_norm(mean=0, sd=150, name = "e"), nCont = 0.05, 
+                       level = "unit", fixed = TRUE) {
   sim_gen(generator = generator, slope = 1, const = 0, nCont = nCont, 
-          level = level, fixed = fixed, name = name)
+          level = level, fixed = fixed)
 }
 
 #' @rdname sim_gen
 #' @export
 # wrapper:
-sim_gen_re <- function(generator = gen_v_norm(), name = "v") {
-  sim_gen_e(generator, name)
+sim_gen_re <- function(generator = gen_v_norm(name = "v")) {
+  sim_gen_e(generator)
 }
 
 #' @rdname sim_gen
 #' @export
-sim_gen_rec <- function(generator = gen_v_norm(mean=0, sd=40), nCont = 0.05, level = "area", fixed = TRUE, name = "v") {
-  sim_gen_ec(generator, nCont, level, fixed, name)
+sim_gen_rec <- function(generator = gen_v_norm(mean=0, sd=40, name = "v"), nCont = 0.05, level = "area", fixed = TRUE) {
+  sim_gen_ec(generator, nCont, level, fixed)
 }
 
 sim_gen_data <- function(loadData) {

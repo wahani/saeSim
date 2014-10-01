@@ -32,24 +32,22 @@
 #'  dat2 <- sim(sim_base_standard(),
 #'              sim_gen_e())
 #'  all.equal(dat1, dat2)
-gen_norm <- function(mean = 0, sd = 1) {
-  desc <- paste("~ N(", mean, ", ", sd^2, ") unit-level", sep = "")
-  function(nDomains, nUnits, name) {
-    idD <- make_id(nDomains, nUnits)
-    idD[name] <- rnorm(nrow(idD), mean = mean, sd = sd)
-    idD
+gen_norm <- function(mean = 0, sd = 1, name = "e") {
+  desc <- paste(name, " ~ N(", mean, ", ", sd^2, ") unit-level", sep = "")
+  function(dat) {
+    dat[name] <- rnorm(nrow(dat), mean = mean, sd = sd) + if(exists(name, dat)) dat[[name]] else 0
+    dat
   }
 }
 
 #' @rdname generators
 #' @export
-gen_v_norm <- function(mean = 0, sd = 1) {
-  desc <- paste("~ N(", mean, ", ", sd^2, ") domain-level", sep = "")
-  function(nDomains, nUnits, name) {    
-    idD <- make_id(nDomains, nUnits)
-    tmp <- rnorm(nDomains, mean = mean, sd = sd)
-    idD[name] <- tmp[idD$idD]
-    idD
+gen_v_norm <- function(mean = 0, sd = 1, name = "v") {
+  desc <- paste(name, " ~ N(", mean, ", ", sd^2, ") domain-level", sep = "")
+  function(dat) {
+    tmp <- rnorm(length(unique(dat$idD)), mean = mean, sd = sd)
+    dat[name] <- tmp[dat$idD] + if(exists(name, dat)) dat[[name]] else 0
+    dat
   }
 }
 
@@ -57,11 +55,10 @@ gen_v_norm <- function(mean = 0, sd = 1) {
 #' @importFrom spdep cell2nb nb2mat
 #' @rdname generators
 #' @export
-gen_v_sar <- function(mean = 0, sd = 1, rho = 0.5, type = "rook") {
-  desc <- paste("~ N(", mean, ", SAR1(", type, ")(", rho, ", ", sd^2, ") domain-level", sep = "")
-  function(nDomains, nUnits, name) {    
-    idD <- make_id(nDomains, nUnits)
-    
+gen_v_sar <- function(mean = 0, sd = 1, rho = 0.5, type = "rook", name) {
+  desc <- paste(name, " ~ N(", mean, ", SAR1(", type, ")(", rho, ", ", sd^2, ") domain-level", sep = "")
+  function(dat) {
+    nDomains <- length(unique(dat$idD))
     # Spatial Structure:
     W <- nb2mat(cell2nb(nDomains, 1, type), style = "W")
     identity <- diag(1, nDomains, nDomains)
@@ -71,29 +68,28 @@ gen_v_sar <- function(mean = 0, sd = 1, rho = 0.5, type = "rook") {
     # Drawing the numbers:
     v <- mvrnorm(1, mu = rep(mean, length.out = nDomains), Sigma = sp_var)
         
-    idD[name] <- v[idD$idD]
-    idD
+    dat[name] <- v[dat$idD] + if(exists(name, dat)) dat[[name]] else 0
+    dat
   }
 }
 
 #' @rdname generators
 #' @export
-gen_generic <- function(generator, ..., level = "unit", desc = "F") {
+gen_generic <- function(generator, ..., level = "unit", desc = "F", name) {
   genArgs <- list(...)
   force(generator)
   stopifnot(level %in% c("unit", "domain"))
-  desc <- paste("~ ", desc, "(", paste(..., sep = ", "), ") ", level, "-level", sep = "")
+  desc <- paste(name, "~ ", desc, "(", paste(..., sep = ", "), ") ", level, "-level", sep = "")
   
-  gen_unit <- function(nDomains, nUnits, name) {
-    dat <- make_id(nDomains, nUnits)
-    dat[name] <- do.call(generator, c(nrow(dat), genArgs))
+  gen_unit <- function(dat) {
+    dat[name] <- do.call(generator, c(nrow(dat), genArgs)) + if(exists(name, dat)) dat[[name]] else 0
     dat
   }
   
-  gen_domain <- function(nDomains, nUnits, name) {    
-    dat <- make_id(nDomains, nUnits)
+  gen_domain <- function(dat) {
+    nDomains <- length(unique(dat$idD))
     tmp <- do.call(generator, c(nDomains, genArgs))
-    dat[name] <- tmp[dat$idD]
+    dat[name] <- tmp[dat$idD] + if(exists(name, dat)) dat[[name]] else 0
     dat
   }
   
