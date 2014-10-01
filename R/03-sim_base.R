@@ -53,7 +53,7 @@ sim_base_data <- function(data, domainID) {
 #' sim_lmmc()
 sim_lm <- function() {
   sim_base_standard(nDomains = 100, nUnits = 100) %&% 
-    sim_gen_fe(gen_norm(0, 4, name = "x"), const = 100, slope = 1) %&% 
+    sim_gen_fe(gen_norm(0, 4, name = "x")) %&% 
     sim_gen_e(gen_norm(0, 4, name = "e"))
 }
 

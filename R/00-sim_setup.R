@@ -1,7 +1,3 @@
-setClass("sim_rs", contains = "data.frame")
-
-setClass("sim_rs_c", contains = "sim_rs")
-
 setClass("sim_base", contains = "list")
 
 setClass("sim_setup", 

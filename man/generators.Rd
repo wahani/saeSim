@@ -6,13 +6,13 @@
 \alias{gen_v_sar}
 \title{Generator functions}
 \usage{
-gen_norm(mean = 0, sd = 1)
+gen_norm(mean = 0, sd = 1, name = "e")
 
-gen_v_norm(mean = 0, sd = 1)
+gen_v_norm(mean = 0, sd = 1, name = "v")
 
-gen_v_sar(mean = 0, sd = 1, rho = 0.5, type = "rook")
+gen_v_sar(mean = 0, sd = 1, rho = 0.5, type = "rook", name)
 
-gen_generic(generator, ..., level = "unit", desc = "F")
+gen_generic(generator, ..., level = "unit", desc = "F", name)
 }
 \arguments{
 \item{mean}{the mean passed to the random number generator, for example \code{\link{rnorm}}.}

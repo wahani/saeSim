@@ -3,6 +3,7 @@
 #' @import methods
 #' @import ggplot2
 #' @import parallel
+#' @export %>%
 
 ################################################################################
 
@@ -30,15 +31,7 @@ setClass("sim_id_virtual",
 setClass("sim_sample", contains = "sim_id_virtual")
 
 setClass("sim_gen_virtual",
-         slots = c(const = "numeric", slope = "numeric", name = "character"),
-         contains = c("sim_id_virtual", "VIRTUAL"),
-         validity = function(object) {
-           if(length(slot(object, "const")) != 1) 
-             return("The argument 'const' is expected to be a scalar!")
-           if(length(slot(object, "slope")) != 1) 
-             return("The argument 'slope' is expected to be a scalar!")
-           TRUE
-         })
+         contains = c("sim_id_virtual", "VIRTUAL"))
 
 ################################################################################
 

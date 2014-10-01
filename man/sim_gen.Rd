@@ -8,28 +8,22 @@
 \alias{sim_gen_rec}
 \title{Generation component}
 \usage{
-sim_gen(generator, const = 0, slope = 1, name = "variableName",
-  nCont = NULL, level = NULL, fixed = NULL)
+sim_gen(generator, nCont = NULL, level = NULL, fixed = NULL)
 
-sim_gen_fe(generator = gen_norm(0, 4), const = 100, slope = 1,
-  name = "x")
+sim_gen_fe(generator = gen_norm(0, 4, name = "x"))
 
-sim_gen_e(generator = gen_norm(0, 4), name = "e")
+sim_gen_e(generator = gen_norm(0, 4, name = "e"))
 
-sim_gen_ec(generator = gen_norm(mean = 0, sd = 150), nCont = 0.05,
-  level = "unit", fixed = TRUE, name = "e")
+sim_gen_ec(generator = gen_norm(mean = 0, sd = 150, name = "e"),
+  nCont = 0.05, level = "unit", fixed = TRUE)
 
-sim_gen_re(generator = gen_v_norm(), name = "v")
+sim_gen_re(generator = gen_v_norm(name = "v"))
 
-sim_gen_rec(generator = gen_v_norm(mean = 0, sd = 40), nCont = 0.05,
-  level = "area", fixed = TRUE, name = "v")
+sim_gen_rec(generator = gen_v_norm(mean = 0, sd = 40, name = "v"),
+  nCont = 0.05, level = "area", fixed = TRUE)
 }
 \arguments{
 \item{generator}{generator function used to generate random numbers.}
-
-\item{const}{constant/intercept in a fixed effects part.}
-
-\item{slope}{slope in a fixed effects part.}
 
 \item{name}{variable name used in the resulting \code{data.frame}.}
 

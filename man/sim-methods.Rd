@@ -14,11 +14,11 @@
 
 \method{sim}{sim_sample}(x, dat, ...)
 
-\method{sim}{sim_gen}(x, ...)
+\method{sim}{sim_gen}(x, dat, ...)
 
-\method{sim}{sim_genCont}(x, ...)
+\method{sim}{sim_genCont}(x, dat, ...)
 
-\method{sim}{sim_genData}(x, ...)
+\method{sim}{sim_genData}(x, dat, ...)
 }
 \arguments{
 \item{dat}{data.frame}

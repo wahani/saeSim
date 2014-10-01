@@ -2,7 +2,7 @@ context("sim")
 test_that("Method for base", {
   dat <- sim(sim_base_standard(nDomains=3, nUnits = 4), 
              # Fixed-Effects: drawn from N(50, 20^2), b0 = 0, slope = 10
-             sim_gen_fe(generator = gen_norm(mean=50, sd=20, name = "x"), const=0, slope = 10), 
+             sim_gen_fe(generator = gen_norm(mean=50, sd=20, name = "x")), 
              # Model-Error: e ~ N(0, 1)
              sim_gen_e(generator=gen_norm(0, 1)),
              # Random-Intercept: v ~ N(0, 1)
@@ -23,7 +23,7 @@ test_that("Method for base", {
   )
   
   expect_that(nrow(dat), equals(12))
-  expect_that(ncol(dat), equals(8))
+  expect_that(ncol(dat), equals(7))
   expect_that(all(c("idU", "idD") %in% names(dat)), is_true())
   
 })
