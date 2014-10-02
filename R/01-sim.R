@@ -30,7 +30,7 @@ sim.sim_base <- function(x, ...) {
   setup <- sim_setup(x, ..., R = 1, simName = "")
     
   # Generating pop
-  out <- make_id(setup[[1]]@nDomains, setup[[1]]@nUnits)
+  out <- make_id(setup@base[[1]], setup@base[[2]])
   
   for (smstp in setup)
     out <- sim(smstp, out)

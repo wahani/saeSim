@@ -1,10 +1,10 @@
 context("sim_agg")
 
 test_that("Basic functionality", {
-  setup <- sim_setup(sim_base_standard(), R=1) %&% sim_gen_e() %&% sim_gen_fe() %&% 
-    sim_calc(calc_var("y", funList=list("length" = length), newName="N")) %&% sim_agg() %&%
+  setup <- sim_setup(sim_base_standard(), R=1) %>% sim_gen_e() %>% sim_gen_fe() %>% 
+    sim_calc(calc_var("y", funList=list("length" = length), newName="N")) %>% sim_agg() %>%
     sim_calc(calc_var("y", funList = list("make_factor" = function(x) factor(letters[1:2]), 
-                                          "make_character" = function(x) letters[1:2]))) %&%
+                                          "make_character" = function(x) letters[1:2]))) %>%
     sim_resp(resp_eq(y = 100 + x + e))
   
   dat <- sim(setup, R = 1)[[1]]
@@ -27,10 +27,9 @@ test_that("Basic functionality", {
 
 
 test_that("Attributes are preserved", {
-  setup <- sim_setup(sim_base_standard(), R=1) %&% sim_gen_e() %&% sim_gen_fe() %&% 
-    sim_calc(calc_var("y", funList=list("length" = length), newName="N")) %&% sim_agg() %&%
-    sim_calc(calc_var("y", funList = list("make_factor" = function(x) factor(letters[1:2]), 
-                                          "make_character" = function(x) letters[1:2]))) %&%  
+  setup <- sim_base_standard() %>% sim_gen_e() %>% sim_gen_fe() %>% 
+    sim_resp(resp_eq(y = 100 + x + e)) %>%
+    sim_agg() %>%
     sim_calc(function(dat) {attr(dat, "x") <- 2; dat})
   
   setup %>% as.data.frame %>% attr("x") %>% expect_equal(2)

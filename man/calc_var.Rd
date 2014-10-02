@@ -21,7 +21,7 @@ calc_var(varName = "y", funList = list(mean = mean, var = var),
 This function is intended to be used with \code{\link{sim_calc}} and not interactively. It can be used to calculate statistics for gouping variables in the data.
 }
 \examples{
-sim_base_standard() \%&\% sim_gen_fe() \%&\% sim_gen_e() \%&\% sim_calc(calc_var())
+sim_base_standard() \%>\% sim_gen_fe() \%>\% sim_gen_e() \%>\% sim_calc(calc_var())
 }
 \seealso{
 \code{\link{sim_calc}}

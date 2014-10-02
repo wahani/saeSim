@@ -42,7 +42,7 @@ These functions are intended to be used with \code{\link{sim_gen}} and not inter
  \code{gen_generic} can be used if your world is not normal. You can specify 'any' function as generator, like \code{\link{rnorm}}. Arguments in \code{...} are matched be name or position. The first argument of \code{generator} is expected to be the number of random numbers (not necessarily named \code{n}) and need not to be specified.
 }
 \examples{
-sim_base_standard() \%&\% sim_gen_fe() \%&\% sim_gen_e() \%&\% sim_gen_re() \%&\% sim_gen_re(gen_v_sar())
+sim_base_standard() \%>\% sim_gen_fe() \%>\% sim_gen_e() \%>\% sim_gen_re() \%>\% sim_gen_re(gen_v_sar())
 
  # Generic interface
  set.seed(1)

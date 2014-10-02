@@ -22,10 +22,10 @@
 #' \dontrun{
 #' # plot:
 #' plot(setup)
-#' plot(setup %&% sim_gen_ec() %&% sim_agg())
+#' plot(setup %>% sim_gen_ec() %>% sim_agg())
 #' # autoplot for the ggplot2 user:
 #' autoplot(setup)
-#' autoplot(setup %&% sim_gen_ec())
+#' autoplot(setup %>% sim_gen_ec())
 #' 
 #' # Start a simulation:
 #' resultList <- sim(setup)
@@ -43,6 +43,8 @@ sim_setup.sim_base <- function(base, ..., R = 1, simName = "") {
   } else {
     # Taking care of the smstp-family:
     if (class(dots[[1]]) == "list") dots <- dots[[1]]
+    if (length(dots) == 0) return(new("sim_setup", base = base, R = R, 
+                                      simName = simName, list()))
     
     smstp_objects <- dots
     smstp_objects[is.sim_id_virtual(dots)] <- 
@@ -52,7 +54,8 @@ sim_setup.sim_base <- function(base, ..., R = 1, simName = "") {
         x
       })
         
-    smstp_objects <- smstp_objects[c(which(is.sim_gen(smstp_objects) | is.sim_genData(smstp_objects)),
+    smstp_objects <- smstp_objects[c(which(is.sim_genData(smstp_objects)),
+                                     which(is.sim_gen(smstp_objects)),
                                      which(is.sim_genCont(smstp_objects)),
                                      which(is.sim_resp(smstp_objects)),
                                      which(is.sim_cpopulation(smstp_objects)),
@@ -72,8 +75,7 @@ sim_setup.sim_base <- function(base, ..., R = 1, simName = "") {
 #' @export
 sim_setup.sim_setup <- function(base, ..., R = base@R, simName = base@simName) {
   smstp_objects <- c(list(...), S3Part(base, strictS3=TRUE))
-  new("sim_setup", base = base@base, R = R, simName = simName, 
-      smstp_objects)
+  sim_setup(base = base@base, R = R, simName = simName, smstp_objects)
 }
 
 #' @inheritParams sim_base_data

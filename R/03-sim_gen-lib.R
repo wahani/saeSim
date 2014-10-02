@@ -16,9 +16,9 @@
 #' @seealso \code{\link{gen_norm}}, \code{\link{gen_v_norm}}, \code{\link{gen_v_sar}}, \code{\link{sim_agg}}, \code{\link{sim_calc}}, \code{\link{sim_sample}}
 #' @examples
 #' # Data setup for a mixed model
-#' sim_base_standard() %&% sim_gen_fe() %&% sim_gen_re() %&% sim_gen_e()
+#' sim_base_standard() %>% sim_gen_fe() %>% sim_gen_re() %>% sim_gen_e()
 #' # Adding contamination in the model error
-#' sim_base_standard() %&% sim_gen_fe() %&% sim_gen_re() %&% sim_gen_e() %&% sim_gen_ec()
+#' sim_base_standard() %>% sim_gen_fe() %>% sim_gen_re() %>% sim_gen_e() %>% sim_gen_ec()
 #' 
 #' # Simple user defined generator:
 #' gen_myVar <- function(nDomains, nUnits, name) {
@@ -27,52 +27,56 @@
 #'   dat
 #' }
 #' 
-#' sim_base_standard() %&% sim_gen_fe() %&% sim_gen_e(gen_myVar)
-sim_gen <- function(generator, 
+#' sim_base_standard() %>% sim_gen_fe() %>% sim_gen_e(gen_myVar)
+sim_gen <- function(simSetup, generator, 
                     nCont = NULL, level = NULL, fixed = NULL) {
-  if(any(c(is.null(nCont), is.null(level), is.null(fixed)))) {
+  obj <- if(any(c(is.null(nCont), is.null(level), is.null(fixed)))) {
     new("sim_gen", fun = generator)
   } else {
     new("sim_genCont", fun = generator,
         nCont = nCont, level = level, fixed = fixed)
   }
   
+  sim_setup(simSetup, obj)
+  
 }
 
 
 #' @rdname sim_gen
 #' @export
-sim_gen_fe <- function(generator = gen_norm(0, 4, name = "x")) {
-  sim_gen(generator = generator)  
+sim_gen_fe <- function(simSetup, generator = gen_norm(0, 4, name = "x")) {
+  sim_gen(simSetup, generator = generator)  
 }
 
 #' @rdname sim_gen
 #' @export
-sim_gen_e <- function(generator = gen_norm(0, 4, name = "e")) {
-  sim_gen(generator = generator)
+sim_gen_e <- function(simSetup, generator = gen_norm(0, 4, name = "e")) {
+  sim_gen(simSetup, generator = generator)
 }
 
 #' @rdname sim_gen
 #' @export
-sim_gen_ec <- function(generator = gen_norm(mean=0, sd=150, name = "e"), 
+sim_gen_ec <- function(simSetup,
+                       generator = gen_norm(mean=0, sd=150, name = "e"), 
                        nCont = 0.05, level = "unit", fixed = TRUE) {
-  sim_gen(generator = generator, nCont = nCont, level = level, fixed = fixed)
+  sim_gen(simSetup, generator = generator, nCont = nCont, level = level, fixed = fixed)
 }
 
 #' @rdname sim_gen
 #' @export
 # wrapper:
-sim_gen_re <- function(generator = gen_v_norm(name = "v")) {
-  sim_gen_e(generator)
+sim_gen_re <- function(simSetup, generator = gen_v_norm(name = "v")) {
+  sim_gen_e(simSetup, generator)
 }
 
 #' @rdname sim_gen
 #' @export
-sim_gen_rec <- function(generator = gen_v_norm(mean=0, sd=40, name = "v"), 
+sim_gen_rec <- function(simSetup,
+                        generator = gen_v_norm(mean=0, sd=40, name = "v"), 
                         nCont = 0.05, level = "area", fixed = TRUE) {
-  sim_gen_ec(generator, nCont, level, fixed)
+  sim_gen_ec(simSetup, generator, nCont, level, fixed)
 }
 
-sim_gen_data <- function(loadData) {
-  new("sim_genData", fun = loadData)
+sim_gen_data <- function(simSetup, loadData) {
+  sim_setup(simSetup, new("sim_genData", fun = loadData))
 }

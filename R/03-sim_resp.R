@@ -1,4 +1,4 @@
 #' @export
-sim_resp <- function(respFun = resp_eq()) {
-  new("sim_resp", fun = respFun)
+sim_resp <- function(simSetup, respFun = resp_eq()) {
+  sim_setup(simSetup, new("sim_resp", fun = respFun))
 }

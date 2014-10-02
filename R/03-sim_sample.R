@@ -11,17 +11,17 @@
 #' @export
 #' @examples
 #' # Simple random sample - 5% sample:
-#' sim_lm() %&% sim_sample(sample_srs())
+#' sim_lm() %>% sim_sample(sample_srs())
 #' 
 #' # Simple random sampling proportional to size - 5% in each domain:
-#' sim_lm() %&% sim_sample(sample_csrs())
+#' sim_lm() %>% sim_sample(sample_csrs())
 #' 
 #' # User defined sampling function:
 #' sample_mySampleFun <- function(dat) {
 #'   dat[sample.int(nrow(dat), 10), ]
 #' }
 #' 
-#' sim_lm() %&% sim_sample(sample_mySampleFun)
-sim_sample <- function(smplFun = sample_csrs(size=5L)) {
-  new("sim_sample", fun = smplFun)
+#' sim_lm() %>% sim_sample(sample_mySampleFun)
+sim_sample <- function(simSetup, smplFun = sample_csrs(size=5L)) {
+  sim_setup(simSetup, new("sim_sample", fun = smplFun))
 }

@@ -15,7 +15,7 @@
 #' @rdname sim_calc
 #' @examples
 #' # Standard behavior
-#' sim_base_standard() %&% sim_gen_fe() %&% sim_calc()
+#' sim_base_standard() %>% sim_gen_fe() %>% sim_calc()
 #' 
 #' # Custom data modifications
 #' ## Add predicted values of a linear model
@@ -26,33 +26,33 @@
 #'   dat
 #' }
 #'
-#' sim_base_standard() %&% sim_gen_fe() %&% sim_gen_e() %&% sim_calc(calc_lm)
-sim_calc <- function(calcFun = calc_var(), level = "population") {
+#' sim_base_standard() %>% sim_gen_fe() %>% sim_gen_e() %>% sim_calc(calc_lm)
+sim_calc <- function(simSetup, calcFun = calc_var(), level = "population") {
   if(!(level %in% c("population", "sample", "agg"))) 
     stop("This level is not supported, check spelling.")
-  new(paste("sim_c", level, sep = ""), fun = calcFun)
+  sim_setup(simSetup, new(paste("sim_c", level, sep = ""), fun = calcFun))
 }
 
 #' @export
 #' @rdname sim_calc
-sim_n <- function() {
-  sim_calc(calc_var("y", funList=list(length), newName="n"), level="sample")
+sim_n <- function(simSetup) {
+  sim_calc(simSetup, calc_var("y", funList=list(length), newName="n"), level="sample")
 }
 
 #' @export
 #' @rdname sim_calc
-sim_N <- function() {
-  sim_calc(calc_var("y", funList=list(length), newName="N"), level="population")
+sim_N <- function(simSetup) {
+  sim_calc(simSetup, calc_var("y", funList=list(length), newName="N"), level="population")
 }
 
 #' @export
 #' @rdname sim_calc
-sim_popMean <- function(exclude = NULL) {
-  sim_calc(calc_var("y", funList=list(mean), exclude, newName="popMean"), level="population")
+sim_popMean <- function(simSetup, exclude = NULL) {
+  sim_calc(simSetup, calc_var("y", funList=list(mean), exclude, newName="popMean"), level="population")
 }
 
 #' @export
 #' @rdname sim_calc
-sim_popVar <- function(exclude = NULL) {
-  sim_calc(calc_var("y", funList=list(var), exclude, newName = "popVar"), level="population")
+sim_popVar <- function(simSetup, exclude = NULL) {
+  sim_calc(simSetup, calc_var("y", funList=list(var), exclude, newName = "popVar"), level="population")
 }

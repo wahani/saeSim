@@ -16,7 +16,7 @@ sample_csrs(size = 0.05, clusterVar = "idD", ...)
 This function is intended to be used with \code{\link{sim_sample}} and not interactively. \code{sample_csrs} will draw with simple random sampling in each cluster. Clusters are identified using the variable names given by \code{clusterVar}.
 }
 \examples{
-sim_lm() \%&\% sim_sample(sample_csrs())
+sim_lm() \%>\% sim_sample(sample_csrs())
 }
 \seealso{
 \code{\link{sample_srs}}, \code{\link{sample_sampleWrapper}}, \code{\link{sim_sample}}, \code{\link{sample.int}}

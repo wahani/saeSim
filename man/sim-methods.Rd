@@ -5,6 +5,7 @@
 \alias{sim.sim_gen}
 \alias{sim.sim_genCont}
 \alias{sim.sim_genData}
+\alias{sim.sim_resp}
 \alias{sim.sim_sample}
 \title{Sim-methods}
 \usage{
@@ -15,6 +16,8 @@
 \method{sim}{sim_sample}(x, dat, ...)
 
 \method{sim}{sim_gen}(x, dat, ...)
+
+\method{sim}{sim_resp}(x, dat, ...)
 
 \method{sim}{sim_genCont}(x, dat, ...)
 
