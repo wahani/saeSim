@@ -1,5 +1,6 @@
 is.sim_gen_virtual <- function(x) sapply(x, inherits, what = "sim_gen_virtual")
 is.sim_gen <- function(x) sapply(x, inherits, what = "sim_gen")
+is.sim_resp <- function(x) sapply(x, inherits, what = "sim_resp")
 is.sim_sample <- function(x) sapply(x, inherits, what = "sim_sample")
 is.sim_cpopulation <- function(x) sapply(x, inherits, what = "sim_cpopulation")
 is.sim_csample <- function(x) sapply(x, inherits, what = "sim_csample")

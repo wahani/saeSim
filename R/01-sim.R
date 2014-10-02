@@ -92,6 +92,12 @@ sim.sim_gen <- function(x, dat, ...) {
 
 #' @rdname sim-methods
 #' @export
+sim.sim_resp <- function(x, dat, ...) {
+  x@fun(dat)
+}
+
+#' @rdname sim-methods
+#' @export
 sim.sim_genCont <- function(x, dat, ...) {
   genDat <- x@fun(dat)
   nCont <- if(length(x@nCont) > 1) as.list(as.integer(x@nCont)) else 
