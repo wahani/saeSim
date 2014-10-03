@@ -1,3 +1,9 @@
+Version 0.5.0
+
+- R, the number of reps, is not an argument of sim_setup anymore but only of sim
+- Generator functions are now functions which f: data.frame -> data.frame
+- The response is not generated automatically but using the sim_resp component
+
 Version 0.4.7
 
 - Preserve attributes of data in sample_* and agg_standard
