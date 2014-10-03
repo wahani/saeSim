@@ -34,7 +34,7 @@ test_that("Id construction for not simulated data.frames", {
   dat <- data.frame(id = 1:10, x = rnorm(10))
   dat1 <- dat %>% sim_base_data("id") %>% as.data.frame
   dat2 <- dat %>% sim_setup(domainID = "id") %>% as.data.frame
-  resultList <- sim_setup(dat, R = 10, simName = "testthat", domainID = "id") %>% sim
+  resultList <- sim_setup(dat, simName = "testthat", domainID = "id") %>% sim(R = 10)
   
   expect_equal(dat1, dat2)
   expect_equal(length(resultList), 10)

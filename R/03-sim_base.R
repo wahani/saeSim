@@ -13,7 +13,7 @@
 #' sim_base_standard() %>% sim_gen_fe() %>% sim_gen_e()
 sim_base_standard <- function(nDomains = 100, nUnits = 100) {
   base <- new("sim_base", list(nDomains = nDomains, nUnits = nUnits))
-  new("sim_setup", base = base, R = 1, simName = "")
+  new("sim_setup", base = base, simName = "")
 }
 
 #' Construct a design-based set-up

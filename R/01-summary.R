@@ -13,7 +13,7 @@
 summary.sim_setup <- function(object, ...) {
   componentList <- S3Part(object, strictS3=TRUE)
   cat("General Information about", object@simName, "simulation set-up:\n")
-  cat("# of runs:", object@R, "\n")
+  #cat("# of runs:", object@R, "\n")
   cat("# of sim_gen:", 
       sum(is.sim_gen_virtual(componentList) | is.sim_genData(componentList)),
       "\n")
@@ -31,8 +31,8 @@ summary.sim_setup <- function(object, ...) {
   cat("\nApproximating the expected duration:\n")
   cat("A single run takes ... ")
   tmp <- system.time(dat <- as.data.frame(object))
-  cat(tmp["elapsed"], "seconds.", object@R, "*", tmp["elapsed"], "=", 
-      object@R * tmp["elapsed"], "seconds.\n")
+  cat(tmp["elapsed"], "seconds.", 100, "*", tmp["elapsed"], "=", 
+      100 * tmp["elapsed"], "seconds.\n")
   
   cat("\nStructure of the data:\n")
   print(str(dat))

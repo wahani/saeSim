@@ -27,7 +27,7 @@ sim <- function(x, ...) UseMethod("sim")
 sim.sim_base <- function(x, ...) {
   
   # Preparing:
-  setup <- sim_setup(x, ..., R = 1, simName = "")
+  setup <- sim_setup(x, ..., simName = "")
     
   # Generating pop
   out <- make_id(setup@base[[1]], setup@base[[2]])
@@ -63,8 +63,8 @@ sim.sim_sample <- function(x, dat, ...) {
 
 #' @rdname sim
 #' @export
-sim.sim_setup <- function(x, ..., R = NULL, simName = NULL, parallel = FALSE, path = NULL) {
-  iterateOver <- as.list(1:if(is.null(R)) x@R else R)
+sim.sim_setup <- function(x, ..., R = 1, simName = NULL, parallel = FALSE, path = NULL) {
+  iterateOver <- as.list(1:R)
   iterateFun <- if(parallel) {
     setPTOption(packageToLoad = "saeSim")
     mclapply

@@ -34,25 +34,17 @@ sim_setup <- function(base, ...) UseMethod("sim_setup")
 
 #' @rdname sim_setup
 #' @export
-sim_setup.sim_base <- function(base, ..., R = 1, simName = "") {
+sim_setup.sim_base <- function(base, ..., simName = "") {
   
   dots <- list(...)
   if (length(dots) == 0) {
-    return(new("sim_setup", base = base, R = R, 
-               simName = simName, list()))
+    return(new("sim_setup", base = base, simName = simName, list()))
   } else {
     # Taking care of the smstp-family:
     if (class(dots[[1]]) == "list") dots <- dots[[1]]
-    if (length(dots) == 0) return(new("sim_setup", base = base, R = R, 
-                                      simName = simName, list()))
+    if (length(dots) == 0) return(new("sim_setup", base = base, simName = simName, list()))
     
     smstp_objects <- dots
-    smstp_objects[is.sim_id_virtual(dots)] <- 
-      lapply(dots[is.sim_id_virtual(dots)], function(x) {
-        x@nDomains <- base$nDomains
-        x@nUnits <- base$nUnits
-        x
-      })
         
     smstp_objects <- smstp_objects[c(which(is.sim_genData(smstp_objects)),
                                      which(is.sim_gen(smstp_objects)),
@@ -64,23 +56,21 @@ sim_setup.sim_base <- function(base, ..., R = 1, simName = "") {
                                      which(is.sim_agg(smstp_objects)),
                                      which(is.sim_cagg(smstp_objects)))]
     
-    # Putting everything in a list:
-    return(new("sim_setup", base = base, R = R, 
-               simName = simName, smstp_objects))
+    return(new("sim_setup", base = base, simName = simName, smstp_objects))
   }
   
 }
 
 #' @rdname sim_setup
 #' @export
-sim_setup.sim_setup <- function(base, ..., R = base@R, simName = base@simName) {
+sim_setup.sim_setup <- function(base, ..., simName = base@simName) {
   smstp_objects <- c(list(...), S3Part(base, strictS3=TRUE))
-  sim_setup(base = base@base, R = R, simName = simName, smstp_objects)
+  sim_setup(base = base@base, simName = simName, smstp_objects)
 }
 
 #' @inheritParams sim_base_data
 #' @rdname sim_setup
 #' @export
-sim_setup.data.frame <- function(base, ..., R = 1, simName = "", domainID) {
-  sim_setup(sim_base_data(base, domainID), ..., R = R, simName = simName)
+sim_setup.data.frame <- function(base, ..., simName = "", domainID) {
+  sim_setup(sim_base_data(base, domainID), ..., simName = simName)
 }
