@@ -7,15 +7,15 @@
 \alias{sim_popVar}
 \title{Calculation component}
 \usage{
-sim_calc(calcFun = calc_var(), level = "population")
+sim_calc(simSetup, calcFun = calc_var(), level = "population")
 
-sim_n()
+sim_n(simSetup)
 
-sim_N()
+sim_N(simSetup)
 
-sim_popMean(exclude = NULL)
+sim_popMean(simSetup, exclude = NULL)
 
-sim_popVar(exclude = NULL)
+sim_popVar(simSetup, exclude = NULL)
 }
 \arguments{
 \item{calcFun}{a function used for calculation.}
@@ -34,7 +34,7 @@ Potentially you can define a \code{calcFun} yourself. Take care that it only has
 }
 \examples{
 # Standard behavior
-sim_base_standard() \%>\% sim_gen_fe() \%>\% sim_calc()
+sim_base() \%>\% sim_gen_fe() \%>\% sim_calc()
 
 # Custom data modifications
 ## Add predicted values of a linear model
@@ -45,7 +45,7 @@ calc_lm <- function(dat) {
   dat
 }
 
-sim_base_standard() \%>\% sim_gen_fe() \%>\% sim_gen_e() \%>\% sim_calc(calc_lm)
+sim_base() \%>\% sim_gen_fe() \%>\% sim_gen_e() \%>\% sim_calc(calc_lm)
 }
 \seealso{
 \code{\link{calc_var}}, \code{\link{sim_gen}}, \code{\link{sim_agg}}, \code{\link{sim_sample}}

@@ -1,6 +1,6 @@
 context("sim")
 test_that("Method for base", {
-  dat <- sim_base_standard(nDomains=3, nUnits = 4) %>%
+  dat <- sim_base(base_id(nDomains=3, nUnits = 4)) %>%
     # Fixed-Effects: drawn from N(50, 20^2), b0 = 0, slope = 10
     sim_gen_fe(generator = gen_norm(mean=50, sd=20, name = "x")) %>%
     # Model-Error: e ~ N(0, 1)
@@ -29,9 +29,9 @@ test_that("Method for base", {
 })
 
 test_that("Method for sim_setup", {
-  setup <- sim_base_standard(nDomains = 4, nUnits = 3) %>%
+  setup <- sim_base(base_id(nDomains = 4, nUnits = 3)) %>%
     sim_gen_fe() %>% sim_gen_e()
-  datList <- sim(setup, R = 500, simName = "test")
+  datList <- sim(setup %>% sim_simName("test"), R = 500)
   
   expect_that(length(datList), equals(500))
   expect_that(max(rbind_all(datList)$idR), equals(500))

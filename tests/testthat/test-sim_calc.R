@@ -1,6 +1,6 @@
 context("sim_calc")
 test_that("sim_calc and calc_var", {
-  setup <- sim_base_standard(nDomains=5, nUnits = 10) %>% 
+  setup <- sim_base(base_id(nDomains=5, nUnits = 10)) %>% 
     sim_gen_fe(generator = gen_norm(mean=50, sd=20, name = "x")) %>%
     sim_gen_e(generator=gen_norm(0, 1)) %>%
     sim_gen_ec() %>%

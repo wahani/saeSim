@@ -16,9 +16,9 @@
 #' @seealso \code{\link{gen_norm}}, \code{\link{gen_v_norm}}, \code{\link{gen_v_sar}}, \code{\link{sim_agg}}, \code{\link{sim_calc}}, \code{\link{sim_sample}}
 #' @examples
 #' # Data setup for a mixed model
-#' sim_base_standard() %>% sim_gen_fe() %>% sim_gen_re() %>% sim_gen_e()
+#' sim_base() %>% sim_gen_fe() %>% sim_gen_re() %>% sim_gen_e()
 #' # Adding contamination in the model error
-#' sim_base_standard() %>% sim_gen_fe() %>% sim_gen_re() %>% sim_gen_e() %>% sim_gen_ec()
+#' sim_base() %>% sim_gen_fe() %>% sim_gen_re() %>% sim_gen_e() %>% sim_gen_ec()
 #' 
 #' # Simple user defined generator:
 #' gen_myVar <- function(nDomains, nUnits, name) {
@@ -27,7 +27,7 @@
 #'   dat
 #' }
 #' 
-#' sim_base_standard() %>% sim_gen_fe() %>% sim_gen_e(gen_myVar)
+#' sim_base() %>% sim_gen_fe() %>% sim_gen_e(gen_myVar)
 sim_gen <- function(simSetup, generator, 
                     nCont = NULL, level = NULL, fixed = NULL) {
   obj <- if(any(c(is.null(nCont), is.null(level), is.null(fixed)))) {

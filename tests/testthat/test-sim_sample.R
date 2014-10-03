@@ -1,6 +1,6 @@
 context("sim_sample")
 test_that("Attributes are preserved", {
-  setup <- sim_base_standard(nDomains=3, nUnits = 4) %>%
+  setup <- sim_base(base_id(nDomains=3, nUnits = 4)) %>%
     sim_gen_fe(generator = gen_norm(mean=50, sd=20, name = "x")) %>%
     sim_gen_e(generator=gen_norm(0, 1, name = "e")) %>% 
     sim_calc(function(dat) {attr(dat, "x") <- 2; dat})
@@ -11,7 +11,7 @@ test_that("Attributes are preserved", {
 })
 
 test_that("Basic sampling functionality", {
-  setup <- sim_base_standard(nDomains=3, nUnits = 4)
+  setup <- sim_base(base_id(nDomains=3, nUnits = 4))
   
   # 1
   setup %>% sim_sample(sample_sampleWrapper(12L, 5)) %>% as.data.frame %>% 
@@ -34,7 +34,7 @@ test_that("Basic sampling functionality", {
 })
 
 test_that("sim method is applying the sampling functions correctly", {
-  setup <- sim_base_standard(nDomains=3, nUnits = 10) %>%
+  setup <- sim_base(base_id(nDomains=3, nUnits = 10)) %>%
     sim_gen_fe(generator = gen_norm(mean=50, sd=20, name = "x"))
   
   expect_that(nrow(sim(setup %>% sim_sample())[[1]]), equals(15))
@@ -45,7 +45,7 @@ test_that("sim method is applying the sampling functions correctly", {
 })
 
 test_that("sample_srs() can handle integer and numeric", {
-  setup <- sim_base_standard() %>% sim_gen_fe()
+  setup <- sim_base() %>% sim_gen_fe()
   result1 <- sim(setup %>% sim_sample(sample_srs(1)), R = 1)[[1]]
   result2 <- sim(setup %>% sim_sample(sample_srs(0.5)), R = 1)[[1]]
   result3 <- sim(setup %>% sim_sample(sample_srs(5.5)), R = 1)[[1]]
@@ -57,7 +57,7 @@ test_that("sample_srs() can handle integer and numeric", {
 })
 
 test_that("sample_csrs is working with numeric input and length > 1", {
-  setup <- sim_base_standard(10, 10) %>% sim_gen_fe()
+  setup <- sim_base(base_id(10, 10)) %>% sim_gen_fe()
   
   expect_equal(sum(c(2,5,4,2,4,2,3,4,2,4)), 
                setup %>% sim_sample(sample_csrs(size=c(2,5,4,2,4,2,3,4,2,4))) %>%

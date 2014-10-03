@@ -1,5 +1,3 @@
-setClass("sim_base", contains = "list")
-
 setClass("sim_setup", 
-         slots = c(base = "sim_base", simName = "character"), 
+         slots = c(base = "data.frame", simName = "character"), 
          contains = "list")

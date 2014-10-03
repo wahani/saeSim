@@ -26,7 +26,7 @@
 \arguments{
 \item{dat}{data.frame}
 
-\item{x}{a \code{sim_setup} or \code{sim_base} constructed with \code{sim_setup()} or \code{sim_base_standard()}}
+\item{x}{a \code{sim_setup} or \code{data.frame}}
 
 \item{...}{simulation components; any composition of \code{\link{sim_gen}}, \code{\link{sim_calc}}, \code{\link{sim_sample}}, \code{\link{sim_agg}}. If \code{parallel = TRUE} arguments passed to mclapply, see details}
 }

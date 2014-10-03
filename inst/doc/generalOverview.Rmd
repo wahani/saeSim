@@ -16,12 +16,11 @@ A linear mixed model contains two components. A fixed effects part, and an error
 
 - To begin with, this is the desired approach: `sim_setup(base, ..., R = 500, simName = "")`. The example is the set-up for a linear model:
 ```{r eval=FALSE}
-setup <- sim_setup(sim_base_standard(), sim_gen_fe(), sim_gen_e(), R = 500, 
-                   simName = "Doku")
+setup <- sim_setup(sim_base() %>% sim_gen_fe() %>% sim_gen_e(), simName = "Doku")
 ```
 - Also it is possible to compose a set-up by using `%>%`. Internally the function `sim_setup` is called and uses it's defaults for all arguments but `base` and `...`:
 ```{r eval=FALSE}
-setup <- sim_base_standard() %>% sim_gen_fe() %>% sim_gen_e()
+setup <- sim_base() %>% sim_gen_fe() %>% sim_gen_e()
 ```
 - The set-up itself does not contain the simulated data. To simulate all the data use the function `sim`. This will return a `list` containing `data.frame`s as elements:
 ```{r eval=FALSE}
@@ -29,14 +28,14 @@ dataList <- sim(setup)
 ```
 - Lastly, it is possible to just produce one data set. This approach is mainly used in development but can be useful when exploring the set-up:
 ```{r eval=FALSE}
-simData <- sim(sim_base_standard(), sim_gen_fe(), sim_gen_e())
+simData <- sim(sim_base(), sim_gen_fe(), sim_gen_e())
 ```
 
 You can also use the following code to add additional components from different set-ups:
 
 ```{r eval=FALSE}
 setup <- setup %>% sim_gen_rec() %>% sim_gen_ec()
-anotherSetup <- sim_setup(sim_base_standard(), R = 5)
+anotherSetup <- sim_setup(sim_base(), R = 5)
 setup <- setup %>% anotherSetup
 ```
 
@@ -46,7 +45,7 @@ In the third line of the above example two set-up objects are combined. What wil
 
 For the simulation set-up you start with the 'base'. At this time, only one base is defined:
 
-- `sim_base_standard(nDomains = 100, nUnits = 100)` - `nDomains` specify the number of domains/cluster/areas in the data - `nUnits` the number of observations in each domain.
+- `sim_base(base_id(nDomains = 100, nUnits = 100))` - `nDomains` specify the number of domains/cluster/areas in the data - `nUnits` the number of observations in each domain.
 
 
 ## sim_gen
@@ -80,7 +79,7 @@ Meaning we can specify a linear mixed model set-up with the regressor `x`, the m
 
 ```{r}
 library(saeSim)
-setup <- sim_setup(sim_base_standard(), sim_gen_fe(), sim_gen_e(), sim_gen_re(), sim_gen_re(gen_v_sar(), "vSp"))
+setup <- sim_setup(sim_base() %>% sim_gen_fe() %>% sim_gen_e() %>% sim_gen_re() %>% sim_gen_re(gen_v_sar(name = "vSp")))
 # This will result in the same set-up:
 setup <- sim_lmm() %>% sim_gen_re(gen_v_sar(), "vSp")
 ```
@@ -113,7 +112,7 @@ If you use relative numbers for `nCont` the actual number of contaminated observ
 Use the following example to see how these things play together:
 
 ```{r}
-sim(sim_base_standard(3, 4), 
+sim(sim_base(3, 4), 
     sim_gen_fe(), sim_gen_e(), 
     sim_gen_ec(nCont = c(1, 2, 3), level = "unit", name = "eCont"))
 ```
@@ -136,8 +135,8 @@ The `sim_sample` function only controls the role of the component to be added. H
 
 Consider the following examples:
 ```{r}
-sim(sim_base_standard(3, 4), sim_gen_fe(), sim_sample(sample_srs(1L)))
-sim(sim_base_standard(3, 4), sim_gen_fe(), sim_sample(sample_csrs(1L)))
+sim(sim_base(3, 4), sim_gen_fe(), sim_sample(sample_srs(1L)))
+sim(sim_base(3, 4), sim_gen_fe(), sim_sample(sample_csrs(1L)))
 ```
 
 ```{r eval=FALSE}
@@ -172,10 +171,10 @@ Of course the real workhorse is the `calcFun`. At this time you can only calcula
 Consider the following examples to see how this function can be used:  
   
 ```{r}
-sim(sim_base_standard(3, 4), sim_gen_fe(), sim_gen_e(), sim_gen_ec(), 
+sim(sim_base(base_id(3, 4)), sim_gen_fe(), sim_gen_e(), sim_gen_ec(), 
     sim_calc(calc_var(varName = "y", funList = list(mean = mean, var = var), 
                       exclude = "idC", by = "idD"), level = "population"))
-sim(sim_base_standard(3, 4), sim_gen_fe(), sim_gen_e(), sim_gen_ec(), 
+sim(sim_base(base_id(3, 4)), sim_gen_fe(), sim_gen_e(), sim_gen_ec(), 
     sim_calc(calc_var(varName = "y", funList = list(mean = mean, var = var), 
                       exclude = NULL, by = "idD"), level = "population"))
 setup %>% sim_calc(calc_var(varName = "y", funList = list(length), newName = "N"), 
@@ -197,7 +196,7 @@ Since these specifications above can get lengthy and annoying there are some con
 - `sim_popVar()` - adds the population variances
 
 ```{r}
-sim(sim_base_standard(3, 4), sim_gen_fe(), sim_gen_e(), sim_gen_ec(), sim_popMean())
+sim(sim_base(base_id(3, 4)) %>% sim_gen_fe() %>% sim_gen_e() %>% sim_gen_ec() %>% sim_popMean())
 ```
 
 

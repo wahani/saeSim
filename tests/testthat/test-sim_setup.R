@@ -1,6 +1,6 @@
 context("sim_setup")
 test_that("sim_setup", {
-  tmp <- sim_setup(sim_base_standard(nDomains = 3, nUnits = 4) %>% 
+  tmp <- sim_setup(sim_base(base_id(nDomains = 3, nUnits = 4)) %>% 
                      sim_gen_fe() %>%
                      sim_gen_e(), simName = "")
   
@@ -9,7 +9,7 @@ test_that("sim_setup", {
 })
 
 test_that("methods equal", {
-  setup <- sim_base_standard() %>% sim_gen_fe() %>% sim_gen_e() %>% sim_agg()
+  setup <- sim_base() %>% sim_gen_fe() %>% sim_gen_e() %>% sim_agg()
   cat("\n")
   dat <- show(setup)
   
@@ -32,18 +32,16 @@ test_that("autoplot", {
 
 test_that("Id construction for not simulated data.frames", {
   dat <- data.frame(id = 1:10, x = rnorm(10))
-  dat1 <- dat %>% sim_base_data("id") %>% as.data.frame
-  dat2 <- dat %>% sim_setup(domainID = "id") %>% as.data.frame
+  dat1 <- sim_base(base_addId(dat, "id")) %>% as.data.frame
   resultList <- sim_setup(dat, simName = "testthat", domainID = "id") %>% sim(R = 10)
   
-  expect_equal(dat1, dat2)
   expect_equal(length(resultList), 10)
   expect_true(all(names(resultList[[2]]) %in% c("idD", "idU", "idR", "simName", "x", "id")))
 })
 
 test_that("sim_setup sorts its content", {
-  setup <- sim_base_standard(3, 3) %>% sim_agg() %>% sim_sample() %>% sim_n() %>% sim_N() %>% sim_gen_re() %>% sim_gen_fe()
-  setup1 <- sim_base_data(data.frame(var = rep(c(1, 2), 10)), "var") %>% sim_gen_fe() %>% sim_gen_e() %>% sim_agg() %>% sim_resp(resp_eq(y = 100 + x + e))
+  setup <- sim_base(base_id(3, 3)) %>% sim_agg() %>% sim_sample() %>% sim_n() %>% sim_N() %>% sim_gen_re() %>% sim_gen_fe()
+  setup1 <- sim_base(base_addId(data.frame(var = rep(c(1, 2), 10)), "var")) %>% sim_gen_fe() %>% sim_gen_e() %>% sim_agg() %>% sim_resp(resp_eq(y = 100 + x + e))
   
   expect_equal(length(setup), 6)
   expect_is(setup[[1]], "sim_gen")
@@ -53,5 +51,5 @@ test_that("sim_setup sorts its content", {
   expect_is(setup[[5]], "sim_csample")
   expect_is(setup[[6]], "sim_agg")
   
-  expect_equal(length(setup1), 5)
+  expect_equal(length(setup1), 4)
 })

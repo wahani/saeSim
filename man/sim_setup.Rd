@@ -2,17 +2,14 @@
 \name{sim_setup}
 \alias{sim_setup}
 \alias{sim_setup.data.frame}
-\alias{sim_setup.sim_base}
 \alias{sim_setup.sim_setup}
 \title{Constructor for sim_setup}
 \usage{
 sim_setup(base, ...)
 
-\method{sim_setup}{sim_base}(base, ..., R = 1, simName = "")
+\method{sim_setup}{data.frame}(base, ..., simName = "")
 
-\method{sim_setup}{sim_setup}(base, ..., R = base@R, simName = base@simName)
-
-\method{sim_setup}{data.frame}(base, ..., R = 1, simName = "", domainID)
+\method{sim_setup}{sim_setup}(base, ..., simName = base@simName)
 }
 \arguments{
 \item{base}{a object constructed by the \code{sim_base_*} family or a \code{sim_setup} object, constructed with \code{\link{sim_setup}}.}
@@ -22,8 +19,6 @@ sim_setup(base, ...)
 \item{R}{the number of desired repetitions in the simulation.}
 
 \item{simName}{the name of the simulation. It is simply added as character variable to the data.}
-
-\item{domainID}{variable names in \code{data} as character which will identify the domains/groups/cluster in the data.}
 }
 \value{
 An objects of class \code{sim_setup}. There is really no need to access an object of class \code{sim_setup}. You can interact with it using the \code{show}, \code{plot}, \code{autoplot} and of course \code{sim} method.
@@ -33,7 +28,7 @@ This function is used to construct a new simulation set-up. There are several wa
 }
 \examples{
 # Define a set-up
-setup <- sim_setup(sim_base_standard(), sim_gen_fe(), sim_gen_e())
+setup <- sim_base() \%>\% sim_gen_fe() \%>\% sim_gen_e()
 # Show:
 setup
 
@@ -50,6 +45,6 @@ resultList <- sim(setup)
 }
 }
 \seealso{
-\code{\link{sim}}, \code{\link{sim_base_standard}}, \code{\link{show}}, \code{\link{plot}}, \code{\link{autoplot}}
+\code{\link{sim}}, \code{\link{sim_base}}, \code{\link{show}}, \code{\link{plot}}, \code{\link{autoplot}}
 }
 

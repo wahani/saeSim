@@ -10,5 +10,5 @@
 #' @export
 #' @method as.data.frame sim_setup
 as.data.frame.sim_setup <- function(x, row.names = NULL, optional = FALSE, ...) {
-  do.call(sim, c(x = list(x@base), S3Part(x, strictS3=TRUE)))
+  do.call(sim, list(x = x@base, S3Part(x, strictS3=TRUE)))
 }

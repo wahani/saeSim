@@ -22,15 +22,14 @@
 #'  @seealso \code{\link{sim_gen}}, \code{\link{sim_gen_fe}}, \code{\link{sim_gen_e}}, \code{\link{sim_gen_ec}}, \code{\link{sim_gen_re}}, \code{\link{sim_gen_rec}}, \code{\link[spdep]{cell2nb}}
 #'  
 #'  @examples
-#'  sim_base_standard() %>% sim_gen_fe() %>% sim_gen_e() %>% sim_gen_re() %>% sim_gen_re(gen_v_sar())
+#'  sim_base() %>% sim_gen_fe() %>% sim_gen_e() %>% sim_gen_re() %>% sim_gen_re(gen_v_sar())
 #'  
 #'  # Generic interface
 #'  set.seed(1)
-#'  dat1 <- sim(sim_base_standard(), 
-#'              sim_gen(gen_generic(rnorm, mean = 0, sd = 4), name="e"))
+#'  dat1 <- sim(sim_base %>%
+#'                sim_gen(gen_generic(rnorm, mean = 0, sd = 4, name = "e")))
 #'  set.seed(1)
-#'  dat2 <- sim(sim_base_standard(),
-#'              sim_gen_e())
+#'  dat2 <- sim(sim_base() %>% sim_gen_e())
 #'  all.equal(dat1, dat2)
 gen_norm <- function(mean = 0, sd = 1, name = "e") {
   desc <- paste(name, " ~ N(", mean, ", ", sd^2, ") unit-level", sep = "")

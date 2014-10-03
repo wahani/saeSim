@@ -1,6 +1,6 @@
 #' Constructor for sim_base
 #' 
-#' Use the `sim_base_*` functions to start a new simulation setup.
+#' Use the `sim_base` functions to start a new simulation setup.
 #' 
 #' @param nDomains the number of domains.
 #' @param nUnits the number of units. Can have \code{length(nUnits) == nDomains} where it is interpreted as number of units in each domain. Else the number of units in each domain is constant.
@@ -10,33 +10,25 @@
 #' 
 #' @examples
 #' # Example for a linear model:
-#' sim_base_standard() %>% sim_gen_fe() %>% sim_gen_e()
-sim_base_standard <- function(nDomains = 100, nUnits = 100) {
-  base <- new("sim_base", list(nDomains = nDomains, nUnits = nUnits))
-  new("sim_setup", base = base, simName = "")
+#' sim_base() %>% sim_gen_fe() %>% sim_gen_e()
+sim_base <- function(data = base_id(100, 100)) {
+  new("sim_setup", base = data, simName = "")
 }
 
 #' Construct a design-based set-up
 #' 
-#' \code{sim_base_data} is still an experimental implementation to extend the whole approach for design-based simulation studies. 
+#' \code{sim_base} is still an experimental implementation to extend the whole approach for design-based simulation studies. 
 #' 
 #' @param data a data.frame containing a population.
 #' @param domainID variable names in \code{data} as character which will identify the domains/groups/cluster in the data.
 #' 
-#' @rdname sim_base_data
+#' @rdname base_addId
 #' @export
-sim_base_data <- function(data, domainID) {
+base_addId <- function(data, domainID) {
   dataList <- split(data, data[domainID])
   nUnits <- sapply(dataList, nrow)
   nDomains <- length(nUnits)
-  
-  # Ordering the clusters
-  data <- rbind_all(dataList)
-  
-  sim_base_standard(nDomains, nUnits) %>% sim_gen_data((function(data) {
-    force(data)
-    function() get("data")
-  })(data))
+  cbind(base_id(nDomains, nUnits), rbind_all(dataList))
 }
 
 #' Preconfigured set-ups
@@ -53,7 +45,7 @@ sim_base_data <- function(data, domainID) {
 #' sim_lmc()
 #' sim_lmmc()
 sim_lm <- function() {
-  sim_base_standard(nDomains = 100, nUnits = 100) %>% 
+  sim_base() %>% 
     sim_gen_fe(gen_norm(0, 4, name = "x")) %>% 
     sim_gen_e(gen_norm(0, 4, name = "e")) %>%
     sim_resp(resp_eq(y = 100 + x + e))

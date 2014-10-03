@@ -9,13 +9,13 @@
 #' 
 #' @return An objects of class \code{sim_setup}. There is really no need to access an object of class \code{sim_setup}. You can interact with it using the \code{show}, \code{plot}, \code{autoplot} and of course \code{sim} method.
 #' 
-#' @seealso \code{\link{sim}}, \code{\link{sim_base_standard}}, \code{\link{show}}, \code{\link{plot}}, \code{\link{autoplot}}
+#' @seealso \code{\link{sim}}, \code{\link{sim_base}}, \code{\link{show}}, \code{\link{plot}}, \code{\link{autoplot}}
 #' @export
 #' @rdname sim_setup
 #' 
 #' @examples
 #' # Define a set-up
-#' setup <- sim_setup(sim_base_standard(), sim_gen_fe(), sim_gen_e())  
+#' setup <- sim_base() %>% sim_gen_fe() %>% sim_gen_e()
 #' # Show:
 #' setup
 #' 
@@ -34,7 +34,7 @@ sim_setup <- function(base, ...) UseMethod("sim_setup")
 
 #' @rdname sim_setup
 #' @export
-sim_setup.sim_base <- function(base, ..., simName = "") {
+sim_setup.data.frame <- function(base, ..., simName = "") {
   
   dots <- list(...)
   if (length(dots) == 0) {
@@ -46,8 +46,7 @@ sim_setup.sim_base <- function(base, ..., simName = "") {
     
     smstp_objects <- dots
         
-    smstp_objects <- smstp_objects[c(which(is.sim_genData(smstp_objects)),
-                                     which(is.sim_gen(smstp_objects)),
+    smstp_objects <- smstp_objects[c(which(is.sim_gen(smstp_objects)),
                                      which(is.sim_genCont(smstp_objects)),
                                      which(is.sim_resp(smstp_objects)),
                                      which(is.sim_cpopulation(smstp_objects)),
@@ -66,11 +65,4 @@ sim_setup.sim_base <- function(base, ..., simName = "") {
 sim_setup.sim_setup <- function(base, ..., simName = base@simName) {
   smstp_objects <- c(list(...), S3Part(base, strictS3=TRUE))
   sim_setup(base = base@base, simName = simName, smstp_objects)
-}
-
-#' @inheritParams sim_base_data
-#' @rdname sim_setup
-#' @export
-sim_setup.data.frame <- function(base, ..., simName = "", domainID) {
-  sim_setup(sim_base_data(base, domainID), ..., simName = simName)
 }

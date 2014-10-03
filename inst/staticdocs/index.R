@@ -3,7 +3,7 @@ sd_section("Basic Functions",
            package. Use `sim_setup` to configure a new simulation setup and `sim`
            to start the simulation.",
            c("sim_setup",
-             "sim_base_standard",
+             "sim_base",
              "sim"))
 
 sd_section("Simulation Components",

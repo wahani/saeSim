@@ -10,7 +10,7 @@
 #' @export
 #' 
 #' @examples
-#' sim_base_standard() %>% sim_gen_fe() %>% sim_gen_e() %>% sim_agg(agg_standard())
+#' sim_base() %>% sim_gen_fe() %>% sim_gen_e() %>% sim_agg(agg_standard())
 agg_standard <- function(splitVars = "idD") {
   function(dat) {
     
