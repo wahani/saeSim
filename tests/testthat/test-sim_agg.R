@@ -2,12 +2,14 @@ context("sim_agg")
 
 test_that("Basic functionality", {
   setup <- sim_setup(sim_base()) %>% sim_gen_e() %>% sim_gen_fe() %>% 
-    sim_calc(calc_var("y", funList=list("length" = length), newName="N")) %>% sim_agg() %>%
-    sim_calc(calc_var("y", funList = list("make_factor" = function(x) factor(letters[1:2]), 
-                                          "make_character" = function(x) letters[1:2]))) %>%
-    sim_resp(resp_eq(y = 100 + x + e))
+    sim_resp(resp_eq(y = 100 + x + e)) %>%
+    sim_calc(calc_var(N = length(y)), by = "idD") %>% 
+    sim_calc(calc_var(aFactor = as.factor(c("a", "b") %>% rep(length.out = length(y))),
+                      aCharacter = c("a", "b") %>% rep(length.out = length(y)))) %>% 
+    sim_agg()
   
-  dat <- sim(setup, R = 1)[[1]]
+  dat <- sim(setup)[[1]]
+  
   expect_that(nrow(dat), equals(100))
   expect_that(dat$idU, is_a("NULL"))
   expect_that(dat$yMake_factor, is_a("NULL"))
@@ -17,10 +19,10 @@ test_that("Basic functionality", {
   expect_that(dat$x, is_a("numeric"))
   expect_that(dat$y, is_a("numeric"))
   expect_that(dat$N, is_a("numeric"))
-  expect_that(dat$yMake_factora, is_a("numeric"))
-  expect_that(dat$yMake_factorb, is_a("numeric"))
-  expect_that(dat$yMake_charactera, is_a("numeric"))
-  expect_that(dat$yMake_characterb, is_a("numeric"))
+  expect_that(dat$aFactora, is_a("numeric"))
+  expect_that(dat$aFactorb, is_a("numeric"))
+  expect_that(dat$aCharactera, is_a("numeric"))
+  expect_that(dat$aCharacterb, is_a("numeric"))
   expect_that(dat$idR, is_a("integer"))
   expect_that(dat$simName, is_a("character"))  
 })

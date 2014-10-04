@@ -27,10 +27,11 @@
 #' }
 #'
 #' sim_base() %>% sim_gen_fe() %>% sim_gen_e() %>% sim_calc(calc_lm)
-sim_calc <- function(simSetup, calcFun = calc_var(), level = "population") {
+sim_calc <- function(simSetup, calcFun = calc_var(), level = "population", by = "") {
   if(!(level %in% c("population", "sample", "agg"))) 
     stop("This level is not supported, check spelling.")
-  sim_setup(simSetup, new(paste("sim_c", level, sep = ""), fun = calcFun))
+  fun <- if(by == "") calcFun else apply_by(by, calcFun)
+  sim_setup(simSetup, new(paste("sim_c", level, sep = ""), fun = fun))
 }
 
 #' @export
