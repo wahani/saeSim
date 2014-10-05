@@ -13,7 +13,7 @@
 #' @importFrom graphics plot
 plot.sim_setup <- function(x, y, ...) {
   # Get some data
-  dat <- sim(x@base, S3Part(x, TRUE))
+  dat <- as.data.frame(x)
   # get name for y-Axis; default to "y" 
   yAxis <- if(all(names(dat) != "y")) 
     names(dat)[!grepl("id", names(dat))][1] else "y"

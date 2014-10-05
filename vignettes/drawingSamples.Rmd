@@ -1,0 +1,36 @@
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{Introduction}
+-->
+```{r include=FALSE}
+options(markdown.HTML.header = system.file('misc', 'vignette.css', package='knitr'))
+```
+
+## sim_sample
+
+It should be possible to get information from 3 different 'levels'. The population, a sample or the aggregates of the sample. The population is the standard output, so there is nothing to add. For sampling, it is possible to supply a function (the `smpling_*`-functions), which return the positions (or a logical) for selection.
+
+- `sim_sample(smplFun)` - used to add a sampling component to the set-up - the resulting list contains the samples instead of the populations
+
+The `sim_sample` function only controls the role of the component to be added. How samples are drawn can be controlled by the `smplFun`:
+
+- `sample_sampleWrapper(...)` is a wrapper of the sample function already implemented in R. The arguments will simply be passed to `sample`
+- `sample_srs(size, ...)` will draw with simple random sampling. `size` can either be >= 1 giving the sample size or < 1 where it is treated as proportion. `...` will be passed to `sample.int`
+- `sample_csrs(size, ...)` uses srs within each cluster (domain/area). Additionally `size` can have `length(size) > 1` which will be interpreted as different sample sizes in each domain
+
+Consider the following examples:
+```{r}
+library(saeSim)
+base_id(3, 4) %>% sim_gen_fe() %>% sim_sample(sample_srs(1L))
+base_id(3, 4) %>% sim_gen_fe() %>% sim_sample(sample_csrs(1L))
+```
+
+```{r eval=FALSE}
+# simple random sampling:
+sim_lm() %>% sim_sample(sample_srs(size = 10L))
+sim_lm() %>% sim_sample(sample_srs(size = 0.05))
+# srs in each domain/cluster
+sim_lm() %>% sim_sample(sample_csrs(size = 10L))
+sim_lm() %>% sim_sample(sample_csrs(size = rep(10L, 100)))
+sim_lm() %>% sim_sample(sample_csrs(size = 0.05))
+```

@@ -1,0 +1,42 @@
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{Introduction}
+-->
+```{r include=FALSE}
+options(markdown.HTML.header = system.file('misc', 'vignette.css', package='knitr'))
+```
+
+# sim_comp
+
+In addition you may want to keep some information from the population or sample. That is why you can calculate some additional variables on the data. For contaminated data you want to further specify if the outlying observations should be used for calculating those statistics - for that you can supply one or more indicator variables in the data.
+
+- `sim_calc(calcFun, level = "population")` - `level` can be "population" or "sample" determining of the calculation is made on the population or after sampling - if no sampling is added the argument has no effect
+
+Of course the real workhorse is the `calcFun`. At this time you can only calculate something for each domain using the following 'calculator':
+
+- `calc_var(varName = "y", funList = list(mean = mean, var = var), exclude = NULL, by = "idD", newName = varName)` - `exclude` will determine if any of the observations will be excluded from the calculation
+
+Consider the following examples to see how this function can be used:  
+  
+```{r}
+library(saeSim)
+base_id(2, 3) %>% sim_gen_fe() %>% sim_gen_e() %>% sim_gen_ec() %>% 
+  sim_resp(resp_eq(y = 100 + x + e)) %>%
+  sim_comp_pop(calc_var(popMean = mean(y)), by = "idD")
+
+sim_lm() %>% sim_N()
+
+sim_lm() %>% 
+  sim_sample() %>%
+  sim_n()
+```
+
+
+# Pre-configured sim_comp components
+
+Since these specifications above can get lengthy and annoying there are some convenience functions (remember that all statistics are calculated within each domain):
+
+- `sim_n()` - adds the sample sizes in `n`
+- `sim_N()` - adds the population N in `N`
+- `sim_popMean()` - adds the population means
+- `sim_popVar()` - adds the population variances

@@ -56,6 +56,6 @@ sort_sim_fun <- function(...) {
 #' @rdname sim_setup
 #' @export
 sim_setup.sim_setup <- function(base, ..., simName = base@simName) {
-  argList <- c(list(...), S3Part(base, strictS3=TRUE), list(base = base@base, simName = simName))
+  argList <- c(S3Part(base, strictS3=TRUE), list(...) , list(base = base@base, simName = simName))
   do.call(sim_setup, argList)
 }

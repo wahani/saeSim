@@ -22,14 +22,14 @@
 #'  @seealso \code{\link{sim_gen}}, \code{\link{sim_gen_fe}}, \code{\link{sim_gen_e}}, \code{\link{sim_gen_ec}}, \code{\link{sim_gen_re}}, \code{\link{sim_gen_rec}}, \code{\link[spdep]{cell2nb}}
 #'  
 #'  @examples
-#'  sim_base() %>% sim_gen_fe() %>% sim_gen_e() %>% sim_gen_re() %>% sim_gen_re(gen_v_sar())
+#'  sim_base() %>% sim_gen_fe() %>% sim_gen_e() %>% sim_gen_re() %>% sim_gen_re(gen_v_sar(name = "vSP"))
 #'  
 #'  # Generic interface
 #'  set.seed(1)
-#'  dat1 <- sim(sim_base %>%
+#'  dat1 <- sim(base_id() %>%
 #'                sim_gen(gen_generic(rnorm, mean = 0, sd = 4, name = "e")))
 #'  set.seed(1)
-#'  dat2 <- sim(sim_base() %>% sim_gen_e())
+#'  dat2 <- sim(base_id() %>% sim_gen_e())
 #'  all.equal(dat1, dat2)
 gen_norm <- function(mean = 0, sd = 1, name = "e") {
   desc <- paste(name, " ~ N(", mean, ", ", sd^2, ") unit-level", sep = "")
@@ -81,7 +81,8 @@ gen_generic <- function(generator, ..., level = "unit", desc = "F", name) {
   desc <- paste(name, "~ ", desc, "(", paste(..., sep = ", "), ") ", level, "-level", sep = "")
   
   gen_unit <- function(dat) {
-    dat[name] <- do.call(generator, c(nrow(dat), genArgs)) + if(exists(name, dat)) dat[[name]] else 0
+    dat[name] <- 
+      do.call(generator, c(nrow(dat), genArgs)) + if(exists(name, dat)) dat[[name]] else 0
     dat
   }
   

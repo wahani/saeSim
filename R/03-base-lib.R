@@ -9,29 +9,29 @@
 #' @examples
 #' base_id(2, 2)
 #' base_id(2, c(2, 3))
-setGeneric("base_id", function(nDomains, nUnits, ...) {
+base_id <- function(nDomains = 10, nUnits = 10) {
+  make_id_data(nDomains, nUnits)
+}
+
+setGeneric("make_id_data", function(nDomains, nUnits, ...) {
   stopifnot(length(nDomains) == 1, 
             if(length(nUnits) > 1) length(nUnits) == nDomains else TRUE)
-  standardGeneric("base_id")
+  standardGeneric("make_id_data")
 })
 
-#' @rdname base_id
-#' @export
-setMethod("base_id", signature=c(nDomains = "numeric", nUnits = "numeric"),
+setMethod("make_id_data", signature=c(nDomains = "numeric", nUnits = "numeric"),
           function(nDomains, nUnits, ...) {
             if(length(nUnits) == 1) {
               out <- data.frame(idD = rep(1:nDomains, each = nUnits)) %.% 
                 group_by("idD") %.% mutate(idU = 1:n())
               return(as.data.frame(out))
             } else {
-              base_id(nDomains, as.list(nUnits))
+              make_id_data(nDomains, as.list(nUnits))
             }
             
           })
 
-#' @rdname base_id
-#' @export
-setMethod("base_id", signature=c(nDomains = "numeric", nUnits = "list"),
+setMethod("make_id_data", signature=c(nDomains = "numeric", nUnits = "list"),
           function(nDomains, nUnits, ...) {
             out <- 
               data.frame(idD = unlist(lapply(1:nDomains, 
