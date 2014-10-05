@@ -98,27 +98,5 @@ sim.sim_resp <- function(x, dat, ...) {
 #' @rdname sim-methods
 #' @export
 sim.sim_genCont <- function(x, dat, ...) {
-  genDat <- x@fun(dat)
-  nCont <- if(length(x@nCont) > 1) as.list(as.integer(x@nCont)) else 
-    if(x@nCont >= 1) as.integer(x@nCont) else x@nCont 
-  
-  genDat <- select_cont(genDat, nCont, x@level, x@fixed)
-  
-  # gleiche namen
-  replace_cont <- function(var1, var2) ifelse(var1 == 0, var2, var1)
-  replace_contData <- function(contData, dat) {
-    vars <- names(contData)[names(contData) %in% names(dat)]
-    for(var in vars) contData[var] <- replace_cont(contData[[var]], dat[[var]])
-    contData
-  }
-  
-  replace_contData(genDat, dat)
-    
-}
-
-#' @rdname sim-methods
-#' @export
-sim.sim_genData <- function(x, dat, ...) {
-  idDat <- make_id(x@nDomains, x@nUnits)
-  cbind(idDat, x@fun()) 
+  x@fun(dat)
 }

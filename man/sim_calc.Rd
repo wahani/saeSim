@@ -7,7 +7,7 @@
 \alias{sim_popVar}
 \title{Calculation component}
 \usage{
-sim_calc(simSetup, calcFun = calc_var(), level = "population")
+sim_calc(simSetup, calcFun = calc_var(), level = "population", by = "")
 
 sim_n(simSetup)
 
@@ -22,7 +22,7 @@ sim_popVar(simSetup, exclude = NULL)
 
 \item{level}{character giving the level on which the variable is to be calculated. One in \code{c("population", "sample", "agg")}.}
 
-\item{exclude}{charcter vector of variable names in the data used to exclude observations from the calculation or \code{NULL}. The variables must be \code{logical}, \code{TRUE}s will be excluded.}
+\item{by}{variable names as character to split the data. Computed values will be constant within each group.}
 }
 \description{
 One of the components which can be added to a simulation set-up. These functions can be used for adding new variables to the data. \code{sim_calc} is the generic interface to add a calculation component. Everything else are preconfigured components.

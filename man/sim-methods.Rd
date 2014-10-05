@@ -4,7 +4,6 @@
 \alias{sim.sim_calc_virtual}
 \alias{sim.sim_gen}
 \alias{sim.sim_genCont}
-\alias{sim.sim_genData}
 \alias{sim.sim_resp}
 \alias{sim.sim_sample}
 \title{Sim-methods}
@@ -20,8 +19,6 @@
 \method{sim}{sim_resp}(x, dat, ...)
 
 \method{sim}{sim_genCont}(x, dat, ...)
-
-\method{sim}{sim_genData}(x, dat, ...)
 }
 \arguments{
 \item{dat}{data.frame}

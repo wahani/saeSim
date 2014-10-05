@@ -38,19 +38,7 @@ setClass("sim_gen_virtual",
 setClass("sim_gen", contains = "sim_gen_virtual")
 
 setClass("sim_genCont_virtual",
-         slots = c(nCont = "numeric", level = "character", fixed = "logical"),
-         contains = c("sim_gen_virtual", "VIRTUAL"),
-         validity = function(object) {
-           if(any(object@nCont <= 0)) 
-             return("nCont is expected to be larger than 0!")
-           if(length(object@nCont) == 1 && object@nCont == 1) 
-             warning("nCont is equal to 1, will not be interpreted as proportion!")
-           if(!(object@level %in% c("area", "unit", "none"))) 
-             return("Supported levels are area, unit and none!")
-           if(length(object@nCont) > 1 & (object@level %in% c("area", "none"))) 
-             return("A vector of nCont on level area or none can not be interpreted!")
-           TRUE
-         })
+         contains = c("sim_gen_virtual", "VIRTUAL"))
 
 setClass("sim_genCont", contains = "sim_genCont_virtual")
 

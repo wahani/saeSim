@@ -4,9 +4,6 @@
 #' 
 #' @param generator generator function used to generate random numbers.
 #' @param name variable name used in the resulting \code{data.frame}.
-#' @param level "unit", "area" or "none" - is the whole area contaminated, units inside an area or random observations in the data.
-#' @param nCont gives the number of contaminated observations. Values between 0 and 1 will be trated as proportion. If length is larger 1, the expected length is the number of domains, you can specify something else in each domain. Integers are expected in that cas - numeric will be converted to integer.
-#' @param fixed TRUE fixes the observations which will be contaminated. FALSE will result in a random selection of contaminated observations. Default is NULL for non-contaminated scenarios.
 #' 
 #' @details \code{fe}: fixed-effect component; \code{e}: model-error; \code{ec}: contaminated model error; \code{re}: random-effect (error constant for each domain); \code{rec} contaminated random-effect. Note that for contamination you are expected to add both, a non-contaminated component and a contaminated component. They are simply added up in the response \code{y}.
 #' 
@@ -28,24 +25,14 @@
 #' }
 #' 
 #' sim_base() %>% sim_gen_fe() %>% sim_gen_e(gen_myVar)
-sim_gen <- function(simSetup, generator, 
-                    nCont = NULL, level = NULL, fixed = NULL) {
-  obj <- if(any(c(is.null(nCont), is.null(level), is.null(fixed)))) {
-    new("sim_gen", fun = generator)
-  } else {
-    new("sim_genCont", fun = generator,
-        nCont = nCont, level = level, fixed = fixed)
-  }
-  
-  sim_setup(simSetup, obj)
-  
+sim_gen <- function(simSetup, generator) {
+  sim_setup(simSetup, new("sim_gen", fun = generator))
 }
-
 
 #' @rdname sim_gen
 #' @export
 sim_gen_fe <- function(simSetup, generator = gen_norm(0, 4, name = "x")) {
-  sim_gen(simSetup, generator = generator)  
+  sim_gen(simSetup, generator = generator)
 }
 
 #' @rdname sim_gen
@@ -59,7 +46,7 @@ sim_gen_e <- function(simSetup, generator = gen_norm(0, 4, name = "e")) {
 sim_gen_ec <- function(simSetup,
                        generator = gen_norm(mean=0, sd=150, name = "e"), 
                        nCont = 0.05, level = "unit", fixed = TRUE) {
-  sim_gen(simSetup, generator = generator, nCont = nCont, level = level, fixed = fixed)
+  sim_genCont(simSetup, generator = generator, nCont = nCont, level = level, fixed = fixed)
 }
 
 #' @rdname sim_gen
@@ -75,8 +62,4 @@ sim_gen_rec <- function(simSetup,
                         generator = gen_v_norm(mean=0, sd=40, name = "v"), 
                         nCont = 0.05, level = "area", fixed = TRUE) {
   sim_gen_ec(simSetup, generator, nCont, level, fixed)
-}
-
-sim_gen_data <- function(simSetup, loadData) {
-  sim_setup(simSetup, new("sim_genData", fun = loadData))
 }
