@@ -32,33 +32,11 @@ sim.data.frame <- function(x, ...) {
   # Generating pop
   out <- setup@base
   
-  for (smstp in setup)
-    out <- sim(smstp, out)
+  for (fun in setup)
+    out <- fun(out)
     
   # Return:
   out
-}
-
-#' Sim-methods
-#' 
-#' These methods are documented because I have to (and of course want to) fulfill the conventions documented in 'Writing R documentation files' in the 'Writing R Extensions' manual. You don't need them, they are only used internally.
-#' @param dat data.frame
-#' @inheritParams sim
-#' @rdname sim-methods
-sim.sim_agg <- function(x, dat, ...) {
-  x@fun(dat)
-}
-
-#' @rdname sim-methods
-#' @export
-sim.sim_calc_virtual <- function(x, dat, ...) {
-  x@fun(dat)
-}
-
-#' @rdname sim-methods
-#' @export
-sim.sim_sample <- function(x, dat, ...) {
-  x@fun(dat)
 }
 
 #' @rdname sim
@@ -81,22 +59,4 @@ sim.sim_setup <- function(x, ..., R = 1, parallel = FALSE, path = NULL) {
     }
     df
   }, object = x, path = path, ...)
-}
-
-#' @rdname sim-methods
-#' @export
-sim.sim_gen <- function(x, dat, ...) {
-  x@fun(dat)
-}
-
-#' @rdname sim-methods
-#' @export
-sim.sim_resp <- function(x, dat, ...) {
-  x@fun(dat)
-}
-
-#' @rdname sim-methods
-#' @export
-sim.sim_genCont <- function(x, dat, ...) {
-  x@fun(dat)
 }

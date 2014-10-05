@@ -23,5 +23,5 @@
 #' 
 #' sim_lm() %>% sim_sample(sample_mySampleFun)
 sim_sample <- function(simSetup, smplFun = sample_csrs(size=5L)) {
-  sim_setup(simSetup, new("sim_sample", fun = smplFun))
+  sim_setup(simSetup, new("sim_fun", order = 5, smplFun))
 }

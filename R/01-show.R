@@ -6,7 +6,7 @@
 #' @export
 setMethod("show", "sim_setup",
           function(object) {
-            dat <- sim(object@base, S3Part(object, TRUE))
+            dat <- as.data.frame(object)
             print(head(dat))
             invisible(dat)
           })

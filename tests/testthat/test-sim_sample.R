@@ -3,7 +3,7 @@ test_that("Attributes are preserved", {
   setup <- sim_base(base_id(nDomains=3, nUnits = 4)) %>%
     sim_gen_fe(generator = gen_norm(mean=50, sd=20, name = "x")) %>%
     sim_gen_e(generator=gen_norm(0, 1, name = "e")) %>% 
-    sim_calc(function(dat) {attr(dat, "x") <- 2; dat})
+    sim_comp_pop(function(dat) {attr(dat, "x") <- 2; dat})
   
   setup %>% sim_sample(sample_csrs()) %>% as.data.frame %>% attr("x") %>% expect_equal(2)
   setup %>% sim_sample(sample_srs()) %>% as.data.frame %>% attr("x") %>% expect_equal(2)

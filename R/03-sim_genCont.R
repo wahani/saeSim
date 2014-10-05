@@ -3,12 +3,12 @@
 #' @param nCont gives the number of contaminated observations. Values between 0 and 1 will be trated as proportion. If length is larger 1, the expected length is the number of domains, you can specify something else in each domain. Integers are expected in that cas - numeric will be converted to integer.
 #' @param fixed TRUE fixes the observations which will be contaminated. FALSE will result in a random selection of contaminated observations. Default is NULL for non-contaminated scenarios.
 #' @export
-sim_genCont <- function(simSetup, generator, nCont, level, fixed) {
+sim_gen_cont <- function(simSetup, generator, nCont, level, fixed) {
   
   generator <- gen_cont(generator, nCont, level, fixed)
   
   sim_setup(simSetup, 
-            new("sim_genCont", fun = generator))
+            new("sim_fun", order = 2, generator))
 }
 
 gen_cont <- function(generator, nCont, level, fixed) {

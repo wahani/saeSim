@@ -26,7 +26,7 @@
 #' 
 #' sim_base() %>% sim_gen_fe() %>% sim_gen_e(gen_myVar)
 sim_gen <- function(simSetup, generator) {
-  sim_setup(simSetup, new("sim_gen", fun = generator))
+  sim_setup(simSetup, new("sim_fun", order = 1, generator))
 }
 
 #' @rdname sim_gen
@@ -46,7 +46,7 @@ sim_gen_e <- function(simSetup, generator = gen_norm(0, 4, name = "e")) {
 sim_gen_ec <- function(simSetup,
                        generator = gen_norm(mean=0, sd=150, name = "e"), 
                        nCont = 0.05, level = "unit", fixed = TRUE) {
-  sim_genCont(simSetup, generator = generator, nCont = nCont, level = level, fixed = fixed)
+  sim_gen_cont(simSetup, generator = generator, nCont = nCont, level = level, fixed = fixed)
 }
 
 #' @rdname sim_gen

@@ -19,5 +19,5 @@
 #' # User aggFun:
 #' sim_lm() %>% sim_agg(function(dat) dat[1, ])
 sim_agg <- function(simSetup, aggFun = agg_standard()) {
-  sim_setup(simSetup, new("sim_agg", fun = aggFun))
+  sim_setup(simSetup, new("sim_fun", order = 7, aggFun))
 }

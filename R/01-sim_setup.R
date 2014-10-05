@@ -36,26 +36,19 @@ sim_setup <- function(base, ...) UseMethod("sim_setup")
 #' @export
 sim_setup.data.frame <- function(base, ..., simName = "") {
   
+  simFunList <- sort_sim_fun(...)
+  
+  new("sim_setup", base = base, simName = simName, simFunList)
+  
+}
+
+sort_sim_fun <- function(...) {
   dots <- list(...)
   if (length(dots) == 0) {
-    return(new("sim_setup", base = base, simName = simName, list()))
+    list()
   } else {
-    # Taking care of the smstp-family:
-    if (class(dots[[1]]) == "list") dots <- dots[[1]]
-    if (length(dots) == 0) return(new("sim_setup", base = base, simName = simName, list()))
-    
-    smstp_objects <- dots
-        
-    smstp_objects <- smstp_objects[c(which(is.sim_gen(smstp_objects)),
-                                     which(is.sim_genCont(smstp_objects)),
-                                     which(is.sim_resp(smstp_objects)),
-                                     which(is.sim_cpopulation(smstp_objects)),
-                                     which(is.sim_sample(smstp_objects)),
-                                     which(is.sim_csample(smstp_objects)),
-                                     which(is.sim_agg(smstp_objects)),
-                                     which(is.sim_cagg(smstp_objects)))]
-    
-    return(new("sim_setup", base = base, simName = simName, smstp_objects))
+    ordering <- sapply(dots, function(fun) fun@order) %>% order
+    dots[ordering]
   }
   
 }
@@ -63,6 +56,6 @@ sim_setup.data.frame <- function(base, ..., simName = "") {
 #' @rdname sim_setup
 #' @export
 sim_setup.sim_setup <- function(base, ..., simName = base@simName) {
-  smstp_objects <- c(list(...), S3Part(base, strictS3=TRUE))
-  sim_setup(base = base@base, simName = simName, smstp_objects)
+  argList <- c(list(...), S3Part(base, strictS3=TRUE), list(base = base@base, simName = simName))
+  do.call(sim_setup, argList)
 }

@@ -8,8 +8,8 @@ test_that("sim_calc and calc_var", {
     sim_resp(resp_eq(y = 10 * x + e))
   
   dat <- setup %>% 
-    sim_calc(calc_var(popMean = mean(y), popVar = var(y), N = length(y)), by = "idD") %>%
-    sim_calc(calc_var(n = length(y)), level = "sample", by = "idD") %>% 
+    sim_popMean() %>% sim_popVar %>% sim_N() %>%
+    sim_n() %>% 
     as.data.frame
   
   calc_lm <- function(dat) {
@@ -17,7 +17,7 @@ test_that("sim_calc and calc_var", {
     dat
   }
   
-  dat1 <- sim(setup %>% sim_agg() %>% sim_calc(calc_lm, level="agg"))[[1]]
+  dat1 <- sim(setup %>% sim_agg() %>% sim_comp_agg(calc_lm))[[1]]
   
   expect_that(nrow(dat), equals(25))
   expect_that(all(c("popMean", "popVar", "N", "n") %in% names(dat)), is_true())

@@ -14,7 +14,7 @@ test_that("sim_gen", code={
   setup1 <- sim_base() %>% 
     sim_gen(gen_norm(0, 4, name = "x")) %>% 
     sim_gen(gen_norm(0, 4, "e")) %>% 
-    sim_genCont(gen_norm(0, 150, "e"), nCont = 0.05, level = "unit", fixed = TRUE)
+    sim_gen_cont(gen_norm(0, 150, "e"), nCont = 0.05, level = "unit", fixed = TRUE)
   setup2 <- sim_base() %>% sim_gen_fe() %>% sim_gen_e() %>% sim_gen_ec()
   
   set.seed(1)
