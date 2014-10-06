@@ -8,7 +8,7 @@
 #' 
 #' @details Potentially you can define a function for computation yourself. Take care that it only has one argument, named \code{dat}, and returns a \code{data.frame}.
 #' 
-#' \code{sim_n} and \code{sim_N} will add the sample and population size in each domain respectively. \code{sim_popMean} and \code{sim_popVar} the population mean and variance of the variable \code{y}.
+#' \code{sim_comp_n} and \code{sim_comp_N} will add the sample and population size in each domain respectively. \code{sim_comp_popMean} and \code{sim_comp_popVar} the population mean and variance of the variable \code{y}.
 #' 
 #' @seealso \code{\link{calc_var}}, \code{\link{sim_gen}}, \code{\link{sim_agg}}, \code{\link{sim_sample}}
 #' @export
@@ -48,24 +48,24 @@ sim_comp_agg <- function(simSetup, fun = calc_var(), by = "") {
 
 #' @export
 #' @rdname sim_comp
-sim_n <- function(simSetup) {
+sim_comp_n <- function(simSetup) {
   sim_comp_sample(simSetup, calc_var(n = nrow(dat)), by = "idD")
 }
 
 #' @export
 #' @rdname sim_comp
-sim_N <- function(simSetup) {
+sim_comp_N <- function(simSetup) {
   sim_comp_pop(simSetup, calc_var(N = nrow(dat)), by = "idD")
 }
 
 #' @export
 #' @rdname sim_comp
-sim_popMean <- function(simSetup) {
+sim_comp_popMean <- function(simSetup) {
   sim_comp_pop(simSetup, calc_var(popMean = mean(y)), by = "idD")
 }
 
 #' @export
 #' @rdname sim_comp
-sim_popVar <- function(simSetup) {
+sim_comp_popVar <- function(simSetup) {
   sim_comp_pop(simSetup, calc_var(popVar = var(y)))
 }

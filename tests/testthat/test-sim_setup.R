@@ -18,7 +18,7 @@ test_that("methods equal", {
 
 context("sim_setup-methods")
 test_that("as.data.frame", {
-  setup <- sim_lm()
+  setup <- sim_base_lm()
   dat <- as.data.frame(setup)
   expect_is(dat, class="data.frame")
   expect_equal(nrow(dat), 10000)
@@ -26,8 +26,8 @@ test_that("as.data.frame", {
 })
 
 test_that("autoplot", {
-  expect_warning(autoplot(sim_lm(), x = "z"))
-  expect_warning(autoplot(sim_lm(), y = "k"))
+  expect_warning(autoplot(sim_base_lm(), x = "z"))
+  expect_warning(autoplot(sim_base_lm(), y = "k"))
 })
 
 test_that("Id construction for not simulated data.frames", {
@@ -40,7 +40,7 @@ test_that("Id construction for not simulated data.frames", {
 })
 
 test_that("sim_setup sorts its content", {
-  setup <- sim_base(base_id(3, 3)) %>% sim_agg() %>% sim_sample() %>% sim_n() %>% sim_N() %>% sim_gen_re() %>% sim_gen_fe()
+  setup <- sim_base(base_id(3, 3)) %>% sim_agg() %>% sim_sample() %>% sim_comp_n() %>% sim_comp_N() %>% sim_gen_re() %>% sim_gen_fe()
   setup1 <- sim_base(base_addId(data.frame(var = rep(c(1, 2), 10)), "var")) %>% sim_gen_fe() %>% sim_gen_e() %>% sim_agg() %>% sim_resp(resp_eq(y = 100 + x + e))
   orderAttr <- sapply(setup, function(fun) fun@order)
   

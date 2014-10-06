@@ -17,6 +17,6 @@ describe(x, ...)
 Use this function to get a description of your setup. At the moment only the data generation is being described. Contamination will be ignored.
 }
 \examples{
-\dontrun{describe(sim_lmm())}
+\dontrun{describe(sim_base_lmm())}
 }
 

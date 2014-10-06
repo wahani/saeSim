@@ -58,10 +58,10 @@ This section gives an overview of data which can be generated.
 
 There are several pre-configured set-ups you can use for an easy start.
 
-- `sim_lm()` will return a simulation set-up for a linear model, i.e. one regressor and one error component.
-- `sim_lmm()` a linear mixed model
-- `sim_lmc()` a linear model with contamination in the model error (5% outliers in each area)
-- `sim_lmmc()` a linear mixed model with contamination in the model error and random effect (5% outliers in each area and 5% of the areas are outliers)
+- `sim_base_lm()` will return a simulation set-up for a linear model, i.e. one regressor and one error component.
+- `sim_base_lmm()` a linear mixed model
+- `sim_base_lmc()` a linear model with contamination in the model error (5% outliers in each area)
+- `sim_base_lmmc()` a linear mixed model with contamination in the model error and random effect (5% outliers in each area and 5% of the areas are outliers)
 
 
 
@@ -70,7 +70,7 @@ There are several pre-configured set-ups you can use for an easy start.
 If you are interested in aggregated information you can either draw directly from the model when specifying `nUnits = 1` or use the aggregate component. Aggregating the data is another component which can be used on the population or sample. The aggregation will simply be done after the sampling, if you haven't specified any sampling component, the population is aggregated (makes sense if you draw samples directly from the model). The variable `idU` will be lost. All variables including `idC` will be `TRUE` if any of the non-aggregated values is `TRUE` - this holds for all logical variables in the data. For categorical data (character or factor) the modus is taken. For numerical variables the mean will be taken.
 
 ```{r}
-sim_lm() %>% sim_agg()
+sim_base_lm() %>% sim_agg()
 ```
 
 
@@ -84,7 +84,7 @@ You will want to check your results regularly to see how things will work out. W
 - `autoplot` - I am unable to annotate graphics from the package `graphics`, that's why I need a plotting function using `ggplot2`. Will imitate `smoothScatter` see [this article](http://wahani.github.io/PlotNo1/) if you should be interested in how it works
 
 ```{r}
-setup <- sim_lmm()
+setup <- sim_base_lmm()
 plot(setup)
 library(ggplot2)
 autoplot(setup)

@@ -14,7 +14,7 @@ calc_var(...)
 This function is intended to be used with \code{\link{sim_calc}} and not interactively. It can be used to calculate statistics for gouping variables in the data.
 }
 \examples{
-sim_lm() \%>\% sim_comp_pop(calc_var(yExp = exp(y)))
+sim_base_lm() \%>\% sim_comp_pop(calc_var(yExp = exp(y)))
 }
 \seealso{
 \code{\link{sim_calc}}

@@ -12,7 +12,7 @@
 #' @rdname autoplot
 #' @examples
 #' \dontrun{
-#' autoplot(sim_lm())
+#' autoplot(sim_base_lm())
 #' }
 autoplot.sim_setup <-  function(object, x = "x", y = "y", ...) {
   # Get some data

@@ -8,7 +8,7 @@
 #' @export
 #' 
 #' @examples
-#' \dontrun{describe(sim_lmm())}
+#' \dontrun{describe(sim_base_lmm())}
 describe <- function(x, ...) UseMethod("describe")
 
 #' @rdname describe

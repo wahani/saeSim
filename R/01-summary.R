@@ -9,7 +9,7 @@
 #' @method summary sim_setup
 #' 
 #' @examples
-#' summary(sim_lm())
+#' summary(sim_base_lm())
 summary.sim_setup <- function(object, ...) {
   componentList <- S3Part(object, strictS3=TRUE)
   cat("General Information about", object@simName, "simulation set-up:\n")

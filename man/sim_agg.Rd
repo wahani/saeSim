@@ -16,13 +16,13 @@ Potentially you can define a \code{aggFun} yourself. Take care that it only has 
 }
 \examples{
 # Aggregating the population:
-sim_lm() \%>\% sim_agg()
+sim_base_lm() \%>\% sim_agg()
 
 # Aggregating after sampling:
-sim_lm() \%>\% sim_sample() \%>\% sim_agg()
+sim_base_lm() \%>\% sim_sample() \%>\% sim_agg()
 
 # User aggFun:
-sim_lm() \%>\% sim_agg(function(dat) dat[1, ])
+sim_base_lm() \%>\% sim_agg(function(dat) dat[1, ])
 }
 \seealso{
 \code{\link{agg_standard}}, \code{\link{sim_gen}}, \code{\link{sim_calc}}, \code{\link{sim_sample}}

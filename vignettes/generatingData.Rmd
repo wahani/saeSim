@@ -26,7 +26,7 @@ Meaning we can specify a linear mixed model set-up with the regressor `x`, the m
 library(saeSim)
 setup <- sim_base() %>% sim_gen_fe() %>% sim_gen_e() %>% sim_gen_re() %>% sim_gen_re(gen_v_sar(name = "vSp"))
 # This will result in the same set-up:
-setup <- sim_lmm() %>% sim_gen_re(gen_v_sar(name = "vSp"))
+setup <- sim_base_lmm() %>% sim_gen_re(gen_v_sar(name = "vSp"))
 ```
 
 To get the simulated data as a list (when given to the function `sim` it creates 500 Populations):

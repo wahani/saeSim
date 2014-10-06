@@ -32,7 +32,7 @@ This function can be applied to a \code{sim_setup} object or \code{sim_base}. It
 The backend for parallel computation is very experimental. You can find the code and documentation on www.github.com/wahani/parallelTools. In Windows parallelization is build around \code{\link[parallel]{clusterApply}}. If you are not using Windows the function \code{\link[parallel]{mclapply}} is used. See the parameters of \code{mclapply} how to control the parallelization. Parallizing trivial tasks in Windows will result in wasted time. Also working with large data.frames will be inefficient in Windows.
 }
 \examples{
-setup <- sim_lm()
+setup <- sim_base_lm()
 resultList <- sim(setup, R = 1)
 
 # Will return a data frame

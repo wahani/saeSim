@@ -23,7 +23,7 @@ options(markdown.HTML.header = system.file('misc', 'vignette.css', package='knit
 library(saeSim)
 setup <- sim_setup(sim_base_standard(), sim_gen_fe(), sim_gen_e(), sim_gen_re(), sim_gen_re(gen_v_sar(), "vSp"))
 # This will result in the same set-up:
-setup <- sim_lmm() %>% sim_gen_re(gen_v_sar(), "vSp")
+setup <- sim_base_lmm() %>% sim_gen_re(gen_v_sar(), "vSp")
 
 ## ----eval=FALSE----------------------------------------------------------
 #  dataList <- sim(setup)
@@ -69,7 +69,7 @@ setup %>%
            level = "sample")
 
 ## ------------------------------------------------------------------------
-sim(sim_base_standard(3, 4), sim_gen_fe(), sim_gen_e(), sim_gen_ec(), sim_popMean())
+sim(sim_base_standard(3, 4), sim_gen_fe(), sim_gen_e(), sim_gen_ec(), sim_comp_popMean())
 
 ## ------------------------------------------------------------------------
 setup

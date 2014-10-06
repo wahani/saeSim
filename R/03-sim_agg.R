@@ -11,13 +11,13 @@
 #' @export
 #' @examples
 #' # Aggregating the population:
-#' sim_lm() %>% sim_agg()
+#' sim_base_lm() %>% sim_agg()
 #' 
 #' # Aggregating after sampling:
-#' sim_lm() %>% sim_sample() %>% sim_agg()
+#' sim_base_lm() %>% sim_sample() %>% sim_agg()
 #' 
 #' # User aggFun:
-#' sim_lm() %>% sim_agg(function(dat) dat[1, ])
+#' sim_base_lm() %>% sim_agg(function(dat) dat[1, ])
 sim_agg <- function(simSetup, aggFun = agg_standard()) {
   sim_setup(simSetup, new("sim_fun", order = 7, aggFun))
 }

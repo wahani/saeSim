@@ -27,10 +27,10 @@ base_id(3, 4) %>% sim_gen_fe() %>% sim_sample(sample_csrs(1L))
 
 ```{r eval=FALSE}
 # simple random sampling:
-sim_lm() %>% sim_sample(sample_srs(size = 10L))
-sim_lm() %>% sim_sample(sample_srs(size = 0.05))
+sim_base_lm() %>% sim_sample(sample_srs(size = 10L))
+sim_base_lm() %>% sim_sample(sample_srs(size = 0.05))
 # srs in each domain/cluster
-sim_lm() %>% sim_sample(sample_csrs(size = 10L))
-sim_lm() %>% sim_sample(sample_csrs(size = rep(10L, 100)))
-sim_lm() %>% sim_sample(sample_csrs(size = 0.05))
+sim_base_lm() %>% sim_sample(sample_csrs(size = 10L))
+sim_base_lm() %>% sim_sample(sample_csrs(size = rep(10L, 100)))
+sim_base_lm() %>% sim_sample(sample_csrs(size = 0.05))
 ```

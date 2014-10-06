@@ -8,8 +8,8 @@ test_that("sim_calc and calc_var", {
     sim_resp(resp_eq(y = 10 * x + e))
   
   dat <- setup %>% 
-    sim_popMean() %>% sim_popVar %>% sim_N() %>%
-    sim_n() %>% 
+    sim_comp_popMean() %>% sim_comp_popVar %>% sim_comp_N() %>%
+    sim_comp_n() %>% 
     as.data.frame
   
   calc_lm <- function(dat) {

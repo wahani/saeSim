@@ -15,7 +15,7 @@
 #' @rdname sim
 #' @export
 #' @examples
-#' setup <- sim_lm()
+#' setup <- sim_base_lm()
 #' resultList <- sim(setup, R = 1)
 #' 
 #' # Will return a data frame

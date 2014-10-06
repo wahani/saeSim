@@ -9,7 +9,7 @@
 #' @export
 #' 
 #' @examples
-#' sim_lm() %>% sim_comp_pop(calc_var(yExp = exp(y)))
+#' sim_base_lm() %>% sim_comp_pop(calc_var(yExp = exp(y)))
 calc_var <- function(...) {
   mc <- match.call(expand.dots = TRUE)
   mc[[1]] <- quote(mutate_wrapper)

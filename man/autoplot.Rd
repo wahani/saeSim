@@ -19,7 +19,7 @@ Use this function to produce plots for an object of class \code{sim_setup} and y
 }
 \examples{
 \dontrun{
-autoplot(sim_lm())
+autoplot(sim_base_lm())
 }
 }
 

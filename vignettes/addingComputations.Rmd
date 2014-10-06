@@ -24,11 +24,11 @@ base_id(2, 3) %>% sim_gen_fe() %>% sim_gen_e() %>% sim_gen_ec() %>%
   sim_resp(resp_eq(y = 100 + x + e)) %>%
   sim_comp_pop(calc_var(popMean = mean(y)), by = "idD")
 
-sim_lm() %>% sim_N()
+sim_base_lm() %>% sim_comp_N()
 
-sim_lm() %>% 
+sim_base_lm() %>% 
   sim_sample() %>%
-  sim_n()
+  sim_comp_n()
 ```
 
 
@@ -36,7 +36,7 @@ sim_lm() %>%
 
 Since these specifications above can get lengthy and annoying there are some convenience functions (remember that all statistics are calculated within each domain):
 
-- `sim_n()` - adds the sample sizes in `n`
-- `sim_N()` - adds the population N in `N`
-- `sim_popMean()` - adds the population means
-- `sim_popVar()` - adds the population variances
+- `sim_comp_n()` - adds the sample sizes in `n`
+- `sim_comp_N()` - adds the population N in `N`
+- `sim_comp_popMean()` - adds the population means
+- `sim_comp_popVar()` - adds the population variances
