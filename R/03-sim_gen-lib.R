@@ -45,8 +45,8 @@ sim_gen_e <- function(simSetup, generator = gen_norm(0, 4, name = "e")) {
 #' @export
 sim_gen_ec <- function(simSetup,
                        generator = gen_norm(mean=0, sd=150, name = "e"), 
-                       nCont = 0.05, level = "unit", fixed = TRUE) {
-  sim_gen_cont(simSetup, generator = generator, nCont = nCont, level = level, fixed = fixed)
+                       nCont = 0.05, type = "unit", areaVar = "idD", fixed = TRUE) {
+  sim_gen_cont(simSetup, generator = generator, nCont = nCont, type = type, areaVar = areaVar, fixed = fixed)
 }
 
 #' @rdname sim_gen
@@ -60,6 +60,6 @@ sim_gen_re <- function(simSetup, generator = gen_v_norm(name = "v")) {
 #' @export
 sim_gen_rec <- function(simSetup,
                         generator = gen_v_norm(mean=0, sd=40, name = "v"), 
-                        nCont = 0.05, level = "area", fixed = TRUE) {
-  sim_gen_ec(simSetup, generator, nCont, level, fixed)
+                        nCont = 0.05, type = "area", areaVar = "idD", fixed = TRUE) {
+  sim_gen_ec(simSetup, generator = generator, nCont = nCont, type = type, areaVar = areaVar, fixed = fixed)
 }

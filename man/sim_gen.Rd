@@ -15,12 +15,12 @@ sim_gen_fe(simSetup, generator = gen_norm(0, 4, name = "x"))
 sim_gen_e(simSetup, generator = gen_norm(0, 4, name = "e"))
 
 sim_gen_ec(simSetup, generator = gen_norm(mean = 0, sd = 150, name = "e"),
-  nCont = 0.05, level = "unit", fixed = TRUE)
+  nCont = 0.05, type = "unit", areaVar = "idD", fixed = TRUE)
 
 sim_gen_re(simSetup, generator = gen_v_norm(name = "v"))
 
 sim_gen_rec(simSetup, generator = gen_v_norm(mean = 0, sd = 40, name = "v"),
-  nCont = 0.05, level = "area", fixed = TRUE)
+  nCont = 0.05, type = "area", areaVar = "idD", fixed = TRUE)
 }
 \arguments{
 \item{generator}{generator function used to generate random numbers.}

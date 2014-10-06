@@ -61,16 +61,13 @@ sim_lmm <- function() {
 #' @rdname sim_setup_preconfigured
 #' @export
 sim_lmc <- function() {
-  sim_lm() %>% sim_gen_ec(gen_norm(mean = 0, sd = 150, name = "e"), nCont = 0.05,
-                          level = "unit", fixed = TRUE)
+  sim_lm() %>% sim_gen_ec()
 }
 
 #' @rdname sim_setup_preconfigured
 #' @export
 sim_lmmc <- function() {
   sim_lmm() %>% 
-    sim_gen_ec(gen_norm(mean = 0, sd = 150, name = "e"), nCont = 0.05,
-               level = "unit", fixed = TRUE) %>%
-    sim_gen_rec(gen_v_norm(mean = 0, sd = 40, name = "v"), nCont = 0.05,
-                level = "area", fixed = TRUE)
+    sim_gen_ec() %>%
+    sim_gen_rec()
 }

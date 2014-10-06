@@ -1,76 +1,53 @@
-setGeneric("select_cont", function(dat, nCont, level, fixed, ...) standardGeneric("select_cont"))
+select_cont <- function(dat, nCont, type, areaVar, fixed) {
+  datList <- makeDataList(dat, areaVar)
+  obs <- if(type == "unit") {
+    makeObsUnit(nCont, sapply(datList, nrow))
+  } else {
+    makeObsArea(nCont, sapply(datList, nrow), fixed)
+  }
+  mapply(selectObsFromData, datList, obs, fixed, SIMPLIFY = FALSE) %>% rbind_all
+}
 
-setMethod("select_cont", c(dat = "data.frame", nCont = "integer"), 
-          function(dat, nCont, level, fixed, ...) {
-            # Def Variables:
-            id_ind <- grepl("id", names(dat))
-            # Unit - fixed
-            if (level == "unit" & fixed) {
-              out <- rbind_all(lapply(split(dat, dat$idD), 
-                                      function(df) {
-                                        ids <- df$idU < (max(nrow(df)) - nCont + 1)
-                                        df[ids, !id_ind] <- 0
-                                        df$idC <- !ids
-                                        df
-                                      }))
-              return(out)  
-            }
-            # Unit - random
-            if (level == "unit" & !fixed) {
-              out <- rbind_all(lapply(split(dat, dat$idD), 
-                                      function(df) {
-                                        ids <- df$idU %in% sample(df$idU, max(0, nrow(df) - nCont))
-                                        df[ids, !id_ind] <- 0
-                                        df$idC <- !ids
-                                        df
-                                      }))
-              return(out)
-            }
-            # Area - fixed
-            if (level == "area" & fixed) {
-              ids <- dat$idD < max(1, max(dat$idD) - nCont + 1)
-            }
-            # Area - random
-            if (level == "area" & !fixed) {
-              ids <- dat$idD %in% sample(1:max(dat$idD), max(0, max(dat$idD) - nCont))
-            }
-            # none - random
-            if (level == "none" & fixed) {
-              ids <- 1:nrow(dat) < (nrow(dat) - nCont + 1)              
-            }
-            # none - random
-            if (level == "none" & !fixed) {
-              ids <- 1:nrow(dat) %in% sample(1:nrow(dat), max(0, nrow(dat) - nCont))
-            }
-            dat[ids, !id_ind] <- 0
-            dat$idC <- !ids
-            return(dat)
-          })
+makeDataList <- function(dat, areaVar) {
+  if(is.null(areaVar)) {
+    list(dat)
+  } else {
+    split(dat, dat[areaVar])
+  }
+}
 
-setMethod("select_cont", c(nCont = "list"), 
-          function(dat, nCont, level, fixed, ...) {
-            # area | none
-            # makes no sense
-            if (level %in% c("area", "none")) stop("A vector for nCont is not supported fore level in c('area', 'none')!")
-            # unit
-            rbind_all(mapply(select_cont, split(dat, dat$idD), nCont, 
-                             MoreArgs = list(level = level, fixed = fixed), 
-                             SIMPLIFY = FALSE))
-          })
+makeObsUnit <- function(nCont, nrowsOfDatList) {
+  if(any(nCont %% 1 != 0)) {
+    mapply(rbinom, nrowsOfDatList, 1, nCont, SIMPLIFY = FALSE) %>% sapply(sum)
+  } else {
+    rep(nCont, length.out = length(nrowsOfDatList))
+  }
+}
 
-setMethod("select_cont", c(nCont = "numeric"), 
-          function(dat, nCont, level, fixed, ...) {
-            # area
-            if (level %in% c("area")) {
-              nCont <- as.integer(ceiling(nCont * max(dat$idD)))
-            }
-            # none
-            if (level %in% c("none")) {
-              nCont <- as.integer(ceiling(nCont * nrow(dat)))
-            }
-            # unit
-            if (level == "unit") {
-              nCont <- as.list(as.integer(ceiling(nCont * sapply(split(dat$idD, dat$idD), length))))
-            }
-            select_cont(dat, nCont, level, fixed)
-          })
+makeObsArea <- function(nCont, nrowsOfDatList, fixed) {
+  numberOfAreas <- if((nCont %% 1) != 0) {
+    rbinom(length(nrowsOfDatList), 1, nCont) %>% sum
+  } else {
+    nCont
+  }
+  
+  selection <- if(fixed) {
+    1:max(length(nrowsOfDatList) - numberOfAreas, 1)
+  } else {
+    sample.int(length(nrowsOfDatList), max(0, length(nrowsOfDatList) - numberOfAreas))
+  }
+  
+  nrowsOfDatList[selection] <- 0
+  nrowsOfDatList
+}
+
+selectObsFromData <- function(dat, obs, fixed) {
+  selection <- if(fixed) {
+    if(obs == 0) numeric(0) else (max(nrow(dat) - obs + 1, 1)):nrow(dat)
+  } else {
+    sample.int(nrow(dat), min(obs, nrow(dat)))
+  }
+  dat[!((1:nrow(dat)) %in% selection), ] <- 0
+  dat$idC <- (1:nrow(dat)) %in% selection
+  dat
+}

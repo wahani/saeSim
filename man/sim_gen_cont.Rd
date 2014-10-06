@@ -3,14 +3,16 @@
 \alias{sim_gen_cont}
 \title{Generation Component for contamination}
 \usage{
-sim_gen_cont(simSetup, generator, nCont, level, fixed)
+sim_gen_cont(simSetup, generator, nCont, type, areaVar = NULL, fixed = TRUE)
 }
 \arguments{
-\item{nCont}{gives the number of contaminated observations. Values between 0 and 1 will be trated as proportion. If length is larger 1, the expected length is the number of domains, you can specify something else in each domain. Integers are expected in that cas - numeric will be converted to integer.}
+\item{nCont}{gives the number of contaminated observations. Values between 0 and 1 will be trated as probability. If length is larger 1, the expected length is the number of areas.}
 
-\item{level}{"unit", "area" or "none" - is the whole area contaminated, units inside an area or random observations in the data.}
+\item{type}{"unit" or "area" - unit- or area-level contamination.}
 
-\item{fixed}{TRUE fixes the observations which will be contaminated. FALSE will result in a random selection of contaminated observations. Default is NULL for non-contaminated scenarios.}
+\item{areaVar}{character with variable name(s) identifying areas.}
+
+\item{fixed}{TRUE fixes the observations which will be contaminated. FALSE will result in a random selection of observations or areas.}
 }
 \description{
 Generation Component for contamination

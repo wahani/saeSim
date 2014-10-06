@@ -11,15 +11,15 @@ test_that("Method for base", {
     sim_gen_re(gen_v_sar(mean=0, sd=2, rho=0.5, type="rook", name = "v_sp")) %>%
     # Adding outliers in each error-component:
     # 5% in each area,at least 1, those with highest ID:
-    sim_gen_ec(gen_norm(sd = 150), nCont=0.05, level="unit", fixed=TRUE) %>%
+    sim_gen_ec(gen_norm(sd = 150), nCont=0.05, type="unit", "idD", fixed=TRUE) %>%
     # 5% of the areas, at least 1, those with highest ID
-    sim_gen_rec(gen_v_norm(sd = 50), nCont=0.05, level="area", fixed=TRUE) %>%
+    sim_gen_rec(gen_v_norm(sd = 50), nCont=0.05, type="area", "idD", fixed=TRUE) %>%
     # 2 Areas, randomly chosen
-    sim_gen_rec(gen_v_sar(sd = 50, name = "v_sp"), nCont=2, level="area", fixed=FALSE) %>%
+    sim_gen_rec(gen_v_sar(sd = 50, name = "v_sp"), nCont=2, type="area", "idD", fixed=FALSE) %>%
     # 1 in area1, 2 in area2, 1 in area3
-    sim_gen_rec(gen_norm(mean = 10, sd = 1), nCont = c(1, 2, 1), level = "unit", fixed = TRUE) %>%
+    sim_gen_rec(gen_norm(mean = 10, sd = 1), nCont = c(1, 2, 1), type = "unit", "idD", fixed = TRUE) %>%
     # 2 outliers, somewhere...
-    sim_gen_rec(gen_norm(mean = 10, sd = 1), nCont = 2, level = "none", fixed = FALSE) %>%
+    sim_gen_rec(gen_norm(mean = 10, sd = 1), nCont = 2, type = "unit", NULL, fixed = FALSE) %>%
     as.data.frame
   
   expect_that(nrow(dat), equals(12))
