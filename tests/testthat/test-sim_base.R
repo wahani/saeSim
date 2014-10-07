@@ -1,9 +1,9 @@
 context("sim_base")
-test_that("base_addId", {
+test_that("base_add_id", {
   data(diamonds, envir=environment(), package = "ggplot2")
   diamonds <- diamonds[1:1000, ]
   diamonds["clusterVariable"] <- 1:nrow(diamonds)
-  setup <- sim_base(base_addId(data = diamonds, "clusterVariable"))
+  setup <- sim_base(base_add_id(data = diamonds, "clusterVariable"))
   dat <- sim(setup %>% sim_gen_e())[[1]]
   
   expect_equal(nrow(dat), 1000)

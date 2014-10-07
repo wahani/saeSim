@@ -14,28 +14,28 @@ test_that("Basic sampling functionality", {
   setup <- sim_base(base_id(nDomains=3, nUnits = 4))
   
   setup %>% sim_sample(sample_fraction(size = 0.05)) %>% as.data.frame %>% 
-    nrow %>% expect_that(equals(1))
+    nrow %>% expect_equal(1)
   
   setup %>% sim_sample(sample_number(size = 5L)) %>% as.data.frame %>% 
-    nrow %>% expect_that(equals(5))
+    nrow %>% expect_equal(5)
   
   setup %>% sim_sample(sample_number(size = 2L, groupVars = "idD")) %>% as.data.frame %>% 
-    nrow %>% expect_that(equals(6))
+    nrow %>% expect_equal(6)
   
   setup <- base_id(3, 100)
   setup %>% sim_sample(sample_fraction(size = 0.01, groupVars = "idD")) %>% as.data.frame %>% 
-    nrow %>% expect_that(equals(3))
+    nrow %>% expect_equal(3)
 })
 
 test_that("applying the sampling functions correctly", {
   setup <- sim_base(base_id(nDomains=3, nUnits = 10)) %>%
     sim_gen_fe(generator = gen_norm(mean=50, sd=20, name = "x"))
   
-  expect_that(nrow(sim(setup %>% sim_sample())[[1]]), equals(15))
-  expect_that(nrow(sim(setup %>% sim_sample(sample_fraction(0.05)))[[1]]), equals(2))
+  expect_equal(nrow(sim(setup %>% sim_sample())[[1]]), 15)
+  expect_equal(nrow(sim(setup %>% sim_sample(sample_fraction(0.05)))[[1]]), (2))
   
-  expect_that(nrow(sim(setup %>% sim_sample(sample_number(5L)))[[1]]), equals(5))
-  expect_that(nrow(sim(setup %>% sim_sample(sample_number(c(3), groupVars = "idD")))[[1]]), equals(9))
+  expect_equal(nrow(sim(setup %>% sim_sample(sample_number(5L)))[[1]]), (5))
+  expect_equal(nrow(sim(setup %>% sim_sample(sample_number(c(3), groupVars = "idD")))[[1]]), (9))
 })
 
 test_that("sample_srs() can handle integer and numeric", {
@@ -44,8 +44,8 @@ test_that("sample_srs() can handle integer and numeric", {
   result2 <- setup %>% sim_sample(sample_fraction(0.5)) %>% as.data.frame
   result3 <- setup %>% sim_sample(sample_number(5.5)) %>% as.data.frame
   result4 <- setup %>% sim_sample(sample_number(1L)) %>% as.data.frame
-  expect_that(nrow(result1), equals(1))
-  expect_that(nrow(result2), equals(5000))
-  expect_that(nrow(result3), equals(5))
-  expect_that(nrow(result4), equals(1))
+  expect_equal(nrow(result1), (1))
+  expect_equal(nrow(result2), (5000))
+  expect_equal(nrow(result3), (5))
+  expect_equal(nrow(result4), (1))
 })

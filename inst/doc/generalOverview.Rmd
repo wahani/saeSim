@@ -166,22 +166,22 @@ In addition you may want to keep some information from the population or sample.
 
 Of course the real workhorse is the `calcFun`. At this time you can only calculate something for each domain using the following 'calculator':
 
-- `calc_var(varName = "y", funList = list(mean = mean, var = var), exclude = NULL, by = "idD", newName = varName)` - `exclude` will determine if any of the observations will be excluded from the calculation
+- `comp_var(varName = "y", funList = list(mean = mean, var = var), exclude = NULL, by = "idD", newName = varName)` - `exclude` will determine if any of the observations will be excluded from the calculation
 
 Consider the following examples to see how this function can be used:  
   
 ```{r}
 sim(sim_base(base_id(3, 4)), sim_gen_fe(), sim_gen_e(), sim_gen_ec(), 
-    sim_calc(calc_var(varName = "y", funList = list(mean = mean, var = var), 
+    sim_calc(comp_var(varName = "y", funList = list(mean = mean, var = var), 
                       exclude = "idC", by = "idD"), level = "population"))
 sim(sim_base(base_id(3, 4)), sim_gen_fe(), sim_gen_e(), sim_gen_ec(), 
-    sim_calc(calc_var(varName = "y", funList = list(mean = mean, var = var), 
+    sim_calc(comp_var(varName = "y", funList = list(mean = mean, var = var), 
                       exclude = NULL, by = "idD"), level = "population"))
-setup %>% sim_calc(calc_var(varName = "y", funList = list(length), newName = "N"), 
+setup %>% sim_calc(comp_var(varName = "y", funList = list(length), newName = "N"), 
                    level = "population")
 setup %>% 
   sim_sample() %>%
-  sim_calc(calc_var(varName = "y", funList = list(length), newName = "n"), 
+  sim_calc(comp_var(varName = "y", funList = list(length), newName = "n"), 
            level = "sample")
 ```
 

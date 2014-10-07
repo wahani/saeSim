@@ -1,8 +1,7 @@
-#' Construct ID-Variables
-#' @description This function can be used to construct a data frame with grouping/\code{ID} variables. This is helpful for user written generator functions.
-#' @param nDomains The number of domains. Can be considered as cluster variable.
-#' @param nUnits The number of units in each domain. If \code{length(nUnits) > 1} each elemnt is the number of units in each domain respectively.
-#' @param ... arguments passed to methods.
+#' Construct data with id-variables
+#' @description This function constructs a data frame with grouping/\code{id} variables.
+#' @param nDomains The number of domains.
+#' @param nUnits The number of units in each domain. Can have \code{length(nUnits) > 1}.
 #' 
 #' @rdname base_id
 #' @export
@@ -15,10 +14,23 @@ base_id <- function(nDomains = 10, nUnits = 10) {
             if(length(nUnits) > 1) length(nUnits) == nDomains else TRUE)
   
   out <- data.frame(idD = rep(1:nDomains, times = nUnits)) %>% 
-    group_by("idD") %>% mutate(idU = 1:n()) %>% arrange(idD, idU)
+    s_group_by("idD") %>% mutate(idU = 1:n()) %>% s_arrange("idD", "idU")
   as.data.frame(out)
   
 }
 
-
-
+#' Add id-variables to data
+#' 
+#' Use this function to add id-variables to your data.
+#' 
+#' @param data a data.frame.
+#' @param domainId variable names in \code{data} as character which will identify the areas/domains/groups/cluster in the data.
+#' 
+#' @rdname base_add_id
+#' @export
+base_add_id <- function(data, domainId) {
+  dataList <- split(data, data[domainId])
+  nUnits <- sapply(dataList, nrow)
+  nDomains <- length(nUnits)
+  cbind(base_id(nDomains, nUnits), rbind_all(dataList))
+}

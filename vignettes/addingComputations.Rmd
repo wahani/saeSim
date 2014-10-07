@@ -14,15 +14,15 @@ In addition you may want to keep some information from the population or sample.
 
 Of course the real workhorse is the `calcFun`. At this time you can only calculate something for each domain using the following 'calculator':
 
-- `calc_var(varName = "y", funList = list(mean = mean, var = var), exclude = NULL, by = "idD", newName = varName)` - `exclude` will determine if any of the observations will be excluded from the calculation
+- `comp_var(varName = "y", funList = list(mean = mean, var = var), exclude = NULL, by = "idD", newName = varName)` - `exclude` will determine if any of the observations will be excluded from the calculation
 
 Consider the following examples to see how this function can be used:  
   
 ```{r}
 library(saeSim)
 base_id(2, 3) %>% sim_gen_fe() %>% sim_gen_e() %>% sim_gen_ec() %>% 
-  sim_resp(resp_eq(y = 100 + x + e)) %>%
-  sim_comp_pop(calc_var(popMean = mean(y)), by = "idD")
+  sim_resp_eq(y = 100 + x + e) %>%
+  sim_comp_pop(comp_var(popMean = mean(y)), by = "idD")
 
 sim_base_lm() %>% sim_comp_N()
 

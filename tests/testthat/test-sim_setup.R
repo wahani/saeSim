@@ -4,7 +4,7 @@ test_that("sim_setup", {
                      sim_gen_fe() %>%
                      sim_gen_e(), simName = "")
   
-  expect_that(length(tmp), equals(2))
+  expect_equal(length(tmp), (2))
   expect_that(all(sapply(tmp, inherits, what = "sim_fun")), is_true())
 })
 
@@ -32,7 +32,7 @@ test_that("autoplot", {
 
 test_that("Id construction for not simulated data.frames", {
   dat <- data.frame(id = 1:10, x = rnorm(10))
-  dat1 <- sim_base(base_addId(dat, "id")) %>% as.data.frame
+  dat1 <- sim_base(base_add_id(dat, "id")) %>% as.data.frame
   resultList <- sim_setup(dat, simName = "testthat") %>% sim(R = 10)
   
   expect_equal(length(resultList), 10)
@@ -41,7 +41,7 @@ test_that("Id construction for not simulated data.frames", {
 
 test_that("sim_setup sorts its content", {
   setup <- sim_base(base_id(3, 3)) %>% sim_agg() %>% sim_sample() %>% sim_comp_n() %>% sim_comp_N() %>% sim_gen_re() %>% sim_gen_fe()
-  setup1 <- sim_base(base_addId(data.frame(var = rep(c(1, 2), 10)), "var")) %>% sim_gen_fe() %>% sim_gen_e() %>% sim_agg() %>% sim_resp(resp_eq(y = 100 + x + e))
+  setup1 <- sim_base(base_add_id(data.frame(var = rep(c(1, 2), 10)), "var")) %>% sim_gen_fe() %>% sim_gen_e() %>% sim_agg() %>% sim_resp_eq(y = 100 + x + e)
   orderAttr <- sapply(setup, function(fun) fun@order)
   
   expect_equal(length(setup), 6)

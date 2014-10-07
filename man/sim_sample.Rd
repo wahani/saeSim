@@ -6,10 +6,12 @@
 sim_sample(simSetup, smplFun = sample_number(size = 5L, groupVars = "idD"))
 }
 \arguments{
-\item{smplFun}{function which controls the sampling process. \code{\link{sample_csrs}} is the default.}
+\item{simSetup}{a \code{sim_setup}.}
+
+\item{smplFun}{function which controls the sampling process.}
 }
 \description{
-One of the components which can be added to a simulation set-up. This component can be used to add a sampling mechanism to the simulation set-up. A sample will be drawn after the population is generated (\code{\link{sim_gen}}) and variables on the population are computed (\code{\link{sim_calc}}).
+One of the components which can be added to a \code{sim_setup}. This component can be used to add a sampling mechanism to the simulation set-up. A sample will be drawn after the population is generated (\code{\link{sim_gen}}) and variables on the population are computed (\code{\link{sim_comp_pop}}).
 }
 \details{
 Potentially you can define a \code{smplFun} yourself. Take care that it has one argument, named \code{dat} being the data as data.frame, and returns the sample as data.frame.
@@ -29,6 +31,6 @@ sample_mySampleFun <- function(dat) {
 sim_base_lm() \%>\% sim_sample(sample_mySampleFun)
 }
 \seealso{
-\code{\link{sample_srs}}, \code{\link{sample_csrs}}, \code{\link{sample_sampleWrapper}}
+\code{\link{sample_number}}, \code{\link{sample_fraction}}
 }
 

@@ -1,16 +1,15 @@
-#' Calculator function
+#' Compute variables in data
 #' 
-#' This function is intended to be used with \code{\link{sim_calc}} and not interactively. It can be used to calculate statistics for gouping variables in the data.
+#' This function is intended to be used with \code{\link{sim_comp_pop}}, \code{\link{sim_comp_sample}} or \code{\link{sim_comp_agg}} and not interactively. This is a wrapper around \code{\link[dplyr]{mutate}}
 #' 
-#' @param by variable names as character to split the data. Computed values will be constant within each group.
 #' @param ... variables interpreted in the context of that data frame.
 #' 
-#' @seealso \code{\link{sim_calc}}
+#' @seealso \code{\link{sim_comp_pop}}, \code{\link{sim_comp_sample}}, \code{\link{sim_comp_agg}}
 #' @export
 #' 
 #' @examples
-#' sim_base_lm() %>% sim_comp_pop(calc_var(yExp = exp(y)))
-calc_var <- function(...) {
+#' sim_base_lm() %>% sim_comp_pop(comp_var(yExp = exp(y)))
+comp_var <- function(...) {
   mc <- match.call(expand.dots = TRUE)
   mc[[1]] <- quote(mutate_wrapper)
   eval(mc)

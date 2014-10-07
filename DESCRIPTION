@@ -1,14 +1,14 @@
 Package: saeSim
 Type: Package
 Title: Simulation Tools for Small Area Estimation
-Date: 2014-10-03
+Date: 2014-10-07
 Version: 0.5.0
 Author: Sebastian Warnholz <Sebastian.Warnholz@fu-berlin.de>
 Maintainer: Sebastian Warnholz <Sebastian.Warnholz@fu-berlin.de>
-URL: wahani.github.io/saeSim
 Depends:
     R(>= 3.1),
-    methods
+    methods,
+    magrittr
 Imports:
     dplyr(>= 0.2),
     ggplot2,
@@ -19,12 +19,10 @@ Suggests:
     testthat,
     knitr
 Description: Tools for the simulation of data in the context of small area
-    estimation. They will organize your simulation set-up into phases:
-    Generating data - computing - drawing samples - computing - aggregating -
-    computing. At the moment the tools are only intended to support model-based
-    simulations. An experimental link for design-based studies is implemented.
-    Also an experimental link to easily run simulations in parallel is
-    implemented.
+    estimation. Combine all steps of your simulation - from data generation
+    over drawing samples to model fitting - in one object. This enables easy
+    modification and combination of different scenarios. You can store your
+    results in a folder or start the simulation in parallel.
 Roxygen: list(wrap = FALSE)
 License: GPL-3 | file LICENSE
 VignetteBuilder: knitr

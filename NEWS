@@ -3,12 +3,13 @@ Version 0.5.0
 - R, the number of reps, is not an argument of sim_setup anymore but only of sim
 - Generator functions are now functions which f: data.frame -> data.frame
 - The response is not generated automatically but using the sim_resp component
-- calc_var function is now a wrapper around dplyr::mutate
+- comp_var function is now a wrapper around dplyr::mutate
 - sample_number and sample_fraction replace sample_srs and sample_csrs
 - agg_standard was renamed to agg_all
 - calc was renamed to comp; sim_n, sim_N, sim_popMean, sim_popVar are renamed to sim_comp_*
 - Contaminated data is now included in sim_gen_cont; argument names have changed
 - The base can explicitly be set by sim_base or simply by starting from a data.frame
+- gen_generic supports a groupVar instead of level
 
 Version 0.4.7
 

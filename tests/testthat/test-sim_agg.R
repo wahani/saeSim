@@ -2,15 +2,15 @@ context("sim_agg")
 
 test_that("Basic functionality", {
   setup <- sim_setup(sim_base()) %>% sim_gen_e() %>% sim_gen_fe() %>% 
-    sim_resp(resp_eq(y = 100 + x + e)) %>%
+    sim_resp_eq(y = 100 + x + e) %>%
     sim_comp_N() %>% 
-    sim_comp_pop(calc_var(aFactor = as.factor(c("a", "b") %>% rep(length.out = length(y))),
+    sim_comp_pop(comp_var(aFactor = as.factor(c("a", "b") %>% rep(length.out = length(y))),
                           aCharacter = c("a", "b") %>% rep(length.out = length(y)))) %>% 
     sim_agg()
   
   dat <- sim(setup)[[1]]
   
-  expect_that(nrow(dat), equals(100))
+  expect_equal(nrow(dat), 100)
   expect_that(dat$idU, is_a("NULL"))
   expect_that(dat$yMake_factor, is_a("NULL"))
   expect_that(dat$yMake_character, is_a("NULL"))
@@ -30,7 +30,7 @@ test_that("Basic functionality", {
 
 test_that("Attributes are preserved", {
   setup <- sim_base() %>% sim_gen_e() %>% sim_gen_fe() %>% 
-    sim_resp(resp_eq(y = 100 + x + e)) %>%
+    sim_resp_eq(y = 100 + x + e) %>%
     sim_agg() %>%
     sim_comp_pop(function(dat) {attr(dat, "x") <- 2; dat})
   

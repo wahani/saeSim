@@ -19,7 +19,7 @@ Consider a linear mixed model. It contains two components. A fixed effects part,
 ```{r}
 library(saeSim)
 setup <- sim_base() %>% sim_gen_fe() %>% sim_gen_e() %>% 
-  sim_resp(resp_eq(y = 100 + 2 * x + e)) %>% sim_simName("Doku")
+  sim_resp_eq(y = 100 + 2 * x + e) %>% sim_simName("Doku")
 ```
 
 `sim_base()` is responsible to supply a `data.frame` to which variables can be added. The default is to create a `data.frame` with indicator variables `idD` and `idU` (2-level-model), which uniquly identify observations. `sim_resp` will add a variable `y` equal to a 

@@ -6,13 +6,15 @@
 sim_agg(simSetup, aggFun = agg_all())
 }
 \arguments{
+\item{simSetup}{a \code{sim_setup}.}
+
 \item{aggFun}{function which controls the aggregation process. At the moment only \code{\link{agg_all}} is defined.}
 }
 \description{
-One of the components which can be added to a simulation set-up. Aggregating the data is a simulation component which can be used to aggregate the population or sample. The aggregation will simply be done after the sampling, if you haven't specified any sampling component, the population is aggregated (makes sense if you draw samples directly from the model). The unit identifier \code{idU} will be deleted.
+One of the components which can be added to a simulation set-up. Aggregating the data is a simulation component which can be used to aggregate the population or sample. The aggregation will simply be done after the sampling, if you haven't specified any sampling component, the population is aggregated (makes sense if you draw samples directly from the model).
 }
 \details{
-Potentially you can define a \code{aggFun} yourself. Take care that it only has one argument, named \code{dat}, and returns the aggregated data as \code{data.frame}.
+Potentially you can define an \code{aggFun} yourself. Take care that it only has one argument, named \code{dat}, and returns the aggregated data as \code{data.frame}.
 }
 \examples{
 # Aggregating the population:
@@ -25,6 +27,6 @@ sim_base_lm() \%>\% sim_sample() \%>\% sim_agg()
 sim_base_lm() \%>\% sim_agg(function(dat) dat[1, ])
 }
 \seealso{
-\code{\link{agg_all}}, \code{\link{sim_gen}}, \code{\link{sim_calc}}, \code{\link{sim_sample}}
+\code{\link{agg_all}}, \code{\link{sim_gen}}, \code{\link{sim_comp_pop}}, \code{\link{sim_sample}}, , \code{\link{sim_comp_sample}}
 }
 

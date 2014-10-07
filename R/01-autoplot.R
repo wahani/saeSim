@@ -1,4 +1,4 @@
-#' Autoplot methods
+#' Autoplot method
 #' 
 #' Use this function to produce plots for an object of class \code{sim_setup} and you like to have plots based on ggplot2. At this time it is a ggplot2 implementation which mimics the behavior of \code{\link{smoothScatter}} without all the options.
 #' 

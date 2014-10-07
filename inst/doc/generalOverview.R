@@ -56,16 +56,16 @@ sim_setup(setup, sim_agg())
 
 ## ------------------------------------------------------------------------
 sim(sim_base_standard(3, 4), sim_gen_fe(), sim_gen_e(), sim_gen_ec(), 
-    sim_calc(calc_var(varName = "y", funList = list(mean = mean, var = var), 
+    sim_calc(comp_var(varName = "y", funList = list(mean = mean, var = var), 
                       exclude = "idC", by = "idD"), level = "population"))
 sim(sim_base_standard(3, 4), sim_gen_fe(), sim_gen_e(), sim_gen_ec(), 
-    sim_calc(calc_var(varName = "y", funList = list(mean = mean, var = var), 
+    sim_calc(comp_var(varName = "y", funList = list(mean = mean, var = var), 
                       exclude = NULL, by = "idD"), level = "population"))
-setup %>% sim_calc(calc_var(varName = "y", funList = list(length), newName = "N"), 
+setup %>% sim_calc(comp_var(varName = "y", funList = list(length), newName = "N"), 
                    level = "population")
 setup %>% 
   sim_sample() %>%
-  sim_calc(calc_var(varName = "y", funList = list(length), newName = "n"), 
+  sim_calc(comp_var(varName = "y", funList = list(length), newName = "n"), 
            level = "sample")
 
 ## ------------------------------------------------------------------------

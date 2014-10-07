@@ -4,10 +4,10 @@ test_that("sim_generate for smstp_fe", code={
     sim_gen_fe() %>% as.data.frame
   
   expect_is(test_out, "data.frame")
-  expect_that(length(test_out), equals(3))
-  expect_that(nrow(test_out), equals(8))
-  expect_that(max(test_out$idU), equals(5))
-  expect_that(max(test_out$idD), equals(2))
+  expect_equal(length(test_out), 3)
+  expect_equal(nrow(test_out), 8)
+  expect_equal(max(test_out$idU), 5)
+  expect_equal(max(test_out$idD), 2)
 })
 
 test_that("sim_gen", code={
@@ -22,7 +22,7 @@ test_that("sim_gen", code={
   set.seed(1)
   result2 <- sim(setup2, R = 1)
   
-  expect_that(result2, equals(result1))
+  expect_equal(result2, result1)
 })
 
 test_that("gen_generic", {

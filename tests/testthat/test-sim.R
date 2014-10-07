@@ -22,9 +22,9 @@ test_that("Method for base", {
     sim_gen_rec(gen_norm(mean = 10, sd = 1), nCont = 2, type = "unit", NULL, fixed = FALSE) %>%
     as.data.frame
   
-  expect_that(nrow(dat), equals(12))
-  expect_that(ncol(dat), equals(7))
-  expect_that(all(c("idU", "idD") %in% names(dat)), is_true())
+  expect_equal(nrow(dat), 12)
+  expect_equal(ncol(dat), 7)
+  expect_true(all(c("idU", "idD") %in% names(dat)))
   
 })
 
@@ -33,8 +33,8 @@ test_that("Method for sim_setup", {
     sim_gen_fe() %>% sim_gen_e()
   datList <- sim(setup %>% sim_simName("test"), R = 500)
   
-  expect_that(length(datList), equals(500))
-  expect_that(max(rbind_all(datList)$idR), equals(500))
+  expect_equal(length(datList), (500))
+  expect_equal(max(rbind_all(datList)$idR), (500))
   expect_that(all(rbind_all(datList)$simName == "test"), is_true())
   
 })

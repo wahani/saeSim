@@ -20,7 +20,7 @@ sd_section("Generators",
 sd_section("Calculator Functions",
            "There is only one preconfigured calculator. The `sim_calc` component
            gives you access for your own calculator functions.",
-           c("calc_var"))
+           c("comp_var"))
 
 sd_section("Sampling Functions",
            "Use these functions to control the sampling process.",

@@ -1,6 +1,6 @@
-#' Sampling function
+#' Sampling functions
 #' 
-#' This is a wrapper around \link[dplyr]{sample_frac}.
+#' This function is intended to be used with \code{\link{sim_sample}} and not interactively. This is a wrapper around \link[dplyr]{sample_frac} and \link[dplyr]{sample_n}.
 #' 
 #' @param groupVars character with names of variables to be used for grouping.
 #' 
@@ -9,6 +9,9 @@
 #' @rdname sampling
 #' @export
 #' 
+#' @examples
+#' sim_base_lm() %>% sim_sample(sample_number(5))
+#' sim_base_lm() %>% sim_sample(sample_fraction(0.5))
 sample_fraction <- function(size, replace = FALSE, weight = NULL, groupVars = NULL) {
   force(size); force(replace); force(weight); force(groupVars)
   function(dat) {

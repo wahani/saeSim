@@ -6,7 +6,7 @@
 \method{summary}{sim_setup}(object, ...)
 }
 \arguments{
-\item{object}{a simulation setup constructed with \code{\link{sim_setup}}.}
+\item{object}{a \code{sim_setup}.}
 
 \item{...}{nothing to pass to here.}
 }

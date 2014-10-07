@@ -2,7 +2,7 @@
 #' 
 #' Reports a summary of the simulation setup.
 #' 
-#' @param object a simulation setup constructed with \code{\link{sim_setup}}.
+#' @param object a \code{sim_setup}.
 #' @param ... nothing to pass to here.
 #' 
 #' @export

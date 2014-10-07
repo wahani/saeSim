@@ -3,8 +3,6 @@
 #' @import methods
 #' @import ggplot2
 #' @import parallel
-#' @export %>%
-#' @export autoplot
 
 ################################################################################
 

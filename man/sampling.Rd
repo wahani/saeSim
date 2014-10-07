@@ -2,7 +2,7 @@
 \name{sample_fraction}
 \alias{sample_fraction}
 \alias{sample_number}
-\title{Sampling function}
+\title{Sampling functions}
 \usage{
 sample_fraction(size, replace = FALSE, weight = NULL, groupVars = NULL)
 
@@ -23,6 +23,10 @@ standardised to sum to 1.}
 \item{groupVars}{character with names of variables to be used for grouping.}
 }
 \description{
-This is a wrapper around \link[dplyr]{sample_frac}.
+This function is intended to be used with \code{\link{sim_sample}} and not interactively. This is a wrapper around \link[dplyr]{sample_frac} and \link[dplyr]{sample_n}.
+}
+\examples{
+sim_base_lm() \%>\% sim_sample(sample_number(5))
+sim_base_lm() \%>\% sim_sample(sample_fraction(0.5))
 }
 

@@ -1,12 +1,13 @@
 #' Sampling component
 #' 
-#' One of the components which can be added to a simulation set-up. This component can be used to add a sampling mechanism to the simulation set-up. A sample will be drawn after the population is generated (\code{\link{sim_gen}}) and variables on the population are computed (\code{\link{sim_calc}}).
+#' One of the components which can be added to a \code{sim_setup}. This component can be used to add a sampling mechanism to the simulation set-up. A sample will be drawn after the population is generated (\code{\link{sim_gen}}) and variables on the population are computed (\code{\link{sim_comp_pop}}).
 #' 
-#' @param smplFun function which controls the sampling process. \code{\link{sample_csrs}} is the default.
+#' @param smplFun function which controls the sampling process.
+#' @inheritParams sim_agg
 #' 
 #' @details Potentially you can define a \code{smplFun} yourself. Take care that it has one argument, named \code{dat} being the data as data.frame, and returns the sample as data.frame.
 #' 
-#' @seealso \code{\link{sample_srs}}, \code{\link{sample_csrs}}, \code{\link{sample_sampleWrapper}}
+#' @seealso \code{\link{sample_number}}, \code{\link{sample_fraction}}
 #' 
 #' @export
 #' @examples
