@@ -1,4 +1,5 @@
 ## saeSim
+[![Build Status](https://travis-ci.org/wahani/saeSim.png?branch=master)](https://travis-ci.org/wahani/saeSim)
 
 Tools for the simulation of data in the context of small area estimation. They will organize your simulation set-up into phases:
   1. Generating data 
@@ -32,3 +33,4 @@ install_github("wahani/saeSim")
   - The sample_* allow you to control the sampling process
   - Also you can compute statistics on the population, the sample and the aggregate.
   - For area level information, you can easily aggregate the sample or population.
+

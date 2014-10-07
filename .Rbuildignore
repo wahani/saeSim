@@ -6,3 +6,4 @@ devel
 .gitignore
 .Rprofile
 README.md
+^\.travis\.yml$
