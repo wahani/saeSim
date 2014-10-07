@@ -1,7 +1,7 @@
 context("sim_agg")
 
 test_that("Basic functionality", {
-  setup <- sim_setup(sim_base()) %>% sim_gen_e() %>% sim_gen_fe() %>% 
+  setup <- sim_base() %>% sim_gen_e() %>% sim_gen_fe() %>% 
     sim_resp_eq(y = 100 + x + e) %>%
     sim_comp_N() %>% 
     sim_comp_pop(comp_var(aFactor = as.factor(c("a", "b") %>% rep(length.out = length(y))),

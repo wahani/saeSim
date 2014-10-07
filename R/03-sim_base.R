@@ -31,14 +31,14 @@ sim_base_lm <- function() {
   sim_base() %>% 
     sim_gen_fe(gen_norm(0, 4, name = "x")) %>% 
     sim_gen_e(gen_norm(0, 4, name = "e")) %>%
-    sim_resp_eq(y = 100 + x + e)
+    sim_resp(function(dat) s_mutate(dat, "y = 100 + x + e"))
 }
 
 #' @rdname sim_setup_preconfigured
 #' @export
 sim_base_lmm <- function() {
   sim_base_lm() %>% sim_gen_re(gen_v_norm(0, 1, name = "v")) %>% 
-    sim_resp_eq(y = y + v)
+    sim_resp(function(dat) s_mutate(dat, "y = y + v"))
 }
 
 #' @rdname sim_setup_preconfigured

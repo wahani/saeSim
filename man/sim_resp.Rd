@@ -13,7 +13,8 @@ sim_resp_eq(simSetup, ...)
 
 \item{respFun}{a function constructing the response variable}
 
-\item{...}{variables interpreted in the context of that data frame.}
+\item{...}{Name-value pairs of expressions. Use \code{NULL} to drop
+a variable.}
 }
 \description{
 One of the components which can be added to a \code{sim_setup}.

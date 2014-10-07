@@ -3,6 +3,8 @@
 #' These are some preconfigured generation components and all wrappers around \code{\link{sim_gen}} and \code{\link{sim_gen_cont}}.
 #' 
 #' @inheritParams sim_gen_cont
+#' @inheritParams sim_gen
+#' @inheritParams sim_agg
 #' 
 #' @details \code{fe}: fixed-effect component; \code{e}: model-error; \code{ec}: contaminated model error; \code{re}: random-effect (error constant for each domain); \code{rec} contaminated random-effect. Note that for contamination you are expected to add both, a non-contaminated component and a contaminated component. They are simply added up in the response \code{y}.
 #' @rdname sim_gen_preconf

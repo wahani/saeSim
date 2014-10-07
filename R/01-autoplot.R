@@ -39,3 +39,8 @@ autoplot.sim_setup <-  function(object, x = "x", y = "y", ...) {
     scale_fill_gradientn(colours = colorRampPalette(c("white", blues9))(256)) + 
     theme_classic() + theme(legend.position = "none")
 }
+
+#' @name autoplot
+#' @export autoplot
+#' @rdname autoplot
+NULL

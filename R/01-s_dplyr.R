@@ -13,3 +13,7 @@ eval.string.dplyr = function(.data, .fun.name, ...) {
   df = eval(parse(text=code,srcfile=NULL))
   df
 }
+
+s_mutate = function(.data, ...) {
+  eval.string.dplyr(.data,"mutate", ...)
+}

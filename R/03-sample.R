@@ -16,10 +16,10 @@ sample_fraction <- function(size, replace = FALSE, weight = NULL, groupVars = NU
   force(size); force(replace); force(weight); force(groupVars)
   function(dat) {
     if(is.null(groupVars)) {
-      dat %>% dplyr:::sample_frac.data.frame(size = size, replace = replace, weight = weight)
+      dat %>% sample_frac(size = size, replace = replace, weight = weight)
     } else {
       s_group_by(dat, groupVars) %>% 
-        dplyr:::sample_frac.grouped_df(size = size, replace = replace, weight = weight) %>% as.data.frame
+        sample_frac(size = size, replace = replace, weight = weight) %>% as.data.frame
     }
   }
 }
@@ -30,10 +30,10 @@ sample_number <- function(size, replace = FALSE, weight = NULL, groupVars = NULL
   force(size); force(replace); force(weight); force(groupVars)
   function(dat) {
     if(is.null(groupVars)) {
-      dat %>% dplyr:::sample_n.data.frame(size = size, replace = replace, weight = weight)
+      dat %>% sample_n(size = size, replace = replace, weight = weight)
     } else {
       s_group_by(dat, groupVars) %>% 
-        dplyr:::sample_n.grouped_df(size = size, replace = replace, weight = weight) %>% as.data.frame
+        sample_n(size = size, replace = replace, weight = weight) %>% as.data.frame
     }
   }
 }

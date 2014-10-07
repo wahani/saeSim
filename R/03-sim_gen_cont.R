@@ -2,6 +2,7 @@
 #' 
 #' One of the components which can be added to a \code{sim_setup}. It is applied after functions added with \code{\link{sim_gen}}.
 #' 
+#' @inheritParams sim_agg
 #' @inheritParams sim_gen
 #' 
 #' @param nCont gives the number of contaminated observations. Values between 0 and 1 will be trated as probability. If length is larger 1, the expected length is the number of areas.

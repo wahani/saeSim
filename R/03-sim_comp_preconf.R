@@ -7,23 +7,23 @@
 #' @export
 #' @rdname sim_comp_preconf
 sim_comp_n <- function(simSetup) {
-  sim_comp_sample(simSetup, comp_var(n = nrow(dat)), by = "idD")
+  sim_comp_sample(simSetup, function(dat) s_mutate(dat, "n = nrow(.data)"), by = "idD")
 }
 
 #' @export
 #' @rdname sim_comp_preconf
 sim_comp_N <- function(simSetup) {
-  sim_comp_pop(simSetup, comp_var(N = nrow(dat)), by = "idD")
+  sim_comp_pop(simSetup, function(dat) s_mutate(dat, "N = nrow(.data)"), by = "idD")
 }
 
 #' @export
 #' @rdname sim_comp_preconf
 sim_comp_popMean <- function(simSetup) {
-  sim_comp_pop(simSetup, comp_var(popMean = mean(y)), by = "idD")
+  sim_comp_pop(simSetup, function(dat) s_mutate(dat, "popMean = mean(y)"), by = "idD")
 }
 
 #' @export
 #' @rdname sim_comp_preconf
 sim_comp_popVar <- function(simSetup) {
-  sim_comp_pop(simSetup, comp_var(popVar = var(y)), by = "idD")
+  sim_comp_pop(simSetup, function(dat) s_mutate(dat, "popVar = var(y)"), by = "idD")
 }
