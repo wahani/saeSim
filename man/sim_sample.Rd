@@ -3,7 +3,7 @@
 \alias{sim_sample}
 \title{Sampling component}
 \usage{
-sim_sample(simSetup, smplFun = sample_csrs(size = 5L))
+sim_sample(simSetup, smplFun = sample_number(size = 5L, groupVars = "idD"))
 }
 \arguments{
 \item{smplFun}{function which controls the sampling process. \code{\link{sample_csrs}} is the default.}

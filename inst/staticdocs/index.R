@@ -29,4 +29,4 @@ sd_section("Sampling Functions",
 sd_section("Aggregator Functions",
            "There is only one preconfigured function for aggregation. If you don't 
            like it's behavior you can supply your own function to `sim_agg`.",
-           c("agg_standard"))
+           c("agg_all"))

@@ -6,7 +6,7 @@
 \usage{
 sample_fraction(size, replace = FALSE, weight = NULL, groupVars = NULL)
 
-sample_number(size, replace = FALSE, weight = NULL, groupVars = "")
+sample_number(size, replace = FALSE, weight = NULL, groupVars = NULL)
 }
 \arguments{
 \item{size}{For \code{sample_n}, the number of rows to select.

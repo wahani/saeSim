@@ -1,8 +1,8 @@
-#' Aggregator function
+#' Aggregation function
 #' 
 #' This function is intended to be used with \code{\link{sim_agg}} and not interactively. This is one implementation for aggregating data in a simulation set-up.
 #' 
-#' @param splitVars variable names as character to split the data.
+#' @param groupVars variable names as character identifying groups to be aggregated.
 #' 
 #' @details This function follows the split-apply-combine idiom. Each data set is split by the defined variables. Then the variables within each subset are aggregated (reduced to one row). Logical variables are reduced by \code{\link{any}}; for characters and factors dummy variables are created and the aggregate is the mean of each dummy; and for numerics the mean (removing NAs).
 #' 
@@ -10,8 +10,8 @@
 #' @export
 #' 
 #' @examples
-#' sim_base() %>% sim_gen_fe() %>% sim_gen_e() %>% sim_agg(agg_standard())
-agg_standard <- function(splitVars = "idD") {
+#' sim_base() %>% sim_gen_fe() %>% sim_gen_e() %>% sim_agg(agg_all())
+agg_all <- function(groupVars = "idD") {
   function(dat) {
     
     # Keep Attributes
@@ -29,7 +29,7 @@ agg_standard <- function(splitVars = "idD") {
     # Delete vars:
     dat <- dat[!(names(dat) %in% c("idU"))]
     # split:
-    datList <- split(dat, as.list(dat[splitVars]))
+    datList <- split(dat, as.list(dat[groupVars]))
     # apply:
     datList <- lapply(datList, 
            function(df) {
