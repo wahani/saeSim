@@ -1,5 +1,5 @@
 ## saeSim
-[![Build Status](https://travis-ci.org/wahani/saeSim.png?branch=master)](https://travis-ci.org/wahani/saeSim)
+[![Build Status](https://travis-ci.org/wahani/saeSim.png?branch=devel)](https://travis-ci.org/wahani/saeSim)
 
 Tools for the simulation of data in the context of small area estimation. They will organize your simulation set-up into phases:
   1. Generating data 
