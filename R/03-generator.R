@@ -34,9 +34,14 @@
 gen_norm <- function(mean = 0, sd = 1, name = "e") {
   desc <- paste(name, " ~ N(", mean, ", ", sd^2, ") unit-level", sep = "")
   function(dat) {
-    dat[name] <- rnorm(nrow(dat), mean = mean, sd = sd) + if(exists(name, dat)) dat[[name]] else 0
+    dat <- add_var(dat, rnorm(nrow(dat), mean = mean, sd = sd), name)
     dat
   }
+}
+
+add_var <- function(dat, value, name) {
+  dat[name] <- value + if(exists(name, dat)) dat[[name]] else 0
+  dat
 }
 
 #' @rdname generators
@@ -45,7 +50,7 @@ gen_v_norm <- function(mean = 0, sd = 1, name = "v") {
   desc <- paste(name, " ~ N(", mean, ", ", sd^2, ") domain-level", sep = "")
   function(dat) {
     tmp <- rnorm(length(unique(dat$idD)), mean = mean, sd = sd)
-    dat[name] <- tmp[dat$idD] + if(exists(name, dat)) dat[[name]] else 0
+    dat <- add_var(dat, tmp[dat$idD], name)
     dat
   }
 }
@@ -66,32 +71,39 @@ gen_v_sar <- function(mean = 0, sd = 1, rho = 0.5, type = "rook", name) {
     
     # Drawing the numbers:
     v <- mvrnorm(1, mu = rep(mean, length.out = nDomains), Sigma = sp_var)
-        
-    dat[name] <- v[dat$idD] + if(exists(name, dat)) dat[[name]] else 0
+    
+    dat <- add_var(dat, v[dat$idD], name)
+    
     dat
   }
 }
 
 #' @rdname generators
 #' @export
-gen_generic <- function(generator, ..., level = "unit", desc = "F", name) {
+gen_generic <- function(generator, ..., groupVars = NULL, desc = "F", name) {
   genArgs <- list(...)
   force(generator)
-  stopifnot(level %in% c("unit", "domain"))
-  desc <- paste(name, "~ ", desc, "(", paste(..., sep = ", "), ") ", level, "-level", sep = "")
+  force(groupVars)
   
-  gen_unit <- function(dat) {
-    dat[name] <- 
-      do.call(generator, c(nrow(dat), genArgs)) + if(exists(name, dat)) dat[[name]] else 0
-    dat
+  desc <- paste(name, "~ ", desc, "(", paste(..., sep = ", "), ") ", groupVars, "-level", sep = "")
+      
+  gen_no_group <- function(dat) {
+    randomNumbers <- do.call(generator, c(nrow(dat), genArgs))
+    add_var(dat, randomNumbers, name)
   }
   
-  gen_domain <- function(dat) {
-    nDomains <- length(unique(dat$idD))
-    tmp <- do.call(generator, c(nDomains, genArgs))
-    dat[name] <- tmp[dat$idD] + if(exists(name, dat)) dat[[name]] else 0
-    dat
+  gen_constant_within_group <- function(dat) {
+    dat <- dat %>% s_arrange(groupVars)
+    nrowGroup <- s_group_by(dat, groupVars) %>% group_size
+    randomNumbers <- do.call(generator, c(length(nrowGroup), genArgs))
+    add_var(dat, rep(randomNumbers, times = nrowGroup), name)
   }
   
-  get(paste("gen_", level, sep = ""))
+  if(is.null(groupVars)) {
+    gen_no_group
+  } else {
+    gen_constant_within_group
+  }
 }
+
+

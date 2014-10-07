@@ -28,9 +28,9 @@ test_that("sim_gen", code={
 test_that("gen_generic", {
   # Generator itself
   set.seed(1)
-  dat1 <- gen_generic(runif, level = "domain", name = "x")(base_id(5, 2))
+  dat1 <- gen_generic(runif, groupVars = "idD", name = "x")(base_id(5, 2))
   set.seed(1)
-  dat2 <- gen_generic(runif, level = "unit", name = "x")(base_id(5, 2))
+  dat2 <- gen_generic(runif, name = "x")(base_id(5, 2))
   expect_is(dat1, "data.frame")
   expect_equal(nrow(dat1), 10)
   expect_equal(dat1[1, "x"], dat1[2, "x"])
@@ -41,7 +41,7 @@ test_that("gen_generic", {
   set.seed(1)
   dat1 <- sim(sim_base() %>% 
       sim_gen(gen_generic(rnorm, mean = 0, sd = 4, name="e")) %>%
-      sim_gen(gen_generic(rnorm, mean = 0, sd = 1, level = "domain", name="v")))
+      sim_gen(gen_generic(rnorm, mean = 0, sd = 1, groupVars = "idD", name="v")))
   set.seed(1)
   dat2 <- sim(sim_base() %>% sim_gen_e() %>% sim_gen_re())
   expect_equal(dat1, dat2)
