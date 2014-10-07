@@ -14,19 +14,19 @@ summary.sim_setup <- function(object, ...) {
   componentList <- S3Part(object, strictS3=TRUE)
   cat("General Information about", object@simName, "simulation set-up:\n")
   #cat("# of runs:", object@R, "\n")
-  cat("# of sim_gen:", 
-      sum(is.sim_gen_virtual(componentList) | is.sim_genData(componentList)),
-      "\n")
-  cat("# of sim_calc (population):", 
-      sum(is.sim_cpopulation(componentList)), "\n")
+  cat("# of sim_gen:", elementsEqualTo(componentList, 1), "\n")
+  cat("# of sim_gen_cont:", elementsEqualTo(componentList, 2), "\n")
+  cat("# of sim_resp:", elementsEqualTo(componentList, 3), "\n")
+  cat("# of sim_comp_pop:", 
+      elementsEqualTo(componentList, 4), "\n")
   cat("# of sim_sample:",
-      sum(is.sim_sample(componentList)), "\n")
-  cat("# of sim_calc (sample):", 
-      sum(is.sim_csample(componentList)), "\n")
+      elementsEqualTo(componentList, 5), "\n")
+  cat("# of sim_comp_sample:", 
+      elementsEqualTo(componentList, 6), "\n")
   cat("# of sim_agg:",
-      sum(is.sim_agg(componentList)), "\n")
-  cat("# of sim_calc (aggregate):", 
-      sum(is.sim_cagg(componentList)), "\n")
+      elementsEqualTo(componentList, 7), "\n")
+  cat("# of sim_comp_agg:", 
+      elementsEqualTo(componentList, 8), "\n")
   
   cat("\nApproximating the expected duration:\n")
   cat("A single run takes ... ")
@@ -37,4 +37,8 @@ summary.sim_setup <- function(object, ...) {
   cat("\nStructure of the data:\n")
   print(str(dat))
   invisible(NULL)
+}
+
+elementsEqualTo <- function(simFunList, number) {
+  sapply(simFunList, function(obj) obj@order == number) %>% sum
 }

@@ -16,7 +16,8 @@ Consider a linear mixed model. It contains two components. A fixed effects part,
 
 - Here follows a example for a linear model:
 
-```{r eval=FALSE}
+```{r}
+library(saeSim)
 setup <- sim_base() %>% sim_gen_fe() %>% sim_gen_e() %>% 
   sim_resp(resp_eq(y = 100 + 2 * x + e)) %>% sim_simName("Doku")
 ```

@@ -12,7 +12,7 @@ gen_v_norm(mean = 0, sd = 1, name = "v")
 
 gen_v_sar(mean = 0, sd = 1, rho = 0.5, type = "rook", name)
 
-gen_generic(generator, ..., level = "unit", desc = "F", name)
+gen_generic(generator, ..., groupVars = NULL, desc = "F", name)
 }
 \arguments{
 \item{mean}{the mean passed to the random number generator, for example \code{\link{rnorm}}.}
@@ -27,9 +27,9 @@ gen_generic(generator, ..., level = "unit", desc = "F", name)
 
 \item{...}{arguments passed to \code{generator}.}
 
-\item{level}{character in \code{c("unit", "domain")}. If equal to 'unit' random numbers for all observations are generated. If equal to 'domain' they are different between domains and constant within.}
-
 \item{desc}{character used for describing the distribution from which the data is generated.}
+
+\item{level}{character in \code{c("unit", "domain")}. If equal to 'unit' random numbers for all observations are generated. If equal to 'domain' they are different between domains and constant within.}
 }
 \description{
 These functions are intended to be used with \code{\link{sim_gen}} and not interactively. They are designed to draw random numbers according to the setting of grouping variables.

@@ -15,18 +15,18 @@
 #' @rdname sim_comp
 #' @examples
 #' # Standard behavior
-#' sim_base() %>% sim_gen_fe() %>% sim_calc()
+#' sim_base() %>% sim_gen_fe() %>% sim_comp_N()
 #' 
 #' # Custom data modifications
 #' ## Add predicted values of a linear model
 #' library(saeSim)
 #'
-#' calc_lm <- function(dat) {
+#' comp_lm <- function(dat) {
 #'   dat$linearPredictor <- predict(lm(y ~ x, data = dat))
 #'   dat
 #' }
 #'
-#' sim_base() %>% sim_gen_fe() %>% sim_gen_e() %>% sim_calc(calc_lm)
+#' sim_base() %>% sim_gen_fe() %>% sim_gen_e() %>% sim_resp(resp_eq(y = 100 + x + e)) %>% sim_comp_pop(comp_lm)
 sim_comp_pop <- function(simSetup, fun = calc_var(), by = "") {
   fun <- if(by == "") fun else apply_by(by, fun)
   sim_setup(simSetup, new("sim_fun", order = 4, fun))

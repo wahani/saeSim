@@ -42,9 +42,8 @@ sim_base() \%>\% sim_gen_fe() \%>\% sim_gen_re() \%>\% sim_gen_e()
 sim_base() \%>\% sim_gen_fe() \%>\% sim_gen_re() \%>\% sim_gen_e() \%>\% sim_gen_ec()
 
 # Simple user defined generator:
-gen_myVar <- function(nDomains, nUnits, name) {
-  dat <- make_id(nDomains, nUnits)
-  dat[name] <- rnorm(nrow(dat))
+gen_myVar <- function(dat) {
+  dat["myVar"] <- rnorm(nrow(dat))
   dat
 }
 

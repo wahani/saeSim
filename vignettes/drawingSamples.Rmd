@@ -21,16 +21,15 @@ The `sim_sample` function only controls the role of the component to be added. H
 Consider the following examples:
 ```{r}
 library(saeSim)
-base_id(3, 4) %>% sim_gen_fe() %>% sim_sample(sample_srs(1L))
-base_id(3, 4) %>% sim_gen_fe() %>% sim_sample(sample_csrs(1L))
+base_id(3, 4) %>% sim_gen_fe() %>% sim_sample(sample_number(1L))
+base_id(3, 4) %>% sim_gen_fe() %>% sim_sample(sample_number(1L, groupVars = "idD"))
 ```
 
 ```{r eval=FALSE}
 # simple random sampling:
-sim_base_lm() %>% sim_sample(sample_srs(size = 10L))
-sim_base_lm() %>% sim_sample(sample_srs(size = 0.05))
+sim_base_lm() %>% sim_sample(sample_number(size = 10L))
+sim_base_lm() %>% sim_sample(sample_fraction(size = 0.05))
 # srs in each domain/cluster
-sim_base_lm() %>% sim_sample(sample_csrs(size = 10L))
-sim_base_lm() %>% sim_sample(sample_csrs(size = rep(10L, 100)))
-sim_base_lm() %>% sim_sample(sample_csrs(size = 0.05))
+sim_base_lm() %>% sim_sample(sample_number(size = 10L, goupVars = "idD"))
+sim_base_lm() %>% sim_sample(sample_fraction(size = 0.05, groupVars = "idD"))
 ```

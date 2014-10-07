@@ -38,18 +38,18 @@ Potentially you can define a function for computation yourself. Take care that i
 }
 \examples{
 # Standard behavior
-sim_base() \%>\% sim_gen_fe() \%>\% sim_calc()
+sim_base() \%>\% sim_gen_fe() \%>\% sim_comp_N()
 
 # Custom data modifications
 ## Add predicted values of a linear model
 library(saeSim)
 
-calc_lm <- function(dat) {
+comp_lm <- function(dat) {
   dat$linearPredictor <- predict(lm(y ~ x, data = dat))
   dat
 }
 
-sim_base() \%>\% sim_gen_fe() \%>\% sim_gen_e() \%>\% sim_calc(calc_lm)
+sim_base() \%>\% sim_gen_fe() \%>\% sim_gen_e() \%>\% sim_resp(resp_eq(y = 100 + x + e)) \%>\% sim_comp_pop(comp_lm)
 }
 \seealso{
 \code{\link{calc_var}}, \code{\link{sim_gen}}, \code{\link{sim_agg}}, \code{\link{sim_sample}}

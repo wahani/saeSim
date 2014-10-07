@@ -16,10 +16,10 @@ Potentially you can define a \code{smplFun} yourself. Take care that it has one 
 }
 \examples{
 # Simple random sample - 5\% sample:
-sim_base_lm() \%>\% sim_sample(sample_srs())
+sim_base_lm() \%>\% sim_sample(sample_fraction(0.05))
 
 # Simple random sampling proportional to size - 5\% in each domain:
-sim_base_lm() \%>\% sim_sample(sample_csrs())
+sim_base_lm() \%>\% sim_sample(sample_fraction(0.05, groupVars = "idD"))
 
 # User defined sampling function:
 sample_mySampleFun <- function(dat) {
