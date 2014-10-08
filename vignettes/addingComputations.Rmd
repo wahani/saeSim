@@ -8,22 +8,32 @@ options(markdown.HTML.header = system.file('misc', 'vignette.css', package='knit
 
 # sim_comp
 
-In addition you may want to keep some information from the population or sample. That is why you can calculate some additional variables on the data. For contaminated data you want to further specify if the outlying observations should be used for calculating those statistics - for that you can supply one or more indicator variables in the data.
+Here follow some examples how to add components for computation to a `sim_setup`. Three points can be accessed with 
 
-- `sim_calc(calcFun, level = "population")` - `level` can be "population" or "sample" determining of the calculation is made on the population or after sampling - if no sampling is added the argument has no effect
+- `sim_comp_pop` - add a computation before sampling
+- `sim_comp_sample` - add a computation after sampling
+- `sim_comp_agg` - add a computation after aggregation
 
-Of course the real workhorse is the `calcFun`. At this time you can only calculate something for each domain using the following 'calculator':
-
-- `comp_var(varName = "y", funList = list(mean = mean, var = var), exclude = NULL, by = "idD", newName = varName)` - `exclude` will determine if any of the observations will be excluded from the calculation
-
-Consider the following examples to see how this function can be used:  
-  
 ```{r}
 library(saeSim)
 base_id(2, 3) %>% sim_gen_fe() %>% sim_gen_e() %>% sim_gen_ec() %>% 
   sim_resp_eq(y = 100 + x + e) %>%
   sim_comp_pop(comp_var(popMean = mean(y)), by = "idD")
 
+```
+
+The function `comp_var` is a wrapper around `dplyr::mutate` so you can add simple data manipulations. The argument `by` is a little extension and lets you define operations in the scope of groups identified by a variable in the data.
+
+# Pre-configured components
+
+Some statistics will be of interest frequently, which is why some predefined components are available.
+
+- `sim_comp_n()` - adds the sample sizes in `n`
+- `sim_comp_N()` - adds the population N in `N`
+- `sim_comp_popMean()` - adds the population means
+- `sim_comp_popVar()` - adds the population variances
+
+```{r}
 sim_base_lm() %>% sim_comp_N()
 
 sim_base_lm() %>% 
@@ -31,12 +41,33 @@ sim_base_lm() %>%
   sim_comp_n()
 ```
 
+# Add custom computation functions
 
-# Pre-configured sim_comp components
+By adding computation functions you can extend the functionality of a sim_setup to wrap up your whole simulation. This will seperate the utility of this package from simply generating data. Add for example the linear predictor to the data:
 
-Since these specifications above can get lengthy and annoying there are some convenience functions (remember that all statistics are calculated within each domain):
+```{r}
+comp_linearPredictor <- function(dat) {
+  dat$linearPredictor <- lm(y ~ x, dat) %>% predict
+  dat
+}
 
-- `sim_comp_n()` - adds the sample sizes in `n`
-- `sim_comp_N()` - adds the population N in `N`
-- `sim_comp_popMean()` - adds the population means
-- `sim_comp_popVar()` - adds the population variances
+sim_base_lm() %>% 
+  sim_comp_pop(comp_linearPredictor)
+```
+
+Or, should this be desiarable, directly produce a list of `lm` objects or add them as attribute to the data. However, the intended way of writing functions is that they will return the modified data set and has class 'data.frame'. 
+
+```{r}
+sim_base_lm() %>% 
+  sim_comp_pop(function(dat) lm(y ~ x, dat))
+
+comp_linearModelAsAttr <- function(dat) {
+  attr(dat, "linearModel") <- lm(y ~ x, dat)
+  dat
+}
+
+sim_base_lm() %>% 
+  sim_comp_pop(comp_linearModelAsAttr)
+
+```
+
