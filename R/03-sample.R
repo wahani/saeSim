@@ -18,8 +18,11 @@ sample_fraction <- function(size, replace = FALSE, weight = NULL, groupVars = NU
     if(is.null(groupVars)) {
       dat %>% sample_frac(size = size, replace = replace, weight = weight)
     } else {
-      s_group_by(dat, groupVars) %>% 
+      attributesToKeep <- attributes(dat)[!(names(attributes(dat)) %in% names(attributes(data.frame())))]
+      dat <- s_group_by(dat, groupVars) %>% 
         sample_frac(size = size, replace = replace, weight = weight) %>% as.data.frame
+      attributes(dat) <- c(attributes(dat), attributesToKeep)
+      dat
     }
   }
 }
@@ -32,8 +35,12 @@ sample_number <- function(size, replace = FALSE, weight = NULL, groupVars = NULL
     if(is.null(groupVars)) {
       dat %>% sample_n(size = size, replace = replace, weight = weight)
     } else {
-      s_group_by(dat, groupVars) %>% 
+      attributesToKeep <- attributes(dat)[!(names(attributes(dat)) %in% names(attributes(data.frame())))]
+      dat <- s_group_by(dat, groupVars) %>% 
         sample_n(size = size, replace = replace, weight = weight) %>% as.data.frame
+      
+      attributes(dat) <- c(attributes(dat), attributesToKeep)
+      dat
     }
   }
 }
