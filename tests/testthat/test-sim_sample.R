@@ -8,6 +8,9 @@ test_that("Attributes are preserved", {
   setup %>% sim_sample(sample_number(2)) %>% as.data.frame %>% attr("x") %>% expect_equal(2)
   setup %>% sim_sample(sample_fraction(0.2)) %>% as.data.frame %>% attr("x") %>% expect_equal(2)
   
+  setup %>% sim_sample(sample_number(2, groupVars = "idD")) %>% as.data.frame %>% attr("x") %>% expect_equal(2)
+  setup %>% sim_sample(sample_fraction(0.2, groupVars = "idD")) %>% as.data.frame %>% attr("x") %>% expect_equal(2)
+  
 })
 
 test_that("Basic sampling functionality", {

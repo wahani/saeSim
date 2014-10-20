@@ -1,3 +1,6 @@
+Version 0.5.1
+- bugfix: keep attributes after sampling
+
 Version 0.5.0
 
 - R, the number of reps, is not an argument of sim_setup anymore but only of sim
