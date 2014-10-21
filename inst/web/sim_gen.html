@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>sim_gen. saeSim 0.5.3</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">saeSim 0.5.3</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Generation component</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>sim_gen(simSetup, generator)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>simSetup</dt>
+      <dd>a <code>sim_setup</code>.</dd>
+      <dt>generator</dt>
+      <dd>generator function used to generate random numbers.</dd>
+    </dl>
+    
+    <div class="Generation component">
+      <h2>Generation component</h2>
+      
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+      
+      <p>One of the components which can be added to a <code>sim_setup</code>.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+      
+      <p>Potentially you can define a <code>generator</code> yourself. Take care that it has one argument, named <code>dat</code>, and returns a <code>data.frame</code>.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'># Data setup for a mixed model
+sim_base() %&gt;% sim_gen_x() %&gt;% sim_gen_v() %&gt;% sim_gen_e()
+</div>
+<div class='output'>  idD idU          x          v           e
+1   1   1 10.0729235 -0.1025736 -3.68271987
+2   1   2 -0.1511652 -0.1025736 -0.03405092
+3   1   3 -3.3784877 -0.1025736 -4.10256668
+4   1   4 -3.8412945 -0.1025736  0.87490832
+5   1   5 -2.1279408 -0.1025736 -4.91538924
+6   1   6 -2.3627411 -0.1025736 -0.46247998
+</div>
+<div class='input'># Adding contamination in the model error
+sim_base() %&gt;% sim_gen_x() %&gt;% sim_gen_v() %&gt;% sim_gen_e() %&gt;% sim_gen_ec()
+</div>
+<div class='output'>Source: local data frame [6 x 6]
+
+  idD idU          x           v          e   idC
+1   1   1  2.0008449 -0.06565085  3.9516728 FALSE
+2   1   2 -8.3086713 -0.06565085  1.4588824 FALSE
+3   1   3  1.9621720 -0.06565085 -0.6088774 FALSE
+4   1   4 -4.1314388 -0.06565085  2.8949746 FALSE
+5   1   5  0.4478872 -0.06565085 -1.0874811 FALSE
+6   1   6 -1.4246888 -0.06565085  0.2730894 FALSE
+</div>
+<div class='input'>
+# Simple user defined generator:
+gen_myVar &lt;- function(dat) {
+  dat[&quot;myVar&quot;] &lt;- rnorm(nrow(dat))
+  dat
+}
+
+sim_base() %&gt;% sim_gen_x() %&gt;% sim_gen(gen_myVar)
+</div>
+<div class='output'>  idD idU          x       myVar
+1   1   1 14.1713010 -1.60192801
+2   1   2  0.5240013  0.04505110
+3   1   3  3.7652209  0.06509719
+4   1   4 -3.3071306  0.25442593
+5   1   5  0.2218655  1.01332767
+6   1   6 -2.4903843 -0.76940195
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>sim_gen</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+<code><a href='generators.html'>gen_norm</a></code>, <code><a href='generators.html'>gen_v_norm</a></code>, <code><a href='generators.html'>gen_v_sar</a></code>, <code><a href='sim_agg.html'>sim_agg</a></code>, , <code><a href='sim_comp.html'>sim_comp_pop</a></code>, <code><a href='sim_sample.html'>sim_sample</a></code>, <code><a href='sim_gen_preconf.html'>sim_gen_x</a></code>, <code><a href='sim_gen_preconf.html'>sim_gen_e</a></code>, <code><a href='sim_gen_preconf.html'>sim_gen_v</a></code>, <code><a href='sim_gen_preconf.html'>sim_gen_vc</a></code>, <code><a href='sim_gen_preconf.html'>sim_gen_ec</a></code>
+
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

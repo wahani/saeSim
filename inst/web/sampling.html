@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>sample_fraction. saeSim 0.5.3</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">saeSim 0.5.3</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Sampling functions</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>sample_fraction(size, replace&nbsp;=&nbsp;FALSE, weight&nbsp;=&nbsp;NULL, groupVars&nbsp;=&nbsp;NULL)</div>
+<div>sample_number(size, replace&nbsp;=&nbsp;FALSE, weight&nbsp;=&nbsp;NULL, groupVars&nbsp;=&nbsp;NULL)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>size</dt>
+      <dd>For <code>sample_n</code>, the number of rows to select.
+For <code>sample_frac</code>, the fraction of rows to select.
+If <code>tbl</code> is grouped, <code>size</code> applies to each group.</dd>
+      <dt>replace</dt>
+      <dd>Sample with or without replacement?</dd>
+      <dt>weight</dt>
+      <dd>Sampling weights. This expression is evaluated in the
+context of the data frame. It must return a vector of non-negative
+numbers the same length as the input. Weights are automatically
+standardised to sum to 1.</dd>
+      <dt>groupVars</dt>
+      <dd>character with names of variables to be used for grouping.</dd>
+    </dl>
+    
+    <div class="Sampling functions">
+      <h2>Sampling functions</h2>
+      
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+      
+      <p>This function is intended to be used with <code><a href='sim_sample.html'>sim_sample</a></code> and not interactively. This is a wrapper around <a href='http://www.inside-r.org/packages/cran/dplyr/docs/sample'>sample_frac</a> and <a href='http://www.inside-r.org/packages/cran/dplyr/docs/sample'>sample_n</a>.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>sim_base_lm() %&gt;% sim_sample(sample_number(5))
+</div>
+<div class='output'>     idD idU          x          e         y
+1983  20  83  2.4367219 -1.8878906 100.54883
+456    5  56 -2.9740579  0.3162138  97.34216
+7943  80  43  2.4551156 -3.9802332  98.47488
+3813  39  13  0.1833337  5.4762940 105.65963
+2074  21  74  7.9147706 -1.2062993 106.70847
+</div>
+<div class='input'>sim_base_lm() %&gt;% sim_sample(sample_fraction(0.5))
+</div>
+<div class='output'>     idD idU         x           e         y
+7556  76  56  1.998539  0.05944173 102.05798
+6483  65  83  6.162889 -3.31758242 102.84531
+2331  24  31  8.965958  1.67106966 110.63703
+1461  15  61 -3.535418 -2.75745655  93.70713
+1475  15  75 -1.540738  3.22595298 101.68521
+3433  35  33  2.045363  1.30846446 103.35383
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>sample_fraction</li><li>sample_number</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

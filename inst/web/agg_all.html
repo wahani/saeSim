@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>agg_all. saeSim 0.5.3</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">saeSim 0.5.3</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Aggregation function</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>agg_all(groupVars&nbsp;=&nbsp;"idD")</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>groupVars</dt>
+      <dd>variable names as character identifying groups to be aggregated.</dd>
+    </dl>
+    
+    <div class="Aggregation function">
+      <h2>Aggregation function</h2>
+      
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+      
+      <p>This function is intended to be used with <code><a href='sim_agg.html'>sim_agg</a></code> and not interactively. This is one implementation for aggregating data in a simulation set-up.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+      
+      <p>This function follows the split-apply-combine idiom. Each data set is split by the defined variables. Then the variables within each subset are aggregated (reduced to one row). Logical variables are reduced by <code><a href='http://www.inside-r.org/packages/cran/base/docs/any'>any</a></code>; for characters and factors dummy variables are created and the aggregate is the mean of each dummy; and for numerics the mean (removing NAs).</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>sim_base() %&gt;% sim_gen_x() %&gt;% sim_gen_e() %&gt;% sim_agg(agg_all())
+</div>
+<div class='output'>Source: local data frame [6 x 3]
+
+  idD           x          e
+1   1 -0.08294899 -0.1600532
+2   2  0.49869166  0.4296185
+3   3  0.07358184 -0.2867927
+4   4  0.39515279 -0.5600914
+5   5  0.22271680 -0.5537131
+6   6  0.51064252  0.8599795
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>agg_all</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+<code><a href='sim_agg.html'>sim_agg</a></code>
+
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>sim_gen_cont. saeSim 0.5.3</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">saeSim 0.5.3</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Generation Component for contamination</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>sim_gen_cont(simSetup, generator, nCont, type, areaVar&nbsp;=&nbsp;NULL, fixed&nbsp;=&nbsp;TRUE)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>simSetup</dt>
+      <dd>a <code>sim_setup</code>.</dd>
+      <dt>generator</dt>
+      <dd>generator function used to generate random numbers.</dd>
+      <dt>nCont</dt>
+      <dd>gives the number of contaminated observations. Values between 0 and 1 will be trated as probability. If length is larger 1, the expected length is the number of areas.</dd>
+      <dt>type</dt>
+      <dd>"unit" or "area" - unit- or area-level contamination.</dd>
+      <dt>areaVar</dt>
+      <dd>character with variable name(s) identifying areas.</dd>
+      <dt>fixed</dt>
+      <dd>TRUE fixes the observations which will be contaminated. FALSE will result in a random selection of observations or areas.</dd>
+    </dl>
+    
+    <div class="Generation Component for contamination">
+      <h2>Generation Component for contamination</h2>
+      
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+      
+      <p>One of the components which can be added to a <code>sim_setup</code>. It is applied after functions added with <code><a href='sim_gen.html'>sim_gen</a></code>.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>sim_base_lm() %&gt;%
+  sim_gen_cont(gen_norm(name = &quot;e&quot;), nCont = 0.05, type = &quot;unit&quot;, areaVar = &quot;idD&quot;) %&gt;%
+  as.data.frame
+</div>
+<div class='output'>Source: local data frame [10,000 x 6]
+
+   idD idU          x           e   idC         y
+1    1   1 -3.3849184   1.2613555 FALSE  97.87644
+2    1   2  2.0199295  -2.6244698 FALSE  99.39546
+3    1   3  2.8715259  -5.6687505 FALSE  97.20278
+4    1   4 -1.1911215   0.2715405 FALSE  99.08042
+5    1   5 -0.6559629   4.0457478 FALSE 103.38978
+6    1   6 -4.0250652 -15.3107178 FALSE  80.66422
+7    1   7 -9.0324344   3.2151882 FALSE  94.18275
+8    1   8 -0.5810913  -3.1786872 FALSE  96.24022
+9    1   9 -1.3689019  -8.4097467 FALSE  90.22135
+10   1  10  2.6940428   4.6596870 FALSE 107.35373
+.. ... ...        ...         ...   ...       ...
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>sim_gen_cont</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+<code><a href='sim_gen.html'>sim_gen</a></code>
+
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

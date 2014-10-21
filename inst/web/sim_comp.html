@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>sim_comp_pop. saeSim 0.5.3</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">saeSim 0.5.3</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Calculation component</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>sim_comp_pop(simSetup, fun&nbsp;=&nbsp;comp_var(), by&nbsp;=&nbsp;"")</div>
+<div>sim_comp_sample(simSetup, fun&nbsp;=&nbsp;comp_var(), by&nbsp;=&nbsp;"")</div>
+<div>sim_comp_agg(simSetup, fun&nbsp;=&nbsp;comp_var(), by&nbsp;=&nbsp;"")</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>simSetup</dt>
+      <dd>a <code>sim_setup</code>.</dd>
+      <dt>fun</dt>
+      <dd>a function, see details.</dd>
+      <dt>by</dt>
+      <dd>names of variables as character; identifying groups for which fun is applied.</dd>
+    </dl>
+    
+    <div class="Calculation component">
+      <h2>Calculation component</h2>
+      
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+      
+      <p>One of the components which can be added to a <code>sim_setup</code>. These functions can be used for adding new variables to the data.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+      
+      <p>Potentially you can define a function for computation yourself. Take care that it only has one argument, named <code>dat</code>, and returns a <code>data.frame</code>. Use <code><a href='comp_var.html'>comp_var</a></code> for simple data manipulation. Functions added with <code>sim_comp_pop</code> are applied before sampling; <code>sim_comp_sample</code> after sampling. Functions added with <code>sim_comp_agg</code> after aggregation.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'># Standard behavior
+sim_base() %&gt;% sim_gen_x() %&gt;% sim_comp_N()
+</div>
+<div class='output'>Source: local data frame [6 x 4]
+
+  idD idU          x   N
+1   1   1  2.2565388 100
+2   1   2  2.6767934 100
+3   1   3  3.9769912 100
+4   1   4 -4.6900092 100
+5   1   5 -3.8446483 100
+6   1   6  0.5845799 100
+</div>
+<div class='input'>
+# Custom data modifications
+## Add predicted values of a linear model
+library(saeSim)
+
+comp_lm &lt;- function(dat) {
+  dat$linearPredictor &lt;- predict(lm(y ~ x, data = dat))
+  dat
+}
+
+sim_base_lm() %&gt;% sim_comp_pop(comp_lm)
+</div>
+<div class='output'>  idD idU          x         e         y linearPredictor
+1   1   1  0.4887127 11.060181 111.54889       100.49753
+2   1   2 10.3473966  1.086928 111.43432       110.31267
+3   1   3 -4.4923730 -2.486401  93.02123        95.53845
+4   1   4 -0.7728383  5.494948 104.72211        99.24155
+5   1   5 -3.0794815 -3.813436  93.10708        96.94510
+6   1   6 -3.4755741 -5.487301  91.03712        96.55076
+</div>
+<div class='input'>
+# or if applied after sampling
+sim_base_lm() %&gt;% sim_sample() %&gt;% sim_comp_pop(comp_lm)
+</div>
+<div class='output'>  idD idU          x           e         y linearPredictor
+1   1   8 -1.3808444 -0.20094743  98.41821        98.59708
+2   1  47  4.1653239  5.32082766 109.48615       104.20728
+3   1   5  3.1850904 -6.31387632  96.87121       103.21573
+4   1  58  0.1155953 -0.57799362  99.53760       100.11080
+5   1  51 -9.6771456 -0.01849865  90.30436        90.20499
+6   2  78 -3.8655778  1.39127494  97.52570        96.08366
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>sim_comp_agg</li><li>sim_comp_pop</li><li>sim_comp_sample</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+<code><a href='comp_var.html'>comp_var</a></code>, <code><a href='sim_gen.html'>sim_gen</a></code>, <code><a href='sim_agg.html'>sim_agg</a></code>, <code><a href='sim_sample.html'>sim_sample</a></code>, <code><a href='sim_comp_preconf.html'>sim_comp_N</a></code>, <code><a href='sim_comp_preconf.html'>sim_comp_n</a></code>, <code><a href='sim_comp_preconf.html'>sim_comp_popMean</a></code>, <code><a href='sim_comp_preconf.html'>sim_comp_popVar</a></code>
+
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

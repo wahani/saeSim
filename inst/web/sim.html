@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>sim. saeSim 0.5.3</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">saeSim 0.5.3</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Start simulation</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>sim(x, ...)</div>
+<div>"sim"(x, ..., R&nbsp;=&nbsp;1, parallel&nbsp;=&nbsp;FALSE, path&nbsp;=&nbsp;NULL)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>x</dt>
+      <dd>a <code>sim_setup</code> or <code>data.frame</code></dd>
+      <dt>...</dt>
+      <dd>simulation components; If <code>parallel = TRUE</code> arguments passed to mclapply, see details.</dd>
+      <dt>R</dt>
+      <dd>number of repetitions.</dd>
+      <dt>parallel</dt>
+      <dd>if <code>FALSE</code> <code>lapply</code> is used; if <code>TRUE</code> a 'plug-and-play' version of mclapply is used; see details.</dd>
+      <dt>path</dt>
+      <dd>optional path in which the simulation results can be saved.</dd>
+    </dl>
+    
+    <div class="Start simulation">
+      <h2>Start simulation</h2>
+      
+    </div>
+
+    <div class="Value">
+      <h2>Value</h2>
+      
+      <p>The return value is always a list. The elements are the resulting <code>data.frame</code>s of each simulation run.</p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+      
+      <p>This function can be applied to a <code>sim_setup</code>. It will start the simulation. Use the printing method as long as you are testing the scenario.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+      
+      <p>The backend for parallel computation is very experimental. You can find the code and documentation on www.github.com/wahani/parallelTools. In Windows parallelization is build around <code><a href='http://www.inside-r.org/packages/cran/parallel/docs/clusterApply'>clusterApply</a></code>. If you are not using Windows the function <code><a href='http://www.inside-r.org/packages/cran/parallel/docs/mclapply'>mclapply</a></code> is used. See the parameters of <code>mclapply</code> how to control the parallelization. Parallizing trivial tasks in Windows will result in wasted time. Also working with large data.frames will be inefficient in Windows.
+Use the <code>path</code> to store the simulation results to a directory. This may be a good idea for long running simulations and for those using large <code>data.frame</code>s. Use <code><a href='sim_read_data.html'>sim_read_data</a></code>, to read load them again.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>setup &lt;- sim_base_lm()
+resultList &lt;- sim(setup, R = 1)
+
+# Will return a data frame
+dat &lt;- sim(sim_base() %&gt;% sim_gen_x() %&gt;% sim_gen_e())
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>sim</li><li>sim.sim_setup</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>
