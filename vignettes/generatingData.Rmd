@@ -1,6 +1,6 @@
 <!--
 %\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{Introduction}
+%\VignetteIndexEntry{Generating Data}
 -->
 ```{r include=FALSE}
 options(markdown.HTML.header = system.file('misc', 'vignette.css', package='knitr'))
