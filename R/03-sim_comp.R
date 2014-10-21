@@ -25,6 +25,9 @@
 #' }
 #'
 #' sim_base_lm() %>% sim_comp_pop(comp_lm)
+#' 
+#' # or if applied after sampling
+#' sim_base_lm() %>% sim_sample() %>% sim_comp_pop(comp_lm)
 sim_comp_pop <- function(simSetup, fun = comp_var(), by = "") {
   fun <- if(by == "") fun else apply_by(by, fun)
   sim_setup(simSetup, new("sim_fun", order = 4, fun))

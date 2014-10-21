@@ -1,5 +1,6 @@
 Version 0.5.3
 - base_id returns only column with idD if nUnits == 1
+- updates for documentation and vignettes
 
 Version 0.5.2
 - renaming of sim_gen_fe and sim_gen_re

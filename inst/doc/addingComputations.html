@@ -196,6 +196,246 @@ hr {
 }
 </style>
 
+body {
+  background-color: #fff;
+  margin: 1em auto;
+  max-width: 800px;
+  overflow: visible;
+  padding-left: 2em;
+  padding-right: 2em;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+#header {
+  text-align: center;
+}
+
+#TOC {
+  clear: both;
+  margin: 0 0 10px 0;
+  padding: 4px;
+  border: 1px solid #CCCCCC;
+  border-radius: 5px;
+  background-color: #f6f6f6;
+  font-size: 13px;
+  line-height: 1.3;
+}
+  #TOC .toctitle {
+    font-weight: bold;
+    font-size: 15px;
+    margin-left: 5px;
+  }
+
+  #TOC ul {
+    padding-left: 40px;
+    margin-left: -1.5em;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  #TOC ul ul {
+    margin-left: -2em;
+  }
+  #TOC li {
+    line-height: 16px;
+  }
+
+table {
+  margin: auto;
+  min-width: 40%;
+  border-width: 1px;
+  border-color: #DDDDDD;
+  border-style: outset;
+  border-collapse: collapse;
+}
+table[summary="R argblock"] {
+  width: 100%;
+  border: none;
+}
+table th {
+  border-width: 2px;
+  padding: 5px;
+  border-style: inset;
+}
+table td {
+  border-width: 1px;
+  border-style: inset;
+  line-height: 18px;
+  padding: 5px 5px;
+}
+table, table th, table td {
+  border-left-style: none;
+  border-right-style: none;
+}
+table tr.odd {
+  background-color: #f7f7f7;
+}
+
+p {
+  margin: 0.5em 0;
+}
+
+blockquote {
+  background-color: #f6f6f6;
+  padding: 13px;
+  padding-bottom: 1px;
+}
+
+hr {
+  border-style: solid;
+  border: none;
+  border-top: 1px solid #777;
+  margin: 28px 0;
+}
+
+dl {
+  margin-left: 0;
+}
+  dl dd {
+    margin-bottom: 13px;
+    margin-left: 13px;
+  }
+  dl dt {
+    font-weight: bold;
+  }
+
+ul {
+  margin-top: 0;
+}
+  ul li {
+    list-style: circle outside;
+  }
+  ul ul {
+    margin-bottom: 0;
+  }
+
+pre, code {
+  background-color: #f5f5f5;
+  border-radius: 3px;
+  color: #333;
+}
+pre {
+  overflow-x: auto;
+  border-radius: 3px;
+  margin: 5px 0px 10px 0px;
+  padding: 10px;
+}
+pre:not([class]) {
+  background-color: white;
+  border: #f5f5f5 1px solid;
+}
+pre:not([class]) code {
+  color: #444;
+  background-color: white;
+}
+code {
+  font-family: monospace;
+  font-size: 90%;
+}
+p > code, li > code {
+  padding: 2px 4px;
+  color: #d14;
+  border: 1px solid #e1e1e8;
+  white-space: inherit;
+}
+div.figure {
+  text-align: center;
+}
+table > caption, div.figure p.caption {
+  font-style: italic;
+}
+table > caption span, div.figure p.caption span {
+  font-style: normal;
+  font-weight: bold;
+}
+p {
+  margin: 0 0 10px;
+}
+table {
+  margin: auto auto 10px auto;
+}
+
+img {
+  background-color: #FFFFFF;
+  padding: 2px;
+  border: 1px solid #DDDDDD;
+  border-radius: 3px;
+  border: 1px solid #CCCCCC;
+  margin: 0 5px;
+  max-width: 100%;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 35px;
+  line-height: 40px;
+}
+
+h2 {
+  border-bottom: 4px solid #f5f5f5;
+  padding-top: 10px;
+  padding-bottom: 2px;
+  font-size: 145%;
+}
+
+h3 {
+  border-bottom: 2px solid #f5f5f5;
+  padding-top: 10px;
+  font-size: 120%;
+}
+
+h4 {
+  border-bottom: 1px solid #f5f5f5;
+  margin-left: 8px;
+  font-size: 105%;
+}
+
+h5, h6 {
+  border-bottom: 1px solid #ccc;
+  font-size: 105%;
+}
+
+a {
+  color: #0033dd;
+  text-decoration: none;
+}
+  a:hover {
+    color: #6666ff; }
+  a:visited {
+    color: #800080; }
+  a:visited:hover {
+    color: #BB00BB; }
+  a[href^="http:"] {
+    text-decoration: underline; }
+  a[href^="https:"] {
+    text-decoration: underline; }
+
+div.r-help-page {
+  background-color: #f9f9f9;
+  border-bottom: #ddd 1px solid;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+div.r-help-page:hover {
+  background-color: #f4f4f4;
+}
+
+/* Class described in https://benjeffrey.com/posts/pandoc-syntax-highlighting-css
+   Colours from https://gist.github.com/robsimmons/1172277 */
+
+code > span.kw { color: #555; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal (decimal values) */
+code > span.bn { color: #d14; } /* BaseN */
+code > span.fl { color: #d14; } /* Float */
+code > span.ch { color: #d14; } /* Char */
+code > span.st { color: #d14; } /* String */
+code > span.co { color: #888888; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* OtherToken */
+code > span.al { color: #ff0000; font-weight: bold; } /* AlertToken */
+code > span.fu { color: #900; font-weight: bold; } /* Function calls */
+code > span.er { color: #a61717; background-color: #e3d2d2; } /* ErrorTok */
 
 
 </head>
@@ -224,13 +464,13 @@ base_id(2, 3) %&gt;% sim_gen_x() %&gt;% sim_gen_e() %&gt;% sim_gen_ec() %&gt;%
 
 <pre><code>## Source: local data frame [6 x 7]
 ## 
-##   idD idU       x      e   idC      y popMean
-## 1   1   1 -2.5058  1.950 FALSE  99.44   100.7
-## 2   1   2  0.7346  2.953 FALSE 103.69   100.7
-## 3   1   3 -3.3425  2.303 FALSE  98.96   100.7
-## 4   2   1  6.3811 -1.222 FALSE 105.16   103.6
-## 5   2   2  1.3180  6.047 FALSE 107.37   103.6
-## 6   2   3 -3.2819  1.559 FALSE  98.28   103.6
+##   idD idU          x         e   idC         y  popMean
+## 1   1   1 -2.5058152  1.949716 FALSE  99.44390 100.6975
+## 2   1   2  0.7345733  2.953299 FALSE 103.68787 100.6975
+## 3   1   3 -3.3425144  2.303125 FALSE  98.96061 100.6975
+## 4   2   1  6.3811232 -1.221554 FALSE 105.15957 103.6007
+## 5   2   2  1.3180311  6.047125 FALSE 107.36516 103.6007
+## 6   2   3 -3.2818735  1.559373 FALSE  98.27750 103.6007
 </code></pre>
 
 <p>The function <code>comp_var</code> is a wrapper around <code>dplyr::mutate</code> so you can add simple data manipulations. The argument <code>by</code> is a little extension and lets you define operations in the scope of groups identified by a variable in the data.</p>
@@ -256,13 +496,13 @@ base_id(2, 3) %&gt;% sim_gen_x() %&gt;% sim_gen_e() %&gt;% sim_gen_ec() %&gt;%
 
 <pre><code>## Source: local data frame [6 x 9]
 ## 
-##   idD idU       x        e      y   N popMean popVar n
-## 1   1  79 -1.8936 -0.99575  97.11 100   100.7  19.90 5
-## 2   1  48  0.6130  1.64335 102.26 100   100.7  19.90 5
-## 3   1  72  4.6416 -0.06541 104.58 100   100.7  19.90 5
-## 4   1  81  0.1685  5.17994 105.35 100   100.7  19.90 5
-## 5   1  96 -1.2800  8.31746 107.04 100   100.7  19.90 5
-## 6   2  48 -0.5776 -3.54162  95.88 100   100.2  29.31 5
+##   idD idU          x           e         y   N  popMean  popVar n
+## 1   1  79 -1.8936025 -0.99575479  97.11064 100 100.6850 19.9026 5
+## 2   1  48  0.6130134  1.64334551 102.25636 100 100.6850 19.9026 5
+## 3   1  72  4.6416105 -0.06541197 104.57620 100 100.6850 19.9026 5
+## 4   1  81  0.1684635  5.17994363 105.34841 100 100.6850 19.9026 5
+## 5   1  96 -1.2799715  8.31746103 107.03749 100 100.6850 19.9026 5
+## 6   2  48 -0.5775984 -3.54162153  95.88078 100 100.1871 29.3064 5
 </code></pre>
 
 <h1>Add custom computation functions</h1>
@@ -278,13 +518,13 @@ sim_base_lm() %&gt;%
   sim_comp_pop(comp_linearPredictor)
 </code></pre>
 
-<pre><code>##   idD idU       x       e      y linearPredictor
-## 1   1   1 -4.4516  2.3544  97.90           95.58
-## 2   1   2  5.3566  6.4636 111.82          105.27
-## 3   1   3 -2.7164  0.1963  97.48           97.29
-## 4   1   4 -0.2168  0.2930 100.08           99.76
-## 5   1   5 -2.9725  7.3210 104.35           97.04
-## 6   1   6  2.1499 -2.1982  99.95          102.10
+<pre><code>##   idD idU          x         e         y linearPredictor
+## 1   1   1 -4.4516358  2.354366  97.90273        95.58028
+## 2   1   2  5.3566233  6.463612 111.82024       105.26617
+## 3   1   3 -2.7163859  0.196289  97.47990        97.29388
+## 4   1   4 -0.2168253  0.293028 100.07620        99.76226
+## 5   1   5 -2.9725459  7.320980 104.34843        97.04092
+## 6   1   6  2.1498536 -2.198224  99.95163       102.09941
 </code></pre>
 
 <p>Or, should this be desiarable, directly produce a list of <code>lm</code> objects or add them as attribute to the data. However, the intended way of writing functions is that they will return the modified data set and has class &#39;data.frame&#39;. </p>
@@ -301,7 +541,7 @@ sim_base_lm() %&gt;%
 ## 
 ## Coefficients:
 ## (Intercept)            x  
-##       99.97         0.99
+##     99.9701       0.9904
 </code></pre>
 
 <pre><code class="r">comp_linearModelAsAttr &lt;- function(dat) {
@@ -322,7 +562,42 @@ attr(dat, &quot;linearModel&quot;)
 ## 
 ## Coefficients:
 ## (Intercept)            x  
-##     100.047        0.986
+##    100.0468       0.9859
+</code></pre>
+
+<p>If you use any kind of sampling, the &#39;linearPredictor&#39; can be added after sampling. This is where small area models are supposed to be applied.</p>
+
+<pre><code class="r">sim_base_lm() %&gt;% 
+  sim_sample() %&gt;%
+  sim_comp_sample(comp_linearPredictor)
+</code></pre>
+
+<pre><code>##   idD idU           x          e         y linearPredictor
+## 1   1  60  2.09820910 -3.8323007  98.26591       102.03126
+## 2   1  88 -3.04640225 -6.8890675  90.06453        96.86791
+## 3   1  58  7.48469646  2.9023633 110.38706       107.43737
+## 4   1  39 -5.55043261 -0.9879773  93.46159        94.35476
+## 5   1  35 -0.02147426  6.6929521 106.67148        99.90386
+## 6   2  93 -0.61503906 -0.6941185  98.69084        99.30813
+</code></pre>
+
+<p>Should you want to apply area level models, use <code>sim_comp_agg</code> instead.</p>
+
+<pre><code class="r">sim_base_lm() %&gt;% 
+  sim_sample() %&gt;%
+  sim_agg() %&gt;% 
+  sim_comp_agg(comp_linearPredictor)
+</code></pre>
+
+<pre><code>## Source: local data frame [6 x 5]
+## 
+##   idD           x           e         y linearPredictor
+## 1   1  0.76379464 -1.08301237  99.68078       100.94938
+## 2   2 -0.35907289 -0.04239448  99.59853        99.58713
+## 3   3  2.43398768  1.78645808 104.22045       102.97564
+## 4   4  0.50120711  2.39170991 102.89292       100.63081
+## 5   5  0.09757107  1.45589446 101.55347       100.14113
+## 6   6  1.84826797 -2.99870630  98.84956       102.26505
 </code></pre>
 
 </body>

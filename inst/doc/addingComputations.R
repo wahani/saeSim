@@ -42,3 +42,14 @@ dat <- sim_base_lm() %>%
 
 attr(dat, "linearModel")
 
+## ------------------------------------------------------------------------
+sim_base_lm() %>% 
+  sim_sample() %>%
+  sim_comp_sample(comp_linearPredictor)
+
+## ------------------------------------------------------------------------
+sim_base_lm() %>% 
+  sim_sample() %>%
+  sim_agg() %>% 
+  sim_comp_agg(comp_linearPredictor)
+

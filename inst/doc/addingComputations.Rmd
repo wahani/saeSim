@@ -76,3 +76,20 @@ dat <- sim_base_lm() %>%
 attr(dat, "linearModel")
 ```
 
+If you use any kind of sampling, the 'linearPredictor' can be added after sampling. This is where small area models are supposed to be applied.
+
+```{r}
+sim_base_lm() %>% 
+  sim_sample() %>%
+  sim_comp_sample(comp_linearPredictor)
+```
+
+Should you want to apply area level models, use `sim_comp_agg` instead.
+
+```{r}
+sim_base_lm() %>% 
+  sim_sample() %>%
+  sim_agg() %>% 
+  sim_comp_agg(comp_linearPredictor)
+```
+

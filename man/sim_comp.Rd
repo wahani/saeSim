@@ -38,6 +38,9 @@ comp_lm <- function(dat) {
 }
 
 sim_base_lm() \%>\% sim_comp_pop(comp_lm)
+
+# or if applied after sampling
+sim_base_lm() \%>\% sim_sample() \%>\% sim_comp_pop(comp_lm)
 }
 \seealso{
 \code{\link{comp_var}}, \code{\link{sim_gen}}, \code{\link{sim_agg}}, \code{\link{sim_sample}}, \code{\link{sim_comp_N}}, \code{\link{sim_comp_n}}, \code{\link{sim_comp_popMean}}, \code{\link{sim_comp_popVar}}
