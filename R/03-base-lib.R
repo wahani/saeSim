@@ -3,6 +3,8 @@
 #' @param nDomains The number of domains.
 #' @param nUnits The number of units in each domain. Can have \code{length(nUnits) > 1}.
 #' 
+#' @return
+#' Return a \code{data.frame} with variables \code{idD} as ID-variable for domains, and \code{idU} as ID-variable for units.
 #' @rdname base_id
 #' @export
 #' @examples
@@ -15,6 +17,8 @@ base_id <- function(nDomains = 10, nUnits = 10) {
   
   out <- data.frame(idD = rep(1:nDomains, times = nUnits)) %>% 
     s_group_by("idD") %>% mutate(idU = 1:n()) %>% s_arrange("idD", "idU")
+  
+  out <- if(length(nUnits) == 1 && nUnits == 1) out["idD"] else out
   as.data.frame(out)
   
 }

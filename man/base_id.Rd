@@ -10,6 +10,9 @@ base_id(nDomains = 10, nUnits = 10)
 
 \item{nUnits}{The number of units in each domain. Can have \code{length(nUnits) > 1}.}
 }
+\value{
+Return a \code{data.frame} with variables \code{idD} as ID-variable for domains, and \code{idU} as ID-variable for units.
+}
 \description{
 This function constructs a data frame with grouping/\code{id} variables.
 }
