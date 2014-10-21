@@ -26,7 +26,7 @@ Potentially you can define a function for computation yourself. Take care that i
 }
 \examples{
 # Standard behavior
-sim_base() \%>\% sim_gen_fe() \%>\% sim_comp_N()
+sim_base() \%>\% sim_gen_x() \%>\% sim_comp_N()
 
 # Custom data modifications
 ## Add predicted values of a linear model

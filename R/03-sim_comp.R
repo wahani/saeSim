@@ -13,7 +13,7 @@
 #' @rdname sim_comp
 #' @examples
 #' # Standard behavior
-#' sim_base() %>% sim_gen_fe() %>% sim_comp_N()
+#' sim_base() %>% sim_gen_x() %>% sim_comp_N()
 #' 
 #' # Custom data modifications
 #' ## Add predicted values of a linear model

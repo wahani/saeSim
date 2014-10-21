@@ -217,7 +217,7 @@ hr {
 </ul>
 
 <pre><code class="r">library(saeSim)
-base_id(2, 3) %&gt;% sim_gen_fe() %&gt;% sim_gen_e() %&gt;% sim_gen_ec() %&gt;% 
+base_id(2, 3) %&gt;% sim_gen_x() %&gt;% sim_gen_e() %&gt;% sim_gen_ec() %&gt;% 
   sim_resp_eq(y = 100 + x + e) %&gt;%
   sim_comp_pop(comp_var(popMean = mean(y)), by = &quot;idD&quot;)
 </code></pre>

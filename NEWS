@@ -1,3 +1,7 @@
+Version 0.5.2
+- renaming of sim_gen_fe and sim_gen_re
+- update of vignettes
+
 Version 0.5.1
 - bugfix: keep attributes after sampling
 

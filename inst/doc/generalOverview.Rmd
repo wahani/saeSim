@@ -18,37 +18,28 @@ Consider a linear mixed model. It contains two components. A fixed effects part,
 
 ```{r}
 library(saeSim)
-setup <- sim_base() %>% sim_gen_fe() %>% sim_gen_e() %>% 
+setup <- sim_base() %>% sim_gen_x() %>% sim_gen_e() %>% 
   sim_resp_eq(y = 100 + 2 * x + e) %>% sim_simName("Doku")
+setup
 ```
 
-`sim_base()` is responsible to supply a `data.frame` to which variables can be added. The default is to create a `data.frame` with indicator variables `idD` and `idU` (2-level-model), which uniquly identify observations. `sim_resp` will add a variable `y` equal to a 
+`sim_base()` is responsible to supply a `data.frame` to which variables can be added. The default is to create a `data.frame` with indicator variables `idD` and `idU` (2-level-model), which uniquly identify observations. `sim_resp` will add a variable `y` as response.
 
-- The set-up itself does not contain the simulated data but the functions to process the data. For starting a simulation use the function `sim`. This will return a `list` containing `data.frame`s as elements:
+- The set-up itself does not contain the simulated data but the functions to process the data. For starting a simulation use the function `sim`. It will return a `list` containing `data.frame`s as elements:
 
 ```{r eval=FALSE}
-dataList <- sim(setup)
+dataList <- sim(setup, R = 10)
 ```
 - Lastly, it is possible to just produce one data set. This approach is mainly used in development but can be useful when exploring the set-up:
 ```{r eval=FALSE}
-simData <- sim(sim_base(), sim_gen_fe(), sim_gen_e())
+simData <- sim_base() %>% sim_gen_x() %>% sim_gen_e() %>% as.data.frame
 ```
-
-You can also use the following code to add additional components from different set-ups:
-
-```{r eval=FALSE}
-setup <- setup %>% sim_gen_rec() %>% sim_gen_ec()
-anotherSetup <- sim_base()
-# setup <- setup %>% anotherSetup
-```
-
-In the third line of the above example two set-up objects are combined. What will happen is, that the basic settings (nDomains, nUnits, R, idC, simName) of `anotherSetup` will be used, but all components of the two set-ups are combined.
 
 ## sim_base
 
-For the simulation set-up you start with the 'base'. At this time, only one base is defined:
+For the simulation set-up you start with the 'base', which is just a `data.frame`. 
 
-- `sim_base(base_id(nDomains = 100, nUnits = 100))` - `nDomains` specify the number of domains/cluster/areas in the data - `nUnits` the number of observations in each domain.
+- `base_id(nDomains, nUnits)` - `nDomains` specify the number of domains/cluster/areas in the data - `nUnits` the number of observations in each domain.
 
 
 ## sim_gen
@@ -65,24 +56,21 @@ There are several pre-configured set-ups you can use for an easy start.
 - `sim_base_lmmc()` a linear mixed model with contamination in the model error and random effect (5% outliers in each area and 5% of the areas are outliers)
 
 
-
 ## sim_agg
 
-If you are interested in aggregated information you can either draw directly from the model when specifying `nUnits = 1` or use the aggregate component. Aggregating the data is another component which can be used on the population or sample. The aggregation will simply be done after the sampling, if you haven't specified any sampling component, the population is aggregated (makes sense if you draw samples directly from the model). The variable `idU` will be lost. All variables including `idC` will be `TRUE` if any of the non-aggregated values is `TRUE` - this holds for all logical variables in the data. For categorical data (character or factor) the modus is taken. For numerical variables the mean will be taken.
+If you are interested in aggregated information you can either draw directly from the model when specifying `nUnits = 1` or use the aggregate component. Aggregating the data is another component which can be used on the population or sample. The aggregation will simply be done after the sampling, if you haven't specified any sampling component, the population is aggregated (makes sense if you draw samples directly from the model).
 
 ```{r}
 sim_base_lm() %>% sim_agg()
 ```
 
-
-
 ## Methods
 
-You will want to check your results regularly to see how things will work out. When working with set-up objects there are some methods supplied to do that, without simulating redundant data all the time:
+You will want to check your results regularly to see how things will work out. When working with `sim_setup` objects there are some methods supplied to do that, without simulating redundant data all the time:
 
 - `show` - this is the `print` method for S4-Classes. You don't have to call `show` explicitly
 - `plot` - will call `smoothScatter` for visualizing the data
-- `autoplot` - I am unable to annotate graphics from the package `graphics`, that's why I need a plotting function using `ggplot2`. Will imitate `smoothScatter` see [this article](http://wahani.github.io/PlotNo1/) if you should be interested in how it works
+- `autoplot` - Will imitate `smoothScatter` with ggplot2
 
 ```{r}
 setup <- sim_base_lmm()
@@ -92,8 +80,6 @@ autoplot(setup)
 autoplot(setup, "e")
 ```
 
-One of the nice things about this package is, that it is extremely easy to explore how different set-up component will influence the results:
-
 ```{r}
-autoplot(setup %>% sim_gen_rec())
+autoplot(setup %>% sim_gen_vc())
 ```

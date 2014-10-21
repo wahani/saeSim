@@ -9,7 +9,7 @@
 #' 
 #' @examples
 #' # Example for a linear model:
-#' sim_base() %>% sim_gen_fe() %>% sim_gen_e()
+#' sim_base() %>% sim_gen_x() %>% sim_gen_e()
 sim_base <- function(data = base_id(100, 100)) {
   new("sim_setup", base = data, simName = "")
 }
@@ -29,15 +29,15 @@ sim_base <- function(data = base_id(100, 100)) {
 #' sim_base_lmmc()
 sim_base_lm <- function() {
   sim_base() %>% 
-    sim_gen_fe(gen_norm(0, 4, name = "x")) %>% 
-    sim_gen_e(gen_norm(0, 4, name = "e")) %>%
+    sim_gen_x(0, 4, name = "x") %>% 
+    sim_gen_e(0, 4, name = "e") %>%
     sim_resp(function(dat) s_mutate(dat, "y = 100 + x + e"))
 }
 
 #' @rdname sim_setup_preconfigured
 #' @export
 sim_base_lmm <- function() {
-  sim_base_lm() %>% sim_gen_re(gen_v_norm(0, 1, name = "v")) %>% 
+  sim_base_lm() %>% sim_gen_v(0, 1, name = "v") %>% 
     sim_resp(function(dat) s_mutate(dat, "y = y + v"))
 }
 
@@ -52,5 +52,5 @@ sim_base_lmc <- function() {
 sim_base_lmmc <- function() {
   sim_base_lmm() %>% 
     sim_gen_ec() %>%
-    sim_gen_rec()
+    sim_gen_vc()
 }

@@ -4,7 +4,7 @@ set.seed(1)
 
 ## ------------------------------------------------------------------------
 library(saeSim)
-base_id(2, 3) %>% sim_gen_fe() %>% sim_gen_e() %>% sim_gen_ec() %>% 
+base_id(2, 3) %>% sim_gen_x() %>% sim_gen_e() %>% sim_gen_ec() %>% 
   sim_resp_eq(y = 100 + x + e) %>%
   sim_comp_pop(comp_var(popMean = mean(y)), by = "idD")
 
@@ -41,6 +41,4 @@ dat <- sim_base_lm() %>%
   as.data.frame
 
 attr(dat, "linearModel")
-
-
 

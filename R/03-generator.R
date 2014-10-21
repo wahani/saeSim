@@ -20,10 +20,10 @@
 #'  
 #'  @rdname generators
 #'  @export
-#'  @seealso \code{\link{sim_gen}}, \code{\link{sim_gen_fe}}, \code{\link{sim_gen_e}}, \code{\link{sim_gen_ec}}, \code{\link{sim_gen_re}}, \code{\link{sim_gen_rec}}, \code{\link[spdep]{cell2nb}}
+#'  @seealso \code{\link{sim_gen}}, \code{\link{sim_gen_x}}, \code{\link{sim_gen_e}}, \code{\link{sim_gen_ec}}, \code{\link{sim_gen_v}}, \code{\link{sim_gen_vc}}, \code{\link[spdep]{cell2nb}}
 #'  
 #'  @examples
-#'  sim_base() %>% sim_gen_fe() %>% sim_gen_e() %>% sim_gen_re() %>% sim_gen_re(gen_v_sar(name = "vSP"))
+#'  sim_base() %>% sim_gen_x() %>% sim_gen_e() %>% sim_gen_v() %>% sim_gen(gen_v_sar(name = "vSP"))
 #'  
 #'  # Generic interface
 #'  set.seed(1)

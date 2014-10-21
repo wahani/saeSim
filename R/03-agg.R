@@ -10,7 +10,7 @@
 #' @export
 #' 
 #' @examples
-#' sim_base() %>% sim_gen_fe() %>% sim_gen_e() %>% sim_agg(agg_all())
+#' sim_base() %>% sim_gen_x() %>% sim_gen_e() %>% sim_agg(agg_all())
 agg_all <- function(groupVars = "idD") {
   function(dat) {
     

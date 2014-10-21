@@ -23,7 +23,7 @@ One of the components which can be added to a \code{sim_setup}.
 Potentially you can define an \code{respFun} yourself. Take care that it only has one argument, named \code{dat}, and returns the a \code{data.frame}.
 }
 \examples{
-base_id() \%>\% sim_gen_fe() \%>\% sim_gen_e() \%>\% sim_resp_eq(y = 100 + 2 * x + e)
+base_id() \%>\% sim_gen_x() \%>\% sim_gen_e() \%>\% sim_resp_eq(y = 100 + 2 * x + e)
 }
 \seealso{
 \code{\link{agg_all}}, \code{\link{sim_gen}}, \code{\link{sim_comp_pop}}, \code{\link{sim_sample}}, , \code{\link{sim_comp_sample}}

@@ -1,7 +1,7 @@
 context("sim_agg")
 
 test_that("Basic functionality", {
-  setup <- sim_base() %>% sim_gen_e() %>% sim_gen_fe() %>% 
+  setup <- sim_base() %>% sim_gen_e() %>% sim_gen_x() %>% 
     sim_resp_eq(y = 100 + x + e) %>%
     sim_comp_N() %>% 
     sim_comp_pop(comp_var(aFactor = as.factor(c("a", "b") %>% rep(length.out = length(y))),
@@ -29,7 +29,7 @@ test_that("Basic functionality", {
 
 
 test_that("Attributes are preserved", {
-  setup <- sim_base() %>% sim_gen_e() %>% sim_gen_fe() %>% 
+  setup <- sim_base() %>% sim_gen_e() %>% sim_gen_x() %>% 
     sim_resp_eq(y = 100 + x + e) %>%
     sim_agg() %>%
     sim_comp_pop(function(dat) {attr(dat, "x") <- 2; dat})

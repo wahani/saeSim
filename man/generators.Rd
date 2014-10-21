@@ -44,7 +44,7 @@ These functions are intended to be used with \code{\link{sim_gen}} and not inter
  \code{gen_generic} can be used if your world is not normal. You can specify 'any' function as generator, like \code{\link{rnorm}}. Arguments in \code{...} are matched by name or position. The first argument of \code{generator} is expected to be the number of random numbers (not necessarily named \code{n}) and need not to be specified.
 }
 \examples{
-sim_base() \%>\% sim_gen_fe() \%>\% sim_gen_e() \%>\% sim_gen_re() \%>\% sim_gen_re(gen_v_sar(name = "vSP"))
+sim_base() \%>\% sim_gen_x() \%>\% sim_gen_e() \%>\% sim_gen_v() \%>\% sim_gen(gen_v_sar(name = "vSP"))
 
  # Generic interface
  set.seed(1)
@@ -55,6 +55,6 @@ sim_base() \%>\% sim_gen_fe() \%>\% sim_gen_e() \%>\% sim_gen_re() \%>\% sim_gen
  all.equal(dat1, dat2)
 }
 \seealso{
-\code{\link{sim_gen}}, \code{\link{sim_gen_fe}}, \code{\link{sim_gen_e}}, \code{\link{sim_gen_ec}}, \code{\link{sim_gen_re}}, \code{\link{sim_gen_rec}}, \code{\link[spdep]{cell2nb}}
+\code{\link{sim_gen}}, \code{\link{sim_gen_x}}, \code{\link{sim_gen_e}}, \code{\link{sim_gen_ec}}, \code{\link{sim_gen_v}}, \code{\link{sim_gen_vc}}, \code{\link[spdep]{cell2nb}}
 }
 

@@ -3,19 +3,15 @@ options(markdown.HTML.header = system.file('misc', 'vignette.css', package='knit
 
 ## ------------------------------------------------------------------------
 library(saeSim)
-setup <- sim_base() %>% sim_gen_fe() %>% sim_gen_e() %>% 
+setup <- sim_base() %>% sim_gen_x() %>% sim_gen_e() %>% 
   sim_resp_eq(y = 100 + 2 * x + e) %>% sim_simName("Doku")
+setup
 
 ## ----eval=FALSE----------------------------------------------------------
-#  dataList <- sim(setup)
+#  dataList <- sim(setup, R = 10)
 
 ## ----eval=FALSE----------------------------------------------------------
-#  simData <- sim(sim_base(), sim_gen_fe(), sim_gen_e())
-
-## ----eval=FALSE----------------------------------------------------------
-#  setup <- setup %>% sim_gen_rec() %>% sim_gen_ec()
-#  anotherSetup <- sim_base()
-#  # setup <- setup %>% anotherSetup
+#  simData <- sim_base() %>% sim_gen_x() %>% sim_gen_e() %>% as.data.frame
 
 ## ------------------------------------------------------------------------
 sim_base_lm() %>% sim_agg()
@@ -28,5 +24,5 @@ autoplot(setup)
 autoplot(setup, "e")
 
 ## ------------------------------------------------------------------------
-autoplot(setup %>% sim_gen_rec())
+autoplot(setup %>% sim_gen_vc())
 

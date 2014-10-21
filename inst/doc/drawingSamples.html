@@ -216,14 +216,14 @@ hr {
 </ul>
 
 <pre><code class="r">library(saeSim)
-base_id(3, 4) %&gt;% sim_gen_fe() %&gt;% sim_sample(sample_number(1L))
+base_id(3, 4) %&gt;% sim_gen_x() %&gt;% sim_sample(sample_number(1L))
 </code></pre>
 
 <pre><code>##    idD idU     x
 ## 12   3   4 5.221
 </code></pre>
 
-<pre><code class="r">base_id(3, 4) %&gt;% sim_gen_fe() %&gt;% sim_sample(sample_number(1L, groupVars = &quot;idD&quot;))
+<pre><code class="r">base_id(3, 4) %&gt;% sim_gen_x() %&gt;% sim_sample(sample_number(1L, groupVars = &quot;idD&quot;))
 </code></pre>
 
 <pre><code>##   idD idU       x

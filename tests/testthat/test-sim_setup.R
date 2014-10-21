@@ -1,7 +1,7 @@
 context("sim_setup")
 test_that("sim_setup", {
   tmp <- sim_setup(sim_base(base_id(nDomains = 3, nUnits = 4)) %>% 
-                     sim_gen_fe() %>%
+                     sim_gen_x() %>%
                      sim_gen_e(), simName = "")
   
   expect_equal(length(tmp), (2))
@@ -9,7 +9,7 @@ test_that("sim_setup", {
 })
 
 test_that("methods equal", {
-  setup <- sim_base() %>% sim_gen_fe() %>% sim_gen_e() %>% sim_agg()
+  setup <- sim_base() %>% sim_gen_x() %>% sim_gen_e() %>% sim_agg()
   cat("\n")
   dat <- show(setup)
   
@@ -40,8 +40,8 @@ test_that("Id construction for not simulated data.frames", {
 })
 
 test_that("sim_setup sorts its content", {
-  setup <- sim_base(base_id(3, 3)) %>% sim_agg() %>% sim_sample() %>% sim_comp_n() %>% sim_comp_N() %>% sim_gen_re() %>% sim_gen_fe()
-  setup1 <- sim_base(base_add_id(data.frame(var = rep(c(1, 2), 10)), "var")) %>% sim_gen_fe() %>% sim_gen_e() %>% sim_agg() %>% sim_resp_eq(y = 100 + x + e)
+  setup <- sim_base(base_id(3, 3)) %>% sim_agg() %>% sim_sample() %>% sim_comp_n() %>% sim_comp_N() %>% sim_gen_v() %>% sim_gen_x()
+  setup1 <- sim_base(base_add_id(data.frame(var = rep(c(1, 2), 10)), "var")) %>% sim_gen_x() %>% sim_gen_e() %>% sim_agg() %>% sim_resp_eq(y = 100 + x + e)
   orderAttr <- sapply(setup, function(fun) fun@order)
   
   expect_equal(length(setup), 6)

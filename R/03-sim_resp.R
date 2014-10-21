@@ -13,7 +13,7 @@
 #' @rdname sim_resp
 #' @export
 #' @examples
-#' base_id() %>% sim_gen_fe() %>% sim_gen_e() %>% sim_resp_eq(y = 100 + 2 * x + e)
+#' base_id() %>% sim_gen_x() %>% sim_gen_e() %>% sim_resp_eq(y = 100 + 2 * x + e)
 sim_resp <- function(simSetup, respFun) {
   sim_setup(simSetup, new("sim_fun", order = 3, respFun))
 }

@@ -18,9 +18,9 @@ Potentially you can define a \code{generator} yourself. Take care that it has on
 }
 \examples{
 # Data setup for a mixed model
-sim_base() \%>\% sim_gen_fe() \%>\% sim_gen_re() \%>\% sim_gen_e()
+sim_base() \%>\% sim_gen_x() \%>\% sim_gen_v() \%>\% sim_gen_e()
 # Adding contamination in the model error
-sim_base() \%>\% sim_gen_fe() \%>\% sim_gen_re() \%>\% sim_gen_e() \%>\% sim_gen_ec()
+sim_base() \%>\% sim_gen_x() \%>\% sim_gen_v() \%>\% sim_gen_e() \%>\% sim_gen_ec()
 
 # Simple user defined generator:
 gen_myVar <- function(dat) {
@@ -28,9 +28,9 @@ gen_myVar <- function(dat) {
   dat
 }
 
-sim_base() \%>\% sim_gen_fe() \%>\% sim_gen_e(gen_myVar)
+sim_base() \%>\% sim_gen_x() \%>\% sim_gen(gen_myVar)
 }
 \seealso{
-\code{\link{gen_norm}}, \code{\link{gen_v_norm}}, \code{\link{gen_v_sar}}, \code{\link{sim_agg}}, , \code{\link{sim_comp_pop}}, \code{\link{sim_sample}}, \code{\link{sim_gen_fe}}, \code{\link{sim_gen_e}}, \code{\link{sim_gen_re}}, \code{\link{sim_gen_rec}}, \code{\link{sim_gen_ec}}
+\code{\link{gen_norm}}, \code{\link{gen_v_norm}}, \code{\link{gen_v_sar}}, \code{\link{sim_agg}}, , \code{\link{sim_comp_pop}}, \code{\link{sim_sample}}, \code{\link{sim_gen_x}}, \code{\link{sim_gen_e}}, \code{\link{sim_gen_v}}, \code{\link{sim_gen_vc}}, \code{\link{sim_gen_ec}}
 }
 

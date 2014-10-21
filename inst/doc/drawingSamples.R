@@ -3,8 +3,8 @@ options(markdown.HTML.header = system.file('misc', 'vignette.css', package='knit
 
 ## ------------------------------------------------------------------------
 library(saeSim)
-base_id(3, 4) %>% sim_gen_fe() %>% sim_sample(sample_number(1L))
-base_id(3, 4) %>% sim_gen_fe() %>% sim_sample(sample_number(1L, groupVars = "idD"))
+base_id(3, 4) %>% sim_gen_x() %>% sim_sample(sample_number(1L))
+base_id(3, 4) %>% sim_gen_x() %>% sim_sample(sample_number(1L, groupVars = "idD"))
 
 ## ------------------------------------------------------------------------
 # simple random sampling:

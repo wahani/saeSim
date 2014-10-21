@@ -15,8 +15,8 @@ After the data generation you may want to draw a sample from the population. If 
 
 ```{r}
 library(saeSim)
-base_id(3, 4) %>% sim_gen_fe() %>% sim_sample(sample_number(1L))
-base_id(3, 4) %>% sim_gen_fe() %>% sim_sample(sample_number(1L, groupVars = "idD"))
+base_id(3, 4) %>% sim_gen_x() %>% sim_sample(sample_number(1L))
+base_id(3, 4) %>% sim_gen_x() %>% sim_sample(sample_number(1L, groupVars = "idD"))
 ```
 
 ```{r}

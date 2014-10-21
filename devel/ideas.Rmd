@@ -1,5 +1,5 @@
 # Todo
-- The functions `sim_gen_fe` etc. should be renamed. `sim_gen_x`
+- The functions `sim_gen_x` etc. should be renamed. `sim_gen_x`
 - Maybe a function `sim_gen_generic` is also useful.
 - summary.sim_setup: print the call of the generator/sampling function/etc.
 - Print the call of all functions in the sequence in which they will be applied.

@@ -22,7 +22,7 @@
 #' resultList <- sim(setup, R = 1)
 #' 
 #' # Will return a data frame
-#' dat <- sim(sim_base() %>% sim_gen_fe() %>% sim_gen_e())
+#' dat <- sim(sim_base() %>% sim_gen_x() %>% sim_gen_e())
 sim <- function(x, ...) UseMethod("sim")
 
 sim.data.frame <- function(x, ...) {

@@ -1,8 +1,8 @@
 context("sim_comp")
-test_that("sim_calc and comp_var", {
+test_that("sim_comp and comp_var", {
   setup <- sim_base(base_id(nDomains=5, nUnits = 10)) %>% 
-    sim_gen_fe(generator = gen_norm(mean=50, sd=20, name = "x")) %>%
-    sim_gen_e(generator=gen_norm(0, 1)) %>%
+    sim_gen_x(mean=50, sd=20) %>%
+    sim_gen_e(0, 1) %>%
     sim_gen_ec() %>%
     sim_sample(sample_number(size=5, groupVars = "idD")) %>%
     sim_resp_eq(y = 10 * x + e)
