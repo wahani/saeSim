@@ -7,3 +7,4 @@ devel
 .Rprofile
 README.md
 ^\.travis\.yml$
+cran-comments.md
