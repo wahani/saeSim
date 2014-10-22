@@ -1,3 +1,6 @@
+Version 0.6.0
+- Cran release
+
 Version 0.5.3
 - base_id returns only column with idD if nUnits == 1
 - updates for documentation and vignettes
