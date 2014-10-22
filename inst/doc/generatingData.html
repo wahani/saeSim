@@ -196,246 +196,6 @@ hr {
 }
 </style>
 
-body {
-  background-color: #fff;
-  margin: 1em auto;
-  max-width: 800px;
-  overflow: visible;
-  padding-left: 2em;
-  padding-right: 2em;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  line-height: 20px;
-}
-
-#header {
-  text-align: center;
-}
-
-#TOC {
-  clear: both;
-  margin: 0 0 10px 0;
-  padding: 4px;
-  border: 1px solid #CCCCCC;
-  border-radius: 5px;
-  background-color: #f6f6f6;
-  font-size: 13px;
-  line-height: 1.3;
-}
-  #TOC .toctitle {
-    font-weight: bold;
-    font-size: 15px;
-    margin-left: 5px;
-  }
-
-  #TOC ul {
-    padding-left: 40px;
-    margin-left: -1.5em;
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
-  #TOC ul ul {
-    margin-left: -2em;
-  }
-  #TOC li {
-    line-height: 16px;
-  }
-
-table {
-  margin: auto;
-  min-width: 40%;
-  border-width: 1px;
-  border-color: #DDDDDD;
-  border-style: outset;
-  border-collapse: collapse;
-}
-table[summary="R argblock"] {
-  width: 100%;
-  border: none;
-}
-table th {
-  border-width: 2px;
-  padding: 5px;
-  border-style: inset;
-}
-table td {
-  border-width: 1px;
-  border-style: inset;
-  line-height: 18px;
-  padding: 5px 5px;
-}
-table, table th, table td {
-  border-left-style: none;
-  border-right-style: none;
-}
-table tr.odd {
-  background-color: #f7f7f7;
-}
-
-p {
-  margin: 0.5em 0;
-}
-
-blockquote {
-  background-color: #f6f6f6;
-  padding: 13px;
-  padding-bottom: 1px;
-}
-
-hr {
-  border-style: solid;
-  border: none;
-  border-top: 1px solid #777;
-  margin: 28px 0;
-}
-
-dl {
-  margin-left: 0;
-}
-  dl dd {
-    margin-bottom: 13px;
-    margin-left: 13px;
-  }
-  dl dt {
-    font-weight: bold;
-  }
-
-ul {
-  margin-top: 0;
-}
-  ul li {
-    list-style: circle outside;
-  }
-  ul ul {
-    margin-bottom: 0;
-  }
-
-pre, code {
-  background-color: #f5f5f5;
-  border-radius: 3px;
-  color: #333;
-}
-pre {
-  overflow-x: auto;
-  border-radius: 3px;
-  margin: 5px 0px 10px 0px;
-  padding: 10px;
-}
-pre:not([class]) {
-  background-color: white;
-  border: #f5f5f5 1px solid;
-}
-pre:not([class]) code {
-  color: #444;
-  background-color: white;
-}
-code {
-  font-family: monospace;
-  font-size: 90%;
-}
-p > code, li > code {
-  padding: 2px 4px;
-  color: #d14;
-  border: 1px solid #e1e1e8;
-  white-space: inherit;
-}
-div.figure {
-  text-align: center;
-}
-table > caption, div.figure p.caption {
-  font-style: italic;
-}
-table > caption span, div.figure p.caption span {
-  font-style: normal;
-  font-weight: bold;
-}
-p {
-  margin: 0 0 10px;
-}
-table {
-  margin: auto auto 10px auto;
-}
-
-img {
-  background-color: #FFFFFF;
-  padding: 2px;
-  border: 1px solid #DDDDDD;
-  border-radius: 3px;
-  border: 1px solid #CCCCCC;
-  margin: 0 5px;
-  max-width: 100%;
-}
-
-h1 {
-  margin-top: 0;
-  font-size: 35px;
-  line-height: 40px;
-}
-
-h2 {
-  border-bottom: 4px solid #f5f5f5;
-  padding-top: 10px;
-  padding-bottom: 2px;
-  font-size: 145%;
-}
-
-h3 {
-  border-bottom: 2px solid #f5f5f5;
-  padding-top: 10px;
-  font-size: 120%;
-}
-
-h4 {
-  border-bottom: 1px solid #f5f5f5;
-  margin-left: 8px;
-  font-size: 105%;
-}
-
-h5, h6 {
-  border-bottom: 1px solid #ccc;
-  font-size: 105%;
-}
-
-a {
-  color: #0033dd;
-  text-decoration: none;
-}
-  a:hover {
-    color: #6666ff; }
-  a:visited {
-    color: #800080; }
-  a:visited:hover {
-    color: #BB00BB; }
-  a[href^="http:"] {
-    text-decoration: underline; }
-  a[href^="https:"] {
-    text-decoration: underline; }
-
-div.r-help-page {
-  background-color: #f9f9f9;
-  border-bottom: #ddd 1px solid;
-  margin-bottom: 10px;
-  padding: 10px;
-}
-div.r-help-page:hover {
-  background-color: #f4f4f4;
-}
-
-/* Class described in https://benjeffrey.com/posts/pandoc-syntax-highlighting-css
-   Colours from https://gist.github.com/robsimmons/1172277 */
-
-code > span.kw { color: #555; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal (decimal values) */
-code > span.bn { color: #d14; } /* BaseN */
-code > span.fl { color: #d14; } /* Float */
-code > span.ch { color: #d14; } /* Char */
-code > span.st { color: #d14; } /* String */
-code > span.co { color: #888888; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* OtherToken */
-code > span.al { color: #ff0000; font-weight: bold; } /* AlertToken */
-code > span.fu { color: #900; font-weight: bold; } /* Function calls */
-code > span.er { color: #a61717; background-color: #e3d2d2; } /* ErrorTok */
 
 
 </head>
@@ -472,13 +232,13 @@ setup &lt;- sim_base() %&gt;% sim_gen_x() %&gt;% sim_gen_e() %&gt;% sim_gen_v() 
 setup
 </code></pre>
 
-<pre><code>##   idD idU           x         e        v        vSp         y
-## 1   1   1 -4.13032190 -5.764674 1.105644 -0.6478287  90.56282
-## 2   1   2 -0.03954227 -5.174315 1.105644 -0.6478287  95.24396
-## 3   1   3 -6.52238637  3.600268 1.105644 -0.6478287  97.53570
-## 4   1   4 -0.76598595  2.027815 1.105644 -0.6478287 101.71964
-## 5   1   5 -1.82340851  1.158094 1.105644 -0.6478287  99.79250
-## 6   1   6  5.55645462 10.607900 1.105644 -0.6478287 116.62217
+<pre><code>##   idD idU        x      e     v     vSp      y
+## 1   1   1 -4.13032 -5.765 1.106 -0.8515  90.36
+## 2   1   2 -0.03954 -5.174 1.106 -0.8515  95.04
+## 3   1   3 -6.52239  3.600 1.106 -0.8515  97.33
+## 4   1   4 -0.76599  2.028 1.106 -0.8515 101.52
+## 5   1   5 -1.82341  1.158 1.106 -0.8515  99.59
+## 6   1   6  5.55645 10.608 1.106 -0.8515 116.42
 </code></pre>
 
 <p>To get the simulated data as a list:</p>
@@ -503,19 +263,19 @@ setup
 <pre><code>## [[1]]
 ## Source: local data frame [12 x 8]
 ## 
-##    idD idU             x            e       eCont   idC idR simName
-## 1    1   1  3.0426745109 -8.895867560    0.000000 FALSE   1        
-## 2    1   2 -2.1870422696  1.312302400    0.000000 FALSE   1        
-## 3    1   3 -6.6599025637  1.871466196    0.000000 FALSE   1        
-## 4    1   4 -9.4016207191  1.041705722    5.915942  TRUE   1        
-## 5    2   1 -2.2121344056 -3.195060366    0.000000 FALSE   1        
-## 6    2   2  6.5940149865  3.988802208    0.000000 FALSE   1        
-## 7    2   3 -0.0279629680  6.005805964 -191.437485  TRUE   1        
-## 8    2   4  1.5433492339 -0.006177373   13.657744  TRUE   1        
-## 9    3   1 10.1495513107 -1.645272634    0.000000 FALSE   1        
-## 10   3   2 -6.5109210822  0.205836476  310.542323  TRUE   1        
-## 11   3   3 -1.3331189619 -4.534454952  292.470706  TRUE   1        
-## 12   3   4 -0.0001270783 -8.006533194 -265.402973  TRUE   1
+##    idD idU          x         e    eCont   idC idR simName
+## 1    1   1  3.0426745 -8.895868    0.000 FALSE   1        
+## 2    1   2 -2.1870423  1.312302    0.000 FALSE   1        
+## 3    1   3 -6.6599026  1.871466    0.000 FALSE   1        
+## 4    1   4 -9.4016207  1.041706    5.916  TRUE   1        
+## 5    2   1 -2.2121344 -3.195060    0.000 FALSE   1        
+## 6    2   2  6.5940150  3.988802    0.000 FALSE   1        
+## 7    2   3 -0.0279630  6.005806 -191.437  TRUE   1        
+## 8    2   4  1.5433492 -0.006177   13.658  TRUE   1        
+## 9    3   1 10.1495513 -1.645273    0.000 FALSE   1        
+## 10   3   2 -6.5109211  0.205836  310.542  TRUE   1        
+## 11   3   3 -1.3331190 -4.534455  292.471  TRUE   1        
+## 12   3   4 -0.0001271 -8.006533 -265.403  TRUE   1
 </code></pre>
 
 </body>
