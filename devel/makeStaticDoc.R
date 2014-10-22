@@ -11,5 +11,6 @@ file.copy(list.files(path = "inst/doc/", pattern = "*.html", full.names = TRUE),
           list.files(path = "inst/web/vignettes/", pattern = "*.html", full.names = TRUE),
           overwrite = TRUE)
 
+#system('git push origin --delete gh-pages')
 system('git add -f inst/web && git commit -m "gh-pages subtree commit"')
 system('git subtree push --prefix inst/web origin gh-pages')
