@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>Index. saeSim 0.6.0</title>
+<title>Index. saeSim 0.6.1</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="Sebastian Warnholz &lt;Sebastian.Warnholz@fu-berlin.de&gt;">
 
@@ -20,7 +20,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">saeSim 0.6.0</a>
+      <a class="brand" href="#">saeSim 0.6.1</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -41,19 +41,7 @@
 
 <p><a href="https://travis-ci.org/wahani/saeSim"><img src="https://travis-ci.org/wahani/saeSim.png?branch=master" alt="Build Status"/></a></p>
 
-<p>Tools for the simulation of data in the context of small area estimation. They will organize your simulation set-up into phases:</p>
-
-<ol>
-<li>Generating data </li>
-<li>Computing on the generated data</li>
-<li>Drawing samples from the data</li>
-<li>Computing on the sample</li>
-<li>Aggregating the sample</li>
-<li>Computing on the aggregates</li>
-<li>Repeat 1-6 <em>R</em> times</li>
-</ol>
-
-<p>Go to the <a href="http://wahani.github.io/saeSim/">homepage</a> of this project to find out more.</p>
+<p>Tools for the simulation of data in the context of small area estimation. Go to the <a href="http://wahani.github.io/saeSim/">homepage</a> of this project to find out more and read the vignette.</p>
 
 <h2>Installation</h2>
 
@@ -63,102 +51,19 @@
 install_github(&quot;wahani/saeSim&quot;)
 </code></pre>
 
-<h2>Key Features</h2>
-
-<ul>
-<li>Data generation</li>
-<li>Sampling</li>
-<li>&#39;Straight forward&#39; parallel back end</li>
-<li>&hellip;</li>
-</ul>
-
 
     <h2>Help topics</h2>
 
-    <h3>Basic Functions</h3>
-    <p>You won&#39;t get around these functions if you decide to work with this 
-           package. Use <code>sim</code> to start a simulation simulation.</p>
-
-    
-    <ul class="index">
-        
-      <li>
-        <code><a href="base_id.html">base_id</a></code><br />Construct data with id-variables</li>
-            
-      <li>
-        <code><a href="sim.html">sim</a></code>(sim.sim_setup)<br />Start simulation</li>
-    
-    </ul>
-    <h3>Simulation Components</h3>
-    <p>These functions help to control the simulation workflow. Use them to 
-           add components to a simulation setup.</p>
-
-    
-    <ul class="index">
-        
-      <li>
-        <code><a href="sim_gen.html">sim_gen</a></code><br />Generation component</li>
-            
-      <li>
-        <code><a href="sim_comp.html">sim_comp_pop</a></code>(sim_comp_agg, sim_comp_sample)<br />Calculation component</li>
-            
-      <li>
-        <code><a href="sim_sample.html">sim_sample</a></code><br />Sampling component</li>
-            
-      <li>
-        <code><a href="sim_agg.html">sim_agg</a></code><br />Aggregation component</li>
-    
-    </ul>
-    <h3>Generators</h3>
-    <p>These functions are predefined interfaces to random number generators
-           implemented in <em>R</em>. You can use <code>gen_generic</code> to supply any random 
-           number generator. Use these functions in conjunction with <code>sim_gen</code></p>
-
-    
-    <ul class="index">
-        
-      <li>
-        <code><a href="generators.html">gen_norm</a></code>(gen_generic, gen_v_norm, gen_v_sar)<br />Generator functions</li>
-    
-    </ul>
-    <h3>Compute Functions</h3>
-    <p>Use these functions to add computations.</p>
-
-    
-    <ul class="index">
-        
-      <li>
-        <code><a href="comp_var.html">comp_var</a></code><br />Compute variables in data</li>
-    
-    </ul>
-    <h3>Sampling Functions</h3>
-    <p>Use these functions to control the sampling process.</p>
-
-    
-    <ul class="index">
-        
-      <li>
-        <code><a href="sampling.html">sample_fraction</a></code>(sample_number)<br />Sampling functions</li>
-    
-    </ul>
-    <h3>Aggregator Functions</h3>
-    <p>There is only one preconfigured function for aggregation. If you don&#39;t 
-           like it&#39;s behavior you can supply your own function to <code>sim_agg</code>.</p>
-
-    
-    <ul class="index">
-        
-      <li>
-        <code><a href="agg_all.html">agg_all</a></code><br />Aggregation function</li>
-    
-    </ul>
-    <h3>Other</h3>
+    <h3></h3>
     
     
     <ul class="index">
         
       <li>
         <code><a href="pipe.html">%&gt;%</a></code><br />Piping operator</li>
+            
+      <li>
+        <code><a href="agg_all.html">agg_all</a></code><br />Aggregation function</li>
             
       <li>
         <code><a href="as.data.frame.sim_setup.html">as.data.frame.sim_setup</a></code><br />as.data.frame method for sim_setup</li>
@@ -170,10 +75,28 @@ install_github(&quot;wahani/saeSim&quot;)
         <code><a href="base_add_id.html">base_add_id</a></code><br />Add id-variables to data</li>
             
       <li>
+        <code><a href="base_id.html">base_id</a></code><br />Construct data with id-variables</li>
+            
+      <li>
+        <code><a href="comp_var.html">comp_var</a></code><br />Compute variables in data</li>
+            
+      <li>
+        <code><a href="generators.html">gen_norm</a></code>(gen_generic, gen_v_norm, gen_v_sar)<br />Generator functions</li>
+            
+      <li>
         <code><a href="plot.sim_setup.html">plot.sim_setup</a></code><br />Plotting methods</li>
             
       <li>
+        <code><a href="sampling.html">sample_fraction</a></code>(sample_number)<br />Sampling functions</li>
+            
+      <li>
         <code><a href="show-sim_setup-method.html">show,sim_setup-method</a></code><br />Show for </li>
+            
+      <li>
+        <code><a href="sim.html">sim</a></code>(sim.sim_setup)<br />Start simulation</li>
+            
+      <li>
+        <code><a href="sim_agg.html">sim_agg</a></code><br />Aggregation component</li>
             
       <li>
         <code><a href="sim_base.html">sim_base</a></code><br />Base component</li>
@@ -183,6 +106,12 @@ install_github(&quot;wahani/saeSim&quot;)
             
       <li>
         <code><a href="sim_comp_preconf.html">sim_comp_n</a></code>(sim_comp_N, sim_comp_popMean, sim_comp_popVar)<br />Preconfigured computation components</li>
+            
+      <li>
+        <code><a href="sim_comp.html">sim_comp_pop</a></code>(sim_comp_agg, sim_comp_sample)<br />Calculation component</li>
+            
+      <li>
+        <code><a href="sim_gen.html">sim_gen</a></code><br />Generation component</li>
             
       <li>
         <code><a href="sim_gen_cont.html">sim_gen_cont</a></code><br />Generation Component for contamination</li>
@@ -197,6 +126,9 @@ install_github(&quot;wahani/saeSim&quot;)
         <code><a href="sim_resp.html">sim_resp</a></code>(sim_resp_eq)<br />Response component</li>
             
       <li>
+        <code><a href="sim_sample.html">sim_sample</a></code><br />Sampling component</li>
+            
+      <li>
         <code><a href="sim_simName.html">sim_simName</a></code><br />Add a name to a sim_setup</li>
             
       <li>
@@ -208,10 +140,7 @@ install_github(&quot;wahani/saeSim&quot;)
   <div class="span3 offset1">
     <h2>Vignettes</h2>
     <ul>
-      <li><a href="vignettes/addingComputations.html">Adding Computations</a></li>
-      <li><a href="vignettes/drawingSamples.html">Sampling</a></li>
-      <li><a href="vignettes/generalOverview.html">Overview</a></li>
-      <li><a href="vignettes/generatingData.html">Generating Data</a></li>
+      <li><a href="vignettes/Introduction.html">Introduction</a></li>
     </ul>
         
     <h2>Dependencies</h2>

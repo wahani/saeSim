@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>gen_norm. saeSim 0.6.0</title>
+<title>gen_norm. saeSim 0.6.1</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -20,7 +20,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">saeSim 0.6.0</a>
+      <a class="brand" href="#">saeSim 0.6.1</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -72,6 +72,11 @@
       
     </div>
 
+    <div class="Generator functions">
+      <h2>Generator functions</h2>
+      
+    </div>
+
     <div class="Description">
       <h2>Description</h2>
       
@@ -93,13 +98,13 @@
     <h2 id="examples">Examples</h2>
     <pre class="examples"><div class='input'>sim_base() %&gt;% sim_gen_x() %&gt;% sim_gen_e() %&gt;% sim_gen_v() %&gt;% sim_gen(gen_v_sar(name = &quot;vSP&quot;))
 </div>
-<div class='output'>  idD idU          x         e         v       vSP
-1   1   1 -0.2296887 -2.131487 -0.572907 -1.381894
-2   1   2 -4.2048447 -2.397557 -0.572907 -1.381894
-3   1   3 -0.2582075 -4.392411 -0.572907 -1.381894
-4   1   4 -4.8129441 -7.844660 -0.572907 -1.381894
-5   1   5  1.4378590  1.615642 -0.572907 -1.381894
-6   1   6 -4.7869607  1.523345 -0.572907 -1.381894
+<div class='output'>  idD idU          x         e          v        vSP
+1   1   1 -4.9625421 -2.034900 -0.2805977 0.03197827
+2   1   2  1.2531545  6.771562 -0.2805977 0.03197827
+3   1   3 -0.7204492  3.985918 -0.2805977 0.03197827
+4   1   4  3.7954980 -0.405333 -0.2805977 0.03197827
+5   1   5  1.6323131  4.545750 -0.2805977 0.03197827
+6   1   6 -1.7831109  3.629079 -0.2805977 0.03197827
 </div>
 <div class='input'>
  # Generic interface
