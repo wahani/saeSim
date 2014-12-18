@@ -8,3 +8,4 @@
 core
 *.html
 /inst/web*
+inst/doc

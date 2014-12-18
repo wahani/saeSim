@@ -1,0 +1,207 @@
+---
+title: "Introduction"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+```{r, echo=FALSE}
+set.seed(1)
+```
+
+`saeSim` is developed to make the data simulation process more compact and yet flexible enough for customization in the context of small area estimation.
+
+## An initial Example
+
+Consider a linear mixed model. It contains two components. A fixed effects part, and an error component. The error component can be split into a random effects part and a model error. 
+
+```{r}
+library(saeSim)
+setup <- sim_base() %>% 
+  sim_gen_x() %>% 
+  sim_gen_e() %>% 
+  sim_resp_eq(y = 100 + 2 * x + e) %>% 
+  sim_simName("Doku")
+setup
+```
+
+`sim_base()` is responsible to supply a `data.frame` to which variables can be added. The default is to create a `data.frame` with indicator variables `idD` and `idU` (2-level-model), which uniquely identify observations. `sim_resp` will add a variable `y` as response.
+
+The setup itself does not contain the simulated data but the functions to process the data. For starting a simulation use the function `sim`. It will return a `list` containing `data.frames` as elements:
+
+```{r eval=FALSE}
+dataList <- sim(setup, R = 10)
+```
+
+You can coerce a simulation setup to a `data.frame` with `as.data.frame`. 
+
+```{r eval=FALSE}
+simData <- sim_base() %>% 
+  sim_gen_x() %>% 
+  sim_gen_e() %>% 
+  as.data.frame
+```
+
+## Naming and structure
+
+Components in a simulation setup should be added using the pipe operator `%>%` from magrittr. A component defines 'when' a specific function will be applied in a chain of functions. To add a component you can use one of: `sim_gen`, `sim_resp`, `sim_comp_pop`, `sim_sample`, `sim_comp_sample`, `sim_agg` and `sim_comp_agg`. They all expect a simulation setup as first argument and a function as second and will take care of the order in which the functions are called. The reason for this is the following:
+
+```{r, eval=FALSE}
+setup <- sim_base() %>% 
+  sim_gen_x() %>% 
+  sim_gen_e() %>% 
+  sim_resp_eq(y = 100 + 2 * x + e)
+
+setup1 <- setup %>% sim_sample(sample_fraction(0.05))
+setup2 <- setup %>% sim_sample(sample_number(5))
+```
+
+You can define a rudimentary scenario and only have to explain how scenarios differ. You do not have to redefine them. `setup1` and `setup2` only differ in the way samples are drawn. `sim_sample` will take care, that the sampling will take place at the appropriate place in the chain of functions no matter how `setup` was composed.
+
+If you can't remember all function names, use auto-complete. All functions to add components start with `sim_`. And all functions meant to be used in a given phase will start with the corresponding prefix, i.e. if you set the sampling scheme you use `sim_sample` -- all functions to control sampling have the prefix `sample`.
+
+## Exploring the setup
+
+You will want to check your results regularly when working with `sim_setup` objects. Some methods are supplied to do that:
+
+- `show` - this is the `print` method for S4-Classes. You don't have to call `show` explicitly. You may have noticed that only a few lines of data are printed to the console if you evaluate a simulation setup. `show` will print the `head` of the resulting data of one simulation run.
+- `plot` - for visualizing the data
+- `autoplot` - Will imitate `smoothScatter` with ggplot2
+
+```{r}
+setup <- sim_base_lmm()
+plot(setup)
+autoplot(setup)
+autoplot(setup, "e")
+autoplot(setup %>% sim_gen_vc())
+```
+
+## sim_gen
+### Semi-custom data
+
+saeSim has a interface to supply any random number generator. If things get more complex you can always define new generator functions.
+
+```{r}
+base_id(2, 3) %>% sim_gen(gen_generic(rnorm, mean = 5, sd = 10, name = "x", groupVars = "idD"))
+```
+
+You can supply any random number generator to `gen_generic` and since we are in small area estimation you have an optional group variable to generate 'area-level' variables. Some short cuts for data generation are `sim_gen_x`, `sim_gen_v` and `sim_gen_e` which add normally distributed variables named 'x', 'e' and 'v' respectively. Also there are some function with the prefix 'gen' which will be extended in the future.
+
+```{r}
+library(saeSim)
+setup <- sim_base() %>% 
+  sim_gen_x() %>% # Variable 'x'
+  sim_gen_e() %>% # Variable 'e'
+  sim_gen_v() %>% # Variable 'v' as a random-effect
+  sim_gen(gen_v_sar(name = "vSp")) %>% # Variable 'vSp' as a random-effect following a SAR(1)
+  sim_resp_eq(y = 100 + x + v + vSp + e) # Computing 'y'
+setup
+```
+
+### Contaminated data
+
+For contaminated data you can use the same generator functions, however, instead of using `sim_gen` you use `sim_gen_cont` which will have some extra arguments to control the contamination. To extend the above setup with a contaminated spatially correlated error component you can add the following:
+
+```{r}
+contSetup <- setup %>% 
+  sim_gen_cont(gen_v_sar(sd = 40, name = "vSp"), 
+               nCont = 0.05, type = "area", areaVar = "idD", fixed = TRUE)
+```
+
+Note that the generator is the same but with a higher standard deviation. The argument `nCont` controls how much observations are contaminated. Values < 1 are interpreted as probability. A single number as the number of contaminated units (can be areas or observations in each area or observations). When given with `length(nCont) > 1` it will be interpreted as number of contaminated observations in each area. Use the following example to see how these things play together:
+
+```{r}
+sim(base_id(3, 4) %>% sim_gen_x() %>% sim_gen_e() %>% 
+      sim_gen_ec(mean = 0, sd = 150, name = "eCont", nCont = c(1, 2, 3)))
+```
+
+## sim_comp
+
+Here follow some examples how to add components for computation to a `sim_setup`. Three points can be accessed with 
+
+- `sim_comp_pop` - add a computation before sampling
+- `sim_comp_sample` - add a computation after sampling
+- `sim_comp_agg` - add a computation after aggregation
+
+```{r}
+base_id(2, 3) %>% sim_gen_x() %>% sim_gen_e() %>% sim_gen_ec() %>% 
+  sim_resp_eq(y = 100 + x + e) %>%
+  sim_comp_pop(comp_var(popMean = mean(y)), by = "idD")
+
+```
+
+The function `comp_var` is a wrapper around `dplyr::mutate` so you can add simple data manipulations. The argument `by` is a little extension and lets you define operations in the scope of groups identified by a variable in the data. In this case the mean of the variable 'y' is computed for every group identified with the variable 'idD'. This is done before sampling, hence the prefix 'pop' for population.
+
+### Add custom computation functions
+
+By adding computation functions you can extend the functionality of a `sim_setup` to wrap up your whole simulation. This will separate the utility of this package from only generating data.
+
+```{r}
+comp_linearPredictor <- function(dat) {
+  dat$linearPredictor <- lm(y ~ x, dat) %>% predict
+  dat
+}
+
+sim_base_lm() %>% 
+  sim_comp_pop(comp_linearPredictor)
+```
+
+Or, should this be desirable, directly produce a list of `lm` objects or add them as attribute to the data. The intended way of writing functions is that they will return the modified data of class 'data.frame'. 
+
+```{r}
+sim_base_lm() %>% 
+  sim_comp_pop(function(dat) lm(y ~ x, dat)) %>%
+  sim(R = 1)
+
+comp_linearModelAsAttr <- function(dat) {
+  attr(dat, "linearModel") <- lm(y ~ x, dat)
+  dat
+}
+
+dat <- sim_base_lm() %>% 
+  sim_comp_pop(comp_linearModelAsAttr) %>%
+  as.data.frame
+
+attr(dat, "linearModel")
+```
+
+If you use any kind of sampling, the 'linearPredictor' can be added after sampling. This is where small area models are supposed to be applied.
+
+```{r}
+sim_base_lm() %>% 
+  sim_sample() %>%
+  sim_comp_sample(comp_linearPredictor)
+```
+
+Should you want to apply area level models, use `sim_comp_agg` instead.
+
+```{r}
+sim_base_lm() %>% 
+  sim_sample() %>%
+  sim_agg() %>% 
+  sim_comp_agg(comp_linearPredictor)
+```
+
+## sim_sample
+
+After the data generation you may want to draw a sample from the population. Use the function `sim_sample()` to add a sampling component to your `sim_setup`. Two predefined functions for sampling are available:
+
+- `sample_number` - wrapper around `dplyr::sample_n`
+- `sample_fraction` - wrapper around `dplyr::sample_frac`
+
+```{r}
+base_id(3, 4) %>% sim_gen_x() %>% sim_sample(sample_number(1L))
+base_id(3, 4) %>% sim_gen_x() %>% sim_sample(sample_number(1L, groupVars = "idD"))
+```
+
+```{r}
+# simple random sampling:
+sim_base_lm() %>% sim_sample(sample_number(size = 10L))
+sim_base_lm() %>% sim_sample(sample_fraction(size = 0.05))
+# srs in each domain/cluster
+sim_base_lm() %>% sim_sample(sample_number(size = 10L, groupVars = "idD"))
+sim_base_lm() %>% sim_sample(sample_fraction(size = 0.05, groupVars = "idD"))
+```
