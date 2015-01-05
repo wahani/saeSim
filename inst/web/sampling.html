@@ -41,7 +41,8 @@
   <div class="span8">
     <h2>Usage</h2>
     <pre><div>sample_fraction(size, replace&nbsp;=&nbsp;FALSE, weight&nbsp;=&nbsp;NULL, groupVars&nbsp;=&nbsp;NULL)</div>
-<div>sample_number(size, replace&nbsp;=&nbsp;FALSE, weight&nbsp;=&nbsp;NULL, groupVars&nbsp;=&nbsp;NULL)</div></pre>
+<div>sample_number(size, replace&nbsp;=&nbsp;FALSE, weight&nbsp;=&nbsp;NULL, groupVars&nbsp;=&nbsp;NULL)</div>
+<div>sample_numbers(size, replace&nbsp;=&nbsp;FALSE, groupVars&nbsp;=&nbsp;NULL)</div></pre>
     
     <h2>Arguments</h2>
     <dl>
@@ -73,7 +74,14 @@ standardised to sum to 1.</dd>
     <div class="Description">
       <h2>Description</h2>
       
-      <p>This function is intended to be used with <code><a href='sim_sample.html'>sim_sample</a></code> and not interactively. This is a wrapper around <a href='http://www.inside-r.org/packages/cran/dplyr/docs/sample'>sample_frac</a> and <a href='http://www.inside-r.org/packages/cran/dplyr/docs/sample'>sample_n</a>.</p>
+      <p>These functions are intended to be used with <code><a href='sim_sample.html'>sim_sample</a></code> and not interactively. They are wrappers around <a href='http://www.inside-r.org/packages/cran/dplyr/docs/sample'>sample_frac</a> and <a href='http://www.inside-r.org/packages/cran/dplyr/docs/sample'>sample_n</a>.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+      
+      <p><code>sample_numbers</code> is a vectorized version of <code>sample_number</code></p>
   
     </div>
     
@@ -100,7 +108,7 @@ standardised to sum to 1.</dd>
   </div>
   <div class="span4">
     <!-- <ul>
-      <li>sample_fraction</li><li>sample_number</li>
+      <li>sample_fraction</li><li>sample_number</li><li>sample_numbers</li>
     </ul>
     <ul>
       
