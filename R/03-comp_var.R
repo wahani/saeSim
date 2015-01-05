@@ -14,27 +14,3 @@ comp_var <- function(...) {
   mc[[1]] <- quote(mutate_wrapper)
   eval(mc)
 }
-
-mutate_wrapper <- function(...) {
-  mc <- match.call(expand.dots = TRUE)
-  mc[[1L]] <- quote(mutate)
-  mc[[length(mc) + 1]] <- quote(dat)
-  
-  function(dat) {
-    eval(mc)
-  }
-}
-
-apply_by <- function(by, fun) {
-  force(fun)
-  force(by)
-  function(dat) {
-    stopifnot(all(by %in% names(dat)))
-    savedAttr <- attributes(dat)
-    out <- split(dat, dat[by]) %>% lapply(fun) %>% rbind_all
-    attrToKeep <- which(!(names(savedAttr) %in% names(attributes(out))))
-    attributes(out)[names(savedAttr)[attrToKeep]] <- savedAttr[attrToKeep]
-    out
-  }
-}
-

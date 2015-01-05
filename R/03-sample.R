@@ -1,10 +1,12 @@
 #' Sampling functions
 #' 
-#' This function is intended to be used with \code{\link{sim_sample}} and not interactively. This is a wrapper around \link[dplyr]{sample_frac} and \link[dplyr]{sample_n}.
+#' These functions are intended to be used with \code{\link{sim_sample}} and not interactively. They are wrappers around \link[dplyr]{sample_frac} and \link[dplyr]{sample_n}.
 #' 
 #' @param groupVars character with names of variables to be used for grouping.
 #' 
 #' @inheritParams dplyr::sample_frac
+#' 
+#' @details \code{sample_numbers} is a vectorized version of \code{sample_number}.
 #' 
 #' @rdname sampling
 #' @export
@@ -43,4 +45,10 @@ sample_number <- function(size, replace = FALSE, weight = NULL, groupVars = NULL
       dat
     }
   }
+}
+
+#' @rdname sampling
+#' @export
+sample_numbers <- function(size, replace = FALSE, groupVars = NULL) {
+  mapply_by(groupVars, lapply(size, function(s) sample_number(s, replace)))
 }

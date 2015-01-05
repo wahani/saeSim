@@ -3,11 +3,14 @@
 \name{sample_fraction}
 \alias{sample_fraction}
 \alias{sample_number}
+\alias{sample_numbers}
 \title{Sampling functions}
 \usage{
 sample_fraction(size, replace = FALSE, weight = NULL, groupVars = NULL)
 
 sample_number(size, replace = FALSE, weight = NULL, groupVars = NULL)
+
+sample_numbers(size, replace = FALSE, groupVars = NULL)
 }
 \arguments{
 \item{size}{For \code{sample_n}, the number of rows to select.
@@ -24,7 +27,10 @@ standardised to sum to 1.}
 \item{groupVars}{character with names of variables to be used for grouping.}
 }
 \description{
-This function is intended to be used with \code{\link{sim_sample}} and not interactively. This is a wrapper around \link[dplyr]{sample_frac} and \link[dplyr]{sample_n}.
+These functions are intended to be used with \code{\link{sim_sample}} and not interactively. They are wrappers around \link[dplyr]{sample_frac} and \link[dplyr]{sample_n}.
+}
+\details{
+\code{sample_numbers} is a vectorized version of \code{sample_number}
 }
 \examples{
 sim_base_lm() \%>\% sim_sample(sample_number(5))

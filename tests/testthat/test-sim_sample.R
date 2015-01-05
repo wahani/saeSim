@@ -41,7 +41,7 @@ test_that("applying the sampling functions correctly", {
   expect_equal(nrow(sim(setup %>% sim_sample(sample_number(c(3), groupVars = "idD")))[[1]]), (9))
 })
 
-test_that("sample_srs() can handle integer and numeric", {
+test_that("more sampling", {
   setup <- sim_base()
   result1 <- setup %>% sim_sample(sample_number(1)) %>% as.data.frame
   result2 <- setup %>% sim_sample(sample_fraction(0.5)) %>% as.data.frame
@@ -51,4 +51,12 @@ test_that("sample_srs() can handle integer and numeric", {
   expect_equal(nrow(result2), (5000))
   expect_equal(nrow(result3), (5))
   expect_equal(nrow(result4), (1))
+})
+
+test_that("vectorized versions of sample_number", {
+  setup <- sim_base()
+  result1 <- setup %>% sim_sample(sample_numbers(1, groupVars = "idD")) %>% as.data.frame
+  result2 <- setup %>% sim_sample(sample_numbers(rep(c(1, 2), 50), groupVars = "idD")) %>% as.data.frame  
+  expect_equal(nrow(result1), 100)
+  expect_equal(nrow(result2), 150)
 })
