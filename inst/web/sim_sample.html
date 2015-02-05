@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>sim_sample. saeSim 0.6.1</title>
+<title>sim_sample. saeSim 0.6.3</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -20,7 +20,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">saeSim 0.6.1</a>
+      <a class="brand" href="#">saeSim 0.6.3</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -78,25 +78,31 @@
     <pre class="examples"><div class='input'># Simple random sample - 5% sample:
 sim_base_lm() %&gt;% sim_sample(sample_fraction(0.05))
 </div>
-<div class='output'>     idD idU         x         e         y
-8403  85   3 -6.336846 -4.885108  88.77805
-7897  79  97 -4.647068  3.334028  98.68696
-1100  11 100  4.072148 -2.574449 101.49770
-7193  72  93 -4.613809  3.047235  98.43343
-5657  57  57 -7.264578  2.065306  94.80073
-3191  32  91 -7.069191 -2.189087  90.74172
+<div class='output'>data.frame [500 x 5]
+
+   idD idU           x         e         y
+1   11  36  0.06465272 -2.335531  97.72912
+2    3  81  4.24300308 -2.175892 102.06711
+3   17   3 -0.43428460 -8.535560  91.03016
+4   28  61  0.21065710 -9.577509  90.63315
+5   61   8 -0.87444866  1.880769 101.00632
+6   14  29 -2.77956604  2.726456  99.94689
+.. ... ...         ...       ...       ...
 </div>
 <div class='input'>
 # Simple random sampling proportional to size - 5% in each domain:
 sim_base_lm() %&gt;% sim_sample(sample_fraction(0.05, groupVars = &quot;idD&quot;))
 </div>
-<div class='output'>  idD idU         x          e         y
-1   1  42  1.904507  1.3037461 103.20825
-2   1  45 -8.264510  1.4747258  93.21022
-3   1  15  6.938246 -3.8559665 103.08228
-4   1  71  2.100268 10.8373035 112.93757
-5   1  56  6.493609  0.6483666 107.14198
-6   2  21  5.444135 -2.8573716 102.58676
+<div class='output'>data.frame [500 x 5]
+
+   idD idU         x         e         y
+1    1  31 -4.841642  1.221170  96.37953
+2    1  92  1.188421 -1.842467  99.34595
+3    1  65 -0.444282 -4.028396  95.52732
+4    1  18  7.943396 -7.680284 100.26311
+5    1  10  1.175738  4.743101 105.91884
+6    2  37  1.866770  5.276006 107.14278
+.. ... ...       ...       ...       ...
 </div>
 <div class='input'>
 # User defined sampling function:
@@ -106,13 +112,16 @@ sample_mySampleFun &lt;- function(dat) {
 
 sim_base_lm() %&gt;% sim_sample(sample_mySampleFun)
 </div>
-<div class='output'>     idD idU          x          e         y
-818    9  18 -2.6111759 -4.9148624  92.47396
-6983  70  83 -3.9031011 -0.3052669  95.79163
-2270  23  70 -0.3577748 -3.9678877  95.67434
-2963  30  63 -5.4582147  0.9858645  95.52765
-6229  63  29  1.6706398 -1.6471439 100.02350
-8001  81   1  3.6823897 -3.9576520  99.72474
+<div class='output'>data.frame [10 x 5]
+
+   idD idU           x         e         y
+1   55  44 -1.46023799 -4.969092  93.57067
+2   95  92  5.90081000  4.403200 110.30401
+3   55  75 -2.07087707  7.306458 105.23558
+4   42  59 -0.01011585 -1.025540  98.96434
+5   28  44  3.81068169 -1.403983 102.40670
+6   57  77 -5.00313686 -2.874930  92.12193
+.. ... ...         ...       ...       ...
 </div></pre>
   </div>
   <div class="span4">

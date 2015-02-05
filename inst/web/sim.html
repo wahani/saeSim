@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>sim. saeSim 0.6.1</title>
+<title>sim. saeSim 0.6.3</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -20,7 +20,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">saeSim 0.6.1</a>
+      <a class="brand" href="#">saeSim 0.6.3</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -46,9 +46,9 @@
     <h2>Arguments</h2>
     <dl>
       <dt>x</dt>
-      <dd>a <code>sim_setup</code> or <code>data.frame</code></dd>
+      <dd>a <code>sim_setup</code></dd>
       <dt>...</dt>
-      <dd>simulation components; If <code>parallel = TRUE</code> arguments passed to mclapply, see details.</dd>
+      <dd>If <code>parallel = TRUE</code> arguments passed to mclapply, see details.</dd>
       <dt>R</dt>
       <dd>number of repetitions.</dd>
       <dt>parallel</dt>
@@ -77,7 +77,7 @@
     <div class="Description">
       <h2>Description</h2>
       
-      <p>This function can be applied to a <code>sim_setup</code>. It will start the simulation. Use the printing method as long as you are testing the scenario.</p>
+      <p>This function will start the simulation. Use the printing method as long as you are testing the scenario.</p>
   
     </div>
 
@@ -92,9 +92,6 @@ Use the <code>path</code> to store the simulation results to a directory. This m
     <h2 id="examples">Examples</h2>
     <pre class="examples"><div class='input'>setup &lt;- sim_base_lm()
 resultList &lt;- sim(setup, R = 1)
-
-# Will return a data frame
-dat &lt;- sim(sim_base() %&gt;% sim_gen_x() %&gt;% sim_gen_e())
 </div></pre>
   </div>
   <div class="span4">

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>sim_resp. saeSim 0.6.1</title>
+<title>sim_resp. saeSim 0.6.3</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -20,7 +20,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">saeSim 0.6.1</a>
+      <a class="brand" href="#">saeSim 0.6.3</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -81,13 +81,16 @@ a variable.</dd>
     <h2 id="examples">Examples</h2>
     <pre class="examples"><div class='input'>base_id() %&gt;% sim_gen_x() %&gt;% sim_gen_e() %&gt;% sim_resp_eq(y = 100 + 2 * x + e)
 </div>
-<div class='output'>  idD idU           x          e         y
-1   1   1 -0.05106013  5.0750132 104.97289
-2   1   2  1.87538647  3.1336145 106.88439
-3   1   3 -4.23760971  2.8845320  94.40931
-4   1   4 -8.04240206 -2.6847619  81.23043
-5   1   5 -2.25223268 -6.3802287  89.11531
-6   1   6 -3.75435600 -0.9753792  91.51591
+<div class='output'>data.frame [100 x 5]
+
+   idD idU          x          e         y
+1    1   1 -2.1055841 -0.3032576  95.48557
+2    1   2  0.1742272 -2.8669216  97.48153
+3    1   3 -3.5983983  4.5409012  97.34410
+4    1   4  0.4737494  2.3928707 103.34037
+5    1   5 -5.8463505 -3.7489684  84.55833
+6    1   6  0.9015963 -1.3975149 100.40568
+.. ... ...        ...        ...       ...
 </div></pre>
   </div>
   <div class="span4">

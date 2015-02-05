@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>sample_fraction. saeSim 0.6.1</title>
+<title>sample_fraction. saeSim 0.6.3</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -20,7 +20,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">saeSim 0.6.1</a>
+      <a class="brand" href="#">saeSim 0.6.3</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -81,29 +81,34 @@ standardised to sum to 1.</dd>
     <div class="Details">
       <h2>Details</h2>
       
-      <p><code>sample_numbers</code> is a vectorized version of <code>sample_number</code></p>
+      <p><code>sample_numbers</code> is a vectorized version of <code>sample_number</code>.</p>
   
     </div>
     
     <h2 id="examples">Examples</h2>
     <pre class="examples"><div class='input'>sim_base_lm() %&gt;% sim_sample(sample_number(5))
 </div>
-<div class='output'>     idD idU          x          e         y
-1983  20  83  2.4367219 -1.8878906 100.54883
-456    5  56 -2.9740579  0.3162138  97.34216
-7943  80  43  2.4551156 -3.9802332  98.47488
-3813  39  13  0.1833337  5.4762940 105.65963
-2074  21  74  7.9147706 -1.2062993 106.70847
+<div class='output'>data.frame [5 x 5]
+
+  idD idU          x          e         y
+1  20  83  2.4367219 -1.8878906 100.54883
+2   5  56 -2.9740579  0.3162138  97.34216
+3  80  43  2.4551156 -3.9802332  98.47488
+4  39  13  0.1833337  5.4762940 105.65963
+5  21  74  7.9147706 -1.2062993 106.70847
 </div>
 <div class='input'>sim_base_lm() %&gt;% sim_sample(sample_fraction(0.5))
 </div>
-<div class='output'>     idD idU         x           e         y
-7556  76  56  1.998539  0.05944173 102.05798
-6483  65  83  6.162889 -3.31758242 102.84531
-2331  24  31  8.965958  1.67106966 110.63703
-1461  15  61 -3.535418 -2.75745655  93.70713
-1475  15  75 -1.540738  3.22595298 101.68521
-3433  35  33  2.045363  1.30846446 103.35383
+<div class='output'>data.frame [5,000 x 5]
+
+   idD idU         x           e         y
+1   76  56  1.998539  0.05944173 102.05798
+2   65  83  6.162889 -3.31758242 102.84531
+3   24  31  8.965958  1.67106966 110.63703
+4   15  61 -3.535418 -2.75745655  93.70713
+5   15  75 -1.540738  3.22595298 101.68521
+6   35  33  2.045363  1.30846446 103.35383
+.. ... ...       ...         ...       ...
 </div></pre>
   </div>
   <div class="span4">

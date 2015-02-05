@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>sim_agg. saeSim 0.6.1</title>
+<title>sim_agg. saeSim 0.6.3</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -20,7 +20,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">saeSim 0.6.1</a>
+      <a class="brand" href="#">saeSim 0.6.3</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -78,36 +78,40 @@
     <pre class="examples"><div class='input'># Aggregating the population:
 sim_base_lm() %&gt;% sim_agg()
 </div>
-<div class='output'>Source: local data frame [6 x 4]
+<div class='output'>data.frame [100 x 4]
 
-  idD          x           e         y
-1   1 -0.3464252  0.35686858 100.01044
-2   2 -0.2120012 -0.06586811  99.72213
-3   3  0.1756998  0.47522990 100.65093
-4   4 -0.1531544  0.67924883 100.52609
-5   5 -1.1509124  0.01606953  98.86516
-6   6 -0.4673820  0.45751343  99.99013
+   idD           x           e         y
+1    1  0.08618277  0.32087092 100.40705
+2    2 -0.63097521 -0.06079153  99.30823
+3    3  0.04361701  0.81398005 100.85760
+4    4  0.34687347 -0.38862068  99.95825
+5    5  0.47337447  0.14850917 100.62188
+6    6  0.28898129 -0.44134196  99.84764
+.. ...         ...         ...       ...
 </div>
 <div class='input'>
 # Aggregating after sampling:
 sim_base_lm() %&gt;% sim_sample() %&gt;% sim_agg()
 </div>
-<div class='output'>Source: local data frame [6 x 4]
+<div class='output'>data.frame [100 x 4]
 
-  idD           x           e         y
-1   1  0.63295841  0.87228751 101.50525
-2   2 -1.10822966 -1.70515466  97.18662
-3   3  1.21666579 -3.22404757  97.99262
-4   4  0.05585678 -0.08448979  99.97137
-5   5  2.44751083 -1.11408737 101.33342
-6   6  0.93255787 -2.58482909  98.34773
+   idD          x          e        y
+1    1 -1.9973984 -1.5527228 96.44988
+2    2  1.6442523 -2.1621982 99.48205
+3    3 -0.3215831 -1.5692805 98.10914
+4    4 -1.0719979  0.2232904 99.15129
+5    5  0.5476848 -2.1388141 98.40887
+6    6 -2.1433148 -1.8793691 95.97732
+.. ...        ...        ...      ...
 </div>
 <div class='input'>
 # User aggFun:
 sim_base_lm() %&gt;% sim_agg(function(dat) dat[1, ])
 </div>
-<div class='output'>  idD idU        x         e        y
-1   1   1 2.256539 0.4887127 102.7453
+<div class='output'>data.frame [1 x 5]
+
+  idD idU        x       e        y
+1   1   1 4.716649 4.43321 109.1499
 </div></pre>
   </div>
   <div class="span4">
