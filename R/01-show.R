@@ -13,6 +13,6 @@ setMethod("show", "sim_setup",
             dat <- as.data.frame(object)
             cat("data.frame ", dim_desc(dat), "\n", sep = "")
             cat("\n")
-            print(trunc_mat(dat, n = NULL, width = NULL))
+            print(trunc_mat(dat, n = 6, width = NULL))
             invisible(dat)
           })

@@ -10,9 +10,9 @@ sim(x, ...)
 \method{sim}{sim_setup}(x, ..., R = 1, parallel = FALSE, path = NULL)
 }
 \arguments{
-\item{x}{a \code{sim_setup} or \code{data.frame}}
+\item{x}{a \code{sim_setup}}
 
-\item{...}{simulation components; If \code{parallel = TRUE} arguments passed to mclapply, see details.}
+\item{...}{If \code{parallel = TRUE} arguments passed to mclapply, see details.}
 
 \item{R}{number of repetitions.}
 
@@ -24,7 +24,7 @@ sim(x, ...)
 The return value is always a list. The elements are the resulting \code{data.frame}s of each simulation run.
 }
 \description{
-This function can be applied to a \code{sim_setup}. It will start the simulation. Use the printing method as long as you are testing the scenario.
+This function will start the simulation. Use the printing method as long as you are testing the scenario.
 }
 \details{
 The backend for parallel computation is very experimental. You can find the code and documentation on www.github.com/wahani/parallelTools. In Windows parallelization is build around \code{\link[parallel]{clusterApply}}. If you are not using Windows the function \code{\link[parallel]{mclapply}} is used. See the parameters of \code{mclapply} how to control the parallelization. Parallizing trivial tasks in Windows will result in wasted time. Also working with large data.frames will be inefficient in Windows.

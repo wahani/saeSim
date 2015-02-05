@@ -8,7 +8,7 @@ mutate_wrapper <- function(...) {
   mc[[length(mc) + 1]] <- quote(dat)
   
   retFun <- function(dat) {
-    eval(mc)
+    eval(mc) %>% as.data.frame
   }
   
   preserve_attributes(retFun)
