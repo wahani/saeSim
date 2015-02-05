@@ -1,3 +1,7 @@
+Version 0.6.3
+- Bugfixes in sim_gen for contamination and sim_gen_eq to preserve attributes of data.frame
+
+
 Version 0.6.2
 - New sampling function sample_numbers - vectorized sample_number
 

@@ -1,8 +1,8 @@
 Package: saeSim
 Type: Package
 Title: Simulation Tools for Small Area Estimation
-Date: 2015-01-05
-Version: 0.6.2
+Date: 2015-02-05
+Version: 0.6.3
 Author: Sebastian Warnholz <Sebastian.Warnholz@fu-berlin.de>
 Maintainer: Sebastian Warnholz <Sebastian.Warnholz@fu-berlin.de>
 URL: https://wahani.github.io/saeSim

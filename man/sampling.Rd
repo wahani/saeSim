@@ -30,7 +30,7 @@ standardised to sum to 1.}
 These functions are intended to be used with \code{\link{sim_sample}} and not interactively. They are wrappers around \link[dplyr]{sample_frac} and \link[dplyr]{sample_n}.
 }
 \details{
-\code{sample_numbers} is a vectorized version of \code{sample_number}
+\code{sample_numbers} is a vectorized version of \code{sample_number}.
 }
 \examples{
 sim_base_lm() \%>\% sim_sample(sample_number(5))
