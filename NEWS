@@ -1,5 +1,7 @@
 Version 0.6.3
 - Bugfixes in sim_gen for contamination and sim_gen_eq to preserve attributes of data.frame
+- The show method was updated and is more consistent
+- Bugfix in as.data.frame: will now always return a data.frame
 
 
 Version 0.6.2

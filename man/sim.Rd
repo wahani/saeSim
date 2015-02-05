@@ -33,8 +33,5 @@ Use the \code{path} to store the simulation results to a directory. This may be 
 \examples{
 setup <- sim_base_lm()
 resultList <- sim(setup, R = 1)
-
-# Will return a data frame
-dat <- sim(sim_base() \%>\% sim_gen_x() \%>\% sim_gen_e())
 }
 

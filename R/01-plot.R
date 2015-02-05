@@ -10,7 +10,6 @@
 #' @method plot sim_setup
 #' @rdname plot.sim_setup
 #' @seealso \code{\link[saeSim]{autoplot}}
-#' @importFrom graphics plot
 plot.sim_setup <- function(x, y, ...) {
   # Get some data
   dat <- as.data.frame(x)

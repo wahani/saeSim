@@ -1,9 +1,3 @@
-# Imports of packages:
-#' @import dplyr
-#' @import methods
-#' @import ggplot2
-#' @import parallel
-
 ################################################################################
 
 setClass("sim_fun",

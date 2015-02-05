@@ -1,9 +1,9 @@
 #' Start simulation
 #' 
-#' This function can be applied to a \code{sim_setup}. It will start the simulation. Use the printing method as long as you are testing the scenario.
+#' This function will start the simulation. Use the printing method as long as you are testing the scenario.
 #' 
-#' @param x a \code{sim_setup} or \code{data.frame}
-#' @param ... simulation components; If \code{parallel = TRUE} arguments passed to mclapply, see details.
+#' @param x a \code{sim_setup}
+#' @param ... If \code{parallel = TRUE} arguments passed to mclapply, see details.
 #' @param parallel if \code{FALSE} \code{lapply} is used; if \code{TRUE} a 'plug-and-play' version of mclapply is used; see details.
 #' @param path optional path in which the simulation results can be saved.
 #' @param R number of repetitions.
@@ -14,31 +14,12 @@
 #'  
 #' @return The return value is always a list. The elements are the resulting \code{data.frame}s of each simulation run.
 #' 
-
 #' @rdname sim
 #' @export
 #' @examples
 #' setup <- sim_base_lm()
 #' resultList <- sim(setup, R = 1)
-#' 
-#' # Will return a data frame
-#' dat <- sim(sim_base() %>% sim_gen_x() %>% sim_gen_e())
 sim <- function(x, ...) UseMethod("sim")
-
-sim.data.frame <- function(x, ...) {
-  
-  # Preparing:
-  setup <- sim_setup(x, ...)
-  
-  # Generating pop
-  out <- setup@base
-  
-  for (fun in setup)
-    out <- fun(out)
-    
-  # Return:
-  out
-}
 
 #' @rdname sim
 #' @export
@@ -49,7 +30,7 @@ sim.sim_setup <- function(x, ..., R = 1, parallel = FALSE, path = NULL) {
     mclapply
   } else lapply
   iterateOver %>% iterateFun(function(i, object, path) {
-    df <- as.data.frame(object)
+    df <- sim_run_once(object)
     df$idR <- i
     df$simName <- object@simName
     # Save results to disk
@@ -60,4 +41,14 @@ sim.sim_setup <- function(x, ..., R = 1, parallel = FALSE, path = NULL) {
     }
     df
   }, object = x, path = path, ...)
+}
+
+sim_run_once <- function(x) {
+  
+  out <- x@base
+  
+  for (fun in x)
+    out <- fun(out)
+  
+  out
 }
