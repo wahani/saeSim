@@ -1,5 +1,6 @@
 Version 0.6.4
 - Rewrite of the summary method
+- New function sim_gen_generic
 
 Version 0.6.3
 - Bugfixes in sim_gen for contamination and sim_gen_eq to preserve attributes of data.frame

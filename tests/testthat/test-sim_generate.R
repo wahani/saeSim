@@ -46,3 +46,15 @@ test_that("gen_generic", {
   dat2 <- sim(sim_base() %>% sim_gen_e() %>% sim_gen_v())
   expect_equal(dat1, dat2)
 })
+
+test_that("sim_gen_generic", {
+  set.seed(1)
+  dat1 <- base_id(5, 5) %>% 
+    sim_gen_generic(rnorm, mean = 0, sd = 4, name="e") %>%
+    sim_gen_generic(rnorm, mean = 0, sd = 1, groupVars = "idD", name="v") %>% 
+    as.data.frame
+  
+  set.seed(1)
+  dat2 <- base_id(5, 5) %>% sim_gen_e() %>% sim_gen_v() %>% as.data.frame
+  expect_equal(dat1, dat2)
+})

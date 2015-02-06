@@ -2,20 +2,25 @@
 % Please edit documentation in R/03-sim_gen.R
 \name{sim_gen}
 \alias{sim_gen}
+\alias{sim_gen_generic}
 \title{Generation component}
 \usage{
 sim_gen(simSetup, generator)
+
+sim_gen_generic(simSetup, ...)
 }
 \arguments{
 \item{simSetup}{a \code{sim_setup}.}
 
 \item{generator}{generator function used to generate random numbers.}
+
+\item{...}{arguments passed to \code{\link{gen_generic}}.}
 }
 \description{
 One of the components which can be added to a \code{sim_setup}.
 }
 \details{
-Potentially you can define a \code{generator} yourself. Take care that it has one argument, named \code{dat}, and returns a \code{data.frame}.
+Potentially you can define a \code{generator} yourself. Take care that it has one argument, named \code{dat}, and returns a \code{data.frame}. \code{sim_gen_generic} is a shortcut to \code{\link{gen_generic}}.
 }
 \examples{
 # Data setup for a mixed model
@@ -30,6 +35,9 @@ gen_myVar <- function(dat) {
 }
 
 sim_base() \%>\% sim_gen_x() \%>\% sim_gen(gen_myVar)
+
+# And a chi-sq(5) distributed 'random-effect':
+sim_base() \%>\% sim_gen_generic(rchisq, df = 5, groupVars = "idD", name = "re")
 }
 \seealso{
 \code{\link{gen_norm}}, \code{\link{gen_v_norm}}, \code{\link{gen_v_sar}}, \code{\link{sim_agg}}, , \code{\link{sim_comp_pop}}, \code{\link{sim_sample}}, \code{\link{sim_gen_x}}, \code{\link{sim_gen_e}}, \code{\link{sim_gen_v}}, \code{\link{sim_gen_vc}}, \code{\link{sim_gen_ec}}
