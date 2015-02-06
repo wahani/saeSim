@@ -92,8 +92,8 @@ gen_generic <- function(generator, ..., groupVars = NULL, desc = "F", name) {
   }
   
   gen_constant_within_group <- function(dat) {
-    dat <- dat %>% s_arrange(groupVars)
-    nrowGroup <- s_group_by(dat, groupVars) %>% group_size
+    dat <- dat %>% arrange_(groupVars)
+    nrowGroup <- group_by_(dat, groupVars) %>% group_size
     randomNumbers <- do.call(generator, c(length(nrowGroup), genArgs))
     add_var(dat, rep(randomNumbers, times = nrowGroup), name)
   }
