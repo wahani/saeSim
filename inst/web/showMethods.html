@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>sim_read_data. saeSim 0.6.4</title>
+<title>show,sim_setup-method. saeSim 0.6.4</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -35,43 +35,47 @@
         
       </header>
       
-      <h1>Read in simulated data</h1>
+      <h1>Show for <code>sim_setup</code></h1>
 
 <div class="row">
   <div class="span8">
     <h2>Usage</h2>
-    <pre><div>sim_read_data(path, ..., returnList&nbsp;=&nbsp;FALSE)</div></pre>
+    <pre><div>"show"(object)</div>
+<div>"show"(object)</div></pre>
     
     <h2>Arguments</h2>
     <dl>
-      <dt>path</dt>
-      <dd>path to the files you want to read in.</dd>
-      <dt>...</dt>
-      <dd>arguments passed to <code><a href='http://www.inside-r.org/packages/cran/utils/docs/read.table'>read.csv</a></code></dd>
-      <dt>returnList</dt>
-      <dd>if <code>TRUE</code> a list containing the data.frames. Very much like the output of sim. If <code>FALSE</code> a single data.frame is returned, using <code><a href='http://www.inside-r.org/packages/cran/dplyr/docs/bind'>rbind_all</a></code></dd>
+      <dt>object</dt>
+      <dd>Any R object</dd>
     </dl>
     
-    <div class="Read in simulated data">
-      <h2>Read in simulated data</h2>
+    <div class="Show for &lt;code&gt;sim_setup&lt;/code&gt;">
+      <h2>Show for &lt;code&gt;sim_setup&lt;/code&gt;</h2>
       
     </div>
 
-    <div class="Read in simulated data">
-      <h2>Read in simulated data</h2>
+    <div class="Show for &lt;code&gt;sim_setup&lt;/code&gt;">
+      <h2>Show for &lt;code&gt;sim_setup&lt;/code&gt;</h2>
       
     </div>
 
     <div class="Description">
       <h2>Description</h2>
       
-      <p>Use this function after saving the results of a simulation in a directory.</p>
+      <p>This is the documentation for the show methods in the package <code>saeSim</code>. In case you don't know, <code>show </code> is for S4-classes like <code>print</code> for S3. If you don't know what that means, don't bother, there is no reason to call <code>show</code> directly, however there is the need to document it.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+      
+      <p>Will print the head of a <code>sim_setup</code> to the console, after converting it to a <code>data.frame</code>.</p>
   
     </div>
       </div>
   <div class="span4">
     <!-- <ul>
-      <li>sim_read_data</li>
+      <li>show,sim_setup-method</li><li>show,summary.sim_setup-method</li>
     </ul>
     <ul>
       
