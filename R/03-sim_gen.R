@@ -24,6 +24,6 @@
 #' 
 #' sim_base() %>% sim_gen_x() %>% sim_gen(gen_myVar)
 sim_gen <- function(simSetup, generator) {
-  sim_setup(simSetup, new("sim_fun", order = 1, generator))
+  sim_setup(simSetup, new("sim_fun", order = 1, call = match.call(), generator))
 }
 

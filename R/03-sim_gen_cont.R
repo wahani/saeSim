@@ -22,7 +22,7 @@ sim_gen_cont <- function(simSetup, generator, nCont, type, areaVar = NULL, fixed
   generator <- gen_cont(generator, nCont, type, areaVar, fixed)
   
   sim_setup(simSetup, 
-            new("sim_fun", order = 2, generator))
+            new("sim_fun", order = 2, call = match.call(), generator))
 }
 
 gen_cont <- function(generator, nCont, type, areaVar, fixed) {

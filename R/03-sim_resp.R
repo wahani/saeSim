@@ -15,7 +15,7 @@
 #' @examples
 #' base_id() %>% sim_gen_x() %>% sim_gen_e() %>% sim_resp_eq(y = 100 + 2 * x + e)
 sim_resp <- function(simSetup, respFun) {
-  sim_setup(simSetup, new("sim_fun", order = 3, respFun))
+  sim_setup(simSetup, new("sim_fun", order = 3, call = match.call(), respFun))
 }
 
 #' @rdname sim_resp
@@ -26,5 +26,5 @@ sim_resp_eq <- function(simSetup, ...) {
   mc[[1]] <- quote(mutate_wrapper)
   mc[[2]] <- NULL
   
-  sim_setup(simSetup, new("sim_fun", order = 3, eval(mc)))
+  sim_setup(simSetup, new("sim_fun", order = 3, call = match.call(), eval(mc)))
 }

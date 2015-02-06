@@ -2,7 +2,7 @@ Package: saeSim
 Type: Package
 Title: Simulation Tools for Small Area Estimation
 Date: 2015-02-05
-Version: 0.6.3
+Version: 0.6.4
 Authors@R: c(person("Sebastian", "Warnholz", role = c("aut", "cre"),
                     email = "Sebastian.Warnholz@fu-berlin.de"),
              person("Timo", "Schmid", role = "aut",
@@ -14,6 +14,7 @@ Depends:
     methods
 Imports:
     dplyr(>= 0.2),
+    functional,
     ggplot2,
     MASS,
     spdep,

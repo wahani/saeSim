@@ -30,19 +30,19 @@
 #' sim_base_lm() %>% sim_sample() %>% sim_comp_pop(comp_lm)
 sim_comp_pop <- function(simSetup, fun = comp_var(), by = "") {
   fun <- if(by == "") fun else apply_by(by, fun)
-  sim_setup(simSetup, new("sim_fun", order = 4, fun))
+  sim_setup(simSetup, new("sim_fun", order = 4, call = match.call(), fun))
 }
 
 #' @export
 #' @rdname sim_comp
 sim_comp_sample <- function(simSetup, fun = comp_var(), by = "") {
   fun <- if(by == "") fun else apply_by(by, fun)
-  sim_setup(simSetup, new("sim_fun", order = 6, fun))
+  sim_setup(simSetup, new("sim_fun", order = 6, call = match.call(), fun))
 }
 
 #' @export
 #' @rdname sim_comp
 sim_comp_agg <- function(simSetup, fun = comp_var(), by = "") {
   fun <- if(by == "") fun else apply_by(by, fun)
-  sim_setup(simSetup, new("sim_fun", order = 8, fun))
+  sim_setup(simSetup, new("sim_fun", order = 8, call = match.call(), fun))
 }

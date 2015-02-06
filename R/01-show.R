@@ -5,6 +5,7 @@
 #' @inheritParams methods::show
 #' 
 #' @details Will print the head of a \code{sim_setup} to the console, after converting it to a \code{data.frame}.
+#' @rdname showMethods
 #' @export
 setMethod("show", "sim_setup",
           function(object) {
