@@ -161,6 +161,9 @@ setup</code></pre>
 <p>Note that the generator is the same but with a higher standard deviation. The argument <code>nCont</code> controls how much observations are contaminated. Values &lt; 1 are interpreted as probability. A single number as the number of contaminated units (can be areas or observations in each area or observations). When given with <code>length(nCont) &gt; 1</code> it will be interpreted as number of contaminated observations in each area. Use the following example to see how these things play together:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sim</span>(<span class="kw">base_id</span>(<span class="dv">3</span>, <span class="dv">4</span>) %&gt;%<span class="st"> </span><span class="kw">sim_gen_x</span>() %&gt;%<span class="st"> </span><span class="kw">sim_gen_e</span>() %&gt;%<span class="st"> </span>
 <span class="st">      </span><span class="kw">sim_gen_ec</span>(<span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">150</span>, <span class="dt">name =</span> <span class="st">&quot;eCont&quot;</span>, <span class="dt">nCont =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)))</code></pre>
+<pre><code>## Warning in parallelStart(...): Parallelization was not stopped, doing it
+## now.</code></pre>
+<pre><code>## Stopped parallelization. All cleaned up.</code></pre>
 <pre><code>## [[1]]
 ## Source: local data frame [12 x 8]
 ## 
