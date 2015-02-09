@@ -60,3 +60,19 @@ test_that("vectorized versions of sample_number", {
   expect_equal(nrow(result1), 100)
   expect_equal(nrow(result2), 150)
 })
+
+test_that("sampling of clusters", {
+  dat <- addAttr(base_id())
+  
+  dat1 <- sample_cluster_number(2, groupVars = "idD")(dat)
+  expect_is(dat1, "data.frame")
+  expect_equal(attr(dat1, "x"), 1)
+  expect_equal(nrow(dat1), 20)
+  expect_equal(length(unique(dat1$idD)), 2)
+  
+  dat2 <- sample_cluster_fraction(0.2, groupVars = "idD")(dat)
+  expect_is(dat2, "data.frame")
+  expect_equal(attr(dat2, "x"), 1)
+  expect_equal(nrow(dat2), 20)
+  expect_equal(length(unique(dat2$idD)), 2)
+})

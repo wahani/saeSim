@@ -1,6 +1,7 @@
 Version 0.6.5
 - new signature for function sim
 - parallel back-end has changed to parallelMap
+- new functions: sample_cluster_fraction and sample_cluster_number
 
 Version 0.6.4
 - Rewrite of the summary method
