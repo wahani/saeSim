@@ -2,7 +2,7 @@
 #' @import dplyr
 #' @import methods
 #' @import ggplot2
-#' @import parallel
+#' @import parallelMap
 #' @importFrom functional Curry Compose
 #' @importFrom MASS mvrnorm
 #' @importFrom spdep cell2nb nb2mat

@@ -1,3 +1,7 @@
+Version 0.6.5
+- new signature for function sim
+- parallel back-end has changed to parallelMap
+
 Version 0.6.4
 - Rewrite of the summary method
 - New function sim_gen_generic
