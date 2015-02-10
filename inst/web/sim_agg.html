@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>sim_agg. saeSim 0.6.6</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">saeSim 0.6.6</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Aggregation component</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>sim_agg(simSetup, aggFun&nbsp;=&nbsp;agg_all())</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>simSetup</dt>
+      <dd>a <code>sim_setup</code>.</dd>
+      <dt>aggFun</dt>
+      <dd>function which controls the aggregation process. At the moment only <code><a href='agg_all.html'>agg_all</a></code> is defined.</dd>
+    </dl>
+    
+    <div class="Aggregation component">
+      <h2>Aggregation component</h2>
+      
+    </div>
+
+    <div class="Aggregation component">
+      <h2>Aggregation component</h2>
+      
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+      
+      <p>One of the components which can be added to a simulation set-up. Aggregating the data is a simulation component which can be used to aggregate the population or sample. The aggregation will simply be done after the sampling, if you haven't specified any sampling component, the population is aggregated (makes sense if you draw samples directly from the model).</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+      
+      <p>Potentially you can define an <code>aggFun</code> yourself. Take care that it only has one argument, named <code>dat</code>, and returns the aggregated data as <code>data.frame</code>.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'># Aggregating the population:
+sim_base_lm() %&gt;% sim_agg()
+</div>
+<div class='output'>data.frame [100 x 4]
+
+   idD           x          e         y
+1    1 -0.32700032 -0.5012604  99.17174
+2    2 -0.02223186 -0.4188942  99.55887
+3    3 -0.09322913  0.5712815 100.47805
+4    4  0.41308657  0.1649475 100.57803
+5    5 -0.47474932  0.5130759 100.03833
+6    6 -0.58872436  0.2070539  99.61833
+.. ...         ...        ...       ...
+</div>
+<div class='input'>
+# Aggregating after sampling:
+sim_base_lm() %&gt;% sim_sample() %&gt;% sim_agg()
+</div>
+<div class='output'>data.frame [100 x 4]
+
+   idD           x           e         y
+1    1  0.61607734  2.24186877 102.85795
+2    2 -3.35137893 -0.00434958  96.64427
+3    3 -0.56886918 -2.85072107  96.58041
+4    4 -2.74391009  0.82986946  98.08596
+5    5 -0.12037177  2.09754862 101.97718
+6    6 -0.03510776  1.93003858 101.89493
+.. ...         ...         ...       ...
+</div>
+<div class='input'>
+# User aggFun:
+sim_base_lm() %&gt;% sim_agg(function(dat) dat[1, ])
+</div>
+<div class='output'>data.frame [1 x 5]
+
+  idD idU          x         e        y
+1   1   1 -0.6137592 -2.440066 96.94618
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>sim_agg</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+<code><a href='agg_all.html'>agg_all</a></code>, <code><a href='sim_gen.html'>sim_gen</a></code>, <code><a href='sim_comp.html'>sim_comp_pop</a></code>, <code><a href='sim_sample.html'>sim_sample</a></code>, , <code><a href='sim_comp.html'>sim_comp_sample</a></code>
+
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

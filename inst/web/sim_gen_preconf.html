@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>sim_gen_x. saeSim 0.6.6</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">saeSim 0.6.6</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Preconfigured generation components</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>sim_gen_x(simSetup, mean&nbsp;=&nbsp;0, sd&nbsp;=&nbsp;4, name&nbsp;=&nbsp;"x")</div>
+<div>sim_gen_e(simSetup, mean&nbsp;=&nbsp;0, sd&nbsp;=&nbsp;4, name&nbsp;=&nbsp;"e")</div>
+<div>sim_gen_ec(simSetup, mean&nbsp;=&nbsp;0, sd&nbsp;=&nbsp;150, name&nbsp;=&nbsp;"e", nCont&nbsp;=&nbsp;0.05, type&nbsp;=&nbsp;"unit", areaVar&nbsp;=&nbsp;"idD", fixed&nbsp;=&nbsp;TRUE)</div>
+<div>sim_gen_v(simSetup, mean&nbsp;=&nbsp;0, sd&nbsp;=&nbsp;1, name&nbsp;=&nbsp;"v")</div>
+<div>sim_gen_vc(simSetup, mean&nbsp;=&nbsp;0, sd&nbsp;=&nbsp;40, name&nbsp;=&nbsp;"v", nCont&nbsp;=&nbsp;0.05, type&nbsp;=&nbsp;"area", areaVar&nbsp;=&nbsp;"idD", fixed&nbsp;=&nbsp;TRUE)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>simSetup</dt>
+      <dd>a <code>sim_setup</code>.</dd>
+      <dt>mean</dt>
+      <dd>the mean passed to the random number generator, for example <code><a href='http://www.inside-r.org/packages/cran/stats/docs/Normal'>rnorm</a></code>.</dd>
+      <dt>sd</dt>
+      <dd>the standard deviation passed to the random number generator, for example <a href='http://www.inside-r.org/packages/cran/stats/docs/Normal'>rnorm</a>.</dd>
+      <dt>name</dt>
+      <dd>name of variable as character in which random numbers are stored.</dd>
+      <dt>nCont</dt>
+      <dd>gives the number of contaminated observations. Values between 0 and 1 will be trated as probability. If length is larger 1, the expected length is the number of areas.</dd>
+      <dt>type</dt>
+      <dd>"unit" or "area" - unit- or area-level contamination.</dd>
+      <dt>areaVar</dt>
+      <dd>character with variable name(s) identifying areas.</dd>
+      <dt>fixed</dt>
+      <dd>TRUE fixes the observations which will be contaminated. FALSE will result in a random selection of observations or areas.</dd>
+    </dl>
+    
+    <div class="Preconfigured generation components">
+      <h2>Preconfigured generation components</h2>
+      
+    </div>
+
+    <div class="Preconfigured generation components">
+      <h2>Preconfigured generation components</h2>
+      
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+      
+      <p>These are some preconfigured generation components and all wrappers around <code><a href='sim_gen.html'>sim_gen</a></code> and <code><a href='sim_gen_cont.html'>sim_gen_cont</a></code>.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+      
+      <p><code>x</code>: fixed-effect component; <code>e</code>: model-error; <code>ec</code>: contaminated model error; <code>v</code>: random-effect (error constant for each domain); <code>vc</code> contaminated random-effect. Note that for contamination you are expected to add both, a non-contaminated component and a contaminated component.</p>
+  
+    </div>
+      </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>sim_gen_e</li><li>sim_gen_ec</li><li>sim_gen_v</li><li>sim_gen_vc</li><li>sim_gen_x</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

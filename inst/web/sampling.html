@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>sample_fraction. saeSim 0.6.6</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">saeSim 0.6.6</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Sampling functions</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>sample_fraction(size, replace&nbsp;=&nbsp;FALSE, weight&nbsp;=&nbsp;NULL, groupVars&nbsp;=&nbsp;NULL)</div>
+<div>sample_number(size, replace&nbsp;=&nbsp;FALSE, weight&nbsp;=&nbsp;NULL, groupVars&nbsp;=&nbsp;NULL)</div>
+<div>sample_numbers(size, replace&nbsp;=&nbsp;FALSE, groupVars&nbsp;=&nbsp;NULL)</div>
+<div>sample_cluster_number(size, replace&nbsp;=&nbsp;FALSE, weight&nbsp;=&nbsp;NULL, groupVars)</div>
+<div>sample_cluster_fraction(size, replace&nbsp;=&nbsp;FALSE, weight&nbsp;=&nbsp;NULL, groupVars)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>size</dt>
+      <dd>For <code>sample_n</code>, the number of rows to select.
+For <code>sample_frac</code>, the fraction of rows to select.
+If <code>tbl</code> is grouped, <code>size</code> applies to each group.</dd>
+      <dt>replace</dt>
+      <dd>Sample with or without replacement?</dd>
+      <dt>weight</dt>
+      <dd>Sampling weights. This expression is evaluated in the
+context of the data frame. It must return a vector of non-negative
+numbers the same length as the input. Weights are automatically
+standardised to sum to 1.</dd>
+      <dt>groupVars</dt>
+      <dd>character with names of variables to be used for grouping.</dd>
+    </dl>
+    
+    <div class="Sampling functions">
+      <h2>Sampling functions</h2>
+      
+    </div>
+
+    <div class="Sampling functions">
+      <h2>Sampling functions</h2>
+      
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+      
+      <p>These functions are intended to be used with <code><a href='sim_sample.html'>sim_sample</a></code> and not interactively. They are wrappers around <a href='http://www.inside-r.org/packages/cran/dplyr/docs/sample'>sample_frac</a> and <a href='http://www.inside-r.org/packages/cran/dplyr/docs/sample'>sample_n</a>.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+      
+      <p><code>sample_numbers</code> is a vectorized version of <code>sample_number</code>.</p>
+  
+      <p><code>sample_cluster_number</code> and <code>sample_cluster_fraction</code> will sample clusters (all units in a cluster).</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>sim_base_lm() %&gt;% sim_sample(sample_number(5))
+</div>
+<div class='output'>data.frame [5 x 5]
+
+  idD idU          x          e         y
+1  20  83  2.4367219 -1.8878906 100.54883
+2   5  56 -2.9740579  0.3162138  97.34216
+3  80  43  2.4551156 -3.9802332  98.47488
+4  39  13  0.1833337  5.4762940 105.65963
+5  21  74  7.9147706 -1.2062993 106.70847
+</div>
+<div class='input'>sim_base_lm() %&gt;% sim_sample(sample_fraction(0.5))
+</div>
+<div class='output'>data.frame [5,000 x 5]
+
+   idD idU         x           e         y
+1   76  56  1.998539  0.05944173 102.05798
+2   65  83  6.162889 -3.31758242 102.84531
+3   24  31  8.965958  1.67106966 110.63703
+4   15  61 -3.535418 -2.75745655  93.70713
+5   15  75 -1.540738  3.22595298 101.68521
+6   35  33  2.045363  1.30846446 103.35383
+.. ... ...       ...         ...       ...
+</div>
+<div class='input'>sim_base_lm() %&gt;% sim_sample(sample_cluster_number(5, groupVars = &quot;idD&quot;))
+</div>
+<div class='output'>data.frame [500 x 5]
+
+   idD idU          x          e         y
+1   58   1  2.1416707 -0.5886407 101.55303
+2   58   2 -1.6725103 -2.6837291  95.64376
+3   58   3  3.8409875  4.7673167 108.60830
+4   58   4 -5.2207056  0.4122122  95.19151
+5   58   5  0.6680721 -2.0440432  98.62403
+6   58   6 -3.1780489  0.4232798  97.24523
+.. ... ...        ...        ...       ...
+</div>
+<div class='input'>sim_base_lm() %&gt;% sim_sample(sample_cluster_fraction(0.5, groupVars = &quot;idD&quot;))
+</div>
+<div class='output'>data.frame [5,000 x 5]
+
+   idD idU          x          e         y
+1   55   1  1.4678330 -6.5214795  94.94635
+2   55   2 -7.8226985  5.0078930  97.18519
+3   55   3  1.3010013 -1.4968832  99.80412
+4   55   4  0.4375884  7.2362152 107.67380
+5   55   5 -2.2575245  1.7712259  99.51370
+6   55   6  1.6785740 -0.1718448 101.50673
+.. ... ...        ...        ...       ...
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>sample_cluster_fraction</li><li>sample_cluster_number</li><li>sample_fraction</li><li>sample_number</li><li>sample_numbers</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

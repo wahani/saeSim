@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>sim. saeSim 0.6.6</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">saeSim 0.6.6</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Start simulation</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>sim(x, R&nbsp;=&nbsp;1, path&nbsp;=&nbsp;NULL, overwrite&nbsp;=&nbsp;TRUE, ..., libs&nbsp;=&nbsp;NULL, exports&nbsp;=&nbsp;NULL)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>x</dt>
+      <dd>a <code>sim_setup</code></dd>
+      <dt>R</dt>
+      <dd>number of repetitions.</dd>
+      <dt>path</dt>
+      <dd>optional path in which the simulation results can be saved. They will we coerced to a <code>data.frame</code> and then saved as 'csv'.</dd>
+      <dt>overwrite</dt>
+      <dd><code>TRUE</code>/<code>FALSE</code>. If <code>TRUE</code> files in <code>path</code> are replaced. If <code>FALSE</code> files in <code>path</code> are not replaced and simulation will not be recomputed.</dd>
+      <dt>...</dt>
+      <dd>arguments passed to <code><a href='http://www.inside-r.org/packages/cran/parallelMap/docs/parallelStart'>parallelStart</a></code>.</dd>
+      <dt>libs</dt>
+      <dd>arguments passed to <code><a href='http://www.inside-r.org/packages/cran/parallelMap/docs/parallelLibrary'>parallelLibrary</a></code>. Will be used in a call to <code><a href='http://www.inside-r.org/packages/cran/base/docs/do.call'>do.call</a></code> after coersion with <code><a href='http://www.inside-r.org/packages/cran/base/docs/list'>as.list</a></code>.</dd>
+      <dt>exports</dt>
+      <dd>arguments passed to <code><a href='http://www.inside-r.org/packages/cran/parallelMap/docs/parallelExport'>parallelExport</a></code>. Will be used in a call to <code><a href='http://www.inside-r.org/packages/cran/base/docs/do.call'>do.call</a></code> after coersion with <code><a href='http://www.inside-r.org/packages/cran/base/docs/list'>as.list</a></code>.</dd>
+    </dl>
+    
+    <div class="Start simulation">
+      <h2>Start simulation</h2>
+      
+    </div>
+
+    <div class="Start simulation">
+      <h2>Start simulation</h2>
+      
+    </div>
+
+    <div class="Value">
+      <h2>Value</h2>
+      
+      <p>The return value is a list. The elements are the results of each simulation run, typically of class <code>data.frame</code>. In case you specified <code>path</code>, each element is <code>NULL</code>.</p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+      
+      <p>This function will start the simulation. Use the printing method as long as you are testing the scenario.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+      
+      <p>The package parallelMap is utilized as back-end for parallel computations.</p>
+  
+      <p>Use the argument <code>path</code> to store the simulation results in a directory. This may be a good idea for long running simulations and for those using large <code>data.frame</code>s. You can use <code><a href='sim_read_data.html'>sim_read_data</a></code> to read them in. The return value will change to NULL in each run.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>setup &lt;- sim_base_lm()
+resultList &lt;- sim(setup, R = 1)
+
+# For parallel computations you may need to export objects
+localFun &lt;- function() cat(&quot;Hello World!&quot;)
+comp_fun &lt;- function(dat) {
+  localFun()
+  dat
+}
+
+res &lt;- sim_base_lm() %&gt;%
+  sim_comp_pop(comp_fun) %&gt;%
+  sim(R = 2,
+      mode = &quot;socket&quot;, cpus = 2,
+      exports = &quot;localFun&quot;)
+</div>
+<strong class='message'>Starting parallelization in mode=socket with cpus=2.</strong>
+<strong class='message'>Exporting objects to slaves for mode socket: localFun</strong>
+<strong class='error'>Error in get(n, envir = sys.parent()): object &#39;localFun&#39; not found</strong>
+<div class='input'>
+str(res)
+</div>
+<strong class='error'>Error in str(res): object &#39;res&#39; not found</strong></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>sim</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>
