@@ -1,5 +1,0 @@
-# Todo
-- Maybe a function `sim_gen_generic` is useful - more intuitive than closures all the time.
-- summary.sim_setup: print the call of the generator/sampling function/etc.
-- Print the call of all functions in the sequence in which they will be applied.
-- For show: How many rows are there? ref head!

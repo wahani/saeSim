@@ -4,7 +4,8 @@
 \alias{sim}
 \title{Start simulation}
 \usage{
-sim(x, R = 1, path = NULL, ..., libs = NULL, exports = NULL)
+sim(x, R = 1, path = NULL, overwrite = TRUE, ..., libs = NULL,
+  exports = NULL)
 }
 \arguments{
 \item{x}{a \code{sim_setup}}
@@ -13,6 +14,8 @@ sim(x, R = 1, path = NULL, ..., libs = NULL, exports = NULL)
 
 \item{path}{optional path in which the simulation results can be saved. They will we coerced to a \code{data.frame} and then saved as 'csv'.}
 
+\item{overwrite}{\code{TRUE}/\code{FALSE}. If \code{TRUE} files in \code{path} are replaced. If \code{FALSE} files in \code{path} are not replaced and simulation will not be recomputed.}
+
 \item{...}{arguments passed to \code{\link{parallelStart}}.}
 
 \item{libs}{arguments passed to \code{\link{parallelLibrary}}. Will be used in a call to \code{\link{do.call}} after coersion with \code{\link{as.list}}.}
@@ -20,13 +23,13 @@ sim(x, R = 1, path = NULL, ..., libs = NULL, exports = NULL)
 \item{exports}{arguments passed to \code{\link{parallelExport}}. Will be used in a call to \code{\link{do.call}} after coersion with \code{\link{as.list}}.}
 }
 \value{
-The return value is a list. The elements are the results of each simulation run, typically of class \code{data.frame}. In case you specified \code{path}, each element is \code{NULL} and the results are stored to disk.
+The return value is a list. The elements are the results of each simulation run, typically of class \code{data.frame}. In case you specified \code{path}, each element is \code{NULL}.
 }
 \description{
 This function will start the simulation. Use the printing method as long as you are testing the scenario.
 }
 \details{
-The package parallelMap is utilized as a back-end for parallel computations.
+The package parallelMap is utilized as back-end for parallel computations.
 
 Use the argument \code{path} to store the simulation results in a directory. This may be a good idea for long running simulations and for those using large \code{data.frame}s. You can use \code{\link{sim_read_data}} to read them in. The return value will change to NULL in each run.
 }
@@ -34,7 +37,7 @@ Use the argument \code{path} to store the simulation results in a directory. Thi
 setup <- sim_base_lm()
 resultList <- sim(setup, R = 1)
 
-# For parallel computations you may need to export object
+# For parallel computations you may need to export objects
 localFun <- function() cat("Hello World!")
 comp_fun <- function(dat) {
   localFun()

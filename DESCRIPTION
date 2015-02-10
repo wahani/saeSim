@@ -1,8 +1,8 @@
 Package: saeSim
 Type: Package
 Title: Simulation Tools for Small Area Estimation
-Date: 2015-02-09
-Version: 0.6.5
+Date: 2015-02-10
+Version: 0.6.6
 Authors@R: c(person("Sebastian", "Warnholz", role = c("aut", "cre"),
                     email = "Sebastian.Warnholz@fu-berlin.de"),
              person("Timo", "Schmid", role = "aut",

@@ -1,3 +1,6 @@
+Version 0.6.6
+- new argument, overwrite, for function sim
+
 Version 0.6.5
 - new signature for function sim
 - parallel back-end has changed to parallelMap
