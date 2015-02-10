@@ -6,5 +6,6 @@ devel
 .gitignore
 .Rprofile
 README.md
+README.Rmd
 ^\.travis\.yml$
 cran-comments.md
