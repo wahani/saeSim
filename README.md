@@ -22,43 +22,9 @@ install.packages("saeSim")
 
 
 ```
-## Version on CRAN: 0.6.0 
-## Development Version: 0.6.6 
+## Version on CRAN: 0.7.0 
+## Development Version: 0.7.0 
 ## 
 ## Updates in package NEWS-file since last release to CRAN:
-## 
-## Changes in version 0.6.6:
-## 
-##     o   new argument, overwrite, for function sim
-## 
-## Changes in version 0.6.5:
-## 
-##     o   new signature for function sim
-## 
-##     o   parallel back-end has changed to parallelMap
-## 
-##     o   new functions: sample_cluster_fraction and sample_cluster_number
-## 
-## Changes in version 0.6.4:
-## 
-##     o   Rewrite of the summary method
-## 
-##     o   New function sim_gen_generic
-## 
-## Changes in version 0.6.3:
-## 
-##     o   Bugfixes in sim_gen for contamination and sim_gen_eq to preserve attributes of data.frame
-## 
-##     o   The show method was updated and is more consistent
-## 
-##     o   Bugfix in as.data.frame: will now always return a data.frame
-## 
-## Changes in version 0.6.2:
-## 
-##     o   New sampling function sample_numbers - vectorized sample_number
-## 
-## Changes in version 0.6.1:
-## 
-##     o   Updated version of the vignette
 ```
 
