@@ -14,6 +14,6 @@ LaTeX: pdfLaTeX
 
 BuildType: Package
 PackageUseDevtools: Yes
-PackageInstallArgs: --no-multiarch --install-tests --clean --preclean --library="C:/Users/swarnholz/R/library"
+PackageInstallArgs: --no-multiarch --install-tests --clean --preclean
 PackageCheckArgs: --as-cran
 PackageRoxygenize: rd,collate,namespace

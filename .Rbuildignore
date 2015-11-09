@@ -8,3 +8,5 @@ devel
 README.md
 ^\.travis\.yml$
 cran-comments.md
+prepareRepo.R
+README.Rmd

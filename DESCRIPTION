@@ -18,7 +18,8 @@ Imports:
     parallel
 Suggests:
     testthat,
-    knitr
+    knitr,
+    DiagrammeR
 Description: Tools for the simulation of data in the context of small area
     estimation. Combine all steps of your simulation - from data generation
     over drawing samples to model fitting - in one object. This enables easy
