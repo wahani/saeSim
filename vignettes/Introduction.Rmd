@@ -12,7 +12,7 @@ vignette: >
 set.seed(1)
 ```
 
-`saeSim` povides tools for simulation studies in the context of small area
+`saeSim` provides tools for simulation studies in the context of small area
 estimation. It can be useful for simulation studies in the field of statistics
 in general if you do not get scared away by the domain specific jargon.
 

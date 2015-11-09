@@ -6,7 +6,7 @@
 ## Simulation Tools for Small Area Estimation
 
 ```{r, results='asis', echo=FALSE}
-cat(gsub("\\n   ", "", packageDescription("aoos", fields = "Description")))
+cat(gsub("\\n   ", "", packageDescription("saeSim", fields = "Description")))
 ```
 
 ## Installation

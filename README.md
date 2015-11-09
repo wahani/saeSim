@@ -5,7 +5,7 @@
 
 ## Simulation Tools for Small Area Estimation
 
-Another implementation of object-orientation in R. It provides syntactic sugar for the S4 class system and two alternative new implementations. One is an experimental version built around S4 and the other one makes it more convenient to work with lists as objects.
+Tools for the simulation of data in the context of small area estimation. Combine all steps of your simulation - from data generation over drawing samples to model fitting - in one object. This enables easy modification and combination of different scenarios. You can store your results in a folder or start the simulation in parallel.
 
 ## Installation
 
@@ -27,8 +27,12 @@ install.packages("saeSim")
 
 ```
 ## Version on CRAN: 0.7.0 
-## Development Version: 0.6.1 
+## Development Version: 0.7.1 
 ## 
 ## Updates in package NEWS-file since last release to CRAN:
+## 
+## Changes in version 0.7.1:
+## 
+##     o   Updated vignette
 ```
 
