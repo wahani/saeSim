@@ -1,3 +1,27 @@
+Version 0.7.0
+- CRAN release
+
+Version 0.6.6
+- new argument, overwrite, for function sim
+
+Version 0.6.5
+- new signature for function sim
+- parallel back-end has changed to parallelMap
+- new functions: sample_cluster_fraction and sample_cluster_number
+
+Version 0.6.4
+- Rewrite of the summary method
+- New function sim_gen_generic
+
+Version 0.6.3
+- Bugfixes in sim_gen for contamination and sim_gen_eq to preserve attributes of data.frame
+- The show method was updated and is more consistent
+- Bugfix in as.data.frame: will now always return a data.frame
+
+
+Version 0.6.2
+- New sampling function sample_numbers - vectorized sample_number
+
 Version 0.6.1
 - Updated version of the vignette
 

@@ -11,7 +11,7 @@ sim_gen_cont(simSetup, generator, nCont, type, areaVar = NULL, fixed = TRUE)
 
 \item{generator}{generator function used to generate random numbers.}
 
-\item{nCont}{gives the number of contaminated observations. Values between 0 and 1 will be trated as probability. If length is larger 1, the expected length is the number of areas.}
+\item{nCont}{gives the number of contaminated observations. Values between 0 and 1 will be treated as probability. If length is larger 1, the expected length is the number of areas.}
 
 \item{type}{"unit" or "area" - unit- or area-level contamination.}
 

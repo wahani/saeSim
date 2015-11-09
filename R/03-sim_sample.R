@@ -24,5 +24,5 @@
 #' 
 #' sim_base_lm() %>% sim_sample(sample_mySampleFun)
 sim_sample <- function(simSetup, smplFun = sample_number(size=5L, groupVars = "idD")) {
-  sim_setup(simSetup, new("sim_fun", order = 5, smplFun))
+  sim_setup(simSetup, new("sim_fun", order = 5, call = match.call(), smplFun))
 }

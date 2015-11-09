@@ -2,39 +2,54 @@
 % Please edit documentation in R/01-sim.R
 \name{sim}
 \alias{sim}
-\alias{sim.sim_setup}
 \title{Start simulation}
 \usage{
-sim(x, ...)
-
-\method{sim}{sim_setup}(x, ..., R = 1, parallel = FALSE, path = NULL)
+sim(x, R = 1, path = NULL, overwrite = TRUE, ..., libs = NULL,
+  exports = NULL)
 }
 \arguments{
-\item{x}{a \code{sim_setup} or \code{data.frame}}
-
-\item{...}{simulation components; If \code{parallel = TRUE} arguments passed to mclapply, see details.}
+\item{x}{a \code{sim_setup}}
 
 \item{R}{number of repetitions.}
 
-\item{parallel}{if \code{FALSE} \code{lapply} is used; if \code{TRUE} a 'plug-and-play' version of mclapply is used; see details.}
+\item{path}{optional path in which the simulation results can be saved. They will we coerced to a \code{data.frame} and then saved as 'csv'.}
 
-\item{path}{optional path in which the simulation results can be saved.}
+\item{overwrite}{\code{TRUE}/\code{FALSE}. If \code{TRUE} files in \code{path} are replaced. If \code{FALSE} files in \code{path} are not replaced and simulation will not be recomputed.}
+
+\item{...}{arguments passed to \code{\link{parallelStart}}.}
+
+\item{libs}{arguments passed to \code{\link{parallelLibrary}}. Will be used in a call to \code{\link{do.call}} after coersion with \code{\link{as.list}}.}
+
+\item{exports}{arguments passed to \code{\link{parallelExport}}. Will be used in a call to \code{\link{do.call}} after coersion with \code{\link{as.list}}.}
 }
 \value{
-The return value is always a list. The elements are the resulting \code{data.frame}s of each simulation run.
+The return value is a list. The elements are the results of each simulation run, typically of class \code{data.frame}. In case you specified \code{path}, each element is \code{NULL}.
 }
 \description{
-This function can be applied to a \code{sim_setup}. It will start the simulation. Use the printing method as long as you are testing the scenario.
+This function will start the simulation. Use the printing method as long as you are testing the scenario.
 }
 \details{
-The backend for parallel computation is very experimental. You can find the code and documentation on www.github.com/wahani/parallelTools. In Windows parallelization is build around \code{\link[parallel]{clusterApply}}. If you are not using Windows the function \code{\link[parallel]{mclapply}} is used. See the parameters of \code{mclapply} how to control the parallelization. Parallizing trivial tasks in Windows will result in wasted time. Also working with large data.frames will be inefficient in Windows.
-Use the \code{path} to store the simulation results to a directory. This may be a good idea for long running simulations and for those using large \code{data.frame}s. Use \code{\link{sim_read_data}}, to read load them again.
+The package parallelMap is utilized as back-end for parallel computations.
+
+Use the argument \code{path} to store the simulation results in a directory. This may be a good idea for long running simulations and for those using large \code{data.frame}s. You can use \code{\link{sim_read_data}} to read them in. The return value will change to NULL in each run.
 }
 \examples{
 setup <- sim_base_lm()
 resultList <- sim(setup, R = 1)
 
-# Will return a data frame
-dat <- sim(sim_base() \%>\% sim_gen_x() \%>\% sim_gen_e())
+# For parallel computations you may need to export objects
+localFun <- function() cat("Hello World!")
+comp_fun <- function(dat) {
+  localFun()
+  dat
+}
+
+res <- sim_base_lm() \%>\%
+  sim_comp_pop(comp_fun) \%>\%
+  sim(R = 2,
+      mode = "socket", cpus = 2,
+      exports = "localFun")
+
+str(res)
 }
 

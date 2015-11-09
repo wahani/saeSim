@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>summary.sim_setup. saeSim 0.6.1</title>
+<title>summary,sim_setup-method. saeSim 0.7.0</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -20,7 +20,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">saeSim 0.6.1</a>
+      <a class="brand" href="#">saeSim 0.7.0</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -47,7 +47,7 @@
       <dt>object</dt>
       <dd>a <code>sim_setup</code>.</dd>
       <dt>...</dt>
-      <dd>nothing to pass to here.</dd>
+      <dd>has no effect.</dd>
     </dl>
     
     <div class="Summary for a sim_setup">
@@ -71,31 +71,17 @@
     <pre class="examples"><div class='input'>summary(sim_base_lm())
 </div>
 <div class='output'>General Information about  simulation set-up:
-# of sim_gen: 2 
-# of sim_gen_cont: 0 
-# of sim_resp: 1 
-# of sim_comp_pop: 0 
-# of sim_sample: 0 
-# of sim_comp_sample: 0 
-# of sim_agg: 0 
-# of sim_comp_agg: 0 
+expression(sim_gen(generator = gen_norm(mean, sd, name)) %&gt;%
+		sim_gen(generator = gen_norm(mean, sd, name)) %&gt;%
+		sim_resp(respFun = function(dat) mutate_(dat, y = &quot;100 + x + e&quot;)))
 
 Approximating the expected duration:
-A single run takes ... 0.02 seconds. 100 * 0.02 = 2 seconds.
-
-Structure of the data:
-&#39;data.frame&#39;:	10000 obs. of  5 variables:
- $ idD: int  1 1 1 1 1 1 1 1 1 1 ...
- $ idU: int  1 2 3 4 5 6 7 8 9 10 ...
- $ x  : num  3.9 -1.36 2.24 2.19 -4 ...
- $ e  : num  -0.987 -4.523 -1.892 3.67 7.012 ...
- $ y  : num  102.9 94.1 100.3 105.9 103 ...
-NULL
+A single run takes 0.1 seconds. 500 *  0.1 = 50 seconds.
 </div></pre>
   </div>
   <div class="span4">
     <!-- <ul>
-      <li>summary.sim_setup</li>
+      <li>summary,sim_setup-method</li>
     </ul>
     <ul>
       

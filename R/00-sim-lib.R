@@ -1,13 +1,7 @@
-# Imports of packages:
-#' @import dplyr
-#' @import methods
-#' @import ggplot2
-#' @import parallel
-
 ################################################################################
 
 setClass("sim_fun",
-         slots = c(order = "numeric"),
+         slots = c(order = "numeric", call = "call"),
          contains = "function")
 
 ################################################################################
@@ -15,3 +9,10 @@ setClass("sim_fun",
 setClass("sim_setup", 
          slots = c(base = "data.frame", simName = "character"), 
          contains = "list")
+
+setClass("summary.sim_setup",
+         slots = c(
+           sim_setup = "sim_setup",
+           duration = "table",
+           expression = "expression",
+           dim = "numeric"))

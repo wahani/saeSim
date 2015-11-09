@@ -10,7 +10,6 @@
 #'  @param generator a function producing random numbers.
 #'  @param ... arguments passed to \code{generator}.
 #'  @param groupVars names of variables as character. Identify groups within random numbers are constant.
-#'  @param desc character used for describing the distribution from which the data is generated.
 #'  
 #'  @details \code{gen_norm} is used to draw random numbers from a normal distribution where all generated numbers are independent.
 #'  
@@ -33,7 +32,7 @@
 #'  dat2 <- sim(base_id() %>% sim_gen_e())
 #'  all.equal(dat1, dat2)
 gen_norm <- function(mean = 0, sd = 1, name = "e") {
-  desc <- paste(name, " ~ N(", mean, ", ", sd^2, ") unit-level", sep = "")
+  force(mean); force(sd); force(name)
   function(dat) {
     dat <- add_var(dat, rnorm(nrow(dat), mean = mean, sd = sd), name)
     dat
@@ -48,7 +47,7 @@ add_var <- function(dat, value, name) {
 #' @rdname generators
 #' @export
 gen_v_norm <- function(mean = 0, sd = 1, name = "v") {
-  desc <- paste(name, " ~ N(", mean, ", ", sd^2, ") domain-level", sep = "")
+  force(mean); force(sd); force(name)
   function(dat) {
     tmp <- rnorm(length(unique(dat$idD)), mean = mean, sd = sd)
     dat <- add_var(dat, tmp[dat$idD], name)
@@ -56,12 +55,10 @@ gen_v_norm <- function(mean = 0, sd = 1, name = "v") {
   }
 }
 
-#' @importFrom MASS mvrnorm
-#' @importFrom spdep cell2nb nb2mat
 #' @rdname generators
 #' @export
 gen_v_sar <- function(mean = 0, sd = 1, rho = 0.5, type = "rook", name) {
-  desc <- paste(name, " ~ N(", mean, ", SAR1(", type, ")(", rho, ", ", sd^2, ") domain-level", sep = "")
+  force(mean); force(sd); force(name); force(rho); force(type)
   function(dat) {
     nDomains <- length(unique(dat$idD))
     # Spatial Structure:
@@ -81,12 +78,11 @@ gen_v_sar <- function(mean = 0, sd = 1, rho = 0.5, type = "rook", name) {
 
 #' @rdname generators
 #' @export
-gen_generic <- function(generator, ..., groupVars = NULL, desc = "F", name) {
+gen_generic <- function(generator, ..., groupVars = NULL, name) {
   genArgs <- list(...)
   force(generator)
   force(groupVars)
-  
-  desc <- paste(name, "~ ", desc, "(", paste(..., sep = ", "), ") ", groupVars, "-level", sep = "")
+  force(name)
       
   gen_no_group <- function(dat) {
     randomNumbers <- do.call(generator, c(nrow(dat), genArgs))
@@ -94,8 +90,8 @@ gen_generic <- function(generator, ..., groupVars = NULL, desc = "F", name) {
   }
   
   gen_constant_within_group <- function(dat) {
-    dat <- dat %>% s_arrange(groupVars)
-    nrowGroup <- s_group_by(dat, groupVars) %>% group_size
+    dat <- dat %>% arrange_(groupVars)
+    nrowGroup <- group_by_(dat, groupVars) %>% group_size
     randomNumbers <- do.call(generator, c(length(nrowGroup), genArgs))
     add_var(dat, rep(randomNumbers, times = nrowGroup), name)
   }
@@ -106,5 +102,4 @@ gen_generic <- function(generator, ..., groupVars = NULL, desc = "F", name) {
     gen_constant_within_group
   }
 }
-
 

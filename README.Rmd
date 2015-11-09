@@ -12,12 +12,19 @@ cat(gsub("\\n   ", "", packageDescription("aoos", fields = "Description")))
 ## Installation
 
 The package is actively developed. Please report bugs, troubles and discussion as [issue on GitHub](https://github.com/wahani/saeSim/issues). You can install the latest version from the [repository on GitHub](https://www.github.com/wahani/saeSim):
-  
+
 ```{r eval=FALSE}
 library(devtools)
 install_github("wahani/saeSim")
 ```
 
+or from CRAN:
+
 ```{r eval=FALSE}
 install.packages("saeSim")
 ```
+
+```{r echo=FALSE}
+wahaniMiscs::getLocalPackageUpdates("saeSim")
+```
+

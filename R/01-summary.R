@@ -3,42 +3,44 @@
 #' Reports a summary of the simulation setup.
 #' 
 #' @param object a \code{sim_setup}.
-#' @param ... nothing to pass to here.
+#' @param ... has no effect.
 #' 
 #' @export
-#' @method summary sim_setup
 #' 
 #' @examples
 #' summary(sim_base_lm())
-summary.sim_setup <- function(object, ...) {
-  componentList <- S3Part(object, strictS3=TRUE)
-  cat("General Information about", object@simName, "simulation set-up:\n")
-  #cat("# of runs:", object@R, "\n")
-  cat("# of sim_gen:", elementsEqualTo(componentList, 1), "\n")
-  cat("# of sim_gen_cont:", elementsEqualTo(componentList, 2), "\n")
-  cat("# of sim_resp:", elementsEqualTo(componentList, 3), "\n")
-  cat("# of sim_comp_pop:", 
-      elementsEqualTo(componentList, 4), "\n")
-  cat("# of sim_sample:",
-      elementsEqualTo(componentList, 5), "\n")
-  cat("# of sim_comp_sample:", 
-      elementsEqualTo(componentList, 6), "\n")
-  cat("# of sim_agg:",
-      elementsEqualTo(componentList, 7), "\n")
-  cat("# of sim_comp_agg:", 
-      elementsEqualTo(componentList, 8), "\n")
+setMethod("summary", c(object = "sim_setup"), function(object, ...) {
+  callList <- lapply(S3Part(object, strictS3=TRUE), getCalls)
+  expr <- parse(text = do.call(paste, c(callList, sep = " %>%\n\t\t")))
+  time <- system.time(dat <- as.data.frame(object))
+  dimension <- dim(dat)
   
-  cat("\nApproximating the expected duration:\n")
-  cat("A single run takes ... ")
-  tmp <- system.time(dat <- as.data.frame(object))
-  cat(tmp["elapsed"], "seconds.", 100, "*", tmp["elapsed"], "=", 
-      100 * tmp["elapsed"], "seconds.\n")
-  
-  cat("\nStructure of the data:\n")
-  print(str(dat))
-  invisible(NULL)
-}
+  new("summary.sim_setup", 
+      sim_setup = object,
+      dim = dimension, 
+      duration = as.table(time), 
+      expression = expr)
+})
 
-elementsEqualTo <- function(simFunList, number) {
-  sapply(simFunList, function(obj) obj@order == number) %>% sum
-}
+getCalls <- function(simFun) {
+  cl <- slot(simFun, "call")
+  cl$simSetup <- NULL
+  paste(deparse(cl), collapse = "\n")
+} 
+
+#' @rdname showMethods
+#' @inheritParams methods::show
+#' @export
+setMethod("show", "summary.sim_setup", function(object) {
+  cat("General Information about", object@sim_setup@simName, "simulation set-up:\n")
+  print(object@expression)
+  
+  tmp <- object@duration
+  cat("\nApproximating the expected duration:\n")
+  cat("A single run takes ")
+  cat(tmp["elapsed"], "seconds. 500 * ", tmp["elapsed"], "=", 
+      500 * tmp["elapsed"], "seconds.\n")
+})
+
+
+

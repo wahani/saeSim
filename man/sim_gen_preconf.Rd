@@ -29,7 +29,7 @@ sim_gen_vc(simSetup, mean = 0, sd = 40, name = "v", nCont = 0.05,
 
 \item{name}{name of variable as character in which random numbers are stored.}
 
-\item{nCont}{gives the number of contaminated observations. Values between 0 and 1 will be trated as probability. If length is larger 1, the expected length is the number of areas.}
+\item{nCont}{gives the number of contaminated observations. Values between 0 and 1 will be treated as probability. If length is larger 1, the expected length is the number of areas.}
 
 \item{type}{"unit" or "area" - unit- or area-level contamination.}
 

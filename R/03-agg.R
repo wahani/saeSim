@@ -12,12 +12,8 @@
 #' @examples
 #' sim_base() %>% sim_gen_x() %>% sim_gen_e() %>% sim_agg(agg_all())
 agg_all <- function(groupVars = "idD") {
-  function(dat) {
-    
-    # Keep Attributes
-    preAttr <- attributes(dat)
-    preAttr[c("class", "row.names", "names")] <- NULL
-    
+  force(groupVars)
+  aggFun <- function(dat) {
     # character > factor > dummies (numeric)
     dat[sapply(dat, is.character)] <- dat[sapply(dat, is.character)] %>% lapply(as.factor)
     dummies <- names(dat)[sapply(dat, is.factor)] %>% 
@@ -43,8 +39,8 @@ agg_all <- function(groupVars = "idD") {
              dfOut
            })
     # combine:
-    out <- rbind_all(datList)
-    attributes(out) <- c(attributes(out), preAttr)
+    out <- rbind_all(datList) %>% as.data.frame
     out
   }
+  preserve_attributes(aggFun)
 } 

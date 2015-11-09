@@ -10,12 +10,25 @@ Another implementation of object-orientation in R. It provides syntactic sugar f
 ## Installation
 
 The package is actively developed. Please report bugs, troubles and discussion as [issue on GitHub](https://github.com/wahani/saeSim/issues). You can install the latest version from the [repository on GitHub](https://www.github.com/wahani/saeSim):
-  
-```{r eval=FALSE}
+
+
+```r
 library(devtools)
 install_github("wahani/saeSim")
 ```
 
-```{r eval=FALSE}
+or from CRAN:
+
+
+```r
 install.packages("saeSim")
 ```
+
+
+```
+## Version on CRAN: 0.7.0 
+## Development Version: 0.6.1 
+## 
+## Updates in package NEWS-file since last release to CRAN:
+```
+

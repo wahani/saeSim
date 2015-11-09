@@ -5,10 +5,15 @@
 #' @inheritParams methods::show
 #' 
 #' @details Will print the head of a \code{sim_setup} to the console, after converting it to a \code{data.frame}.
+#' @rdname showMethods
 #' @export
 setMethod("show", "sim_setup",
           function(object) {
+            # this is essentially dplyr::print.tbl_df but there is no obvious 
+            # constructor for tbl_df ...
             dat <- as.data.frame(object)
-            print(head(dat))
+            cat("data.frame ", dim_desc(dat), "\n", sep = "")
+            cat("\n")
+            print(trunc_mat(dat, n = 6, width = NULL))
             invisible(dat)
           })

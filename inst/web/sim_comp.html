@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>sim_comp_pop. saeSim 0.6.1</title>
+<title>sim_comp_pop. saeSim 0.7.0</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -20,7 +20,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">saeSim 0.6.1</a>
+      <a class="brand" href="#">saeSim 0.7.0</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -82,15 +82,16 @@
     <pre class="examples"><div class='input'># Standard behavior
 sim_base() %&gt;% sim_gen_x() %&gt;% sim_comp_N()
 </div>
-<div class='output'>Source: local data frame [6 x 4]
+<div class='output'>data.frame [10,000 x 4]
 
-  idD idU          x   N
-1   1   1  5.3741795 100
-2   1   2 -0.7684638 100
-3   1   3  3.4666541 100
-4   1   4  5.0433637 100
-5   1   5 -6.3138763 100
-6   1   6 -6.1268605 100
+   idD idU           x   N
+1    1   1  2.16423407 100
+2    1   2  0.82934925 100
+3    1   3 -6.94781124 100
+4    1   4  1.74605473 100
+5    1   5  0.05929812 100
+6    1   6 -2.30019474 100
+.. ... ...         ... ...
 </div>
 <div class='input'>
 # Custom data modifications
@@ -104,25 +105,31 @@ comp_lm &lt;- function(dat) {
 
 sim_base_lm() %&gt;% sim_comp_pop(comp_lm)
 </div>
-<div class='output'>  idD idU          x          e         y linearPredictor
-1   1   1 -5.8896448  0.4994011  94.60976        94.18092
-2   1   2 -6.6459563 -3.1279367  90.22611        93.43328
-3   1   3  0.2174477 -1.0170986  99.20035       100.21794
-4   1   4 -0.5820241 -0.3345908  99.08339        99.42764
-5   1   5 -0.9847147  2.9576655 101.97295        99.02957
-6   1   6 -5.0459305  1.2953910  96.24946        95.01495
+<div class='output'>data.frame [10,000 x 6]
+
+   idD idU         x          e         y linearPredictor
+1    1   1  1.392472 -1.9225530  99.46992       101.49682
+2    1   2  3.558486  2.9857377 106.54422       103.69284
+3    1   3  3.425043  0.9124589 104.33750       103.55755
+4    1   4 -1.464855 -3.8813408  94.65380        98.59990
+5    1   5 -4.860413 -0.5504784  94.58911        95.15729
+6    1   6  5.427173  2.6308299 108.05800       105.58742
+.. ... ...       ...        ...       ...             ...
 </div>
 <div class='input'>
 # or if applied after sampling
 sim_base_lm() %&gt;% sim_sample() %&gt;% sim_comp_pop(comp_lm)
 </div>
-<div class='output'>  idD idU          x          e         y linearPredictor
-1   1  42 -2.5831200 -2.8251144  94.59177        97.41402
-2   1  88  0.3635585  4.9836419 105.34720       100.31652
-3   1  78 -8.8956453 -6.4268563  84.67750        91.19613
-4   1  61 -2.1036965  1.5030413  99.39934        97.88625
-5   1   8  2.3340313  0.6423465 102.97638       102.25745
-6   2   3 -6.2511049  4.4757324  98.22463        93.80103
+<div class='output'>data.frame [500 x 6]
+
+   idD idU         x           e         y linearPredictor
+1    1   6 2.6734643 -0.96662256 101.70684        102.6874
+2    1   7 3.7666940 -3.67252552 100.09417        103.7987
+3    1  19 1.4294723  1.37632825 102.80580        101.4228
+4    1  35 0.3051514 -3.49608370  96.80907        100.2799
+5    1  37 5.0615561  3.09059663 108.15215        105.1149
+6    2   7 4.5192700 -0.03893304 104.48034        104.5637
+.. ... ...       ...         ...       ...             ...
 </div></pre>
   </div>
   <div class="span4">

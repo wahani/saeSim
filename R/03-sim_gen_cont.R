@@ -5,7 +5,7 @@
 #' @inheritParams sim_agg
 #' @inheritParams sim_gen
 #' 
-#' @param nCont gives the number of contaminated observations. Values between 0 and 1 will be trated as probability. If length is larger 1, the expected length is the number of areas.
+#' @param nCont gives the number of contaminated observations. Values between 0 and 1 will be treated as probability. If length is larger 1, the expected length is the number of areas.
 #' @param type "unit" or "area" - unit- or area-level contamination.
 #' @param areaVar character with variable name(s) identifying areas.
 #' @param fixed TRUE fixes the observations which will be contaminated. FALSE will result in a random selection of observations or areas.
@@ -22,18 +22,21 @@ sim_gen_cont <- function(simSetup, generator, nCont, type, areaVar = NULL, fixed
   generator <- gen_cont(generator, nCont, type, areaVar, fixed)
   
   sim_setup(simSetup, 
-            new("sim_fun", order = 2, generator))
+            new("sim_fun", order = 2, call = match.call(), generator))
 }
 
 gen_cont <- function(generator, nCont, type, areaVar, fixed) {
   force(generator); force(nCont); force(type); force(areaVar); force(fixed)
   check_cont_input(nCont, type, fixed)
   
-  function(dat) {
+  genFun <- function(dat) {
     contData <- generator(dat)
     contData <- select_cont(contData, nCont, type, areaVar, fixed)
     replace_contData(contData, dat)
   }
+  
+  preserve_attributes(genFun)
+  
 }
 
 check_cont_input <- function(nCont, type, fixed) {

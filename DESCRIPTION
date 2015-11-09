@@ -1,10 +1,12 @@
 Package: saeSim
 Type: Package
 Title: Simulation Tools for Small Area Estimation
-Date: 2014-10-22
-Version: 0.6.1
-Author: Sebastian Warnholz <Sebastian.Warnholz@fu-berlin.de>
-Maintainer: Sebastian Warnholz <Sebastian.Warnholz@fu-berlin.de>
+Date: 2015-02-16
+Version: 0.7.0
+Authors@R: c(person("Sebastian", "Warnholz", role = c("aut", "cre"),
+                    email = "Sebastian.Warnholz@fu-berlin.de"),
+             person("Timo", "Schmid", role = "aut",
+                    email = "Timo.Schmid@fu-berlin.de"))
 URL: https://wahani.github.io/saeSim
 BugReports: https://github.com/wahani/saeSim/issues
 Depends:
@@ -12,10 +14,11 @@ Depends:
     methods
 Imports:
     dplyr(>= 0.2),
+    functional,
     ggplot2,
     MASS,
     spdep,
-    parallel
+    parallelMap
 Suggests:
     testthat,
     knitr,

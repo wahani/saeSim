@@ -1,63 +1,90 @@
 #' Start simulation
 #' 
-#' This function can be applied to a \code{sim_setup}. It will start the simulation. Use the printing method as long as you are testing the scenario.
+#' This function will start the simulation. Use the printing method as long as you are testing the scenario.
 #' 
-#' @param x a \code{sim_setup} or \code{data.frame}
-#' @param ... simulation components; If \code{parallel = TRUE} arguments passed to mclapply, see details.
-#' @param parallel if \code{FALSE} \code{lapply} is used; if \code{TRUE} a 'plug-and-play' version of mclapply is used; see details.
-#' @param path optional path in which the simulation results can be saved.
+#' @param x a \code{sim_setup}
 #' @param R number of repetitions.
+#' @param path optional path in which the simulation results can be saved. They will we coerced to a \code{data.frame} and then saved as 'csv'.
+#' @param overwrite \code{TRUE}/\code{FALSE}. If \code{TRUE} files in \code{path} are replaced. If \code{FALSE} files in \code{path} are not replaced and simulation will not be recomputed.
+#' @param ... arguments passed to \code{\link{parallelStart}}.
+#' @param libs arguments passed to \code{\link{parallelLibrary}}. Will be used in a call to \code{\link{do.call}} after coersion with \code{\link{as.list}}.
+#' @param exports arguments passed to \code{\link{parallelExport}}. Will be used in a call to \code{\link{do.call}} after coersion with \code{\link{as.list}}.
 #' 
-#' @details The backend for parallel computation is very experimental. You can find the code and documentation on www.github.com/wahani/parallelTools. In Windows parallelization is build around \code{\link[parallel]{clusterApply}}. If you are not using Windows the function \code{\link[parallel]{mclapply}} is used. See the parameters of \code{mclapply} how to control the parallelization. Parallizing trivial tasks in Windows will result in wasted time. Also working with large data.frames will be inefficient in Windows.
-
-#' Use the \code{path} to store the simulation results to a directory. This may be a good idea for long running simulations and for those using large \code{data.frame}s. Use \code{\link{sim_read_data}}, to read load them again.
+#' @details The package parallelMap is utilized as back-end for parallel computations.
+#' 
+#' Use the argument \code{path} to store the simulation results in a directory. This may be a good idea for long running simulations and for those using large \code{data.frame}s. You can use \code{\link{sim_read_data}} to read them in. The return value will change to NULL in each run.
 #'  
-#' @return The return value is always a list. The elements are the resulting \code{data.frame}s of each simulation run.
+#' @return The return value is a list. The elements are the results of each simulation run, typically of class \code{data.frame}. In case you specified \code{path}, each element is \code{NULL}. 
 #' 
-
 #' @rdname sim
 #' @export
 #' @examples
 #' setup <- sim_base_lm()
 #' resultList <- sim(setup, R = 1)
 #' 
-#' # Will return a data frame
-#' dat <- sim(sim_base() %>% sim_gen_x() %>% sim_gen_e())
-sim <- function(x, ...) UseMethod("sim")
-
-sim.data.frame <- function(x, ...) {
+#' # For parallel computations you may need to export objects
+#' localFun <- function() cat("Hello World!")
+#' comp_fun <- function(dat) {
+#'   localFun()
+#'   dat
+#' }
+#' 
+#' res <- sim_base_lm() %>% 
+#'   sim_comp_pop(comp_fun) %>% 
+#'   sim(R = 2, 
+#'       mode = "socket", cpus = 2,
+#'       exports = "localFun")
+#' 
+#' str(res)
+sim <- function(x, R = 1, path = NULL, overwrite = TRUE, ..., libs = NULL, exports = NULL) {
   
-  # Preparing:
-  setup <- sim_setup(x, ...)
+  parallelStart(...)
+  do.call(parallelLibrary, as.list(libs))
+  do.call(parallelExport, as.list(exports))
+  res <- parallelLapply(1:R, map_fun, object = x, path = path, overwrite = overwrite)
+  parallelStop()
+  res
   
-  # Generating pop
-  out <- setup@base
-  
-  for (fun in setup)
-    out <- fun(out)
-    
-  # Return:
-  out
 }
 
-#' @rdname sim
-#' @export
-sim.sim_setup <- function(x, ..., R = 1, parallel = FALSE, path = NULL) {
-  iterateOver <- as.list(1:R)
-  iterateFun <- if(parallel) {
-    setPTOption(packageToLoad = "saeSim")
-    mclapply
-  } else lapply
-  iterateOver %>% iterateFun(function(i, object, path) {
-    df <- as.data.frame(object)
-    df$idR <- i
-    df$simName <- object@simName
-    # Save results to disk
-    if(!is.null(path)) {
-      write.csv(df, file = paste(path, object@simName, i, ".csv", sep = ""),
-                row.names = FALSE)
-      df <- NULL
-    }
+map_fun <- function(i, object, path, overwrite) {
+  filename <- make_sim_filename(i, object, path)
+  df <- if(needs_recompute(filename, overwrite)) {
+    sim_run_it(object, i)
+  } else {
+    NULL
+  }
+  sim_write_results(df, path, filename)
+}
+
+make_sim_filename <- function(i, object, path) {
+  if(!is.null(path)) paste0(path, "/", object@simName, i, ".csv") else NULL
+}
+
+needs_recompute <- function(filename, overwrite) {
+  if(is.null(filename)) return(TRUE) # path = NULL
+  if(!file.exists(filename)) return(TRUE) # always compute if it doesn't exist 
+  else return(overwrite)
+}
+
+sim_run_it <- function(object, i) {
+  df <- sim_run_once(object)
+  df$idR <- i
+  df$simName <- object@simName
+  df
+}
+
+sim_run_once <- function(x) {
+  Reduce(function(x, f) f(x), x, x@base)
+}
+
+sim_write_results <- function(df, path, filename) {
+  if (!is.null(path) && !is.null(df)) {
+    df <- as.data.frame(df)
+    write.csv(df, file = filename, row.names = FALSE)
+    NULL
+  } else {
     df
-  }, object = x, path = path, ...)
+  }
 }
+

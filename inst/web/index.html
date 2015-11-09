@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>Index. saeSim 0.6.1</title>
+<title>Index. saeSim 0.7.0</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="author" content="Sebastian Warnholz &lt;Sebastian.Warnholz@fu-berlin.de&gt;">
+<meta name="author" content="">
 
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
@@ -20,7 +20,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">saeSim 0.6.1</a>
+      <a class="brand" href="#">saeSim 0.7.0</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
@@ -47,8 +47,19 @@
 
 <p>The package is actively developed. Please report bugs, troubles and discussion as <a href="https://github.com/wahani/saeSim/issues">issue on GitHub</a>. You can install the latest version from the <a href="https://www.github.com/wahani/saeSim">repository on GitHub</a>:</p>
 
-<pre><code>library(devtools)
+<pre><code class="r">library(devtools)
 install_github(&quot;wahani/saeSim&quot;)
+</code></pre>
+
+<p>or from CRAN:</p>
+
+<pre><code class="r">install.packages(&quot;saeSim&quot;)
+</code></pre>
+
+<pre><code>## Version on CRAN: 0.7.0 
+## Development Version: 0.7.0 
+## 
+## Updates in package NEWS-file since last release to CRAN:
 </code></pre>
 
 
@@ -87,13 +98,13 @@ install_github(&quot;wahani/saeSim&quot;)
         <code><a href="plot.sim_setup.html">plot.sim_setup</a></code><br />Plotting methods</li>
             
       <li>
-        <code><a href="sampling.html">sample_fraction</a></code>(sample_number)<br />Sampling functions</li>
+        <code><a href="sampling.html">sample_fraction</a></code>(sample_cluster_fraction, sample_cluster_number, sample_number, sample_numbers)<br />Sampling functions</li>
             
       <li>
-        <code><a href="show-sim_setup-method.html">show,sim_setup-method</a></code><br />Show for </li>
+        <code><a href="showMethods.html">show,sim_setup-method</a></code>(show,summary.sim_setup-method)<br />Show for </li>
             
       <li>
-        <code><a href="sim.html">sim</a></code>(sim.sim_setup)<br />Start simulation</li>
+        <code><a href="sim.html">sim</a></code><br />Start simulation</li>
             
       <li>
         <code><a href="sim_agg.html">sim_agg</a></code><br />Aggregation component</li>
@@ -111,7 +122,7 @@ install_github(&quot;wahani/saeSim&quot;)
         <code><a href="sim_comp.html">sim_comp_pop</a></code>(sim_comp_agg, sim_comp_sample)<br />Calculation component</li>
             
       <li>
-        <code><a href="sim_gen.html">sim_gen</a></code><br />Generation component</li>
+        <code><a href="sim_gen.html">sim_gen</a></code>(sim_gen_generic)<br />Generation component</li>
             
       <li>
         <code><a href="sim_gen_cont.html">sim_gen_cont</a></code><br />Generation Component for contamination</li>
@@ -132,7 +143,7 @@ install_github(&quot;wahani/saeSim&quot;)
         <code><a href="sim_simName.html">sim_simName</a></code><br />Add a name to a sim_setup</li>
             
       <li>
-        <code><a href="summary.sim_setup.html">summary.sim_setup</a></code><br />Summary for a sim_setup</li>
+        <code><a href="summary-sim_setup-method.html">summary,sim_setup-method</a></code><br />Summary for a sim_setup</li>
     
     </ul>
   </div>
@@ -146,11 +157,15 @@ install_github(&quot;wahani/saeSim&quot;)
     <h2>Dependencies</h2>
     <ul>
       <li><strong>Depends</strong>: methods</li>
-      <li><strong>Imports</strong>: dplyr, ggplot2, MASS, spdep, parallel</li>
+      <li><strong>Imports</strong>: dplyr, functional, ggplot2, MASS, spdep, parallelMap</li>
       <li><strong>Suggests</strong>: testthat, knitr</li>
       <li><strong>Extends</strong>: </li>
     </ul>
      
+    <h2>Authors</h2>
+    
+    <h2>Authors</h2>
+    
     
   </div>
 </div>
