@@ -2,35 +2,36 @@
 #' 
 #' These functions are intended to be used with \code{\link{sim_gen}} and not interactively. They are designed to draw random numbers according to the setting of grouping variables.
 #'  
-#'  @param mean the mean passed to the random number generator, for example \code{\link{rnorm}}.
-#'  @param sd the standard deviation passed to the random number generator, for example \link{rnorm}.
-#'  @param name name of variable as character in which random numbers are stored.
-#'  @param rho the correlation used to create the variance covariance matrix for a SAR process - see \code{\link[spdep]{cell2nb}}.
-#'  @param type either "rook" or "queen". See \code{\link[spdep]{cell2nb}} for details.
-#'  @param generator a function producing random numbers.
-#'  @param ... arguments passed to \code{generator}.
-#'  @param groupVars names of variables as character. Identify groups within random numbers are constant.
+#' @param mean the mean passed to the random number generator, for example \code{\link{rnorm}}.
+#' @param sd the standard deviation passed to the random number generator, for example \link{rnorm}.
+#' @param name name of variable as character in which random numbers are stored.
+#' @param rho the correlation used to create the variance covariance matrix for a SAR process - see \code{\link[spdep]{cell2nb}}.
+#' @param type either "rook" or "queen". See \code{\link[spdep]{cell2nb}} for details.
+#' @param generator a function producing random numbers.
+#' @param ... arguments passed to \code{generator}.
+#' @param groupVars names of variables as character. Identify groups within random numbers are constant.
+#' 
+#' @details \code{gen_norm} is used to draw random numbers from a normal distribution where all generated numbers are independent.
+#' 
+#' \code{gen_v_norm} and \code{gen_v_sar} will create an area-level random component. In the case of \code{v_norm}, the error component will be from a normal distribution and i.i.d. from an area-level perspective (all units in an area will have the same value, all areas are independent). v_sar will also be from a normal distribution, but the errors are correlated. The variance covariance matrix is constructed for a SAR(1) - spatial/simultanous autoregressive process. \link[MASS]{mvrnorm} is used for the random number generation. \code{gen_v_norm} and \code{gen_v_sar} expect a variable \code{idD} in the data identifying the areas.
+#' 
+#' \code{gen_generic} can be used if your world is not normal. You can specify 'any' function as generator, like \code{\link{rnorm}}. Arguments in \code{...} are matched by name or position. The first argument of \code{generator} is expected to be the number of random numbers (not necessarily named \code{n}) and need not to be specified.
 #'  
-#'  @details \code{gen_norm} is used to draw random numbers from a normal distribution where all generated numbers are independent.
+#' @seealso \code{\link{sim_gen}}, \code{\link{sim_gen_x}}, \code{\link{sim_gen_e}}, \code{\link{sim_gen_ec}}, \code{\link{sim_gen_v}}, \code{\link{sim_gen_vc}}, \code{\link[spdep]{cell2nb}}
 #'  
-#'  \code{gen_v_norm} and \code{gen_v_sar} will create an area-level random component. In the case of \code{v_norm}, the error component will be from a normal distribution and i.i.d. from an area-level perspective (all units in an area will have the same value, all areas are independent). v_sar will also be from a normal distribution, but the errors are correlated. The variance covariance matrix is constructed for a SAR(1) - spatial/simultanous autoregressive process. \link[MASS]{mvrnorm} is used for the random number generation. \code{gen_v_norm} and \code{gen_v_sar} expect a variable \code{idD} in the data identifying the areas.
+#' @rdname generators
+#' @export
 #'  
-#'  \code{gen_generic} can be used if your world is not normal. You can specify 'any' function as generator, like \code{\link{rnorm}}. Arguments in \code{...} are matched by name or position. The first argument of \code{generator} is expected to be the number of random numbers (not necessarily named \code{n}) and need not to be specified.
-#'  
-#'  @rdname generators
-#'  @export
-#'  @seealso \code{\link{sim_gen}}, \code{\link{sim_gen_x}}, \code{\link{sim_gen_e}}, \code{\link{sim_gen_ec}}, \code{\link{sim_gen_v}}, \code{\link{sim_gen_vc}}, \code{\link[spdep]{cell2nb}}
-#'  
-#'  @examples
-#'  sim_base() %>% sim_gen_x() %>% sim_gen_e() %>% sim_gen_v() %>% sim_gen(gen_v_sar(name = "vSP"))
-#'  
-#'  # Generic interface
-#'  set.seed(1)
-#'  dat1 <- sim(base_id() %>%
-#'                sim_gen(gen_generic(rnorm, mean = 0, sd = 4, name = "e")))
-#'  set.seed(1)
-#'  dat2 <- sim(base_id() %>% sim_gen_e())
-#'  all.equal(dat1, dat2)
+#' @examples
+#' sim_base() %>% sim_gen_x() %>% sim_gen_e() %>% sim_gen_v() %>% sim_gen(gen_v_sar(name = "vSP"))
+#' 
+#' # Generic interface
+#' set.seed(1)
+#' dat1 <- sim(base_id() %>%
+#'   sim_gen(gen_generic(rnorm, mean = 0, sd = 4, name = "e")))
+#' set.seed(1)
+#' dat2 <- sim(base_id() %>% sim_gen_e())
+#' all.equal(dat1, dat2)
 gen_norm <- function(mean = 0, sd = 1, name = "e") {
   force(mean); force(sd); force(name)
   function(dat) {
@@ -102,4 +103,5 @@ gen_generic <- function(generator, ..., groupVars = NULL, name) {
     gen_constant_within_group
   }
 }
+
 

@@ -12,8 +12,14 @@ test_that("methods equal", {
   setup <- sim_base() %>% sim_gen_x() %>% sim_gen_e() %>% sim_agg()
   cat("\n")
   dat <- show(setup)
-  
-  expect_equal(nrow(dat), 100)
+  testthat::expect_equal(nrow(dat), 100)
+  cat("\n")
+  dat <- show(setup %>% sim_comp_agg(function(dat) list(1)))
+  testthat::expect_equal(dat, list(1))
+  cat("\n")
+  dat <- show(setup %>% sim_comp_agg(function(dat) asS4(list(1))))
+  testthat::expect_equal(dat, asS4(list(1)))
+  cat("\n")
 })
 
 context("sim_setup-methods")

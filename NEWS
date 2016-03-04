@@ -1,3 +1,6 @@
+Version 0.7.2
+- Update for show method. Now can print not only handle data.frames.
+
 Version 0.7.1
 - Updated vignette
 

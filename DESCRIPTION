@@ -2,7 +2,7 @@ Package: saeSim
 Type: Package
 Title: Simulation Tools for Small Area Estimation
 Date: 2015-02-16
-Version: 0.7.1
+Version: 0.7.2
 Authors@R: c(person("Sebastian", "Warnholz", role = c("aut", "cre"),
                     email = "Sebastian.Warnholz@fu-berlin.de"),
              person("Timo", "Schmid", role = "aut",
@@ -21,13 +21,13 @@ Imports:
     parallelMap
 Suggests:
     testthat,
-    knitr,
-    DiagrammeR
+    knitr
 Description: Tools for the simulation of data in the context of small area
     estimation. Combine all steps of your simulation - from data generation
     over drawing samples to model fitting - in one object. This enables easy
     modification and combination of different scenarios. You can store your
     results in a folder or start the simulation in parallel.
 Roxygen: list(wrap = FALSE)
-License: GPL-3 | file LICENSE
+License: MIT + file LICENSE
 VignetteBuilder: knitr
+RoxygenNote: 5.0.1
