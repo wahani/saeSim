@@ -58,3 +58,28 @@ test_that("sim_gen_generic", {
   dat2 <- base_id(5, 5) %>% sim_gen_e() %>% sim_gen_v() %>% as.data.frame
   expect_equal(dat1, dat2)
 })
+
+test_that("gen_v_ar1", {
+  set.seed(1)
+  dat <- base_id_temporal(3, 1, 3) %>%
+    sim_gen(gen_v_ar1(
+      1.2, sd = 5, rho = 0.6, 
+      groupVar = "idD", timeVar = "idT", name = "v")) %>%
+    as.data.frame
+  testthat::expect_equal(length(unique(dat$v)), 9)
+  
+  dat <- base_id_temporal(3, 1:3, 3) %>%
+    sim_gen(gen_v_ar1(
+      1.2, sd = 5, rho = 0.6, 
+      groupVar = "idD", timeVar = "idT", name = "v")) %>%
+    as.data.frame
+  testthat::expect_equal(length(unique(dat$v)), 9)
+  
+  dat <- base_id_temporal(3, 1:3, 3) %>%
+    sim_gen(gen_v_ar1(
+      1.2, sd = 5, rho = 0.6, 
+      groupVar = c("idD", "idU"), timeVar = "idT", name = "v")) %>%
+    as.data.frame
+  testthat::expect_equal(length(unique(dat$v)), 18)
+  
+})

@@ -23,9 +23,11 @@ sim_gen_vc(simSetup, mean = 0, sd = 40, name = "v", nCont = 0.05,
 \arguments{
 \item{simSetup}{a \code{sim_setup}.}
 
-\item{mean}{the mean passed to the random number generator, for example \code{\link{rnorm}}.}
+\item{mean}{the mean passed to the random number generator, for example
+\code{\link{rnorm}}.}
 
-\item{sd}{the standard deviation passed to the random number generator, for example \link{rnorm}.}
+\item{sd}{the standard deviation passed to the random number generator, for
+example \link{rnorm}.}
 
 \item{name}{name of variable as character in which random numbers are stored.}
 
