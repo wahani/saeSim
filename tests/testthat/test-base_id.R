@@ -28,4 +28,14 @@ test_that("base_id_temporal", {
   
   testthat::expect_equal(dat, comp, check.attributes = FALSE)
   
+  dat <- base_id_temporal(2, 1:2, 2)
+  
+  comp <- data.frame(
+    idD = c(1, 1, 2, 2, 2, 2), 
+    idU = c(1, 1, 1, 1, 2, 2),
+    idT = c(1, 2, 1, 2, 1, 2)
+  )
+  
+  testthat::expect_equal(dat, comp, check.attributes = FALSE)
+  
 })

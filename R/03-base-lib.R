@@ -36,9 +36,11 @@ base_id_temporal <- function(nDomains = 10, nUnits = 10, nTime = 10) {
   stopifnot(length(nTime) == 1)
   dat <- base_id(nDomains, nUnits)
   dat <- dat[rep(1:nrow(dat), nTime), , drop = FALSE]
-  dat <- dat[do.call(order, as.list(dat)), , drop = FALSE]
-  dat$idT <- rep(rep(1:nTime, nUnits), nDomains)
-  dat
+  dat <- split(dat, dat, drop = TRUE) %>% 
+    lapply(function(df) {df$idT <- 1:nrow(df); df}) %>%
+    do.call(what = rbind)
+  rownames(dat) <- NULL
+  dat[order(dat$idD), ]
 }
 
 #' Add id-variables to data
