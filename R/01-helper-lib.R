@@ -1,7 +1,3 @@
-.onAttach <- function(libname, pkgname) {
-  packageStartupMessage("Documentation is available at wahani.github.io/saeSim", domain = NULL, appendLF = TRUE)
-}
-
 mutate_wrapper <- function(...) {
   mc <- match.call(expand.dots = TRUE)
   mc[[1L]] <- quote(mutate)
