@@ -1,3 +1,7 @@
+Version 0.7.3
+- New function: base_id_temporal to construct basic structure for repeated
+measurements.
+
 Version 0.7.2
 - Update for show method. Now can print not only handle data.frames.
 

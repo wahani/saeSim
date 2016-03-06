@@ -1,10 +1,15 @@
 #' Construct data with id-variables
+#' 
 #' @description This function constructs a data frame with grouping/\code{id} variables.
+#' 
 #' @param nDomains The number of domains.
 #' @param nUnits The number of units in each domain. Can have \code{length(nUnits) > 1}.
-#' 
+#' @param nTime The number of time points for each units.
+#'  
 #' @return
-#' Return a \code{data.frame} with variables \code{idD} as ID-variable for domains, and \code{idU} as ID-variable for units.
+#' Return a \code{data.frame} with variables \code{idD} as ID-variable for
+#' domains, and \code{idU} as ID-variable for units.
+#' 
 #' @rdname base_id
 #' @export
 #' @examples
@@ -12,15 +17,28 @@
 #' base_id(2, c(2, 3))
 base_id <- function(nDomains = 10, nUnits = 10) {
   
-  stopifnot(length(nDomains) == 1, 
-            if(length(nUnits) > 1) length(nUnits) == nDomains else TRUE)
+  stopifnot(
+    length(nDomains) == 1, 
+    if (length(nUnits) > 1) length(nUnits) == nDomains else TRUE
+  )
   
   out <- data.frame(idD = rep(1:nDomains, times = nUnits)) %>% 
     group_by_("idD") %>% mutate(idU = 1:n()) %>% arrange_("idD", "idU")
   
-  out <- if(length(nUnits) == 1 && nUnits == 1) out["idD"] else out
+  out <- if (length(nUnits) == 1 && nUnits == 1) out["idD"] else out
   as.data.frame(out)
   
+}
+
+#' @export
+#' @rdname base_id
+base_id_temporal <- function(nDomains = 10, nUnits = 10, nTime = 10) {
+  stopifnot(length(nTime) == 1)
+  dat <- base_id(nDomains, nUnits)
+  dat <- dat[rep(1:nrow(dat), nTime), , drop = FALSE]
+  dat <- dat[do.call(order, as.list(dat)), , drop = FALSE]
+  dat$idT <- rep(rep(1:nTime, nUnits), nDomains)
+  dat
 }
 
 #' Add id-variables to data

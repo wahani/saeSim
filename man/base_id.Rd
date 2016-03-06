@@ -2,17 +2,23 @@
 % Please edit documentation in R/03-base-lib.R
 \name{base_id}
 \alias{base_id}
+\alias{base_id_temporal}
 \title{Construct data with id-variables}
 \usage{
 base_id(nDomains = 10, nUnits = 10)
+
+base_id_temporal(nDomains = 10, nUnits = 10, nTime = 10)
 }
 \arguments{
 \item{nDomains}{The number of domains.}
 
 \item{nUnits}{The number of units in each domain. Can have \code{length(nUnits) > 1}.}
+
+\item{nTime}{The number of time points for each units.}
 }
 \value{
-Return a \code{data.frame} with variables \code{idD} as ID-variable for domains, and \code{idU} as ID-variable for units.
+Return a \code{data.frame} with variables \code{idD} as ID-variable for
+domains, and \code{idU} as ID-variable for units.
 }
 \description{
 This function constructs a data frame with grouping/\code{id} variables.
