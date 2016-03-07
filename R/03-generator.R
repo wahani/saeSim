@@ -117,7 +117,7 @@ gen_v_ar1 <- function(mean = 0, sd = 1, rho = 0.5,
     }
     ar_var <- ar_var + t(ar_var)
     diag(ar_var) <- 1
-    ar_var <- 1 / (1 - rho^2) * ar_var
+    ar_var <- 1 / (1 - rho^2) * sd^2 * ar_var
     
     # Drawing the numbers - I assume a completely balanced design:
     dat <- split(dat, dat[groupVar], drop = TRUE) %>%
