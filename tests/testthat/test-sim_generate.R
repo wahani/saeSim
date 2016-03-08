@@ -82,4 +82,12 @@ test_that("gen_v_ar1", {
     as.data.frame
   testthat::expect_equal(length(unique(dat$v)), 18)
   
+  # To check that this is somewhat correct...
+  # dat <- base_id_temporal(1, 1, 50) %>%
+  #   sim_gen(gen_v_ar1(
+  #     0, sd = 1, rho = 0.6, 
+  #     groupVar = c("idD"), timeVar = "idT", name = "v")) %>%
+  #   as.data.frame
+  # acf(dat$v)
+  
 })
