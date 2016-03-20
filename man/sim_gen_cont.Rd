@@ -11,13 +11,16 @@ sim_gen_cont(simSetup, generator, nCont, type, areaVar = NULL, fixed = TRUE)
 
 \item{generator}{generator function used to generate random numbers.}
 
-\item{nCont}{gives the number of contaminated observations. Values between 0 and 1 will be treated as probability. If length is larger 1, the expected length is the number of areas.}
+\item{nCont}{gives the number of contaminated observations. Values between 0
+and 1 will be treated as probability. If length is larger 1, the expected
+length is the number of areas.}
 
 \item{type}{"unit" or "area" - unit- or area-level contamination.}
 
 \item{areaVar}{character with variable name(s) identifying areas.}
 
-\item{fixed}{TRUE fixes the observations which will be contaminated. FALSE will result in a random selection of observations or areas.}
+\item{fixed}{TRUE fixes the observations which will be contaminated. FALSE
+will result in a random selection of observations or areas.}
 }
 \description{
 One of the components which can be added to a \code{sim_setup}. It is applied after functions added with \code{\link{sim_gen}}.

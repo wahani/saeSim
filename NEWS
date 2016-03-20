@@ -1,3 +1,7 @@
+Version 0.7.4
+- The function 'sim_gen_cont' now allows to select specific areas for
+contamination.
+
 Version 0.7.3
 - New function: base_id_temporal to construct basic structure for repeated
 measurements.

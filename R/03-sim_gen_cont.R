@@ -5,10 +5,16 @@
 #' @inheritParams sim_agg
 #' @inheritParams sim_gen
 #' 
-#' @param nCont gives the number of contaminated observations. Values between 0 and 1 will be treated as probability. If length is larger 1, the expected length is the number of areas.
+#' @param nCont gives the number of contaminated observations. Values between 0 
+#'   and 1 will be treated as probability. If type is 'unit' and length is
+#'   larger than 1, the expected length is the number of areas. If type is
+#'   'area' and length is larger than 1 the values are interpreted as area
+#'   positions; i.e. \code{c(1, 3)} is interpreted as the first and 3rd area in
+#'   the data is contaminated.
 #' @param type "unit" or "area" - unit- or area-level contamination.
 #' @param areaVar character with variable name(s) identifying areas.
-#' @param fixed TRUE fixes the observations which will be contaminated. FALSE will result in a random selection of observations or areas.
+#' @param fixed TRUE fixes the observations which will be contaminated. FALSE
+#'   will result in a random selection of observations or areas.
 #' 
 #' @seealso \code{\link{sim_gen}}
 #' @export
@@ -21,8 +27,10 @@ sim_gen_cont <- function(simSetup, generator, nCont, type, areaVar = NULL, fixed
   
   generator <- gen_cont(generator, nCont, type, areaVar, fixed)
   
-  sim_setup(simSetup, 
-            new("sim_fun", order = 2, call = match.call(), generator))
+  sim_setup(
+    simSetup, 
+    new("sim_fun", order = 2, call = match.call(), generator)
+  )
 }
 
 gen_cont <- function(generator, nCont, type, areaVar, fixed) {
@@ -40,23 +48,25 @@ gen_cont <- function(generator, nCont, type, areaVar, fixed) {
 }
 
 check_cont_input <- function(nCont, type, fixed) {
-    
-  if(length(nCont) == 1 && nCont == 1) {
-    warning("nCont is equal to 1, will not be interpreted as proportion!")
+  
+  if (length(nCont) == 1 && nCont == 1) {
+    warning("nCont is equal to 1 - one area is contaminated.")
   }
   
-  if(!(type %in% c("area", "unit"))) {
+  if (!(type %in% c("area", "unit"))) {
     stop("Supported types are area and unit!")
   }
   
-  if(length(nCont) > 1 & (type %in% c("area"))) {
-    stop("A vector of nCont with type 'area' can not be interpreted!")
+  if (length(nCont) > 1 & (type == "area")) {
+    message("A vector of nCont with type 'area' is interpreted as vector with positions!")
+    if (fixed) stop("With this settings, fixed should be 'TRUE'!")
+    stopifnot(all(nCont %% 1 == 0))
   }
 }
 
 replace_contData <- function(contData, dat) {
   vars <- names(contData)[names(contData) %in% names(dat)]
-  for(var in vars) contData[var] <- replace_cont(contData[[var]], dat[[var]])
+  for (var in vars) contData[var] <- replace_cont(contData[[var]], dat[[var]])
   contData
 }
 
