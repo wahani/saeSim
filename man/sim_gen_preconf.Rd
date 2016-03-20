@@ -31,9 +31,12 @@ example \link{rnorm}.}
 
 \item{name}{name of variable as character in which random numbers are stored.}
 
-\item{nCont}{gives the number of contaminated observations. Values between 0
-and 1 will be treated as probability. If length is larger 1, the expected
-length is the number of areas.}
+\item{nCont}{gives the number of contaminated observations. Values between 0 
+and 1 will be treated as probability. If type is 'unit' and length is
+larger than 1, the expected length is the number of areas. If type is
+'area' and length is larger than 1 the values are interpreted as area
+positions; i.e. \code{c(1, 3)} is interpreted as the first and 3rd area in
+the data is contaminated.}
 
 \item{type}{"unit" or "area" - unit- or area-level contamination.}
 

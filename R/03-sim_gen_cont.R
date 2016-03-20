@@ -59,7 +59,7 @@ check_cont_input <- function(nCont, type, fixed) {
   
   if (length(nCont) > 1 & (type == "area")) {
     message("A vector of nCont with type 'area' is interpreted as vector with positions!")
-    if (fixed) stop("With this settings, fixed should be 'TRUE'!")
+    if (!fixed) stop("With this settings, fixed should be 'TRUE'!")
     stopifnot(all(nCont %% 1 == 0))
   }
 }
