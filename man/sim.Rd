@@ -4,8 +4,8 @@
 \alias{sim}
 \title{Start simulation}
 \usage{
-sim(x, R = 1, path = NULL, overwrite = TRUE, ..., libs = NULL,
-  exports = NULL)
+sim(x, R = 1, path = NULL, overwrite = TRUE, ..., suffix = NULL,
+  libs = NULL, exports = NULL)
 }
 \arguments{
 \item{x}{a \code{sim_setup}}
@@ -17,6 +17,8 @@ sim(x, R = 1, path = NULL, overwrite = TRUE, ..., libs = NULL,
 \item{overwrite}{\code{TRUE}/\code{FALSE}. If \code{TRUE} files in \code{path} are replaced. If \code{FALSE} files in \code{path} are not replaced and simulation will not be recomputed.}
 
 \item{...}{arguments passed to \code{\link{parallelStart}}.}
+
+\item{suffix}{an optional suffix of file names.}
 
 \item{libs}{arguments passed to \code{\link{parallelLibrary}}. Will be used in a call to \code{\link{do.call}} after coersion with \code{\link{as.list}}.}
 

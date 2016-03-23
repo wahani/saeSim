@@ -9,6 +9,7 @@
 #' @param ... arguments passed to \code{\link{parallelStart}}.
 #' @param libs arguments passed to \code{\link{parallelLibrary}}. Will be used in a call to \code{\link{do.call}} after coersion with \code{\link{as.list}}.
 #' @param exports arguments passed to \code{\link{parallelExport}}. Will be used in a call to \code{\link{do.call}} after coersion with \code{\link{as.list}}.
+#' @param suffix an optional suffix of file names.
 #' 
 #' @details The package parallelMap is utilized as back-end for parallel computations.
 #' 
@@ -36,20 +37,23 @@
 #'       exports = "localFun")
 #' 
 #' str(res)
-sim <- function(x, R = 1, path = NULL, overwrite = TRUE, ..., libs = NULL, exports = NULL) {
+sim <- function(x, R = 1, path = NULL, overwrite = TRUE, ..., suffix = NULL, libs = NULL, exports = NULL) {
   
   parallelStart(...)
   do.call(parallelLibrary, as.list(libs))
   do.call(parallelExport, as.list(exports))
-  res <- parallelLapply(1:R, map_fun, object = x, path = path, overwrite = overwrite)
+  res <- parallelLapply(
+    1:R, map_fun, object = x, 
+    path = path, overwrite = overwrite, suffix = suffix
+  )
   parallelStop()
   res
   
 }
 
-map_fun <- function(i, object, path, overwrite) {
-  filename <- make_sim_filename(i, object, path)
-  df <- if(needs_recompute(filename, overwrite)) {
+map_fun <- function(i, object, path, overwrite, suffix) {
+  filename <- make_sim_filename(i, object, path, suffix)
+  df <- if (needs_recompute(filename, overwrite)) {
     sim_run_it(object, i)
   } else {
     NULL
@@ -57,13 +61,14 @@ map_fun <- function(i, object, path, overwrite) {
   sim_write_results(df, path, filename)
 }
 
-make_sim_filename <- function(i, object, path) {
-  if(!is.null(path)) paste0(path, "/", object@simName, i, ".csv") else NULL
+make_sim_filename <- function(i, object, path, suffix) {
+  suffix <- if (is.null(suffix)) "" else paste0("-", suffix)
+  if (!is.null(path)) paste0(path, "/", object@simName, i, suffix, ".csv") else NULL
 }
 
 needs_recompute <- function(filename, overwrite) {
-  if(is.null(filename)) return(TRUE) # path = NULL
-  if(!file.exists(filename)) return(TRUE) # always compute if it doesn't exist 
+  if (is.null(filename)) return(TRUE) # path = NULL
+  if (!file.exists(filename)) return(TRUE) # always compute if it doesn't exist 
   else return(overwrite)
 }
 

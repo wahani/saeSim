@@ -1,3 +1,7 @@
+Version 0.7.5
+- The function 'sim' now has an additional argument, suffix, to provide an
+optional suffix for file names.
+
 Version 0.7.4
 - The function 'sim_gen_cont' now allows to select specific areas for
 contamination.
