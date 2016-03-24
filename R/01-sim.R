@@ -68,7 +68,7 @@ make_sim_filename <- function(i, object, path, suffix) {
 
 needs_recompute <- function(filename, overwrite) {
   if (is.null(filename)) return(TRUE) # path = NULL
-  if (!file.exists(filename)) return(TRUE) # always compute if it doesn't exist 
+  if (!file.exists(filename)) return(file.create(filename)) # always compute if it doesn't exist 
   else return(overwrite)
 }
 
