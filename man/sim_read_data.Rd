@@ -11,7 +11,9 @@ sim_read_data(path, ..., returnList = FALSE)
 
 \item{...}{arguments passed to \code{\link{read.csv}}}
 
-\item{returnList}{if \code{TRUE} a list containing the data.frames. Very much like the output of sim. If \code{FALSE} a single data.frame is returned, using \code{\link[dplyr]{rbind_all}}}
+\item{returnList}{if \code{TRUE} a list containing the data.frames. Very much
+like the output of sim. If \code{FALSE} a single data.frame is returned,
+using \code{\link[dplyr]{rbind_all}}}
 }
 \description{
 Use this function after saving the results of a simulation in a directory.
