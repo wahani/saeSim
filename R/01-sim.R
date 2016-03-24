@@ -1,21 +1,34 @@
 #' Start simulation
 #' 
-#' This function will start the simulation. Use the printing method as long as you are testing the scenario.
+#' This function will start the simulation. Use the printing method as long as
+#' you are testing the scenario.
 #' 
 #' @param x a \code{sim_setup}
 #' @param R number of repetitions.
-#' @param path optional path in which the simulation results can be saved. They will we coerced to a \code{data.frame} and then saved as 'csv'.
-#' @param overwrite \code{TRUE}/\code{FALSE}. If \code{TRUE} files in \code{path} are replaced. If \code{FALSE} files in \code{path} are not replaced and simulation will not be recomputed.
+#' @param path optional path in which the simulation results can be saved. They
+#'   will we coerced to a \code{data.frame} and then saved as 'csv'.
+#' @param overwrite \code{TRUE}/\code{FALSE}. If \code{TRUE} files in
+#'   \code{path} are replaced. If \code{FALSE} files in \code{path} are not
+#'   replaced and simulation will not be recomputed.
 #' @param ... arguments passed to \code{\link{parallelStart}}.
-#' @param libs arguments passed to \code{\link{parallelLibrary}}. Will be used in a call to \code{\link{do.call}} after coersion with \code{\link{as.list}}.
-#' @param exports arguments passed to \code{\link{parallelExport}}. Will be used in a call to \code{\link{do.call}} after coersion with \code{\link{as.list}}.
+#' @param libs arguments passed to \code{\link{parallelLibrary}}. Will be used
+#'   in a call to \code{\link{do.call}} after coersion with
+#'   \code{\link{as.list}}.
+#' @param exports arguments passed to \code{\link{parallelExport}}. Will be used
+#'   in a call to \code{\link{do.call}} after coersion with
+#'   \code{\link{as.list}}.
 #' @param suffix an optional suffix of file names.
 #' 
 #' @details The package parallelMap is utilized as back-end for parallel computations.
 #' 
-#' Use the argument \code{path} to store the simulation results in a directory. This may be a good idea for long running simulations and for those using large \code{data.frame}s. You can use \code{\link{sim_read_data}} to read them in. The return value will change to NULL in each run.
+#' Use the argument \code{path} to store the simulation results in a directory.
+#' This may be a good idea for long running simulations and for those using
+#' large \code{data.frame}s. You can use \code{\link{sim_read_data}} to read
+#' them in. The return value will change to NULL in each run.
 #'  
-#' @return The return value is a list. The elements are the results of each simulation run, typically of class \code{data.frame}. In case you specified \code{path}, each element is \code{NULL}. 
+#' @return The return value is a list. The elements are the results of each
+#'   simulation run, typically of class \code{data.frame}. In case you specified
+#'   \code{path}, each element is \code{NULL}.
 #' 
 #' @rdname sim
 #' @export
