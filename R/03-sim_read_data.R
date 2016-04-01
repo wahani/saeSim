@@ -47,7 +47,9 @@ sim_read_list <- function(path) {
 }
 
 file_reader_rdata <- function(filename) {
-  res <- NULL # res should be the element in each rdata object
-  load(file = filename, envir = environment())
+  res <- NULL
+  try({
+    load(file = filename, envir = environment())
+  })
   res
 }
