@@ -2,6 +2,7 @@
 % Please edit documentation in R/03-sim_read_data.R
 \name{sim_read_data}
 \alias{sim_clear_data}
+\alias{sim_clear_list}
 \alias{sim_read_data}
 \alias{sim_read_list}
 \title{Read in simulated data}
@@ -11,6 +12,8 @@ sim_read_data(path, ..., returnList = FALSE)
 sim_clear_data(path, ...)
 
 sim_read_list(path)
+
+sim_clear_list(path)
 }
 \arguments{
 \item{path}{path to the files you want to read in.}
