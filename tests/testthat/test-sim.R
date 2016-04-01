@@ -38,3 +38,22 @@ test_that("Method for sim_setup", {
   expect_that(all(rbind_all(datList)$simName == "test"), is_true())
   
 })
+
+test_that("Save incremental files", {
+  
+  tmp <- tempdir()
+  sim_base_lm() %>%
+    sim(R = 2, path = tmp)
+  
+  expect_equal(nrow(sim_read_data(tmp)), 20000)
+  expect_equal(ncol(sim_read_data(tmp)), 7)
+  
+  sim_base_lm() %>%
+    sim_agg(function(dat) list(dat = dat, el = 1)) %>%
+    sim(R = 2, path = tmp, fileExt = ".RData")
+  
+  expect_equal(nrow(sim_read_list(tmp)[[1]]$dat), 10000)
+  expect_equal(ncol(sim_read_list(tmp)[[1]]$dat), 5)
+  expect_equal(length(sim_read_list(tmp)[[1]]), 4)
+  expect_equal(length(sim_read_list(tmp)), 2)
+})

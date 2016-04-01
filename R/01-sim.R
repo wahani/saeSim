@@ -18,6 +18,8 @@
 #'   in a call to \code{\link{do.call}} after coersion with
 #'   \code{\link{as.list}}.
 #' @param suffix an optional suffix of file names.
+#' @param fileExt the file extension. Default is ".csv" - alternative it can be
+#'   ".RData".
 #' 
 #' @details The package parallelMap is utilized as back-end for parallel computations.
 #' 
@@ -25,7 +27,7 @@
 #' This may be a good idea for long running simulations and for those using
 #' large \code{data.frame}s. You can use \code{\link{sim_read_data}} to read
 #' them in. The return value will change to NULL in each run.
-#'  
+#'
 #' @return The return value is a list. The elements are the results of each
 #'   simulation run, typically of class \code{data.frame}. In case you specified
 #'   \code{path}, each element is \code{NULL}.
@@ -50,33 +52,33 @@
 #'       exports = "localFun")
 #' 
 #' str(res)
-sim <- function(x, R = 1, path = NULL, overwrite = TRUE, ..., suffix = NULL, libs = NULL, exports = NULL) {
+sim <- function(x, R = 1, path = NULL, overwrite = TRUE, ..., suffix = NULL, fileExt = ".csv", libs = NULL, exports = NULL) {
   
   parallelStart(...)
   do.call(parallelLibrary, as.list(libs))
   do.call(parallelExport, as.list(exports))
   res <- parallelLapply(
     1:R, map_fun, object = x, 
-    path = path, overwrite = overwrite, suffix = suffix
+    path = path, overwrite = overwrite, suffix = suffix, fileExt = fileExt
   )
   parallelStop()
   res
   
 }
 
-map_fun <- function(i, object, path, overwrite, suffix) {
-  filename <- make_sim_filename(i, object, path, suffix)
-  df <- if (needs_recompute(filename, overwrite)) {
+map_fun <- function(i, object, path, overwrite, suffix, fileExt) {
+  filename <- make_sim_filename(i, object, path, suffix, fileExt)
+  res <- if (needs_recompute(filename, overwrite)) {
     sim_run_it(object, i)
   } else {
     NULL
   }
-  sim_write_results(df, path, filename)
+  sim_write_results(res, path, filename, fileExt)
 }
 
-make_sim_filename <- function(i, object, path, suffix) {
+make_sim_filename <- function(i, object, path, suffix, fileExt) {
   suffix <- if (is.null(suffix)) "" else paste0("-", suffix)
-  if (!is.null(path)) paste0(path, "/", object@simName, i, suffix, ".csv") else NULL
+  if (!is.null(path)) paste0(path, "/", object@simName, i, suffix, fileExt) else NULL
 }
 
 needs_recompute <- function(filename, overwrite) {
@@ -86,23 +88,29 @@ needs_recompute <- function(filename, overwrite) {
 }
 
 sim_run_it <- function(object, i) {
-  df <- sim_run_once(object)
-  df$idR <- i
-  df$simName <- object@simName
-  df
+  res <- sim_run_once(object)
+  res$idR <- i
+  res$simName <- object@simName
+  res
 }
 
 sim_run_once <- function(x) {
   Reduce(function(x, f) f(x), x, x@base)
 }
 
-sim_write_results <- function(df, path, filename) {
-  if (!is.null(path) && !is.null(df)) {
-    df <- as.data.frame(df)
-    write.csv(df, file = filename, row.names = FALSE)
+sim_write_results <- function(res, path, filename, fileExt) {
+  if (!is.null(path) && !is.null(res)) {
+    if (identical(fileExt, ".csv")) {
+      res <- as.data.frame(res)
+      write.csv(res, file = filename, row.names = FALSE)
+    } else if (identical(fileExt, ".RData")) {
+      save(list = "res", file = filename)
+    } else {
+      stop("Unknown file extension for this result.")
+    }
     NULL
   } else {
-    df
+    res
   }
 }
 

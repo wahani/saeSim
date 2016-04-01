@@ -1,6 +1,6 @@
 #' Read in simulated data
 #' 
-#' Use this function after saving the results of a simulation in a directory.
+#' Functions to read in simulation data from folder. Can be csv or RData files.
 #' 
 #' @param path path to the files you want to read in.
 #' @param ... arguments passed to \code{\link{read.csv}}
@@ -36,4 +36,18 @@ file_reader <- function(file, ...) {
 lapply_remove_null <- function(l, f, ...) {
   outList <- lapply(l, f, ...)
   outList[!sapply(outList, is.null)]
+}
+
+#' @rdname read_data
+#' @export
+sim_read_list <- function(path) {
+  # this fun reads all RData files and returns its results.
+  filesToLoad <- dir(path = path, pattern = "*.RData$", full.names = TRUE)
+  lapply_remove_null(filesToLoad, file_reader_rdata)
+}
+
+file_reader_rdata <- function(filename) {
+  res <- NULL # res should be the element in each rdata object
+  load(file = filename, envir = environment())
+  res
 }

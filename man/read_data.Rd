@@ -3,11 +3,14 @@
 \name{sim_read_data}
 \alias{sim_clear_data}
 \alias{sim_read_data}
+\alias{sim_read_list}
 \title{Read in simulated data}
 \usage{
 sim_read_data(path, ..., returnList = FALSE)
 
 sim_clear_data(path, ...)
+
+sim_read_list(path)
 }
 \arguments{
 \item{path}{path to the files you want to read in.}
@@ -19,6 +22,6 @@ like the output of sim. If \code{FALSE} a single data.frame is returned,
 using \code{\link[dplyr]{rbind_all}}}
 }
 \description{
-Use this function after saving the results of a simulation in a directory.
+Functions to read in simulation data from folder. Can be csv or RData files.
 }
 
