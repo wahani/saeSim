@@ -53,3 +53,12 @@ file_reader_rdata <- function(filename) {
   })
   res
 }
+
+#' @rdname read_data
+#' @export
+sim_clear_list <- function(path) {
+  # To remove non readable files from folder
+  filesToLoad <- dir(path = path, pattern = "*.RData$", full.names = TRUE)
+  dataList <- lapply(filesToLoad, file_reader_rdata)
+  file.remove(filesToLoad[sapply(dataList, is.null)])
+}
