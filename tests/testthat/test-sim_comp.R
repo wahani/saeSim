@@ -12,7 +12,7 @@ test_that("sim_comp and comp_var", {
   dat <- setup %>% 
     sim_comp_popMean() %>% sim_comp_popVar %>% sim_comp_N() %>%
     sim_comp_n() %>% 
-    as.data.frame
+    saeSim:::sim_run_once()
   
   calc_lm <- function(dat) {
     linearModel <- lm(y ~ x, data = dat)
@@ -22,6 +22,7 @@ test_that("sim_comp and comp_var", {
   
   dat1 <- sim(setup %>% sim_agg() %>% sim_comp_agg(calc_lm))[[1]]
   
+  expect_equal(class(dat), "data.frame")
   expect_equal(nrow(dat), 25)
   expect_that(all(c("popMean", "popVar", "N", "n") %in% names(dat)), is_true())
   expect_equal(unique(dat$n), 5)

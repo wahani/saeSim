@@ -29,7 +29,7 @@ apply_by <- function(by, fun) {
   retFun <- function(dat) {
     stopifnot(all(by %in% names(dat)))
     out <- split(dat, dat[by]) %>% lapply(fun) %>% rbind_all
-    out
+    as.data.frame(out)
   }
   preserve_attributes(retFun)
 }
@@ -41,7 +41,7 @@ mapply_by <- function(by, funs) {
   retFun <- function(dat) {
     stopifnot(all(by %in% names(dat)))
     out <- mapply(function(dat, fun) fun(dat), dat = split(dat, dat[by]), fun = funs, SIMPLIFY = FALSE) %>% rbind_all
-    out
+    as.data.frame(out)
   }
   preserve_attributes(retFun)
 }
