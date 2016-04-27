@@ -7,4 +7,7 @@
 #' @importFrom MASS mvrnorm
 #' @importFrom spdep cell2nb nb2mat
 #' @importFrom graphics plot
+#' @importFrom stats as.formula model.matrix rbinom rnorm
+#' @importFrom utils read.csv write.csv
+#' @importFrom grDevices blues9 colorRampPalette
 NULL
