@@ -26,13 +26,9 @@ install.packages("saeSim")
 
 
 ```
-## Version on CRAN: 0.7.0 
-## Development Version: 0.7.1 
+## Version on CRAN: 0.8.0 
+## Development Version: 0.8.0 
 ## 
 ## Updates in package NEWS-file since last release to CRAN:
-## 
-## Changes in version 0.7.1:
-## 
-##     o   Updated vignette
 ```
 
