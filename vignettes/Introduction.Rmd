@@ -14,7 +14,11 @@ set.seed(1)
 
 `saeSim` provides tools for simulation studies in the context of small area
 estimation. It can be useful for simulation studies in the field of statistics
-in general if you do not get scared away by the domain specific jargon.
+in general if you do not get scared away by the domain specific jargon. Two
+external resources may be of interest in addition to this vignette:
+
+   - [A poster describung the package](https://github.com/wahani/posterUseR2015/blob/master/poster.pdf)
+   - [The article introducing the package](http://dx.doi.org/10.17713/ajs.v45i1.89)
 
 ## An initial Example
 
@@ -60,7 +64,13 @@ simData
 
 ## Naming and structure
 
-Components in a simulation setup should be added using the pipe operator `%>%` from magrittr. A component defines 'when' a specific function will be applied in a chain of functions. To add a component you can use one of: `sim_gen`, `sim_resp`, `sim_comp_pop`, `sim_sample`, `sim_comp_sample`, `sim_agg` and `sim_comp_agg`. They all expect a simulation setup as first argument and a function as second and will take care of the order in which the functions are called. The reason for this is the following:
+Components in a simulation setup should be added using the pipe operator `%>%`
+from magrittr. A component defines 'when' a specific function will be applied in
+a chain of functions. To add a component you can use one of: `sim_gen`,
+`sim_resp`, `sim_comp_pop`, `sim_sample`, `sim_comp_sample`, `sim_agg` and
+`sim_comp_agg`. They all expect a simulation setup as first argument and a
+function as second and will take care of the order in which the functions are
+called. The reason for this is the following:
 
 ```{r, eval=FALSE}
 setup <- sim_base() %>% 
@@ -84,27 +94,7 @@ phase will start with the corresponding prefix, i.e. if you set the sampling
 scheme you use `sim_sample` -- all functions to control sampling have the prefix
 `sample`.
 
-```{r echo=FALSE, dpi=100}
-# This is too large in terms of MB for a vignette inside a package.
-# library(DiagrammeR)
-# grViz("
-# digraph boxes_and_circles {
-# node [shape = box]
-# sim_base
-# sim_gen
-# sim_sample
-# sim_comp_sample
-# sim_agg
-# 
-# sim_base -> sim_gen [label = '       add variables to data in sim_base']; 
-# sim_gen -> sim_sample [label = '    draw a sample'];
-# sim_sample -> sim_comp_sample [label = '      make predictions']; 
-# sim_comp_sample -> sim_agg [label = '     aggregate your data'];
-# 
-# }
-# ")
-```
-
+  
 ## Exploring the setup
 
 You will want to check your results regularly when working with `sim_setup`
@@ -190,7 +180,8 @@ base_id(3, 4) %>%
 
 ## sim_comp
 
-Here follow some examples how to add components for computation to a `sim_setup`. Three points can be accessed with 
+Here follow some examples how to add components for computation to a
+`sim_setup`. Three points can be accessed with
 
 - `sim_comp_pop` - add a computation before sampling
 - `sim_comp_sample` - add a computation after sampling
