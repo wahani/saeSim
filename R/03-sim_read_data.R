@@ -6,7 +6,7 @@
 #' @param ... arguments passed to \code{\link{read.csv}}
 #' @param returnList if \code{TRUE} a list containing the data.frames. Very much
 #'   like the output of sim. If \code{FALSE} a single data.frame is returned,
-#'   using \code{\link[dplyr]{rbind_all}}
+#'   using \code{\link[dplyr]{bind_rows}}
 #' 
 #' @rdname read_data
 #' @export

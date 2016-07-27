@@ -1,3 +1,6 @@
+Version 0.8.1
+- Fix for warning while using rbind_all. Now use bind_rows instead.
+
 Version 0.8.0
 - CRAN release
 

@@ -56,5 +56,5 @@ base_add_id <- function(data, domainId) {
   dataList <- split(data, data[domainId])
   nUnits <- sapply(dataList, nrow)
   nDomains <- length(nUnits)
-  cbind(base_id(nDomains, nUnits), rbind_all(dataList))
+  cbind(base_id(nDomains, nUnits), bind_rows(dataList))
 }

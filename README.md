@@ -9,7 +9,10 @@ Tools for the simulation of data in the context of small area estimation. Combin
 
 ## Installation
 
-The package is actively developed. Please report bugs, troubles and discussion as [issue on GitHub](https://github.com/wahani/saeSim/issues). You can install the latest version from the [repository on GitHub](https://www.github.com/wahani/saeSim):
+The package is actively developed. Please report bugs, troubles and discussion
+as [issue on GitHub](https://github.com/wahani/saeSim/issues). You can install
+the latest version from the [repository on
+GitHub](https://www.github.com/wahani/saeSim):
 
 
 ```r
@@ -24,11 +27,4 @@ or from CRAN:
 install.packages("saeSim")
 ```
 
-
-```
-## Version on CRAN: 0.8.0 
-## Development Version: 0.8.0 
-## 
-## Updates in package NEWS-file since last release to CRAN:
-```
 

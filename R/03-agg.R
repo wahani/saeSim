@@ -39,7 +39,7 @@ agg_all <- function(groupVars = "idD") {
              dfOut
            })
     # combine:
-    out <- rbind_all(datList) %>% as.data.frame
+    out <- bind_rows(datList) %>% as.data.frame
     out
   }
   preserve_attributes(aggFun)

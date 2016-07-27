@@ -5,7 +5,7 @@ select_cont <- function(dat, nCont, type, areaVar, fixed) {
   } else {
     makeObsArea(nCont, sapply(datList, nrow), fixed)
   }
-  mapply(selectObsFromData, datList, obs, fixed, SIMPLIFY = FALSE) %>% rbind_all
+  mapply(selectObsFromData, datList, obs, fixed, SIMPLIFY = FALSE) %>% bind_rows
 }
 
 makeDataList <- function(dat, areaVar) {

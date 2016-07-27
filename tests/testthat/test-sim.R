@@ -34,8 +34,8 @@ test_that("Method for sim_setup", {
   datList <- sim(setup %>% sim_simName("test"), R = 500)
   
   expect_equal(length(datList), (500))
-  expect_equal(max(rbind_all(datList)$idR), (500))
-  expect_that(all(rbind_all(datList)$simName == "test"), is_true())
+  expect_equal(max(bind_rows(datList)$idR), (500))
+  expect_that(all(bind_rows(datList)$simName == "test"), is_true())
   
 })
 

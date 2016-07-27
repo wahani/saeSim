@@ -22,7 +22,7 @@ sim_clear_list(path)
 
 \item{returnList}{if \code{TRUE} a list containing the data.frames. Very much
 like the output of sim. If \code{FALSE} a single data.frame is returned,
-using \code{\link[dplyr]{rbind_all}}}
+using \code{\link[dplyr]{bind_rows}}}
 }
 \description{
 Functions to read in simulation data from folder. Can be csv or RData files.
