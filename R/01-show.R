@@ -13,8 +13,6 @@ setMethod("show", "sim_setup", function(object) {
   run <- sim_run_once(object)
   if (inherits(run, "data.frame")) {
     dat <- as.data.frame(run)
-    cat("data.frame ", dim_desc(dat), "\n", sep = "")
-    cat("\n")
     print(trunc_mat(dat, n = 6, width = NULL))
     invisible(dat)
   } else if (isS4(run)) {
