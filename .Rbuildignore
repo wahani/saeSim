@@ -7,3 +7,4 @@
 ^\.travis\.yml$
 ^cran-comments\.md$
 ^prepareRepo\.R$
+^_config\.yml$
