@@ -27,4 +27,3 @@ This function constructs a data frame with grouping/\code{id} variables.
 base_id(2, 2)
 base_id(2, c(2, 3))
 }
-

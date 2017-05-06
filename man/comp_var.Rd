@@ -18,4 +18,3 @@ sim_base_lm() \%>\% sim_comp_pop(comp_var(yExp = exp(y)))
 \seealso{
 \code{\link{sim_comp_pop}}, \code{\link{sim_comp_sample}}, \code{\link{sim_comp_agg}}
 }
-

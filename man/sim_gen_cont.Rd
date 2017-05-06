@@ -36,4 +36,3 @@ sim_base_lm() \%>\%
 \seealso{
 \code{\link{sim_gen}}
 }
-

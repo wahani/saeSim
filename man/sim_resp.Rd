@@ -15,7 +15,13 @@ sim_resp_eq(simSetup, ...)
 \item{respFun}{a function constructing the response variable}
 
 \item{...}{Name-value pairs of expressions. Use \code{NULL} to drop
-a variable.}
+a variable.
+
+These arguments are automatically \link[rlang:quo]{quoted} and
+\link[rlang:eval_tidy]{evaluated} in the context of the data
+frame. They support \link[rlang:quasiquotation]{unquoting} and
+splicing. See \code{vignette("programming")} for an introduction to
+these concepts.}
 }
 \description{
 One of the components which can be added to a \code{sim_setup}.
@@ -29,4 +35,3 @@ base_id() \%>\% sim_gen_x() \%>\% sim_gen_e() \%>\% sim_resp_eq(y = 100 + 2 * x 
 \seealso{
 \code{\link{agg_all}}, \code{\link{sim_gen}}, \code{\link{sim_comp_pop}}, \code{\link{sim_sample}}, , \code{\link{sim_comp_sample}}
 }
-

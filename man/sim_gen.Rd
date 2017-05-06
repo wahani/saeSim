@@ -42,4 +42,3 @@ sim_base() \%>\% sim_gen_generic(rchisq, df = 5, groupVars = "idD", name = "re")
 \seealso{
 \code{\link{gen_norm}}, \code{\link{gen_v_norm}}, \code{\link{gen_v_sar}}, \code{\link{sim_agg}}, , \code{\link{sim_comp_pop}}, \code{\link{sim_sample}}, \code{\link{sim_gen_x}}, \code{\link{sim_gen_e}}, \code{\link{sim_gen_v}}, \code{\link{sim_gen_vc}}, \code{\link{sim_gen_ec}}
 }
-

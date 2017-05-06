@@ -19,4 +19,3 @@ This is the documentation for the show methods in the package \code{saeSim}. In 
 \details{
 Will print the head of a \code{sim_setup} to the console, after converting it to a \code{data.frame}.
 }
-

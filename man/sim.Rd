@@ -70,4 +70,3 @@ res <- sim_base_lm() \%>\%
 
 str(res)
 }
-

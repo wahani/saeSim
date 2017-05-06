@@ -18,4 +18,3 @@ Reports a summary of the simulation setup.
 \examples{
 summary(sim_base_lm())
 }
-

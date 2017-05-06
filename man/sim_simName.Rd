@@ -17,4 +17,3 @@ Use this function to add a name to a \code{sim_setup} in case you are simulating
 \examples{
 sim_base_lm() \%>\% sim_simName("newName")
 }
-

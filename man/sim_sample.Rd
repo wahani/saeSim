@@ -34,4 +34,3 @@ sim_base_lm() \%>\% sim_sample(sample_mySampleFun)
 \seealso{
 \code{\link{sample_number}}, \code{\link{sample_fraction}}
 }
-

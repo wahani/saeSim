@@ -30,4 +30,3 @@ sim_base_lm() \%>\% sim_agg(function(dat) dat[1, ])
 \seealso{
 \code{\link{agg_all}}, \code{\link{sim_gen}}, \code{\link{sim_comp_pop}}, \code{\link{sim_sample}}, , \code{\link{sim_comp_sample}}
 }
-

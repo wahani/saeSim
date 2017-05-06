@@ -14,4 +14,3 @@ lhs \%>\% rhs
 \description{
 This is the 'pipe operator' from the package 'magrittr'. Use it to chain all operations for the simulation together. See the original documentation for details: \link[magrittr]{\%>\%}.
 }
-

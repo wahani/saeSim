@@ -21,4 +21,3 @@ sim_base() \%>\% sim_gen_x() \%>\% sim_gen_e() \%>\% sim_agg(agg_all())
 \seealso{
 \code{\link{sim_agg}}
 }
-

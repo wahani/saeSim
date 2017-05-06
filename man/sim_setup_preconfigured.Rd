@@ -2,8 +2,8 @@
 % Please edit documentation in R/03-sim_base.R
 \name{sim_base_lm}
 \alias{sim_base_lm}
-\alias{sim_base_lmc}
 \alias{sim_base_lmm}
+\alias{sim_base_lmc}
 \alias{sim_base_lmmc}
 \title{Preconfigured set-ups}
 \usage{
@@ -38,4 +38,3 @@ sim_base_lmm()
 sim_base_lmc()
 sim_base_lmmc()
 }
-

@@ -19,4 +19,3 @@ Use this function to produce plots for an object of class \code{sim_setup}.
 \seealso{
 \code{\link[saeSim]{autoplot}}
 }
-

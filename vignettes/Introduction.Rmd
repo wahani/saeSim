@@ -8,14 +8,15 @@ vignette: >
   %\usepackage[utf8]{inputenc}
 ---
 
+```{r, results='asis', echo=FALSE}
+cat(gsub("\\n   ", "", packageDescription("saeSim", fields = "Description")))
+```
+
 ```{r, echo=FALSE}
 set.seed(1)
 ```
 
-`saeSim` provides tools for simulation studies in the context of small area
-estimation. It can be useful for simulation studies in the field of statistics
-in general if you do not get scared away by the domain specific jargon. Two
-external resources may be of interest in addition to this vignette:
+Two external resources may be of interest in addition to this vignette:
 
    - [A poster describung the package](https://github.com/wahani/posterUseR2015/blob/master/poster.pdf)
    - [The article introducing the package](http://dx.doi.org/10.17713/ajs.v45i1.89)
@@ -109,6 +110,9 @@ printed to the console if you evaluate a simulation setup. `show` will print the
 
 ```{r}
 setup <- sim_base_lmm()
+```
+
+```{r eval = FALSE}
 plot(setup)
 autoplot(setup)
 autoplot(setup, "e")

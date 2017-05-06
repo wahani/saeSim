@@ -1,11 +1,16 @@
 devtools::document()
 devtools::build_vignettes()
-devtools::build()
-knitr::knit("README.Rmd", "README.md")
 
-# devtools::install_github("hadley/staticdocs")
-staticdocs::build_site()
-system('git push origin --delete gh-pages')
-system('git add -f inst/web && git commit -m "gh-pages subtree commit"')
-system('git subtree push --prefix inst/web origin gh-pages')
-system('git reset --hard HEAD~1')
+knitr::knit("vignettes/Introduction.Rmd", "README.md")
+
+batches <- c(
+  "[![Build Status](https://travis-ci.org/wahani/saeSim.png?branch=master)](https://travis-ci.org/wahani/saeSim)",
+  "[![CRAN Version](http://www.r-pkg.org/badges/version/saeSim)](http://cran.rstudio.com/web/packages/saeSim)",
+  "![](http://cranlogs.r-pkg.org/badges/saeSim)",
+  "[![codecov.io](https://codecov.io/github/wahani/saeSim/coverage.svg?branch=master)](https://codecov.io/github/wahani/saeSim?branch=master)",
+  ""
+)
+
+readme <- readLines("README.md")
+readme <- c(batches, readme[-(1:10)])
+writeLines(readme, "README.md")

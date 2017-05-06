@@ -19,4 +19,3 @@
 \description{
 Use this method to get a single simulated data.frame out of a sim_setup object.
 }
-
