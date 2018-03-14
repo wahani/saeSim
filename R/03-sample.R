@@ -24,9 +24,11 @@ sample_fraction <- function(size, replace = FALSE, weight = NULL, groupVars = NU
     if(is.null(groupVars)) {
       dat %>% sample_frac(size = size, replace = replace, weight = weight)
     } else {
-      attributesToKeep <- attributes(dat)[!(names(attributes(dat)) %in% names(attributes(data.frame())))]
-      dat <- group_by_(dat, groupVars) %>% 
-        sample_frac(size = size, replace = replace, weight = weight) %>% as.data.frame
+      attributesToKeep <- attributes(dat)[
+        !(names(attributes(dat)) %in% names(attributes(data.frame())))]
+      dat <- group_by_(dat, groupVars) %>%
+        sample_frac(size = size, replace = replace, weight = !!weight) %>%
+        as.data.frame
       attributes(dat) <- c(attributes(dat), attributesToKeep)
       dat
     }
@@ -39,12 +41,13 @@ sample_number <- function(size, replace = FALSE, weight = NULL, groupVars = NULL
   force(size); force(replace); force(weight); force(groupVars)
   function(dat) {
     if(is.null(groupVars)) {
-      dat %>% sample_n(size = size, replace = replace, weight = weight)
+      dat %>% sample_n(size = size, replace = replace, weight = !!weight)
     } else {
-      attributesToKeep <- attributes(dat)[!(names(attributes(dat)) %in% names(attributes(data.frame())))]
-      dat <- group_by_(dat, groupVars) %>% 
-        sample_n(size = size, replace = replace, weight = weight) %>% as.data.frame
-      
+      attributesToKeep <- attributes(dat)[
+        !(names(attributes(dat)) %in% names(attributes(data.frame())))]
+      dat <- group_by_(dat, groupVars) %>%
+        sample_n(size = size, replace = replace, weight = !!weight) %>%
+          as.data.frame
       attributes(dat) <- c(attributes(dat), attributesToKeep)
       dat
     }
@@ -62,7 +65,7 @@ sample_numbers <- function(size, replace = FALSE, groupVars = NULL) {
 sample_cluster_number <- function(size, replace = FALSE, weight = NULL, groupVars) {
   force(size); force(replace); force(weight); force(groupVars)
   sample_fun <- function(dat) {
-    selectedGroups <- dat[groupVars] %>% unique %>% 
+    selectedGroups <- dat[groupVars] %>% unique %>%
       sample_n(size = size, replace = replace, weight = weight) %>%
       as.data.frame
     left_join(selectedGroups, dat, by = groupVars)
@@ -75,8 +78,8 @@ sample_cluster_number <- function(size, replace = FALSE, weight = NULL, groupVar
 sample_cluster_fraction <- function(size, replace = FALSE, weight = NULL, groupVars) {
   force(size); force(replace); force(weight); force(groupVars)
   sample_fun <- function(dat) {
-    selectedGroups <- dat[groupVars] %>% unique %>% 
-      sample_frac(size = size, replace = replace, weight = weight) %>%
+    selectedGroups <- dat[groupVars] %>% unique %>%
+      sample_frac(size = size, replace = replace, weight = !!weight) %>%
       as.data.frame
     left_join(selectedGroups, dat, by = groupVars)
   }

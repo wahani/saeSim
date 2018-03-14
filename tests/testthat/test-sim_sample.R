@@ -2,15 +2,33 @@ context("sim_sample")
 test_that("Attributes are preserved", {
   setup <- sim_base(base_id(nDomains=3, nUnits = 4)) %>%
     sim_gen_x(mean=50, sd=20, name = "x") %>%
-    sim_gen_e(0, 1, name = "e") %>% 
+    sim_gen_e(0, 1, name = "e") %>%
     sim_comp_pop(function(dat) {attr(dat, "x") <- 2; dat})
-  
-  setup %>% sim_sample(sample_number(2)) %>% as.data.frame %>% attr("x") %>% expect_equal(2)
-  setup %>% sim_sample(sample_fraction(0.2)) %>% as.data.frame %>% attr("x") %>% expect_equal(2)
-  
-  setup %>% sim_sample(sample_number(2, groupVars = "idD")) %>% as.data.frame %>% attr("x") %>% expect_equal(2)
-  setup %>% sim_sample(sample_fraction(0.2, groupVars = "idD")) %>% as.data.frame %>% attr("x") %>% expect_equal(2)
-  
+
+  setup %>%
+    sim_sample(sample_number(2)) %>%
+    as.data.frame %>%
+    attr("x") %>%
+    expect_equal(2)
+
+  setup %>%
+    sim_sample(sample_fraction(0.2)) %>%
+    as.data.frame %>%
+    attr("x") %>%
+    expect_equal(2)
+
+  setup %>%
+    sim_sample(sample_number(2, groupVars = "idD")) %>%
+    as.data.frame %>%
+    attr("x") %>%
+    expect_equal(2)
+
+  setup %>%
+    sim_sample(sample_fraction(0.2, groupVars = "idD")) %>%
+    as.data.frame %>%
+    attr("x") %>%
+    expect_equal(2)
+
 })
 
 test_that("Basic sampling functionality", {

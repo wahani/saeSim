@@ -2,11 +2,11 @@ mutate_wrapper <- function(...) {
   mc <- match.call(expand.dots = TRUE)
   mc[[1L]] <- quote(mutate)
   mc[[length(mc) + 1]] <- quote(dat)
-  
+
   retFun <- function(dat) {
     eval(mc) %>% as.data.frame
   }
-  
+
   preserve_attributes(retFun)
 }
 
