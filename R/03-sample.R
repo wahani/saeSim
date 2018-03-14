@@ -1,18 +1,21 @@
 #' Sampling functions
-#' 
-#' These functions are intended to be used with \code{\link{sim_sample}} and not interactively. They are wrappers around \link[dplyr]{sample_frac} and \link[dplyr]{sample_n}.
-#' 
+#'
+#' These functions are intended to be used with \code{\link{sim_sample}} and not
+#' interactively. They are wrappers around \link[dplyr]{sample_frac} and
+#' \link[dplyr]{sample_n}.
+#'
 #' @param groupVars character with names of variables to be used for grouping.
-#' 
+#'
 #' @inheritParams dplyr::sample_frac
-#' 
+#'
 #' @details \code{sample_numbers} is a vectorized version of \code{sample_number}.
-#' 
-#' \code{sample_cluster_number} and \code{sample_cluster_fraction} will sample clusters (all units in a cluster).
-#' 
+#'
+#' \code{sample_cluster_number} and \code{sample_cluster_fraction} will sample
+#'   clusters (all units in a cluster).
+#'
 #' @rdname sampling
 #' @export
-#' 
+#'
 #' @examples
 #' sim_base_lm() %>% sim_sample(sample_number(5))
 #' sim_base_lm() %>% sim_sample(sample_fraction(0.5))
@@ -22,7 +25,7 @@ sample_fraction <- function(size, replace = FALSE, weight = NULL, groupVars = NU
   force(size); force(replace); force(weight); force(groupVars)
   function(dat) {
     if(is.null(groupVars)) {
-      dat %>% sample_frac(size = size, replace = replace, weight = weight)
+      dat %>% sample_frac(size = size, replace = replace, weight = !!weight)
     } else {
       attributesToKeep <- attributes(dat)[
         !(names(attributes(dat)) %in% names(attributes(data.frame())))]
@@ -66,7 +69,7 @@ sample_cluster_number <- function(size, replace = FALSE, weight = NULL, groupVar
   force(size); force(replace); force(weight); force(groupVars)
   sample_fun <- function(dat) {
     selectedGroups <- dat[groupVars] %>% unique %>%
-      sample_n(size = size, replace = replace, weight = weight) %>%
+      sample_n(size = size, replace = replace, weight = !!weight) %>%
       as.data.frame
     left_join(selectedGroups, dat, by = groupVars)
   }
