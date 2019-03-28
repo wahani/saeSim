@@ -1,0 +1,14 @@
+bibentry(
+  "article",
+  key="Warnholz_Schmid_2016",
+  title="Simulation Tools for Small Area Estimation: Introducing the R-package saeSim",
+  volume=45,
+  url="https://www.ajs.or.at/index.php/ajs/article/view/vol45-1-4",
+  DOI="https://doi.org/10.17713/ajs.v45i1.89",
+  number=1,
+  journal="Austrian Journal of Statistics",
+  author=c(person("Sebastian", "Warnholz"), person("Timo", "Schmid")),
+  year=2016,
+  month="Feb.",
+  pages="55-69"
+)
