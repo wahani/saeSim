@@ -34,4 +34,5 @@ Description: Tools for the simulation of data in the context of small area
 Roxygen: list(wrap = FALSE)
 License: MIT + file LICENSE
 VignetteBuilder: knitr
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
+Encoding: UTF-8

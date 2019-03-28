@@ -4,7 +4,8 @@
 \alias{sim_sample}
 \title{Sampling component}
 \usage{
-sim_sample(simSetup, smplFun = sample_number(size = 5L, groupVars = "idD"))
+sim_sample(simSetup, smplFun = sample_number(size = 5L, groupVars =
+  "idD"))
 }
 \arguments{
 \item{simSetup}{a \code{sim_setup}.}

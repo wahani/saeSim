@@ -14,10 +14,14 @@ sim_resp_eq(simSetup, ...)
 
 \item{respFun}{a function constructing the response variable}
 
-\item{...}{Name-value pairs of expressions. Use \code{NULL} to drop
-a variable.
+\item{...}{Name-value pairs of expressions, each with length 1 or the same
+length as the number of rows in the group (if using \code{\link[=group_by]{group_by()}}) or in the entire
+input (if not using groups). The name of each argument will be the name of
+a new variable, and the value will be its corresponding value.  Use a \code{NULL}
+value in \code{mutate} to drop a variable.  New variables overwrite existing variables
+of the same name.
 
-These arguments are automatically \link[rlang:quo]{quoted} and
+The arguments in \code{...} are automatically \link[rlang:quo]{quoted} and
 \link[rlang:eval_tidy]{evaluated} in the context of the data
 frame. They support \link[rlang:quasiquotation]{unquoting} and
 splicing. See \code{vignette("programming")} for an introduction to

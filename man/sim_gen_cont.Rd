@@ -4,7 +4,8 @@
 \alias{sim_gen_cont}
 \title{Generation Component for contamination}
 \usage{
-sim_gen_cont(simSetup, generator, nCont, type, areaVar = NULL, fixed = TRUE)
+sim_gen_cont(simSetup, generator, nCont, type, areaVar = NULL,
+  fixed = TRUE)
 }
 \arguments{
 \item{simSetup}{a \code{sim_setup}.}

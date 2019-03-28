@@ -8,7 +8,8 @@
 \alias{sample_cluster_fraction}
 \title{Sampling functions}
 \usage{
-sample_fraction(size, replace = FALSE, weight = NULL, groupVars = NULL)
+sample_fraction(size, replace = FALSE, weight = NULL,
+  groupVars = NULL)
 
 sample_number(size, replace = FALSE, weight = NULL, groupVars = NULL)
 
@@ -16,7 +17,8 @@ sample_numbers(size, replace = FALSE, groupVars = NULL)
 
 sample_cluster_number(size, replace = FALSE, weight = NULL, groupVars)
 
-sample_cluster_fraction(size, replace = FALSE, weight = NULL, groupVars)
+sample_cluster_fraction(size, replace = FALSE, weight = NULL,
+  groupVars)
 }
 \arguments{
 \item{size}{For \code{sample_n()}, the number of rows to select.
