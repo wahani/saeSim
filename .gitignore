@@ -11,3 +11,5 @@ core
 *.html
 /inst/web*
 inst/doc
+/doc/
+/Meta/

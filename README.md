@@ -1,13 +1,9 @@
-[![Build Status](https://travis-ci.org/wahani/saeSim.png?branch=master)](https://travis-ci.org/wahani/saeSim)
+[![Build Status](https://app.travis-ci.com/wahani/saeSim.svg?branch=master)](https://app.travis-ci.com/wahani/saeSim)
 [![CRAN Version](http://www.r-pkg.org/badges/version/saeSim)](http://cran.rstudio.com/web/packages/saeSim)
 ![](http://cranlogs.r-pkg.org/badges/saeSim)
 [![codecov.io](https://codecov.io/github/wahani/saeSim/coverage.svg?branch=master)](https://codecov.io/github/wahani/saeSim?branch=master)
 
-Tools for the simulation of data in the context of small area
-estimation. Combine all steps of your simulation - from data generation
-over drawing samples to model fitting - in one object. This enables easy
-modification and combination of different scenarios. You can store your
-results in a folder or start the simulation in parallel.
+Tools for the simulation of data in the context of small area estimation. Combine all steps of your simulation - from data generation over drawing samples to model fitting - in one object. This enables easy modification and combination of different scenarios. You can store your results in a folder or start the simulation in parallel.
 
 
 
@@ -25,24 +21,24 @@ part and a model error.
 
 ```r
 library(saeSim)
-setup <- sim_base() %>% 
-  sim_gen_x() %>% 
-  sim_gen_e() %>% 
+setup <- sim_base() %>%
+  sim_gen_x() %>%
+  sim_gen_e() %>%
   sim_gen_v() %>%
-  sim_resp_eq(y = 100 + 2 * x + v + e) %>% 
+  sim_resp_eq(y = 100 + 2 * x + v + e) %>%
   sim_simName("Doku")
 setup
 ```
 
 ```
-## # Description: data.frame [10,000 × 6]
+## # Description: df [10,000 × 6]
 ##     idD   idU      x     e     v     y
-## * <int> <int>  <dbl> <dbl> <dbl> <dbl>
+##   <int> <int>  <dbl> <dbl> <dbl> <dbl>
 ## 1     1     1 -2.51  -3.22 0.235  92.0
 ## 2     1     2  0.735 -4.23 0.235  97.5
 ## 3     1     3 -3.34  -4.14 0.235  89.4
-## 4     1     4  6.38  -4.74 0.235 108. 
-## 5     1     5  1.32  -2.00 0.235 101. 
+## 4     1     4  6.38  -4.74 0.235 108.
+## 5     1     5  1.32  -2.00 0.235 101.
 ## 6     1     6 -3.28  -2.10 0.235  91.6
 ## # … with 9,994 more rows
 ```
@@ -63,13 +59,13 @@ process the data. To start a simulation use the function `sim`. It will return a
 dataList <- sim(setup, R = 10)
 ```
 
-You can coerce a simulation setup to a `data.frame` with `as.data.frame`. 
+You can coerce a simulation setup to a `data.frame` with `as.data.frame`.
 
 
 ```r
-simData <- sim_base() %>% 
-  sim_gen_x() %>% 
-  sim_gen_e() %>% 
+simData <- sim_base() %>%
+  sim_gen_x() %>%
+  sim_gen_e() %>%
   as.data.frame
 simData
 ```
@@ -86,9 +82,9 @@ called. The reason for this is the following:
 
 
 ```r
-setup <- sim_base() %>% 
-  sim_gen_x() %>% 
-  sim_gen_e() %>% 
+setup <- sim_base() %>%
+  sim_gen_x() %>%
+  sim_gen_e() %>%
   sim_resp_eq(y = 100 + 2 * x + e)
 
 setup1 <- setup %>% sim_sample(sample_fraction(0.05))
@@ -107,7 +103,7 @@ phase will start with the corresponding prefix, i.e. if you set the sampling
 scheme you use `sim_sample` -- all functions to control sampling have the prefix
 `sample`.
 
-  
+
 ## Exploring the setup
 
 You will want to check your results regularly when working with `sim_setup`
@@ -141,20 +137,20 @@ more complex you can always define new generator functions.
 
 
 ```r
-base_id(2, 3) %>% 
+base_id(2, 3) %>%
   sim_gen(gen_generic(rnorm, mean = 5, sd = 10, name = "x", groupVars = "idD"))
 ```
 
 ```
-## # Description: data.frame [6 × 3]
-##     idD   idU      x
-##   <int> <int>  <dbl>
-## 1     1     1  -3.48
-## 2     1     2  -3.48
-## 3     1     3  -3.48
-## 4     2     1  13.2 
-## 5     2     2  13.2 
-## 6     2     3  13.2
+## # Description: df [6 × 3]
+##     idD   idU     x
+##   <int> <int> <dbl>
+## 1     1     1 -3.48
+## 2     1     2 -3.48
+## 3     1     3 -3.48
+## 4     2     1 13.2
+## 5     2     2 13.2
+## 6     2     3 13.2
 ```
 
 You can supply any random number generator to `gen_generic` and since we are in
@@ -167,7 +163,7 @@ which will be extended in the future.
 
 ```r
 library(saeSim)
-setup <- sim_base() %>% 
+setup <- sim_base() %>%
   sim_gen_x() %>% # Variable 'x'
   sim_gen_e() %>% # Variable 'e'
   sim_gen_v() %>% # Variable 'v' as a random-effect
@@ -177,15 +173,15 @@ setup
 ```
 
 ```
-## # Description: data.frame [10,000 × 7]
-##     idD   idU     x     e     v     vSp     y
-## * <int> <int> <dbl> <dbl> <dbl>   <dbl> <dbl>
-## 1     1     1 -3.26 -5.80 -1.29 0.00300  89.7
-## 2     1     2  4.26  4.77 -1.29 0.00300 108. 
-## 3     1     3 -3.07  1.02 -1.29 0.00300  96.7
-## 4     1     4  5.21  2.32 -1.29 0.00300 106. 
-## 5     1     5  1.91  8.53 -1.29 0.00300 109. 
-## 6     1     6 -2.66  3.76 -1.29 0.00300  99.8
+## # Description: df [10,000 × 7]
+##     idD   idU     x     e     v   vSp     y
+##   <int> <int> <dbl> <dbl> <dbl> <dbl> <dbl>
+## 1     1     1 -3.26 -5.80 -1.29  1.44  91.1
+## 2     1     2  4.26  4.77 -1.29  1.44 109.
+## 3     1     3 -3.07  1.02 -1.29  1.44  98.1
+## 4     1     4  5.21  2.32 -1.29  1.44 108.
+## 5     1     5  1.91  8.53 -1.29  1.44 111.
+## 6     1     6 -2.66  3.76 -1.29  1.44 101.
 ## # … with 9,994 more rows
 ```
 
@@ -198,7 +194,7 @@ spatially correlated error component you can add the following:
 
 
 ```r
-contSetup <- setup %>% 
+contSetup <- setup %>%
   sim_gen_cont(
     gen_v_sar(sd = 40, name = "vSp"), # defining the model
     nCont = 0.05, # 5 per cent outliers
@@ -218,9 +214,9 @@ play together:
 
 
 ```r
-base_id(3, 4) %>% 
-  sim_gen_x() %>% 
-  sim_gen_e() %>% 
+base_id(3, 4) %>%
+  sim_gen_x() %>%
+  sim_gen_e() %>%
   sim_gen_ec(mean = 0, sd = 150, name = "eCont", nCont = c(1, 2, 3)) %>%
   as.data.frame
 ```
@@ -252,25 +248,25 @@ Here follow some examples how to add components for computation to a
 
 
 ```r
-base_id(2, 3) %>% 
-  sim_gen_x() %>% 
-  sim_gen_e() %>% 
-  sim_gen_ec() %>% 
+base_id(2, 3) %>%
+  sim_gen_x() %>%
+  sim_gen_e() %>%
+  sim_gen_ec() %>%
   sim_resp_eq(y = 100 + x + e) %>%
    # the mean in each domain:
   sim_comp_pop(comp_var(popMean = mean(y)), by = "idD")
 ```
 
 ```
-## # Description: data.frame [6 × 7]
-##     idD   idU       x     e idC       y popMean
-## * <int> <int>   <dbl> <dbl> <lgl> <dbl>   <dbl>
-## 1     1     1   0.575 6.62  FALSE  107.    108.
-## 2     1     2   3.77  0.226 FALSE  104.    108.
-## 3     1     3  12.6   1.07  FALSE  114.    108.
-## 4     2     1   6.64  5.01  FALSE  112.    106.
-## 5     2     2  -0.842 3.41  FALSE  103.    106.
-## 6     2     3   4.50  0.359 FALSE  105.    106.
+## # Description: df [6 × 7]
+##     idD   idU      x     e idC       y popMean
+##   <int> <int>  <dbl> <dbl> <lgl> <dbl>   <dbl>
+## 1     1     1  0.575 6.62  FALSE  107.    108.
+## 2     1     2  3.77  0.226 FALSE  104.    108.
+## 3     1     3 12.6   1.07  FALSE  114.    108.
+## 4     2     1  6.64  5.01  FALSE  112.    106.
+## 5     2     2 -0.842 3.41  FALSE  103.    106.
+## 6     2     3  4.50  0.359 FALSE  105.    106.
 ```
 
 The function `comp_var` is a wrapper around `dplyr::mutate` so you can add
@@ -293,20 +289,26 @@ comp_linearPredictor <- function(dat) {
   dat
 }
 
-sim_base_lm() %>% 
+sim_base_lm() %>%
   sim_comp_pop(comp_linearPredictor)
 ```
 
 ```
-## # Description: data.frame [10,000 × 6]
+## Warning: `mutate_()` was deprecated in dplyr 0.7.0.
+## Please use `mutate()` instead.
+## See vignette('programming') for more help
+```
+
+```
+## # Description: df [10,000 × 6]
 ##     idD   idU      x      e     y linearPredictor
 ##   <int> <int>  <dbl>  <dbl> <dbl>           <dbl>
 ## 1     1     1 -8.50  -0.637  90.9            91.6
 ## 2     1     2 -0.732  3.09  102.             99.3
-## 3     1     3  1.11   6.99  108.            101. 
-## 4     1     4  3.82   4.38  108.            104. 
-## 5     1     5  0.615 -0.191 100.            101. 
-## 6     1     6  0.382 -3.60   96.8           100. 
+## 3     1     3  1.11   6.99  108.            101.
+## 4     1     4  3.82   4.38  108.            104.
+## 5     1     5  0.615 -0.191 100.            101.
+## 6     1     6  0.382 -3.60   96.8           100.
 ## # … with 9,994 more rows
 ```
 
@@ -316,19 +318,19 @@ they will return the modified data of class 'data.frame'.
 
 
 ```r
-sim_base_lm() %>% 
+sim_base_lm() %>%
   sim_comp_pop(function(dat) lm(y ~ x, dat)) %>%
   sim(R = 1)
 ```
 
 ```
 ## [[1]]
-## 
+##
 ## Call:
 ## lm(formula = y ~ x, data = dat)
-## 
+##
 ## Coefficients:
-## (Intercept)            x  
+## (Intercept)            x
 ##    100.0421       0.9872
 ```
 
@@ -338,7 +340,7 @@ comp_linearModelAsAttr <- function(dat) {
   dat
 }
 
-dat <- sim_base_lm() %>% 
+dat <- sim_base_lm() %>%
   sim_comp_pop(comp_linearModelAsAttr) %>%
   as.data.frame
 
@@ -346,12 +348,12 @@ attr(dat, "linearModel")
 ```
 
 ```
-## 
+##
 ## Call:
 ## lm(formula = y ~ x, data = dat)
-## 
+##
 ## Coefficients:
-## (Intercept)            x  
+## (Intercept)            x
 ##     100.017        1.032
 ```
 
@@ -360,21 +362,21 @@ sampling. This is where small area models are supposed to be applied.
 
 
 ```r
-sim_base_lm() %>% 
+sim_base_lm() %>%
   sim_sample() %>%
   sim_comp_sample(comp_linearPredictor)
 ```
 
 ```
-## # Description: data.frame [500 × 6]
+## # Description: df [500 × 6]
 ##     idD   idU      x     e     y linearPredictor
-## * <int> <int>  <dbl> <dbl> <dbl>           <dbl>
-## 1     1    98  5.47  -1.31 104.            106. 
-## 2     1    27 -0.462  8.40 108.             99.7
-## 3     1    47  0.358 -2.91  97.4           101. 
-## 4     1     5 -6.90   3.15  96.2            93.1
-## 5     1    35  2.40  -4.40  98.0           103. 
-## 6     2    50 -1.19   2.28 101.             98.9
+##   <int> <int>  <dbl> <dbl> <dbl>           <dbl>
+## 1     1     1 -2.35  -2.08  95.6            98.0
+## 2     1    94 -6.89  -2.40  90.7            93.2
+## 3     1    68  5.03  -3.87 101.            106.
+## 4     1    19  3.10   4.42 108.            104.
+## 5     1    27 -0.462  8.40 108.            100.
+## 6     2    95  5.02   1.59 107.            106.
 ## # … with 494 more rows
 ```
 
@@ -382,22 +384,22 @@ Should you want to apply area level models, use `sim_comp_agg` instead.
 
 
 ```r
-sim_base_lm() %>% 
+sim_base_lm() %>%
   sim_sample() %>%
-  sim_agg() %>% 
+  sim_agg() %>%
   sim_comp_agg(comp_linearPredictor)
 ```
 
 ```
-## # Description: data.frame [100 × 5]
+## # Description: df [100 × 5]
 ##     idD      x      e     y linearPredictor
-## * <dbl>  <dbl>  <dbl> <dbl>           <dbl>
-## 1     1  0.202  2.20  102.            100. 
-## 2     2  0.103 -2.58   97.5           100. 
-## 3     3 -2.03   2.49  100.             97.9
-## 4     4  1.52  -1.41  100.            101. 
-## 5     5 -0.649  0.413  99.8            99.3
-## 6     6 -1.14   1.45  100.             98.8
+##   <dbl>  <dbl>  <dbl> <dbl>           <dbl>
+## 1     1 -2.92   1.71   98.8            96.8
+## 2     2 -0.211 -0.119  99.7            99.5
+## 3     3  2.69  -1.60  101.            102.
+## 4     4  0.825 -4.47   96.4           101.
+## 5     5  1.40   0.510 102.            101.
+## 6     6  1.14   2.29  103.            101.
 ## # … with 94 more rows
 ```
 
@@ -412,31 +414,31 @@ the function `sim_sample()` to add a sampling component to your `sim_setup`.
 
 
 ```r
-base_id(3, 4) %>% 
-  sim_gen_x() %>% 
+base_id(3, 4) %>%
+  sim_gen_x() %>%
   sim_sample(sample_number(1L))
 ```
 
 ```
-## # Description: data.frame [1 × 3]
+## # Description: df [1 × 3]
 ##     idD   idU     x
 ##   <int> <int> <dbl>
-## 1     1     1 -7.73
+## 1     2     3 -2.12
 ```
 
 ```r
-base_id(3, 4) %>% 
-  sim_gen_x() %>% 
+base_id(3, 4) %>%
+  sim_gen_x() %>%
   sim_sample(sample_number(1L, groupVars = "idD"))
 ```
 
 ```
-## # Description: data.frame [3 × 3]
-##     idD   idU      x
-## * <int> <int>  <dbl>
-## 1     1     2  0.299
-## 2     2     4  1.63 
-## 3     3     4 -1.87
+## # Description: df [3 × 3]
+##     idD   idU     x
+##   <int> <int> <dbl>
+## 1     1     3 -5.35
+## 2     2     1 -9.71
+## 3     3     2  1.48
 ```
 
 
@@ -446,15 +448,15 @@ sim_base_lm() %>% sim_sample(sample_number(size = 10L))
 ```
 
 ```
-## # Description: data.frame [10 × 5]
+## # Description: df [10 × 5]
 ##     idD   idU      x     e     y
 ##   <int> <int>  <dbl> <dbl> <dbl>
-## 1    37    63 -0.976 -2.66  96.4
-## 2    59    79 -1.14   4.38 103. 
-## 3     7    19  4.97  -2.24 103. 
-## 4    28    36  2.00   4.49 106. 
-## 5    94    47  5.84  -2.69 103. 
-## 6    46    59  6.11  -3.75 102. 
+## 1    79    72  2.37   2.01 104.
+## 2    22    15  3.00   3.03 106.
+## 3    64    64 -0.265 -9.36  90.4
+## 4    57    31  6.09  -3.18 103.
+## 5    53    27 -1.84   2.84 101.
+## 6    45    26  0.549 -9.37  91.2
 ## # … with 4 more rows
 ```
 
@@ -463,15 +465,15 @@ sim_base_lm() %>% sim_sample(sample_fraction(size = 0.05))
 ```
 
 ```
-## # Description: data.frame [500 × 5]
-##     idD   idU      x      e     y
-##   <int> <int>  <dbl>  <dbl> <dbl>
-## 1    65    24 -0.538  2.33  102. 
-## 2    21    10  2.87  -4.87   98.0
-## 3    95    71 -1.01   1.80  101. 
-## 4     7    49  4.77  -0.567 104. 
-## 5    93    68  7.60   1.86  109. 
-## 6    94    56  7.05   2.70  110. 
+## # Description: df [500 × 5]
+##     idD   idU      x     e     y
+##   <int> <int>  <dbl> <dbl> <dbl>
+## 1    80     7 -3.73   7.14 103.
+## 2   100    74  9.64   1.85 111.
+## 3    95    49 -1.77  -6.65  91.6
+## 4    62    95  5.93   1.97 108.
+## 5    76    80 -0.901  3.79 103.
+## 6     3    75  4.65  -3.96 101.
 ## # … with 494 more rows
 ```
 
@@ -481,15 +483,15 @@ sim_base_lm() %>% sim_sample(sample_number(size = 10L, groupVars = "idD"))
 ```
 
 ```
-## # Description: data.frame [1,000 × 5]
-##     idD   idU     x     e     y
-## * <int> <int> <dbl> <dbl> <dbl>
-## 1     1    26 -1.90 -1.80  96.3
-## 2     1    49  9.35  3.79 113. 
-## 3     1    95 -6.71  5.98  99.3
-## 4     1    41  1.57 -5.40  96.2
-## 5     1    42 -8.54 -1.21  90.2
-## 6     1     3  1.49  1.48 103. 
+## # Description: df [1,000 × 5]
+##     idD   idU      x      e     y
+##   <int> <int>  <dbl>  <dbl> <dbl>
+## 1     1    13 -1.09    3.43 102.
+## 2     1    23 -5.01  -12.5   82.4
+## 3     1    26 -0.670   1.25 101.
+## 4     1    68  5.73    5.13 111.
+## 5     1    47  0.721   6.89 108.
+## 6     1    15 -3.46    3.54 100.
 ## # … with 994 more rows
 ```
 
@@ -498,14 +500,14 @@ sim_base_lm() %>% sim_sample(sample_fraction(size = 0.05, groupVars = "idD"))
 ```
 
 ```
-## # Description: data.frame [500 × 5]
-##     idD   idU       x     e     y
-## * <int> <int>   <dbl> <dbl> <dbl>
-## 1     1    49  5.45    2.94 108. 
-## 2     1    12  0.0983 -2.76  97.3
-## 3     1    19 -0.247   1.67 101. 
-## 4     1     5 -5.93    1.10  95.2
-## 5     1    45  4.52   -8.22  96.3
-## 6     2    32  0.0987  6.23 106. 
+## # Description: df [500 × 5]
+##     idD   idU      x     e     y
+##   <int> <int>  <dbl> <dbl> <dbl>
+## 1     1    18  2.43  -2.50  99.9
+## 2     1    25 -0.341 -1.20  98.5
+## 3     1    51  3.60   3.33 107.
+## 4     1    33 -1.02   3.62 103.
+## 5     1    16 -0.573 -8.28  91.1
+## 6     2    49  6.05   1.11 107.
 ## # … with 494 more rows
 ```
