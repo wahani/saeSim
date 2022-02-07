@@ -12,7 +12,7 @@ Depends:
     R(>= 3.1),
     methods
 Imports:
-    dplyr(>= 0.2),
+    dplyr (>= 0.2),
     functional,
     ggplot2,
     grDevices,
@@ -20,7 +20,8 @@ Imports:
     utils,
     spdep,
     stats,
-    parallelMap
+    parallelMap,
+    tibble
 Suggests:
     testthat,
     knitr,
