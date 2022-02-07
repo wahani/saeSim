@@ -14,8 +14,7 @@ gen_v_norm(mean = 0, sd = 1, name = "v")
 
 gen_v_sar(mean = 0, sd = 1, rho = 0.5, type = "rook", name)
 
-gen_v_ar1(mean = 0, sd = 1, rho = 0.5, groupVar = "idD",
-  timeVar = "idT", name)
+gen_v_ar1(mean = 0, sd = 1, rho = 0.5, groupVar = "idD", timeVar = "idT", name)
 
 gen_generic(generator, ..., groupVars = NULL, name)
 }

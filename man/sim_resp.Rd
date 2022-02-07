@@ -14,18 +14,17 @@ sim_resp_eq(simSetup, ...)
 
 \item{respFun}{a function constructing the response variable}
 
-\item{...}{Name-value pairs of expressions, each with length 1 or the same
-length as the number of rows in the group (if using \code{\link[=group_by]{group_by()}}) or in the entire
-input (if not using groups). The name of each argument will be the name of
-a new variable, and the value will be its corresponding value.  Use a \code{NULL}
-value in \code{mutate} to drop a variable.  New variables overwrite existing variables
-of the same name.
+\item{...}{<\code{\link[dplyr:dplyr_data_masking]{data-masking}}> Name-value pairs.
+The name gives the name of the column in the output.
 
-The arguments in \code{...} are automatically \link[rlang:quo]{quoted} and
-\link[rlang:eval_tidy]{evaluated} in the context of the data
-frame. They support \link[rlang:quasiquotation]{unquoting} and
-splicing. See \code{vignette("programming")} for an introduction to
-these concepts.}
+The value can be:
+\itemize{
+\item A vector of length 1, which will be recycled to the correct length.
+\item A vector the same length as the current group (or the whole data frame
+if ungrouped).
+\item \code{NULL}, to remove the column.
+\item A data frame or tibble, to create multiple columns in the output.
+}}
 }
 \description{
 One of the components which can be added to a \code{sim_setup}.

@@ -4,8 +4,17 @@
 \alias{sim}
 \title{Start simulation}
 \usage{
-sim(x, R = 1, path = NULL, overwrite = TRUE, ..., suffix = NULL,
-  fileExt = ".csv", libs = NULL, exports = NULL)
+sim(
+  x,
+  R = 1,
+  path = NULL,
+  overwrite = TRUE,
+  ...,
+  suffix = NULL,
+  fileExt = ".csv",
+  libs = NULL,
+  exports = NULL
+)
 }
 \arguments{
 \item{x}{a \code{sim_setup}}

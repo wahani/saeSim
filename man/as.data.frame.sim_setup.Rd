@@ -4,8 +4,7 @@
 \alias{as.data.frame.sim_setup}
 \title{as.data.frame method for sim_setup}
 \usage{
-\method{as.data.frame}{sim_setup}(x, row.names = NULL,
-  optional = FALSE, ...)
+\method{as.data.frame}{sim_setup}(x, row.names = NULL, optional = FALSE, ...)
 }
 \arguments{
 \item{x}{a sim_setup}

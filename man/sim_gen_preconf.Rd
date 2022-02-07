@@ -12,13 +12,29 @@ sim_gen_x(simSetup, mean = 0, sd = 4, name = "x")
 
 sim_gen_e(simSetup, mean = 0, sd = 4, name = "e")
 
-sim_gen_ec(simSetup, mean = 0, sd = 150, name = "e", nCont = 0.05,
-  type = "unit", areaVar = "idD", fixed = TRUE)
+sim_gen_ec(
+  simSetup,
+  mean = 0,
+  sd = 150,
+  name = "e",
+  nCont = 0.05,
+  type = "unit",
+  areaVar = "idD",
+  fixed = TRUE
+)
 
 sim_gen_v(simSetup, mean = 0, sd = 1, name = "v")
 
-sim_gen_vc(simSetup, mean = 0, sd = 40, name = "v", nCont = 0.05,
-  type = "area", areaVar = "idD", fixed = TRUE)
+sim_gen_vc(
+  simSetup,
+  mean = 0,
+  sd = 40,
+  name = "v",
+  nCont = 0.05,
+  type = "area",
+  areaVar = "idD",
+  fixed = TRUE
+)
 }
 \arguments{
 \item{simSetup}{a \code{sim_setup}.}

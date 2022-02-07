@@ -1,7 +1,7 @@
 Package: saeSim
 Type: Package
 Title: Simulation Tools for Small Area Estimation
-Version: 0.10.0
+Version: 0.11.0
 Authors@R: c(person("Sebastian", "Warnholz", role = c("aut", "cre"),
                     email = "wahani@gmail.com"),
              person("Timo", "Schmid", role = "aut",
@@ -31,8 +31,7 @@ Description: Tools for the simulation of data in the context of small area
     over drawing samples to model fitting - in one object. This enables easy
     modification and combination of different scenarios. You can store your
     results in a folder or start the simulation in parallel.
-Roxygen: list(wrap = FALSE)
 License: MIT + file LICENSE
 VignetteBuilder: knitr
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 Encoding: UTF-8

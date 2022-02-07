@@ -8,8 +8,7 @@
 \alias{sample_cluster_fraction}
 \title{Sampling functions}
 \usage{
-sample_fraction(size, replace = FALSE, weight = NULL,
-  groupVars = NULL)
+sample_fraction(size, replace = FALSE, weight = NULL, groupVars = NULL)
 
 sample_number(size, replace = FALSE, weight = NULL, groupVars = NULL)
 
@@ -17,24 +16,19 @@ sample_numbers(size, replace = FALSE, groupVars = NULL)
 
 sample_cluster_number(size, replace = FALSE, weight = NULL, groupVars)
 
-sample_cluster_fraction(size, replace = FALSE, weight = NULL,
-  groupVars)
+sample_cluster_fraction(size, replace = FALSE, weight = NULL, groupVars)
 }
 \arguments{
-\item{size}{For \code{sample_n()}, the number of rows to select.
+\item{size}{<\code{\link[dplyr:dplyr_tidy_select]{tidy-select}}>
+For \code{sample_n()}, the number of rows to select.
 For \code{sample_frac()}, the fraction of rows to select.
 If \code{tbl} is grouped, \code{size} applies to each group.}
 
 \item{replace}{Sample with or without replacement?}
 
-\item{weight}{Sampling weights. This must evaluate to a vector of
-non-negative numbers the same length as the input. Weights are
-automatically standardised to sum to 1.
-
-This argument is automatically \link[rlang:quo]{quoted} and later
-\link[rlang:eval_tidy]{evaluated} in the context of the data
-frame. It supports \link[rlang:quasiquotation]{unquoting}. See
-\code{vignette("programming")} for an introduction to these concepts.}
+\item{weight}{<\code{\link[dplyr:dplyr_tidy_select]{tidy-select}}> Sampling weights.
+This must evaluate to a vector of non-negative numbers the same length as
+the input. Weights are automatically standardised to sum to 1.}
 
 \item{groupVars}{character with names of variables to be used for grouping.}
 }
