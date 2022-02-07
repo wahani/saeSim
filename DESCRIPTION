@@ -6,7 +6,7 @@ Authors@R: c(person("Sebastian", "Warnholz", role = c("aut", "cre"),
                     email = "wahani@gmail.com"),
              person("Timo", "Schmid", role = "aut",
                     email = "Timo.Schmid@fu-berlin.de"))
-URL: https://wahani.github.io/saeSim
+URL: https://wahani.github.io/saeSim/
 BugReports: https://github.com/wahani/saeSim/issues
 Depends:
     R(>= 3.1),
