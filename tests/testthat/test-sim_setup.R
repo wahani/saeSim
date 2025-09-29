@@ -5,7 +5,7 @@ test_that("sim_setup", {
                      sim_gen_e(), simName = "")
   
   expect_equal(length(tmp), (2))
-  expect_that(all(sapply(tmp, inherits, what = "sim_fun")), is_true())
+  expect_true(all(sapply(tmp, inherits, what = "sim_fun")))
 })
 
 test_that("methods equal", {
