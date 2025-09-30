@@ -35,7 +35,7 @@ test_that("Method for sim_setup", {
   
   expect_equal(length(datList), (500))
   expect_equal(max(bind_rows(datList)$idR), (500))
-  expect_that(all(bind_rows(datList)$simName == "test"), is_true())
+  expect_true(all(bind_rows(datList)$simName == "test"))
   
 })
 

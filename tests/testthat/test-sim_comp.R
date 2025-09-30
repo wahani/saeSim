@@ -24,7 +24,7 @@ test_that("sim_comp and comp_var", {
 
   expect_equal(class(dat), "data.frame")
   expect_equal(nrow(dat), 25)
-  expect_that(all(c("popMean", "popVar", "N", "n") %in% names(dat)), is_true())
+  expect_true(all(c("popMean", "popVar", "N", "n") %in% names(dat)))
   expect_equal(unique(dat$n), 5)
   expect_equal(unique(dat$N), 10)
   expect_that(dat1$linearPredictor, is_equivalent_to(predict(lm(y ~ x, data = dat1))))
