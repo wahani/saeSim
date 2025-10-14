@@ -14,5 +14,7 @@ Use the `sim_base` functions to start a new \code{sim_setup}.
 }
 \examples{
 # Example for a linear model:
-sim_base() \%>\% sim_gen_x() \%>\% sim_gen_e()
+sim_base() \%>\%
+  sim_gen_x() \%>\%
+  sim_gen_e()
 }

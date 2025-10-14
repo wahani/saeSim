@@ -14,7 +14,7 @@ sim_resp_eq(simSetup, ...)
 
 \item{respFun}{a function constructing the response variable}
 
-\item{...}{<\code{\link[dplyr:dplyr_data_masking]{data-masking}}> Name-value pairs.
+\item{...}{<\code{\link[rlang:args_data_masking]{data-masking}}> Name-value pairs.
 The name gives the name of the column in the output.
 
 The value can be:

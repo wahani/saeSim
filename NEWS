@@ -1,142 +1,167 @@
+Version 0.12.0
+
+-   Maintenance release to prepare for upcomming testthat 3.3.0
+-   Fixes in documentation to resolve notes on CRAN
+
 Version 0.11.0
-- Maintenance release to prepare for upcoming dplyr 1.0.8 release
+
+-   Maintenance release to prepare for upcoming dplyr 1.0.8 release
 
 Version 0.10.0
-- Minor fixes to documentation
-- Minor bugfixes
-- CITATION file
+
+-   Minor fixes to documentation
+-   Minor bugfixes
+-   CITATION file
 
 Version 0.9.0
-- CRAN release
+
+-   CRAN release
 
 Version 0.8.2
-- Fix for print/show method of object.
+
+-   Fix for print/show method of object.
 
 Version 0.8.1
-- Fix for warning while using rbind_all. Now use bind_rows instead.
+
+-   Fix for warning while using rbind_all. Now use bind_rows instead.
 
 Version 0.8.0
-- CRAN release
+
+-   CRAN release
 
 Version 0.7.6
-- New argument fileExt in 'sim' to save RData instead of csv files.
-- New function 'sim_read_list' to read in the results from RData files.
-- Fix in preconf computation functions to ensure that they return a data.frame.
+
+-   New argument fileExt in 'sim' to save RData instead of csv files.
+-   New function 'sim_read_list' to read in the results from RData files.
+-   Fix in preconf computation functions to ensure that they return a data.frame.
 
 Version 0.7.5
-- The function 'sim' now has an additional argument, suffix, to provide an
-optional suffix for file names.
-- Storing simulation runs to files now creates an empty template to lock that
-file so multpiple processes can work on the same sequence of jobs.
+
+-   The function 'sim' now has an additional argument, suffix, to provide an optional suffix for
+    file names.
+-   Storing simulation runs to files now creates an empty template to lock that file so multpiple
+    processes can work on the same sequence of jobs.
 
 Version 0.7.4
-- The function 'sim_gen_cont' now allows to select specific areas for
-contamination.
+
+-   The function 'sim_gen_cont' now allows to select specific areas for contamination.
 
 Version 0.7.3
-- New function: base_id_temporal to construct basic structure for repeated
-measurements.
-- New generator: gen_v_ar1 to generate an autocorrelated error term.
+
+-   New function: base_id_temporal to construct basic structure for repeated measurements.
+-   New generator: gen_v_ar1 to generate an autocorrelated error term.
 
 Version 0.7.2
-- Update for show method. Now can print not only handle data.frames.
+
+-   Update for show method. Now can print not only handle data.frames.
 
 Version 0.7.1
-- Updated vignette
+
+-   Updated vignette
 
 Version 0.7.0
-- CRAN release
+
+-   CRAN release
 
 Version 0.6.6
-- new argument, overwrite, for function sim
+
+-   new argument, overwrite, for function sim
 
 Version 0.6.5
-- new signature for function sim
-- parallel back-end has changed to parallelMap
-- new functions: sample_cluster_fraction and sample_cluster_number
+
+-   new signature for function sim
+-   parallel back-end has changed to parallelMap
+-   new functions: sample_cluster_fraction and sample_cluster_number
 
 Version 0.6.4
-- Rewrite of the summary method
-- New function sim_gen_generic
+
+-   Rewrite of the summary method
+-   New function sim_gen_generic
 
 Version 0.6.3
-- Bugfixes in sim_gen for contamination and sim_gen_eq to preserve attributes of data.frame
-- The show method was updated and is more consistent
-- Bugfix in as.data.frame: will now always return a data.frame
 
+-   Bugfixes in sim_gen for contamination and sim_gen_eq to preserve attributes of data.frame
+-   The show method was updated and is more consistent
+-   Bugfix in as.data.frame: will now always return a data.frame
 
 Version 0.6.2
-- New sampling function sample_numbers - vectorized sample_number
+
+-   New sampling function sample_numbers - vectorized sample_number
 
 Version 0.6.1
-- Updated version of the vignette
+
+-   Updated version of the vignette
 
 Version 0.6.0
-- CRAN release
+
+-   CRAN release
 
 Version 0.5.3
-- base_id returns only column with idD if nUnits == 1
-- updates for documentation and vignettes
+
+-   base_id returns only column with idD if nUnits == 1
+-   updates for documentation and vignettes
 
 Version 0.5.2
-- renaming of sim_gen_fe and sim_gen_re
-- update of vignettes
+
+-   renaming of sim_gen_fe and sim_gen_re
+-   update of vignettes
 
 Version 0.5.1
-- bugfix: keep attributes after sampling
+
+-   bugfix: keep attributes after sampling
 
 Version 0.5.0
 
-- R, the number of reps, is not an argument of sim_setup anymore but only of sim
-- Generator functions are now functions which f: data.frame -> data.frame
-- The response is not generated automatically but using the sim_resp component
-- comp_var function is now a wrapper around dplyr::mutate
-- sample_number and sample_fraction replace sample_srs and sample_csrs
-- agg_standard was renamed to agg_all
-- calc was renamed to comp; sim_n, sim_N, sim_popMean, sim_popVar are renamed to sim_comp_*
-- Contaminated data is now included in sim_gen_cont; argument names have changed
-- The base can explicitly be set by sim_base or simply by starting from a data.frame
-- gen_generic supports a groupVar instead of level
+-   R, the number of reps, is not an argument of sim_setup anymore but only of sim
+-   Generator functions are now functions which f: data.frame -> data.frame
+-   The response is not generated automatically but using the sim_resp component
+-   comp_var function is now a wrapper around dplyr::mutate
+-   sample_number and sample_fraction replace sample_srs and sample_csrs
+-   agg_standard was renamed to agg_all
+-   calc was renamed to comp; sim*n, sim_N, sim_popMean, sim_popVar are renamed to sim_comp*\*
+-   Contaminated data is now included in sim_gen_cont; argument names have changed
+-   The base can explicitly be set by sim_base or simply by starting from a data.frame
+-   gen_generic supports a groupVar instead of level
 
 Version 0.4.7
 
-- Preserve attributes of data in sample_* and agg_all
+-   Preserve attributes of data in sample\_\* and agg_all
 
 Version 0.4.6
 
-- Describe function for sim_setup
+-   Describe function for sim_setup
 
 Version 0.4.5
 
-- Bugfix in sim.sim_setup pass simName
-- No garbage collection for sim with path
+-   Bugfix in sim.sim_setup pass simName
+-   No garbage collection for sim with path
 
 Version 0.4.4
 
-- Bug fix in sample_csrs - Handling of numeric input with length > 1
-- Default in sim_setup is R = 1
-- Argument simName in sim.sim_setup
-- Default for simName in sim_setup is set to ""
-- Change in sim_setup, now matches the behaviour of all other components
+-   Bug fix in sample_csrs - Handling of numeric input with length > 1
+-   Default in sim_setup is R = 1
+-   Argument simName in sim.sim_setup
+-   Default for simName in sim_setup is set to ""
+-   Change in sim_setup, now matches the behaviour of all other components
 
 Version 0.4.3
 
-- Bug-fix in calc_var
+-   Bug-fix in calc_var
 
 Version 0.4.2
 
-- Fix in read_simData
-- calc_var accepts a character with length > 1
-- summary.sim_setup prints str instead of head
+-   Fix in read_simData
+-   calc_var accepts a character with length > 1
+-   summary.sim_setup prints str instead of head
 
 Version 0.4.1
 
-- Import dplyr(>= 0.2) - because of import of magrittr
+-   Import dplyr(>= 0.2) - because of import of magrittr
 
 Version 0.4.0
 
-- Implementation of all relevant steps in simulation studies
-- as.data.frame for sim_setup
-- summary for sim_setup
-- sim_setup method for data.frames as link to design-based studies
-- implemented a solution for doing the simulation in parallel
+-   Implementation of all relevant steps in simulation studies
+-   as.data.frame for sim_setup
+-   summary for sim_setup
+-   sim_setup method for data.frames as link to design-based studies
+-   implemented a solution for doing the simulation in parallel

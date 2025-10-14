@@ -28,19 +28,19 @@ will we coerced to a \code{data.frame} and then saved as 'csv'.}
 \code{path} are replaced. If \code{FALSE} files in \code{path} are not
 replaced and simulation will not be recomputed.}
 
-\item{...}{arguments passed to \code{\link{parallelStart}}.}
+\item{...}{arguments passed to \code{\link[parallelMap]{parallelStart}}.}
 
 \item{suffix}{an optional suffix of file names.}
 
 \item{fileExt}{the file extension. Default is ".csv" - alternative it can be
 ".RData".}
 
-\item{libs}{arguments passed to \code{\link{parallelLibrary}}. Will be used
-in a call to \code{\link{do.call}} after coersion with
+\item{libs}{arguments passed to \code{\link[parallelMap]{parallelLibrary}}.
+Will be used in a call to \code{\link{do.call}} after coersion with
 \code{\link{as.list}}.}
 
-\item{exports}{arguments passed to \code{\link{parallelExport}}. Will be used
-in a call to \code{\link{do.call}} after coersion with
+\item{exports}{arguments passed to \code{\link[parallelMap]{parallelExport}}.
+Will be used in a call to \code{\link{do.call}} after coersion with
 \code{\link{as.list}}.}
 }
 \value{
@@ -71,11 +71,13 @@ comp_fun <- function(dat) {
   dat
 }
 
-res <- sim_base_lm() \%>\% 
-  sim_comp_pop(comp_fun) \%>\% 
-  sim(R = 2, 
-      mode = "socket", cpus = 2,
-      exports = "localFun")
+res <- sim_base_lm() \%>\%
+  sim_comp_pop(comp_fun) \%>\%
+  sim(
+    R = 2,
+    mode = "socket", cpus = 2,
+    exports = "localFun"
+  )
 
 str(res)
 }

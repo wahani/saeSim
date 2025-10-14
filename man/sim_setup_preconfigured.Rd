@@ -16,18 +16,26 @@ sim_base_lmc()
 sim_base_lmmc()
 }
 \description{
-\code{sim_base_lm()} will start a linear model: One regressor, one error component. \code{sim_base_lmm()} will start a linear mixed model: One regressor, one error component and one random effect for the domain. \code{sim_base_lmc()} and \code{sim_base_lmmc()} add outlier contamination to the scenarios. Use these as a quick start, then you probably want to configure your own scenario.
+\code{sim_base_lm()} will start a linear model: One regressor, one error
+component. \code{sim_base_lmm()} will start a linear mixed model: One
+regressor, one error component and one random effect for the domain.
+\code{sim_base_lmc()} and \code{sim_base_lmmc()} add outlier contamination to
+the scenarios. Use these as a quick start, then you probably want to
+configure your own scenario.
 }
 \details{
 Additional information on the generated variables:
-\itemize{
+\describe{
 \item{nDomains: }{100 domains}
 \item{nUnits: }{100 in each domain}
 \item{x: }{is normally distributed with mean of 0 and sd of 4}
 \item{e: }{is normally distributed with mean of 0 and sd of 4}
-\item{v: }{is normally distributed with mean of 0 and sd of 1, it is a constant within domains}
-\item{e-cont: }{as e; probability of unit to be contaminated is 0.05; sd is then 150}
-\item{v-cont: }{as v; probability of area to be contaminated is 0.05; sd is then 40}
+\item{v: }{is normally distributed with mean of 0 and sd of 1, it is a
+constant within domains}
+\item{e-cont: }{as e; probability of unit to be contaminated is 0.05; sd is
+then 150}
+\item{v-cont: }{as v; probability of area to be contaminated is 0.05; sd is
+then 40}
 \item{y }{= 100 + x + v + e}
 }
 }
