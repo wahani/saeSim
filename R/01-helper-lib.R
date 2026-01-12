@@ -45,3 +45,13 @@ mapply_by <- function(by, funs) {
   }
   preserve_attributes(retFun)
 }
+
+utils::globalVariables(c(
+  "idD",
+  "idU",
+  "x",
+  "e",
+  "y",
+  "v",
+  "var"
+))

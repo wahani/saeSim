@@ -22,8 +22,8 @@ base_id <- function(nDomains = 10, nUnits = 10) {
     if (length(nUnits) > 1) length(nUnits) == nDomains else TRUE
   )
   
-  out <- data.frame(idD = rep(1:nDomains, times = nUnits)) %>% 
-    group_by_("idD") %>% mutate(idU = 1:n()) %>% arrange_("idD", "idU")
+  out <- data.frame(idD = rep(1:nDomains, times = nUnits)) %>%
+    group_by(idD) %>% mutate(idU = 1:n()) %>% arrange(idD, idU)
   
   out <- if (length(nUnits) == 1 && nUnits == 1) out["idD"] else out
   as.data.frame(out)

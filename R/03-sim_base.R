@@ -52,7 +52,7 @@ sim_base_lm <- function() {
   sim_base() %>%
     sim_gen_x(0, 4, name = "x") %>%
     sim_gen_e(0, 4, name = "e") %>%
-    sim_resp(function(dat) mutate_(dat, y = "100 + x + e"))
+    sim_resp(function(dat) mutate(dat, y = 100 + x + e))
 }
 
 #' @rdname sim_setup_preconfigured
@@ -60,7 +60,7 @@ sim_base_lm <- function() {
 sim_base_lmm <- function() {
   sim_base_lm() %>%
     sim_gen_v(0, 1, name = "v") %>%
-    sim_resp(function(dat) mutate_(dat, y = "y + v"))
+    sim_resp(function(dat) mutate(dat, y = y + v))
 }
 
 #' @rdname sim_setup_preconfigured
