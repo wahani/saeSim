@@ -29,7 +29,7 @@ sample_fraction <- function(size, replace = FALSE, weight = NULL, groupVars = NU
     } else {
       attributesToKeep <- attributes(dat)[
         !(names(attributes(dat)) %in% names(attributes(data.frame())))]
-      dat <- group_by_(dat, groupVars) %>%
+      dat <- group_by(dat, pick(all_of(groupVars))) %>%
         sample_frac(size = size, replace = replace, weight = !!weight) %>%
         as.data.frame
       attributes(dat) <- c(attributes(dat), attributesToKeep)
@@ -48,7 +48,7 @@ sample_number <- function(size, replace = FALSE, weight = NULL, groupVars = NULL
     } else {
       attributesToKeep <- attributes(dat)[
         !(names(attributes(dat)) %in% names(attributes(data.frame())))]
-      dat <- group_by_(dat, groupVars) %>%
+      dat <- group_by(dat, pick(all_of(groupVars))) %>%
         sample_n(size = size, replace = replace, weight = !!weight) %>%
           as.data.frame
       attributes(dat) <- c(attributes(dat), attributesToKeep)
