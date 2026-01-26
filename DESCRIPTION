@@ -1,7 +1,7 @@
 Package: saeSim
 Type: Package
 Title: Simulation Tools for Small Area Estimation
-Version: 0.12.0
+Version: 0.13.0
 Authors@R: c(person("Sebastian", "Warnholz", role = c("aut", "cre"),
                     email = "wahani@gmail.com"),
              person("Timo", "Schmid", role = "aut",
@@ -20,8 +20,7 @@ Imports:
     utils,
     spdep,
     stats,
-    parallelMap,
-    tibble
+    parallelMap
 Suggests:
     testthat,
     knitr,
@@ -34,5 +33,5 @@ Description: Tools for the simulation of data in the context of small area
     results in a folder or start the simulation in parallel.
 License: MIT + file LICENSE
 VignetteBuilder: knitr
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Encoding: UTF-8

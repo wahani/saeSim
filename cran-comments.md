@@ -1,6 +1,6 @@
 ## Test environments
 
--   local ubuntu
+- local ubuntu
 
 ## R CMD check results
 

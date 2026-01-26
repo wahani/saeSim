@@ -1,6 +1,8 @@
 devtools::document()
 devtools::install()
 devtools::build_vignettes()
+devtools::test()
+devtools::check()
 
 knitr::knit("vignettes/Introduction.Rmd", "README.md")
 
